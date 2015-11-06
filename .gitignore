@@ -1,0 +1,7 @@
+.idea
+local.properties
+*.jar
+*.class
+*.iml
+*.apk
+*.dex
