@@ -1,5 +1,8 @@
 package model;
 
+import lang.Function;
+import lang.Action;
+
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -7,9 +10,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by gur on 11/6/2015.
  */
 public class SafeModel <T>{
-    /*
-    gur is a zain - checking
-     */
     private final T model;
     private final ReadWriteLock lock;
 
@@ -18,20 +18,20 @@ public class SafeModel <T>{
         this.lock = new ReentrantReadWriteLock(false);
     }
 
-    public void write(Writer<T> writer){
+    public void write(Action<T> action){
         try{
             lock.writeLock().lock();
-            writer.write(model);
+            action.perform(model);
         }
         finally {
             lock.writeLock().unlock();
         }
     }
 
-    public <S> S read(Reader<T,S> reader){
+    public <S> S read(Function<T> function){
         try{
             lock.readLock().lock();
-            return reader.read(model);
+            return function.perform(model);
         }
         finally {
             lock.readLock().unlock();

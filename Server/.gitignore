@@ -1,1 +1,7 @@
 /target
+*.jar
+*.aar
+*.apk
+*.iml
+*.idea
+local.properties

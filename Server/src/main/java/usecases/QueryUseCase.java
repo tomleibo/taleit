@@ -1,12 +1,20 @@
 package usecases;
 
+import lang.SafeObject;
 import model.Model;
-import model.Reader;
-import model.Writer;
+import lang.Function;
 
 /**
  * Created by gur on 11/6/2015.
  */
-public interface QueryUseCase<S> extends Reader<Model,S> {
+public abstract class QueryUseCase<S> extends ModelUseCase implements Function<Model> {
+    protected QueryUseCase(SafeObject<Model> context) {
+        super(context);
+    }
+
+    @Override
+    protected void safe(SafeObject<Model> model){
+        model.read(this);
+    }
 }
 
