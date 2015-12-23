@@ -1,7 +1,7 @@
 package usecases;
 
 /**
- * Created by sharonk on 12/23/2015
+ * Created by Kerzman on 12/23/2015
  */
 public enum UserDetailForTest {
     // usernames

@@ -1,9 +1,7 @@
 package usecases;
 
 import exceptions.LoginException;
-import exceptions.SignUpException;
 import exceptions.UsecaseException;
-import junit.framework.Assert;
 import lang.SafeObject;
 import model.Model;
 import org.junit.Before;
@@ -11,11 +9,11 @@ import org.junit.Test;
 import usecases.users.Login;
 import usecases.users.SignUp;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Created by gur on 12/23/2015.
+ * Created by Kerzman on 12/23/2015.
  */
 public class LoginTest extends TestBase {
     @Before
