@@ -2,7 +2,6 @@ package model;
 
 import exceptions.LoginException;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.*;
 
 /**
@@ -11,10 +10,12 @@ import java.util.*;
 public class Model {
     final private Map<String, User> users;
     final private Set<User> loggedUsers;
+    final private Map<String, Story> stories;
 
     public Model(){
         this.users = new HashMap<String, User>();
         this.loggedUsers = new HashSet<User>();
+        this.stories = new HashMap<String, Story>();
     }
 
     public void addUser(User user){
@@ -55,5 +56,10 @@ public class Model {
             }
         }
         return null;
+    }
+
+    public void addStory(Story story) {
+        stories.put(story.title + story.username, story);
+        //TODO problematic due to the same user creating the same story twice... fix later with DB
     }
 }
