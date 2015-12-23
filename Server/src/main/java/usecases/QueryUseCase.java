@@ -13,7 +13,7 @@ public abstract class QueryUseCase<S> extends ModelUseCase implements Function<M
     }
 
     @Override
-    protected void safe(SafeObject<Model> model){
+    final protected void safe(SafeObject<Model> model){
         model.read(this);
     }
 }

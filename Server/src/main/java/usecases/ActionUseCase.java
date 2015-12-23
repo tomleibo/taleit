@@ -10,7 +10,7 @@ public abstract class ActionUseCase extends ModelUseCase implements Action<Model
     }
 
     @Override
-    protected void safe(SafeObject<Model> model){
+    final protected void safe(SafeObject<Model> model){
         model.write(this);
     }
 }
