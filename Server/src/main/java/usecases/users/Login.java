@@ -5,6 +5,8 @@ import lang.SafeObject;
 import model.Model;
 
 public class Login extends UserUseCase {
+    String cookie = null;
+
     protected Login(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
     }
@@ -14,6 +16,10 @@ public class Login extends UserUseCase {
             throw new LoginException("User does not exists");
         }
 
-        model.loginUser(username, password);
+        cookie = model.loginUser(username, password);
+    }
+
+    public String getCookie(){
+        return this.cookie;
     }
 }

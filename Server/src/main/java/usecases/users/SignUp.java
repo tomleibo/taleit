@@ -21,4 +21,3 @@ public class SignUp extends UserUseCase {
         model.addUser(new User(username, password));
     }
 }
-

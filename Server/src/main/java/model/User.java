@@ -13,6 +13,7 @@ public class User {
     String username;
     String passwordHash;
     String salt;
+    public String cookie;
 
     public User(String username, String password){
         this.username = username;
