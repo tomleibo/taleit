@@ -38,4 +38,12 @@ public class Model {
             throw new LoginException("Passwords do not match");
         }
     }
+
+    public void logoutUser(String username) {
+        users.get(username).cookie = null;
+
+        if (loggedUsers.contains(username)){
+            loggedUsers.remove(username);
+        }
+    }
 }

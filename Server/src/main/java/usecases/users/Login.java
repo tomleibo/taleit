@@ -1,6 +1,7 @@
 package usecases.users;
 
 import exceptions.LoginException;
+import exceptions.LogoutException;
 import lang.SafeObject;
 import model.Model;
 
@@ -12,7 +13,7 @@ public class Login extends UserUseCase {
     }
 
     public void perform(Model model) {
-        if (!validateUserExists(model)){
+        if (!userExists(model)){
             throw new LoginException("User does not exists");
         }
 
@@ -23,3 +24,4 @@ public class Login extends UserUseCase {
         return this.cookie;
     }
 }
+

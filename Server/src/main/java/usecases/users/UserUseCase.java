@@ -24,28 +24,23 @@ public abstract class UserUseCase extends ActionUseCase {
 
     @Override
     protected void pre() {
-        if (! validateUsername()){
-            throw new SignUpException("Username does not match email pattern");
-        }
+        validateUsername();
+        validatePassword();
+    }
 
-        if (! validatePassword()){
+    void validatePassword() {
+        if (password == null | password.length() < MIN_PASSWORD_LENGTH){
             throw new SignUpException("Password too short. use atleast 6 characters");
         }
     }
 
-    boolean validatePassword() {
-        return password != null && password.length() >= MIN_PASSWORD_LENGTH;
-    }
-
-    boolean validateUsername() {
-        if (this.username == null){
-            return false;
+    void validateUsername() {
+        if (username == null || PATTERN.matcher(username).matches() == false){
+            throw new SignUpException("Username does not match email pattern");
         }
-
-        return PATTERN.matcher(username).matches();
     }
 
-    boolean validateUserExists(Model model){
+    boolean userExists(Model model){
         return model.userExists(username);
     }
 }
