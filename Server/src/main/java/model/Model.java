@@ -9,11 +9,11 @@ import java.util.*;
  */
 public class Model {
     final private Map<String, User> users;
-    final private Set<String> loggedUsers;
+    final private Set<User> loggedUsers;
 
     public Model(){
         this.users = new HashMap<String, User>();
-        this.loggedUsers = new HashSet<String>();
+        this.loggedUsers = new HashSet<User>();
     }
 
     public void addUser(User user){
@@ -30,7 +30,7 @@ public class Model {
         if (user.getPasswordHash(password).equals(user.passwordHash)){
             if (!loggedUsers.contains(username)){
                 user.cookie = UUID.randomUUID().toString();
-                loggedUsers.add(username);
+                loggedUsers.add(user);
             }
             return user.cookie;
         }
@@ -39,11 +39,11 @@ public class Model {
         }
     }
 
-    public void logoutUser(String username) {
-        users.get(username).cookie = null;
-
-        if (loggedUsers.contains(username)){
-            loggedUsers.remove(username);
+    public void logoutUser(String cookie) {
+        for (User user: users.values()){
+            if (user.cookie != null && user.cookie.equals(cookie)){
+                loggedUsers.remove(user);
+            }
         }
     }
 }

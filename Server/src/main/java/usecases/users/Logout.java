@@ -3,30 +3,18 @@ package usecases.users;
 import exceptions.LogoutException;
 import lang.SafeObject;
 import model.Model;
+import usecases.ActionUseCase;
 
-public class Logout extends UserUseCase {
+public class Logout extends ActionUseCase {
     String cookie = null;
 
-    protected Logout(SafeObject<Model> context, String username, String cookie) {
-        super(context, username, "");
+    protected Logout(SafeObject<Model> context, String cookie) {
+        super(context);
 
         this.cookie = cookie;
     }
 
-    @Override
-    protected void pre(){
-        validateUsername();
-    }
-
     public void perform(Model model) {
-        if (!userExists(model)){
-            throw new LogoutException("User does not exists");
-        }
-
-        model.logoutUser(username);
-    }
-
-    public String getCookie(){
-        return this.cookie;
+        model.logoutUser(cookie);
     }
 }

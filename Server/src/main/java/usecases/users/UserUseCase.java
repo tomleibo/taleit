@@ -29,7 +29,7 @@ public abstract class UserUseCase extends ActionUseCase {
     }
 
     void validatePassword() {
-        if (password == null | password.length() < MIN_PASSWORD_LENGTH){
+        if (password == null || password.length() < MIN_PASSWORD_LENGTH){
             throw new SignUpException("Password too short. use atleast 6 characters");
         }
     }
