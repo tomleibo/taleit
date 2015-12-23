@@ -24,4 +24,17 @@ public class User {
     public String getPasswordHash(String password){
         return DigestUtils.sha1Hex(password + salt);
     }
+
+    @Override
+    public int hashCode(){
+        return username.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if (other == null) return false;
+        if (username == null) return false;
+        if (!getClass().equals(other.getClass())) return false;
+        return username.equals(((User)other).username);
+    }
 }
