@@ -14,11 +14,10 @@ public class SignUp extends UserUseCase {
     }
 
     public void perform(Model model) {
-        if (validateUserExists(model)){
+        if (userExists(model)){
             throw new SignUpException("User with this email already exists");
         }
 
         model.addUser(new User(username, password));
     }
 }
-

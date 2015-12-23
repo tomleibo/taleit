@@ -5,3 +5,4 @@ public class LoginException extends UsecaseException {
         super(message);
     }
 }
+
