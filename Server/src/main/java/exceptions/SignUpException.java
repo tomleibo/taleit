@@ -1,6 +1,6 @@
 package exceptions;
 
-public class SignUpException extends UsecaseException {
+public class SignUpException extends UserException {
     public SignUpException(String message) {
         super(message);
     }
