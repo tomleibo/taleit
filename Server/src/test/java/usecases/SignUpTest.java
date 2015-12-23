@@ -1,6 +1,7 @@
 package usecases;
 
 import exceptions.SignUpException;
+import exceptions.UserException;
 import junit.framework.Assert;
 import lang.SafeObject;
 import model.Model;
@@ -38,7 +39,7 @@ public class SignUpTest extends TestBase {
         Assert.assertTrue(model.userExists(userName));
     }
 
-    @Test(expected = SignUpException.class)
+    @Test(expected = UserException.class)
     public void nouser_badmail_userNotAdded() {
         // arrange
         String userName = UserDetailForTest.USERNAME_INVALID.getValue();
@@ -51,7 +52,7 @@ public class SignUpTest extends TestBase {
         Assert.assertFalse(model.userExists(userName));
     }
 
-    @Test(expected = SignUpException.class)
+    @Test(expected = UserException.class)
     public void nouser_nameIsNull_userNotAdded() {
         // arrange
         String userName = null;
@@ -64,7 +65,7 @@ public class SignUpTest extends TestBase {
         Assert.assertFalse(model.userExists(userName));
     }
 
-    @Test(expected = SignUpException.class)
+    @Test(expected = UserException.class)
     public void nouser_passwordIsNull_userNotAdded() {
         // arrange
         String userName = UserDetailForTest.USERNAME_VALID.getValue();
@@ -77,7 +78,7 @@ public class SignUpTest extends TestBase {
         Assert.assertFalse(model.userExists(userName));
     }
 
-    @Test(expected = SignUpException.class)
+    @Test(expected = UserException.class)
     public void nouser_passwordTooShort_userNotAdded() {
         // arrange
         String userName = UserDetailForTest.USERNAME_VALID.getValue();
