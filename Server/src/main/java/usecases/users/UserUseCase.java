@@ -1,6 +1,8 @@
 package usecases.users;
 
 import exceptions.SignUpException;
+import exceptions.UsecaseException;
+import exceptions.UserException;
 import lang.SafeObject;
 import model.Model;
 import usecases.ActionUseCase;
@@ -30,13 +32,13 @@ public abstract class UserUseCase extends ActionUseCase {
 
     void validatePassword() {
         if (password == null || password.length() < MIN_PASSWORD_LENGTH){
-            throw new SignUpException("Password too short. use atleast 6 characters");
+            throw new UserException("Password too short. use atleast 6 characters");
         }
     }
 
     void validateUsername() {
         if (username == null || PATTERN.matcher(username).matches() == false){
-            throw new SignUpException("Username does not match email pattern");
+            throw new UserException("Username does not match email pattern");
         }
     }
 
