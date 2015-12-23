@@ -22,4 +22,15 @@ public class Model {
     public boolean userExists(String username) {
         return users.containsKey(username);
     }
+
+    public void loginUser(String username, String password) {
+        User user = users.get(username);
+
+        if (user.getPasswordHash(password).equals(user.passwordHash)){
+            // TODO: success
+        }
+        else {
+            // TODO: fail
+        }
+    }
 }

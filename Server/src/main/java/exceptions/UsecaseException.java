@@ -1,7 +1,5 @@
 package exceptions;
 
-import usecases.SignUp;
-
 /**
  * Created by gur on 12/23/2015.
  */

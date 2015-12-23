@@ -17,6 +17,10 @@ public class User {
     public User(String username, String password){
         this.username = username;
         this.salt = Integer.toString(RANDOM.nextInt());
-        this.passwordHash = DigestUtils.sha1Hex(password + salt);
+        this.passwordHash = getPasswordHash(password);
+    }
+
+    public String getPasswordHash(String password){
+        return DigestUtils.sha1Hex(password + salt);
     }
 }

@@ -5,3 +5,4 @@ public class SignUpException extends UsecaseException {
         super(message);
     }
 }
+
