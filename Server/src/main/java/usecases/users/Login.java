@@ -8,7 +8,7 @@ import model.Model;
 public class Login extends UserUseCase {
     String cookie = null;
 
-    protected Login(SafeObject<Model> context, String username, String password) {
+    public Login(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
     }
 
