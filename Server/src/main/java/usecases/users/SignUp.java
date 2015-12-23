@@ -9,7 +9,7 @@ import model.User;
  * Created by gur on 12/23/2015.
  */
 public class SignUp extends UserUseCase {
-    protected SignUp(SafeObject<Model> context, String username, String password) {
+    public SignUp(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
     }
 
