@@ -1,5 +1,6 @@
 package usecases;
 
+import exceptions.UsecaseException;
 import lang.SafeObject;
 import model.Model;
 
@@ -13,15 +14,13 @@ public abstract class ModelUseCase implements UseCase{
         this.model = context;
     }
 
-    protected void pre(){};
-    protected void post(){};
-    protected abstract void safe(SafeObject<Model> model);
+    protected void pre() throws UsecaseException {};
+    protected void post()throws UsecaseException {};
+    protected abstract void safe(SafeObject<Model> model) throws UsecaseException;
 
     public void perform() {
         pre();
-
         safe(model);
-
         post();
     }
 }
