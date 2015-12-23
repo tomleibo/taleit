@@ -2,6 +2,7 @@ package model;
 
 import exceptions.LoginException;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.*;
 
 /**
@@ -45,5 +46,14 @@ public class Model {
                 loggedUsers.remove(user);
             }
         }
+    }
+
+    public User getUserFromCookie(String cookie){
+        for (User user: loggedUsers){
+            if (user.cookie.equals(cookie)){
+                return user;
+            }
+        }
+        return null;
     }
 }
