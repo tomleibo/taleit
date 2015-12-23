@@ -13,8 +13,8 @@ public abstract class ModelUseCase implements UseCase{
         this.model = context;
     }
 
-    protected abstract void pre();
-    protected abstract void post();
+    protected void pre(){};
+    protected void post(){};
     protected abstract void safe(SafeObject<Model> model);
 
     public void perform() {
