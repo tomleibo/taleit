@@ -1,6 +1,6 @@
 package exceptions;
 
-public class LoginException extends UsecaseException {
+public class LoginException extends UserException {
     public LoginException(String message) {
         super(message);
     }
