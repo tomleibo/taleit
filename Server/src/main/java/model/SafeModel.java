@@ -7,6 +7,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by gur on 11/6/2015.
  */
 public class SafeModel <T>{
+    /*
+    gur is a zain - checking
+     */
     private final T model;
     private final ReadWriteLock lock;
 
