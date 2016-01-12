@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 /**
  * Created by gur on 12/23/2015.
  */
-@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/actions/signup"} )
+@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/actions/accounts/signup"} )
 public class SignUpServlet extends HttpServlet {
 
     @Override
