@@ -1,5 +1,6 @@
 package usecases.Stories;
 
+import exceptions.InvalidUseCaseParameterException;
 import lang.SafeObject;
 import model.Model;
 import model.Story;
@@ -17,7 +18,7 @@ public class CreateStory extends ActionUseCase {
     //http://www.answers.com/Q/What_is_the_longest_book_title
 
 
-    protected CreateStory(SafeObject<Model> context, String author, String title, String text) {
+    public CreateStory(SafeObject<Model> context, String author, String title, String text) {
         super(context);
 
         this.author = author;
@@ -31,7 +32,6 @@ public class CreateStory extends ActionUseCase {
         validateAuthor(author);// todo change to cookie
         validateTitle(title);
         validateText(text);
-
     }
 
     public void perform(Model model) {
@@ -39,9 +39,18 @@ public class CreateStory extends ActionUseCase {
     }
 
     private void validateAuthor(String author) {
-//        if (author == null){
-//            throw new AuthorException("Author can't be null");
-//        }
+        if (author == null){
+            throw new InvalidUseCaseParameterException("Author" , "can't be null");
+        }
+    }
+
+    private void validateTitle(String title) {
+        if(title == null || title.length() == 0){
+            throw new InvalidUseCaseParameterException("Title", "can't be null or zero length");
+        }
+        if (title.length() > MAX_TITLE_LENGTH){
+            throw new InvalidUseCaseParameterException("Title", "is too long, must be less than" + MAX_TITLE_LENGTH);
+        }
     }
 
     /***
@@ -50,20 +59,12 @@ public class CreateStory extends ActionUseCase {
      * @return
      */
     private boolean validateText(String text) {
-//        if (text == null){
-//            throw new AuthorException("text can't be null");
-//        }
+        if (text == null){
+            throw new InvalidUseCaseParameterException("Text", "can't be null");
+        }
         return false;
     }
 
-    private void validateTitle(String title) {
-//        if(title == null || title.length() == 0){
-//            throw new StoryTitleException("Title can't be null or zero length" + MAX_TITLE_LENGTH);
-//        }
-//        if (title.length() > MAX_TITLE_LENGTH){
-//            throw new StoryTitleException("Title is too long, must be less than" + MAX_TITLE_LENGTH);
-//        }
-    }
 
     private boolean validateUsername(String username) {
         return false;

@@ -1,4 +1,5 @@
 .idea
+/.idea
 local.properties
 *.jar
 *.class
