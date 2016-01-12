@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.LoginException;
+import exceptions.LogoutException;
 
 import java.util.*;
 
@@ -61,5 +62,13 @@ public class Model {
     public void addStory(Story story) {
         stories.put(story.title + story.username, story);
         //TODO problematic due to the same user creating the same story twice... fix later with DB
+    }
+
+    public Set<User> getLoggedUsers(){
+        return loggedUsers;
+    }
+
+    public boolean isUserLoggedIn(String userName){
+         return getLoggedUsers().contains(users.get(userName));
     }
 }
