@@ -15,26 +15,26 @@ public class User {
     String salt;
     public String cookie;
 
-    public User(String username, String password){
+    public User(String username, String password) {
         this.username = username;
         this.salt = Integer.toString(RANDOM.nextInt());
         this.passwordHash = getPasswordHash(password);
     }
 
-    public String getPasswordHash(String password){
+    public String getPasswordHash(String password) {
         return DigestUtils.sha1Hex(password + salt);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return username.hashCode();
     }
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (other == null) return false;
         if (username == null) return false;
         if (!getClass().equals(other.getClass())) return false;
-        return username.equals(((User)other).username);
+        return username.equals(((User) other).username);
     }
 }
