@@ -9,6 +9,7 @@ import usecases.users.SignUp;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.io.InputStreamReader;
 /**
  * Created by gur on 12/23/2015.
  */
+@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/actions/signup"} )
 public class SignUpServlet extends HttpServlet {
 
     @Override
