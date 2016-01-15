@@ -70,4 +70,8 @@ public class Model {
     public boolean isUserLoggedIn(String userName){
          return getLoggedUsers().contains(users.get(userName));
     }
+
+    public Map<Integer, Story> getStories() {
+        return stories;
+    }
 }
