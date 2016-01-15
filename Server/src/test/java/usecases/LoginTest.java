@@ -7,9 +7,7 @@ import model.Model;
 import org.junit.Before;
 import org.junit.Test;
 import usecases.core.SignedUpTestBase;
-import usecases.core.TestBase;
 import usecases.users.Login;
-import usecases.users.SignUp;
 import usecases.utils.UserDetailForTest;
 
 import static junit.framework.Assert.assertNull;
@@ -20,9 +18,10 @@ import static org.junit.Assert.assertNotNull;
  */
 public class LoginTest extends SignedUpTestBase {
     @Before
-    public void setUp(){
+    public void setUp() {
         super.setUp();
     }
+
     @Test
     public void userExists_validData_userLoggedIn() {
         // arrange
