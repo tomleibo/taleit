@@ -6,10 +6,10 @@ package model;
 public class Story {
     static int storyCounter = 0;
 
-    int id;
-    String username; // will be showed as author? maybe add another field later
-    String title;
-    Paragraph root;
+    private int id;
+    private String username; // will be showed as author? maybe add another field
+    private String title;
+    private Paragraph root;
     int paragraphCounter;
 
     public Story(String username, String title, String text){
@@ -18,5 +18,9 @@ public class Story {
         this.id = storyCounter++;
         this.paragraphCounter = 0;
         root = new Paragraph(paragraphCounter, null, text, username);
+    }
+
+    public int getId() {
+        return id;
     }
 }

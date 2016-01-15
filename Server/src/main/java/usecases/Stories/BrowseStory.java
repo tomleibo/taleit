@@ -1,6 +1,6 @@
 package usecases.Stories;
 
-import exceptions.InvalidUseCaseParameterException;
+import exceptions.BrowseStoryException;
 import lang.SafeObject;
 import model.Model;
 import model.Story;
@@ -24,7 +24,7 @@ public class BrowseStory extends ActionUseCase {
 
     public Map<Integer, Story> getStories() {
         if (stories.isEmpty()) {
-            throw new InvalidUseCaseParameterException("Browse Story", "no available stories ");
+            throw new BrowseStoryException("no available stories ");
         }
         return stories;
     }
