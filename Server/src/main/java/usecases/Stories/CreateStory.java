@@ -10,32 +10,38 @@ import usecases.ActionUseCase;
  * Created by Shai on 23/12/2015.
  */
 public class CreateStory extends ActionUseCase {
-    String author;
     String title;
     String text;
+    String username;
+    Story story;
+
+
 
     static final int MAX_TITLE_LENGTH = 3999;
     //http://www.answers.com/Q/What_is_the_longest_book_title
 
 
-    public CreateStory(SafeObject<Model> context, String author, String title, String text) {
+    public CreateStory(SafeObject<Model> context, String title, String text, String username) {
         super(context);
 
-        this.author = author;
+        this.username = username;
         this.title = title;
         this.text = text;
-        // add sub paragraphs later
     }
 
     protected void pre(){
         // TODO probably not here but, check sqlinjection, xss
-        validateAuthor(author);// todo change to cookie
+        validateAuthor(username);// todo change to cookie
         validateTitle(title);
         validateText(text);
     }
 
     public void perform(Model model) {
-        model.addStory(new Story(author, title, text));
+        model.addStory(story = new Story(username, title, text));
+    }
+
+    public Story getStory() {
+        return story;
     }
 
     private void validateAuthor(String author) {
