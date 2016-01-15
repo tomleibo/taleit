@@ -4,10 +4,10 @@ package model;
  * Created by Shai on 23/12/2015.
  */
 public class Story {
-    int id;
-    String username; // will be showed as author? maybe add another field
-    String title;
-    Paragraph root;
+    private int id;
+    private String username; // will be showed as author? maybe add another field
+    private String title;
+    private Paragraph root;
     int paragraphCounter;
     static int storyCounter = 0;
 
@@ -17,5 +17,9 @@ public class Story {
         this.id = storyCounter++;
         this.paragraphCounter = 0;
         root = new Paragraph(paragraphCounter, null, text, username);
+    }
+
+    public int getId() {
+        return id;
     }
 }

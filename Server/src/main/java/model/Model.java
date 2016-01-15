@@ -60,7 +60,7 @@ public class Model {
     }
 
     public void addStory(Story story) {
-        stories.put(story.id, story);
+        stories.put(story.getId(), story);
     }
 
     public Set<User> getLoggedUsers(){
