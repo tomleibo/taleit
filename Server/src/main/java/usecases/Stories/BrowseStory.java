@@ -1,7 +1,6 @@
 package usecases.Stories;
 
 import exceptions.BrowseStoryException;
-import exceptions.InvalidUseCaseParameterException;
 import lang.SafeObject;
 import model.Model;
 import model.Story;
