@@ -6,7 +6,9 @@ import junit.framework.Assert;
 import lang.SafeObject;
 import model.Model;
 import org.junit.Test;
+import usecases.core.TestBase;
 import usecases.users.SignUp;
+import usecases.utils.UserDetailForTest;
 
 /**
  * Created by gur on 12/23/2015.

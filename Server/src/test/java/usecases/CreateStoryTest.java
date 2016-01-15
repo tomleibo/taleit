@@ -4,12 +4,11 @@ import exceptions.LoginException;
 import exceptions.UsecaseException;
 import lang.SafeObject;
 import model.Model;
-import model.Story;
-import org.junit.Before;
 import org.junit.Test;
 import usecases.Stories.CreateStory;
+import usecases.core.TestBase;
 import usecases.users.Login;
-import usecases.users.SignUp;
+import usecases.utils.UserDetailForTest;
 
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertNotNull;

@@ -4,9 +4,11 @@ import lang.SafeObject;
 import model.Model;
 import org.junit.Before;
 import org.junit.Test;
+import usecases.core.TestBase;
 import usecases.users.Login;
 import usecases.users.Logout;
 import usecases.users.SignUp;
+import usecases.utils.UserDetailForTest;
 
 import static junit.framework.Assert.assertFalse;
 
