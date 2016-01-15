@@ -15,8 +15,6 @@ public class CreateStory extends ActionUseCase {
     String username;
     Story story;
 
-
-
     static final int MAX_TITLE_LENGTH = 3999;
     //http://www.answers.com/Q/What_is_the_longest_book_title
 
@@ -31,7 +29,7 @@ public class CreateStory extends ActionUseCase {
 
     protected void pre(){
         // TODO probably not here but, check sqlinjection, xss
-        validateAuthor(username);// todo change to cookie
+        validateUsername(username);// todo change to cookie
         validateTitle(title);
         validateText(text);
     }
@@ -44,7 +42,7 @@ public class CreateStory extends ActionUseCase {
         return story;
     }
 
-    private void validateAuthor(String author) {
+    private void validateUsername(String author) {
         if (author == null){
             throw new InvalidUseCaseParameterException("Author" , "can't be null");
         }
@@ -70,11 +68,5 @@ public class CreateStory extends ActionUseCase {
         }
         return false;
     }
-
-
-    private boolean validateUsername(String username) {
-        return false;
-    }
-
 
 }
