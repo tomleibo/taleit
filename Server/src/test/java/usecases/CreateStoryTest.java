@@ -5,6 +5,7 @@ import model.Model;
 import org.junit.Test;
 import usecases.Stories.CreateStory;
 
+
 /**
  * Created by Shai on 15/01/2016.
  */

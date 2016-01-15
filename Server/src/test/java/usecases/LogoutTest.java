@@ -4,25 +4,21 @@ import lang.SafeObject;
 import model.Model;
 import org.junit.Before;
 import org.junit.Test;
+import usecases.core.SignedUpTestBase;
 import usecases.users.Login;
 import usecases.users.Logout;
-import usecases.users.SignUp;
 
 import static junit.framework.Assert.assertFalse;
 
 /**
  * Created by Kerzman on 12/23/2015.
  */
-public class LogoutTest extends TestBase {
+public class LogoutTest extends SignedUpTestBase {
     private Login login = null;
-    private String userName;
-    private String password;
 
     @Before
     public void setUp() {
-        userName = UserDetailForTest.USERNAME_VALID.getValue();
-        password = UserDetailForTest.PASSWORD_VALID.getValue();
-        new SignUp(new SafeObject<Model>(model), userName, password).perform();
+        super.setUp();
     }
 
     @Test

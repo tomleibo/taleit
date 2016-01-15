@@ -1,4 +1,4 @@
-package usecases;
+package usecases.utils;
 
 /**
  * Created by Kerzman on 12/23/2015

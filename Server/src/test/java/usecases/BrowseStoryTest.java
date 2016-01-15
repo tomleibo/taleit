@@ -7,6 +7,8 @@ import model.Story;
 import org.junit.Test;
 import usecases.Stories.BrowseStory;
 import usecases.Stories.CreateStory;
+import usecases.core.TestBase;
+import usecases.utils.StoryDetailForTest;
 
 import java.util.Map;
 
