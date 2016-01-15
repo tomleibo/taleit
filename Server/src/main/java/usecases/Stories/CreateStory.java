@@ -29,7 +29,7 @@ public class CreateStory extends ActionUseCase {
 
     protected void pre(){
         // TODO probably not here but, check sqlinjection, xss
-        validateUsername(username);// todo change to cookie
+        validateUsername(username);// todo change to cookie and check that user is logged in... should be in servlet
         validateTitle(title);
         validateText(text);
     }
