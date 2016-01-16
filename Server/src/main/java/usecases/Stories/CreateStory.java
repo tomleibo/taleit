@@ -15,7 +15,7 @@ public class CreateStory extends ActionUseCase {
     String username;
     Story story;
 
-    static final int MAX_TITLE_LENGTH = 3999;
+    public static final int MAX_TITLE_LENGTH = 3999;
     //http://www.answers.com/Q/What_is_the_longest_book_title
 
 

@@ -15,12 +15,21 @@ public class Story {
     public Story(String username, String title, String text){
         this.username = username;
         this.title = title;
-        this.id = storyCounter++;
+        this.id = storyCounter;
+        storyCounter++;
         this.paragraphCounter = 0;
         root = new Paragraph(paragraphCounter, null, text, username);
     }
 
     public int getId() {
         return id;
+    }
+
+    public Paragraph getRoot() {
+        return root;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

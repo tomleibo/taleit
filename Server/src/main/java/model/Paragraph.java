@@ -20,4 +20,24 @@ public class Paragraph {
         this.text = text;
         Children = new HashMap<Integer, Paragraph>();
     }
+
+    public String getText() {
+        return text;
+    }
+
+    public Map<Integer, Paragraph> getChildren() {
+        return Children;
+    }
+
+    public Paragraph getFather() {
+        return father;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public int getId() {
+        return id;
+    }
 }
