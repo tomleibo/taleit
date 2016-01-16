@@ -1,35 +1,26 @@
 package model;
 
+import java.util.UUID;
+
 /**
  * Created by Shai on 23/12/2015.
  */
 public class Story {
-    static int storyCounter = 0;
-
-    private int id;
-    private String username; // will be showed as author? maybe add another field
+    private String id;
     private String title;
     private Paragraph root;
-    int paragraphCounter;
 
-    public Story(String username, String title, String text){
-        this.username = username;
+    public Story(String title, Paragraph root){
         this.title = title;
-        this.id = storyCounter;
-        storyCounter++;
-        this.paragraphCounter = 0;
-        root = new Paragraph(paragraphCounter, null, text, username);
+        this.id = UUID.randomUUID().toString();
+        this. root = root;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public Paragraph getRoot() {
         return root;
-    }
-
-    public String getUsername() {
-        return username;
     }
 }

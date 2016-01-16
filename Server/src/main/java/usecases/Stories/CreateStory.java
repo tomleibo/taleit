@@ -1,8 +1,9 @@
-package usecases.Stories;
+package usecases.stories;
 
 import exceptions.InvalidUseCaseParameterException;
 import lang.SafeObject;
 import model.Model;
+import model.Paragraph;
 import model.Story;
 import usecases.ActionUseCase;
 
@@ -11,41 +12,23 @@ import usecases.ActionUseCase;
  */
 public class CreateStory extends ActionUseCase {
     String title;
-    String text;
-    String username;
-    Story story;
+    Paragraph root;
 
-    public static final int MAX_TITLE_LENGTH = 3999;
-    //http://www.answers.com/Q/What_is_the_longest_book_title
+    public static final int MAX_TITLE_LENGTH = 100;
 
-
-    public CreateStory(SafeObject<Model> context, String title, String text, String username) {
+    public CreateStory(SafeObject<Model> context, String title, Paragraph root) {
         super(context);
 
-        this.username = username;
         this.title = title;
-        this.text = text;
+        this.root = root;
     }
 
     protected void pre(){
-        // TODO probably not here but, check sqlinjection, xss
-        validateUsername(username);// todo change to cookie and check that user is logged in... should be in servlet
         validateTitle(title);
-        validateText(text);
     }
 
     public void perform(Model model) {
-        model.addStory(story = new Story(username, title, text));
-    }
-
-    public Story getStory() {
-        return story;
-    }
-
-    private void validateUsername(String author) {
-        if (author == null){
-            throw new InvalidUseCaseParameterException("Author" , "can't be null");
-        }
+        model.addStory(new Story(title, root));
     }
 
     private void validateTitle(String title) {
@@ -56,17 +39,4 @@ public class CreateStory extends ActionUseCase {
             throw new InvalidUseCaseParameterException("Title", "is too long, must be less than" + MAX_TITLE_LENGTH);
         }
     }
-
-    /***
-     * no max size for now
-     * @param text
-     * @return
-     */
-    private boolean validateText(String text) {
-        if (text == null){
-            throw new InvalidUseCaseParameterException("Text", "can't be null");
-        }
-        return false;
-    }
-
 }

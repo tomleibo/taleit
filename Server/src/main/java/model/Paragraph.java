@@ -2,22 +2,25 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Shai on 15/01/2016.
  */
 public class Paragraph {
-    int id;
+    String id;
     Paragraph father;
     Map<Integer, Paragraph> Children;
     String username;
     String text;
+    String title;
 
-    public Paragraph(int id, Paragraph father, String text, String username) {
-        this.id = id;
+    public Paragraph(Paragraph father, String text, String title, String username) {
+        this.id = UUID.randomUUID().toString();
         this.father = father;
         this.username = username;
         this.text = text;
+        this.title = title;
         Children = new HashMap<Integer, Paragraph>();
     }
 
@@ -37,7 +40,7 @@ public class Paragraph {
         return username;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 }

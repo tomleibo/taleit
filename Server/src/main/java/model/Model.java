@@ -11,12 +11,12 @@ import java.util.*;
 public class Model {
     final private Map<String, User> users;
     final private Set<User> loggedUsers;
-    final private Map<Integer, Story> stories;
+    final private Map<String, Story> stories;
 
     public Model(){
         this.users = new HashMap<String, User>();
         this.loggedUsers = new HashSet<User>();
-        this.stories = new HashMap<Integer, Story>();
+        this.stories = new HashMap<String, Story>();
     }
 
     public void addUser(User user){
@@ -71,7 +71,7 @@ public class Model {
          return getLoggedUsers().contains(users.get(userName));
     }
 
-    public Map<Integer, Story> getStories() {
+    public Map<String, Story> getStories() {
         return stories;
     }
 }
