@@ -1,7 +1,6 @@
 package model;
 
 import exceptions.LoginException;
-import exceptions.LogoutException;
 
 import java.util.*;
 
@@ -73,5 +72,9 @@ public class Model {
 
     public Map<Integer, Story> getStories() {
         return stories;
+    }
+
+    public Paragraph concactinateParagraph(Story story, Paragraph father, String text, String username) {
+        return story.addParagraph(father, text, username);
     }
 }

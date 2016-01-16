@@ -7,11 +7,11 @@ import java.util.Map;
  * Created by Shai on 15/01/2016.
  */
 public class Paragraph {
-    int id;
-    Paragraph father;
-    Map<Integer, Paragraph> Children;
-    String username;
-    String text;
+    private int id;
+    private Paragraph father;
+    private Map<Integer, Paragraph> Children;
+    private String username;
+    private String text;
 
     public Paragraph(int id, Paragraph father, String text, String username) {
         this.id = id;
@@ -39,5 +39,9 @@ public class Paragraph {
 
     public int getId() {
         return id;
+    }
+
+    public void addChild(Paragraph paragraph) {
+        Children.put(paragraph.getId(), paragraph);
     }
 }
