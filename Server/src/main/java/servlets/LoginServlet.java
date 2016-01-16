@@ -3,25 +3,22 @@ package servlets;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
-import org.json.JSONException;
 import org.json.JSONObject;
-import usecases.UseCase;
-import usecases.users.SignUp;
+import usecases.users.Login;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by gur on 12/23/2015.
+ * Created by gur on 1/16/2016.
  */
-@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/accounts/signup"} )
-public class SignUpServlet extends HttpServlet {
-
+@WebServlet( name = "LoginServlet", description = "Login servlet", urlPatterns = {"/rest/accounts/login"} )
+public class LoginServlet extends HttpServlet{
     @Override
     public void init() throws ServletException {}
 
@@ -36,11 +33,12 @@ public class SignUpServlet extends HttpServlet {
 
             String username = jsonObject.getString("username");
             String password = jsonObject.getString("password");
-            UseCase signup = new SignUp(Server.Instance.getSafeModel(), username, password);
+            Login login = new Login(Server.Instance.getSafeModel(), username, password);
 
-            signup.perform();
+            login.perform();
 
             response.setStatus(HttpServletResponse.SC_OK);
+            response.getOutputStream().print(login.getCookie());
         }
         catch (Throwable wtf){
             wtf.printStackTrace();
