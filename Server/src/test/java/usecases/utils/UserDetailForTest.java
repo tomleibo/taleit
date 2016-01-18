@@ -7,7 +7,7 @@ public enum UserDetailForTest {
     // usernames
     USERNAME_VALID("sharon@gmail.com"),
     USERNAME_INVALID("gur"),
-    USERNAME_FIRST_TIME("shairip@hotmale.com"),
+    USERNAME_FIRST_TIME("shairip@hotmale.co.il"),
 
     // passwords
     PASSWORD_VALID("123abc"),
