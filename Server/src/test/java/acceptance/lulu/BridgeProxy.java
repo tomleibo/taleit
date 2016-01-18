@@ -1,4 +1,4 @@
-package acceptance.tzipi;
+package acceptance.lulu;
 
 import java.util.Collection;
 
