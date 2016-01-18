@@ -1,6 +1,5 @@
 package usecases;
 
-import exceptions.InvalidUseCaseParameterException;
 import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
@@ -21,12 +20,12 @@ import static org.junit.Assert.assertTrue;
 public class CreateStoryTest extends TestBase{
     @Test
     public void create_Story_Simple() {
-        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
+        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), "cookie-dough", StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
         usecase.perform();
         Story story = usecase.getStory();
 
         assertTrue(model.getStories().size() == 1);
-        assertEquals(story.getUsername(), StoryDetailForTest.AUTHOR.getValue());
+        assertEquals(story.getUser().getUsername(), StoryDetailForTest.AUTHOR.getValue());
 
         Paragraph root = story.getRoot();
 
@@ -34,7 +33,7 @@ public class CreateStoryTest extends TestBase{
         assertNull(root.getFather());
 //        assertEquals(root.getId(), 0);
         assertTrue(root.getChildren().isEmpty());
-        assertEquals(root.getUsername(), StoryDetailForTest.AUTHOR.getValue());
+        assertEquals(root.getUser(), StoryDetailForTest.AUTHOR.getValue());
     }
 
 //    @Test(expected = InvalidUseCaseParameterException.class)

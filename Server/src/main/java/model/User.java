@@ -10,13 +10,13 @@ import java.security.SecureRandom;
 public class User {
     private static SecureRandom RANDOM = new SecureRandom();
 
-    String username;
+    private String username;
     String passwordHash;
     String salt;
     public String cookie;
 
     public User(String username, String password) {
-        this.username = username;
+        this.setUsername(username);
         this.salt = Integer.toString(RANDOM.nextInt());
         this.passwordHash = getPasswordHash(password);
     }
@@ -27,14 +27,22 @@ public class User {
 
     @Override
     public int hashCode() {
-        return username.hashCode();
+        return getUsername().hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (other == null) return false;
-        if (username == null) return false;
+        if (getUsername() == null) return false;
         if (!getClass().equals(other.getClass())) return false;
-        return username.equals(((User) other).username);
+        return getUsername().equals(((User) other).getUsername());
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

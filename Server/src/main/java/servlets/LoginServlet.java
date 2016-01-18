@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by gur on 1/16/2016.
- */
 @WebServlet( name = "LoginServlet", description = "Login servlet", urlPatterns = {"/rest/accounts/login"} )
 public class LoginServlet extends HttpServlet{
     @Override

@@ -10,16 +10,16 @@ import java.util.*;
 public class Model {
     final private Map<String, User> users;
     final private Set<User> loggedUsers;
-    final private Map<Integer, Story> stories;
+    final private Collection<Story> stories;
 
     public Model(){
         this.users = new HashMap<String, User>();
         this.loggedUsers = new HashSet<User>();
-        this.stories = new HashMap<Integer, Story>();
+        this.stories = new HashSet<Story>();
     }
 
     public void addUser(User user){
-        users.put(user.username, user);
+        users.put(user.getUsername(), user);
     }
 
     public boolean userExists(String username) {
@@ -30,7 +30,7 @@ public class Model {
         User user = users.get(username);
 
         if (user.getPasswordHash(password).equals(user.passwordHash)){
-            if (!loggedUsers.contains(username)){
+            if (!loggedUsers.contains(user)){
                 user.cookie = UUID.randomUUID().toString();
                 loggedUsers.add(user);
             }
@@ -59,7 +59,7 @@ public class Model {
     }
 
     public void addStory(Story story) {
-        stories.put(story.getId(), story);
+        stories.add(story);
     }
 
     public Set<User> getLoggedUsers(){
@@ -70,19 +70,19 @@ public class Model {
          return getLoggedUsers().contains(users.get(userName));
     }
 
-    public Map<Integer, Story> getStories() {
+    public Collection<Story> getStories() {
         return stories;
     }
 
-    public Paragraph concactinateParagraph(Story story, Paragraph father, String text, String username) {
-        return story.addParagraph(father, text, username);
+    public Paragraph concactinateParagraph(Story story, Paragraph father, String title, String text, User user) {
+        return story.addParagraph(father, title, text, user);
     }
 
     public Paragraph getRootFromStory(Story story) {
         return story.getRoot();
     }
 
-    public Paragraph getParagraph(Story story, Integer paragraphId) {
+    public Paragraph getParagraph(Story story, String paragraphId) {
         return story.getParagraphById(paragraphId);
     }
 }

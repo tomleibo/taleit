@@ -4,6 +4,7 @@ import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
 import model.Story;
+import model.User;
 import usecases.ActionUseCase;
 
 /**
@@ -12,22 +13,25 @@ import usecases.ActionUseCase;
 public class ContinueStory extends ActionUseCase {
     Paragraph father;
     String text;
-    String username;
+    String title;
+    User user;
     Story story;
     Paragraph paragraph;
 
-    public ContinueStory(SafeObject<Model> context, Paragraph father, String text, String username, Story story) {
+    public ContinueStory(SafeObject<Model> context, Paragraph father, String title, String text, User user, Story story) {
         super(context);
 
         this.father = father;
         this.text = text;
-        this.username = username;
+        this.user = user;
         this.story = story;
-        this.paragraph = null;
+        this.title = title;
+
+        this.paragraph = null; // will be assigned after perform only TODO: change it!!!
     }
 
     public void perform(Model model) {
-        paragraph = model.concactinateParagraph(story, father, text, username);
+        paragraph = model.concactinateParagraph(story, father, title, text, user);
     }
 
     public Paragraph getParagraph() {
