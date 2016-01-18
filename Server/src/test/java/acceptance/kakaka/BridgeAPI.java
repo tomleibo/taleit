@@ -3,7 +3,7 @@ package acceptance.kakaka;
 import java.util.Collection;
 
 /**
- * Created by Sharon Kerzman on 23/06/2015.
+ * Created by Kerzman on 12/23/2015.
  */
 public interface BridgeAPI {
 

@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * Created by Kerzman on 12/23/2015.
  */
-public class BridgeProxy implements BridgeAPI {
+public class BridgeReal implements BridgeAPI {
 
     public boolean signUp(String userName, String password) {
         return true;
