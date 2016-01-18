@@ -12,7 +12,6 @@ public enum UserDetailForTest {
     // passwords
     FIRST_PASSWORD_VALID("123abc"),
     SECOND_PASSWORD_VALID("IlikeU"),
-    PASSWORD_INCORRECT("abc123"),
     PASSWORD_TO_SHORT("123a");
 
     private final String value;
