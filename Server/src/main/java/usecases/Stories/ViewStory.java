@@ -14,7 +14,7 @@ public class ViewStory extends ActionUseCase{
     Integer paragraphId;
     Paragraph paragraph;
 
-    public ViewStory(SafeObject<Model> context, Story story, int paragraphId) {
+    public ViewStory(SafeObject<Model> context, Story story, Integer paragraphId) {
         super(context);
 
         this.story = story;
@@ -25,8 +25,11 @@ public class ViewStory extends ActionUseCase{
         if (paragraphId == null) { // if the user wants the root TODO... not sure if he has it already or not
             paragraph = model.getRootFromStory(story);
         }else{
-            
+            paragraph = model.getParagraph(story, paragraphId);
         }
+    }
 
+    public Paragraph getParagraph() {
+        return paragraph;
     }
 }

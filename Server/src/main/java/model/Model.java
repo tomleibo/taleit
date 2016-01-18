@@ -81,4 +81,8 @@ public class Model {
     public Paragraph getRootFromStory(Story story) {
         return story.getRoot();
     }
+
+    public Paragraph getParagraph(Story story, Integer paragraphId) {
+        return story.getParagraphById(paragraphId);
+    }
 }
