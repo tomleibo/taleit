@@ -1,6 +1,7 @@
 package acceptance.tests;
 
 import acceptance.core.TestBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
@@ -12,6 +13,10 @@ import static junit.framework.Assert.assertTrue;
  * Created by sharonk on 1/18/2016
  */
 public class SignUp extends TestBase {
+    @Before
+    public void init(){
+        super.init();
+    }
 
     @Test
     public void validNameAndPassword() {
