@@ -20,38 +20,38 @@ public class SignUp extends TestBase {
 
     @Test
     public void validNameAndPassword() {
-        assertTrue("failed to perform signup with user: " + userName + " and password: " + password, bridge.signUp
-                (userName, password));
+        assertTrue("failed to perform signup with user: " + userName + " and password: " +
+                password, bridge.signUp(userName, password));
     }
 
     @Test
     public void invalidName() {
-        assertFalse("succeed to perform signup with invalid user name: " + invalidName, bridge.signUp(invalidName,
-                password));
+        assertFalse("succeed to perform signup with invalid user name: " + invalidName,
+                bridge.signUp(invalidName, password));
     }
 
     @Test
     public void shortPassword() {
-        assertFalse("succeed to perform signup with invalid password: " + shortPassword, bridge.signUp(userName,
-                shortPassword));
+        assertFalse("succeed to perform signup with invalid password: " + shortPassword,
+                bridge.signUp(userName, shortPassword));
     }
 
     @Test
     public void sameName() {
-        assertTrue("failed to perform signup with user: " + userName + " and password: " + password, bridge.signUp
-                (userName, password));
+        assertTrue("failed to perform signup with user: " + userName + " and password: " + password,
+                bridge.signUp(userName, password));
 
-        assertFalse("succeed to perform signup with same user name : " + userName, bridge.signUp(userName,
-                secondPassword));
+        assertFalse("succeed to perform signup with same user name : " + userName,
+                bridge.signUp(userName, secondPassword));
     }
 
     @Test
     public void samePassword() {
-        assertTrue("failed to perform signup with user: " + userName + " and password: " + password, bridge.signUp
-                (userName, password));
+        assertTrue("failed to perform signup with user: " + userName + " and password: " + password,
+                bridge.signUp(userName, password));
 
-        assertTrue("failed to perform signup with same password : " + password, bridge.signUp(secondUserName,
-                password));
+        assertTrue("failed to perform signup with same password : " + password,
+                bridge.signUp(secondUserName, password));
     }
     @Test
     public void randomNumberOfSignup(){
