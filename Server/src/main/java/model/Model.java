@@ -77,4 +77,12 @@ public class Model {
     public Paragraph concactinateParagraph(Story story, Paragraph father, String text, String username) {
         return story.addParagraph(father, text, username);
     }
+
+    public Paragraph getRootFromStory(Story story) {
+        return story.getRoot();
+    }
+
+    public Paragraph getParagraph(Story story, Integer paragraphId) {
+        return story.getParagraphById(paragraphId);
+    }
 }

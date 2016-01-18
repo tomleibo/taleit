@@ -1,7 +1,6 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Shai on 15/01/2016.
@@ -9,7 +8,7 @@ import java.util.Map;
 public class Paragraph {
     private int id;
     private Paragraph father;
-    private Map<Integer, Paragraph> Children;
+    private Set<Paragraph> Children;
     private String username;
     private String text;
 
@@ -18,14 +17,14 @@ public class Paragraph {
         this.father = father;
         this.username = username;
         this.text = text;
-        Children = new HashMap<Integer, Paragraph>();
+        Children = new HashSet<Paragraph>();
     }
 
     public String getText() {
         return text;
     }
 
-    public Map<Integer, Paragraph> getChildren() {
+    public Set<Paragraph> getChildren() {
         return Children;
     }
 
@@ -42,6 +41,6 @@ public class Paragraph {
     }
 
     public void addChild(Paragraph paragraph) {
-        Children.put(paragraph.getId(), paragraph);
+        Children.add(paragraph);
     }
 }
