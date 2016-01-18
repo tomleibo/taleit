@@ -1,10 +1,8 @@
 package acceptance.tests;
 
-import acceptance.core.SignedUpBase;
-import acceptance.core.TestBase;
+import acceptance.core.SignedUpBaseAcceptance;
 import org.junit.Before;
 import org.junit.Test;
-import usecases.core.SignedUpTestBase;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -12,7 +10,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
-public class Login extends SignedUpBase {
+public class LoginAcceptance extends SignedUpBaseAcceptance {
     @Before
     public void init(){
         super.init();

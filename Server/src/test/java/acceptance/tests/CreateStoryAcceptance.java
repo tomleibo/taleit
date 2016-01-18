@@ -1,7 +1,6 @@
 package acceptance.tests;
 
-import acceptance.core.LoggedInBase;
-import acceptance.core.SignedUpBase;
+import acceptance.core.LoggedInBaseAcceptance;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
-public class createStorykaki extends LoggedInBase {
+public class CreateStoryAcceptance extends LoggedInBaseAcceptance {
     int storyNumber;
     @Before
     public void init(){

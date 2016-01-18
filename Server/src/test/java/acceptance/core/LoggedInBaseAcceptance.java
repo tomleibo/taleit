@@ -8,7 +8,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
-public class LoggedInBase extends SignedUpBase {
+public class LoggedInBaseAcceptance extends SignedUpBaseAcceptance {
     protected String storyTitle = StoryDetailForTest.FIRST_TITLE.getValue();
     protected String storyText = StoryDetailForTest.FIRST_BODY.getValue();
 

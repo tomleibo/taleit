@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Created by Sharon Kerzman on 12/05/2015.
  */
-public class TestBase {
+public class AcceptanceTestBase {
 
     protected BridgeAPI bridge;
     protected String userName = UserDetailForTest.FIRST_USERNAME_VALID.getValue();

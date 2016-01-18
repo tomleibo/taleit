@@ -1,18 +1,16 @@
 package acceptance.tests;
 
-import acceptance.core.TestBase;
+import acceptance.core.AcceptanceTestBase;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
-import static com.sun.webkit.perf.WCFontPerfLogger.log;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by sharonk on 1/18/2016
  */
-public class SignUp extends TestBase {
+public class SignUpAcceptance extends AcceptanceTestBase {
     @Before
     public void init(){
         super.init();
