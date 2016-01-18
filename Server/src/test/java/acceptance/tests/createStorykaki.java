@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
-public class createStory extends LoggedInBase {
+public class createStorykaki extends LoggedInBase {
     int storyNumber;
     @Before
     public void init(){
