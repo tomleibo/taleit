@@ -45,4 +45,8 @@ public class Paragraph {
     public void addChild(Paragraph paragraph) {
         Children.add(paragraph);
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
