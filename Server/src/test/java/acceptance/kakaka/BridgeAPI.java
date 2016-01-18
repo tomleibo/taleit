@@ -1,4 +1,4 @@
-package acceptance.kaki;
+package acceptance.kakaka;
 
 import java.util.Collection;
 
