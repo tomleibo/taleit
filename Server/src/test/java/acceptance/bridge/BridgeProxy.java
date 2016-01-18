@@ -1,11 +1,11 @@
-package acceptance.kakaka;
+package acceptance.bridge;
 
 import java.util.Collection;
 
 /**
  * Created by Kerzman on 12/23/2015.
  */
-public class BridgeReal implements BridgeAPI {
+public class BridgeProxy implements BridgeAPI {
 
     public boolean signUp(String userName, String password) {
         return true;
@@ -19,7 +19,7 @@ public class BridgeReal implements BridgeAPI {
         return true;
     }
 
-    public int createStory(String userName, String title, String text) {
+    public int createStory(String title, String text) {
         return 1;
     }
 

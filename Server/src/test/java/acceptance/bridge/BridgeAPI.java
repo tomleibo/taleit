@@ -1,4 +1,4 @@
-package acceptance.kakaka;
+package acceptance.bridge;
 
 import java.util.Collection;
 
@@ -17,7 +17,7 @@ public interface BridgeAPI {
     ///////////////////////////////////// STORIES //////////////////
 
     //returns id=0 when fails
-    int createStory(String userName, String title, String text);
+    int createStory(String title, String text);
 
     Collection<Integer> browseStories();
 
