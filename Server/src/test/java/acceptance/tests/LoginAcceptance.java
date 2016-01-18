@@ -17,25 +17,37 @@ public class LoginAcceptance extends SignedUpBaseAcceptance {
     }
 
     @Test
-    public void validNameAndPassword() {
-        assertTrue("failed to perform login with user: " + userName + " and password: " + password,
-                bridge.login(userName, password));
+    public void validNameAndPassword_2_1() {
+        assertTrue("failed to perform login with user: " + userName + " and password: " + password, bridge.login
+                (userName, password));
     }
 
     @Test
-    public void invalidName() {
-        assertFalse("succeed to perform signup with invalid user name: " + invalidName,
-                bridge.login(invalidName,password));
+    public void unexistingName_2_2() {
+        assertFalse("succeed to perform login with un existing user name: " + secondUserName, bridge.login(secondUserName,
+                password));
     }
 
     @Test
-    public void invalidPassword() {
+    public void noName_2_3() {
+        assertFalse("succeed to perform login with no username",
+                bridge.login("",password));
+    }
+
+    @Test
+    public void unexistingPassword_2_4() {
         assertFalse("succeed to perform login with invalid password: " + secondPassword,
                 bridge.login(userName, secondPassword));
     }
 
     @Test
-     public void twoLoginsSameUser() {
+    public void noPassword_2_5() {
+        assertFalse("succeed to perform login with no password",
+                bridge.login(userName, ""));
+    }
+
+    @Test
+     public void twoLoginsSameUser_2_6() {
         assertTrue("failed to perform login with user: " + userName + " and password: " + password,
                 bridge.login(userName, password));
 
@@ -44,7 +56,7 @@ public class LoginAcceptance extends SignedUpBaseAcceptance {
     }
 
     @Test
-    public void twoLoginsDifferentUser() {
+    public void twoLoginsDifferentUser_2_7() {
         assertTrue("failed to perform signup with user: " + secondUserName + " and password: " + secondPassword,
                 bridge.signUp(secondUserName, secondPassword));
 

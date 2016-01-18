@@ -17,25 +17,37 @@ public class SignUpAcceptance extends AcceptanceTestBase {
     }
 
     @Test
-    public void validNameAndPassword() {
+    public void validNameAndPassword_1_1() {
         assertTrue("failed to perform signup with user: " + userName + " and password: " +
                 password, bridge.signUp(userName, password));
     }
 
     @Test
-    public void invalidName() {
-        assertFalse("succeed to perform signup with invalid user name: " + invalidName,
-                bridge.signUp(invalidName, password));
+    public void invalidName_1_2() {
+        assertFalse("succeed to perform signup with invalid user name: " + invalidName, bridge.signUp(invalidName,
+                password));
     }
 
     @Test
-    public void shortPassword() {
+    public void noName_1_3() {
+        assertFalse("succeed to perform signup to user with no name", bridge.signUp("",
+                password));
+    }
+
+    @Test
+    public void shortPassword_1_4() {
         assertFalse("succeed to perform signup with invalid password: " + shortPassword,
                 bridge.signUp(userName, shortPassword));
     }
 
     @Test
-    public void sameName() {
+    public void noPassword_1_5() {
+        assertFalse("succeed to perform signup with no password",
+                bridge.signUp(userName, ""));
+    }
+
+    @Test
+    public void sameName_1_6() {
         assertTrue("failed to perform signup with user: " + userName + " and password: " + password,
                 bridge.signUp(userName, password));
 
@@ -44,7 +56,7 @@ public class SignUpAcceptance extends AcceptanceTestBase {
     }
 
     @Test
-    public void samePassword() {
+    public void samePassword_1_7() {
         assertTrue("failed to perform signup with user: " + userName + " and password: " + password,
                 bridge.signUp(userName, password));
 
@@ -52,7 +64,7 @@ public class SignUpAcceptance extends AcceptanceTestBase {
                 bridge.signUp(secondUserName, password));
     }
     @Test
-    public void randomNumberOfSignup(){
+    public void randomNumberOfSignup_1_8(){
         int randomNumber = getRandomNumber();
         String userName = "gurk";
         String userPostfix = "@gmail.com";
