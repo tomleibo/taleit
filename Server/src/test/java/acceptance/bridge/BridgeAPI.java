@@ -1,4 +1,4 @@
-package acceptance.kakaka;
+package acceptance.bridge;
 
 import java.util.Collection;
 

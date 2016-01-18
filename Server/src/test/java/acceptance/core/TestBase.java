@@ -1,9 +1,9 @@
 package acceptance.core;
 
 
-import acceptance.kakaka.BridgeAPI;
-import acceptance.kakaka.BridgeProxy;
-import acceptance.kakaka.BridgeReal;
+import acceptance.bridge.BridgeAPI;
+import acceptance.bridge.BridgeProxy;
+import acceptance.bridge.BridgeReal;
 import org.junit.Before;
 
 /**
