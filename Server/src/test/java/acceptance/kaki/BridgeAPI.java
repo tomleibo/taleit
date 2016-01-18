@@ -1,4 +1,4 @@
-package acceptance.lulu;
+package acceptance.kaki;
 
 import java.util.Collection;
 
