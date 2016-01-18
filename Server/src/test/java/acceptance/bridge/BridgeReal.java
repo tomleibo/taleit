@@ -19,7 +19,7 @@ public class BridgeReal implements BridgeAPI {
         return true;
     }
 
-    public int createStory(String userName, String title, String text) {
+    public int createStory(String title, String text) {
         return 1;
     }
 
