@@ -24,7 +24,7 @@ public class ViewStoryTest extends TestBase {
 
     @Before
     public void story(){
-        CreateStory usecaseCreate = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
+        CreateStory usecaseCreate = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), "cookie-dough",StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
         usecaseCreate.perform();
         story = usecaseCreate.getStory();
         root = story.getRoot();
@@ -32,10 +32,10 @@ public class ViewStoryTest extends TestBase {
 
     @Test
     public void go_through_linear_Story_tree() {
-        ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.PARAGRAPH_TEXT.getValue(), StoryDetailForTest.AUTHOR.getValue(), story);
+        ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.TITLE.getValue(),StoryDetailForTest.PARAGRAPH_TEXT.getValue(), root.getUser(), story);
         usecaseContinue.perform();
         Paragraph para2 = usecaseContinue.getParagraph();
-        ContinueStory usecaseContinue2 = new ContinueStory(new SafeObject<Model>(model), para2, StoryDetailForTest.PARAGRAPH_TEXT_SECOND.getValue(), StoryDetailForTest.AUTHOR.getValue(), story);
+        ContinueStory usecaseContinue2 = new ContinueStory(new SafeObject<Model>(model), para2, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT_SECOND.getValue(), para2.getUser(), story);
         usecaseContinue2.perform();
         Paragraph para3 = usecaseContinue2.getParagraph();
 

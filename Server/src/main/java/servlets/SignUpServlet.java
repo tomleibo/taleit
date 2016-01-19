@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by gur on 12/23/2015.
- */
 @WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/accounts/signup"} )
 public class SignUpServlet extends HttpServlet {
 

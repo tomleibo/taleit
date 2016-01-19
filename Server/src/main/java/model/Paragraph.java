@@ -6,25 +6,27 @@ import java.util.*;
  * Created by Shai on 15/01/2016.
  */
 public class Paragraph {
-    private int id;
-    private Paragraph father;
-    private Set<Paragraph> Children;
-    private String username;
-    private String text;
+    String id;
+    Paragraph father;
+    Collection<Paragraph> Children;
+    User user;
+    String text;
+    String title;
 
-    public Paragraph(int id, Paragraph father, String text, String username) {
-        this.id = id;
+    public Paragraph(Paragraph father, String text, String title, User user) {
+        this.id = UUID.randomUUID().toString();
         this.father = father;
-        this.username = username;
+        this.user = user;
         this.text = text;
-        Children = new HashSet<Paragraph>();
+        this.title = title;
+        Children = new ArrayList<Paragraph>();
     }
 
     public String getText() {
         return text;
     }
 
-    public Set<Paragraph> getChildren() {
+    public Collection<Paragraph> getChildren() {
         return Children;
     }
 
@@ -32,15 +34,19 @@ public class Paragraph {
         return father;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public void addChild(Paragraph paragraph) {
         Children.add(paragraph);
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

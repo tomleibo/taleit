@@ -1,35 +1,29 @@
 package model;
 
-import exceptions.NoSuchParagraphIdException;
-import exceptions.StoryException;
 
 import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
+
+import exceptions.NoSuchParagraphIdException;
+import exceptions.StoryException;
 
 /**
  * Created by Shai on 23/12/2015.
  */
 public class Story {
-    static int storyCounter = -1;
-
-    final private Map<Integer, Paragraph> paragraphs;
-    private int id;
-    private String username; // will be showed as author? maybe add another field
+    private final HashMap<String, Paragraph> paragraphs;
+    private String id;
     private String title;
     private Paragraph root;
-    int paragraphCounter;
 
-    public Story(String username, String title, String text){
-        this.username = username;
+    public Story(String title, Paragraph root){
         this.title = title;
-        this.id = storyCounter++;
-        this.paragraphCounter = -1;
-        this.root = new Paragraph(paragraphCounter++, null, text, username);
-        this.paragraphs = new HashMap<Integer, Paragraph>();
-        this.paragraphs.put(this.root.getId(), this.root);
+        this.id = UUID.randomUUID().toString();
+        this. root = root;
+        this.paragraphs = new HashMap<String, Paragraph>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -37,25 +31,44 @@ public class Story {
         return root;
     }
 
-    public String getUsername() {
-        return username;
+    public User getUser() {
+        return root.getUser();
     }
 
-    public Paragraph addParagraph(Paragraph father, String text, String username) {
+    public Paragraph addParagraph(Paragraph father, String title, String text, User user) {
         if (father == null){
             throw new StoryException("father can't be null, only the father of the root paragraph is null");
         }
-        Paragraph paragraph = new Paragraph(paragraphCounter++, father, text,username);
-        paragraphs.put(paragraph.getId(), paragraph);
+
+        Paragraph paragraph = new Paragraph(father, text, title, user);
+        paragraphs.put(paragraph.getId(), paragraph); // TODO: make paragraphs a collection of paragraph only. implement equals & hashcode by id only
         father.addChild(paragraph);
         return paragraph;
     }
 
-    public Paragraph getParagraphById(Integer paragraphId) {
+    public Paragraph getParagraphById(String paragraphId) {
         if (paragraphs.containsKey(paragraphId)) {
             return paragraphs.get(paragraphId);
-        }else{
-            throw new NoSuchParagraphIdException(paragraphId);
         }
+
+        throw new NoSuchParagraphIdException(paragraphId);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public boolean equals (Object other){
+        if (other == this) return true;
+        if (other == null) return false;
+        if (!getClass().equals(other.getClass())) return false;
+
+        return getId().equals(((Story) other).getId());
+    }
+
+    @Override
+    public int hashCode(){
+        return getId().hashCode();
     }
 }

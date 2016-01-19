@@ -10,6 +10,7 @@ import usecases.Stories.CreateStory;
 import usecases.core.TestBase;
 import usecases.utils.StoryDetailForTest;
 
+import java.util.Collection;
 import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
@@ -23,34 +24,34 @@ public class BrowseStoryTest extends TestBase {
     @Test
     public void oneStory_valid_returnOneStoryWithSameId_5_1() {
         // arrange
-        int storyId = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
+        String storyId = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
         BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
 
         // act
         browseStory.perform();
 
         //assert
-        assertTrue("couldn't find the story", browseStory.getStories().containsKey(storyId));
+        assertTrue("couldn't find the story", browseStory.getStories().contains(storyId));
         assertEquals("couldn't find the story", browseStory.getStories().size(), 1);
     }
 
     @Test
     public void threeStories_valid_returnThreeStories_5_2() {
         // arrange
-        int firstStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
-        int secondStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
-        int thirdStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
+        String firstStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
+        String secondStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
+        String thirdStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
 
         BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
 
         // act
         browseStory.perform();
-        Map<Integer, Story> stories = browseStory.getStories();
+        Collection<Story> stories = browseStory.getStories();
 
         //assert
-        assertTrue("couldn't find the story", stories.containsKey(firstStory));
-        assertTrue("couldn't find the story", stories.containsKey(secondStory));
-        assertTrue("couldn't find the story", stories.containsKey(thirdStory));
+        assertTrue("couldn't find the story", stories.contains(firstStory));
+        assertTrue("couldn't find the story", stories.contains(secondStory));
+        assertTrue("couldn't find the story", stories.contains(thirdStory));
         assertEquals("couldn't find the story", stories.size(), 3);
     }
 
@@ -61,14 +62,14 @@ public class BrowseStoryTest extends TestBase {
 
         // act
         browseStory.perform();
-        Map<Integer, Story> stories = browseStory.getStories();
+        Collection<Story> stories = browseStory.getStories();
 
         //assert
         assertEquals("couldn't find the story", stories.size(), 0);
     }
 
-    private int getNewStoryId(String author, String title, String body) {
-        CreateStory story = new CreateStory(new SafeObject<Model>(model), author, title, body);
+    private String getNewStoryId(String author, String title, String body) {
+        CreateStory story = new CreateStory(new SafeObject<Model>(model), title, "cookie-dough", title, body);
         story.perform();
         return story.getStory().getId();
     }

@@ -3,8 +3,11 @@ package servlets;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
+import model.Paragraph;
+import model.User;
 import org.json.JSONObject;
-import usecases.users.Logout;
+import usecases.Stories.CreateStory;
+import usecases.UseCase;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@WebServlet( name = "LogoutServlet", description = "Logout servlet", urlPatterns = {"/rest/accounts/logout"} )
-public class LogoutServlet extends HttpServlet{
+/**
+ * Created by gur on 1/16/2016.
+ */
+@WebServlet( name = "CreateStoryServlet", description = "Create story servlet", urlPatterns = {"/rest/stories/create"} )
+public class CreateStoryServlet extends HttpServlet{
     @Override
     public void init() throws ServletException {}
 
@@ -28,12 +34,16 @@ public class LogoutServlet extends HttpServlet{
             String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
             JSONObject jsonObject = new JSONObject(content);
 
-            String cookie = jsonObject.getString("cookie");
-            Logout logout = new Logout(Server.Instance.getSafeModel(), cookie);
+            String cookie = jsonObject.getString("cookie"); //TODO: maybe get cookie from cookieStore/cookieJar ?
+            String title = jsonObject.getString("title");
+            String rootParagraphText = jsonObject.getJSONObject("rootParagraph").getString("text");
+            String rootParagraphTitle = jsonObject.getJSONObject("rootParagraph").getString("title");
+            UseCase createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle, rootParagraphText);
 
-            logout.perform();
+            createStory.perform();
 
             response.setStatus(HttpServletResponse.SC_OK);
+            //TODO: return story id to stream?
         }
         catch (Throwable wtf){
             wtf.printStackTrace();
