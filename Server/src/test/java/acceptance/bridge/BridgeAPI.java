@@ -21,8 +21,6 @@ public interface BridgeAPI {
 
     Collection<Integer> browseStories();
 
-    boolean isStoryExists(int storyId);
-
     int getStoryRoot(int storyId);
 
     //////////////////////////////////// Paragraphs /////////////////////////

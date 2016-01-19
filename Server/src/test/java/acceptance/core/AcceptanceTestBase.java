@@ -6,6 +6,7 @@ import acceptance.bridge.BridgeReal;
 import acceptance.utils.UserDetailForTest;
 import org.junit.Before;
 
+import java.util.Collection;
 import java.util.Random;
 
 /**
@@ -38,5 +39,9 @@ public class AcceptanceTestBase {
     public int getRandomNumber() {
         Random randomGenerator = new Random();
         return (randomGenerator.nextInt(10) + 2);
+    }
+
+    public boolean isStoryExists(int story){
+        return bridge.browseStories().contains(story);
     }
 }

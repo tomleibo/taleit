@@ -26,11 +26,6 @@ public class BridgeReal implements BridgeAPI {
     public Collection<Integer> browseStories() {
         return null;
     }
-
-    public boolean isStoryExists(int storyId) {
-        return true;
-    }
-
     public int getStoryRoot(int storyId) {
         return 1;
     }

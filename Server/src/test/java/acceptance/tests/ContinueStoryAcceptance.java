@@ -26,7 +26,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
     public void validParagraph_6_1() {
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
-        assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
+        assertTrue("Story is not exists", isStoryExists(storyNumber));
 
         paragraphNumber = bridge.createParagraph(storyNumber, paragraphTitle, paragraphText);
         assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == 0);
@@ -45,7 +45,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
     public void noTitle_6_3() {
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
-        assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
+        assertTrue("Story is not exists", isStoryExists(storyNumber));
 
         paragraphNumber = bridge.createParagraph(storyNumber, "", paragraphText);
         assertFalse("Could not create paragraph with no Title",
@@ -57,7 +57,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
     public void noText_6_4() {
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
-        assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
+        assertTrue("Story is not exists", isStoryExists(storyNumber));
 
         paragraphNumber = bridge.createParagraph(storyNumber, paragraphTitle, "");
         assertFalse("Succeed to create paragraph with no Text", paragraphNumber == 0);
@@ -73,7 +73,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
 
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
-        assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
+        assertTrue("Story is not exists", isStoryExists(storyNumber));
 
         // save paragraphs number
         for (int i=1; i<=randomNumber; i++){
