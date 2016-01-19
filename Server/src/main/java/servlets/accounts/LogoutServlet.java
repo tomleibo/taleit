@@ -1,24 +1,21 @@
-package servlets;
+package servlets.accounts;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
-import org.json.JSONException;
 import org.json.JSONObject;
-import usecases.UseCase;
-import usecases.users.SignUp;
+import usecases.users.Logout;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/accounts/signup"} )
-public class SignUpServlet extends HttpServlet {
-
+@WebServlet( name = "LogoutServlet", description = "Logout servlet", urlPatterns = {"/rest/accounts/logout"} )
+public class LogoutServlet extends HttpServlet{
     @Override
     public void init() throws ServletException {}
 
@@ -31,11 +28,10 @@ public class SignUpServlet extends HttpServlet {
             String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
             JSONObject jsonObject = new JSONObject(content);
 
-            String username = jsonObject.getString("username");
-            String password = jsonObject.getString("password");
-            UseCase signup = new SignUp(Server.Instance.getSafeModel(), username, password);
+            String cookie = jsonObject.getString("cookie");
+            Logout logout = new Logout(Server.Instance.getSafeModel(), cookie);
 
-            signup.perform();
+            logout.perform();
 
             response.setStatus(HttpServletResponse.SC_OK);
         }

@@ -1,4 +1,4 @@
-package servlets;
+package servlets.stories;
 
 import ioc.Server;
 import model.Story;

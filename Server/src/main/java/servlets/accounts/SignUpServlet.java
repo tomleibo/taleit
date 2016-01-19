@@ -1,27 +1,24 @@
-package servlets;
+package servlets.accounts;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
-import model.Paragraph;
-import model.User;
+import org.json.JSONException;
 import org.json.JSONObject;
-import usecases.Stories.CreateStory;
 import usecases.UseCase;
+import usecases.users.SignUp;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by gur on 1/16/2016.
- */
-@WebServlet( name = "CreateStoryServlet", description = "Create story servlet", urlPatterns = {"/rest/stories/create"} )
-public class CreateStoryServlet extends HttpServlet{
+@WebServlet( name = "SignUpServlet", description = "Sign up servlet", urlPatterns = {"/rest/accounts/signup"} )
+public class SignUpServlet extends HttpServlet {
+
     @Override
     public void init() throws ServletException {}
 
@@ -34,16 +31,13 @@ public class CreateStoryServlet extends HttpServlet{
             String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
             JSONObject jsonObject = new JSONObject(content);
 
-            String cookie = jsonObject.getString("cookie"); //TODO: maybe get cookie from cookieStore/cookieJar ?
-            String title = jsonObject.getString("title");
-            String rootParagraphText = jsonObject.getJSONObject("rootParagraph").getString("text");
-            String rootParagraphTitle = jsonObject.getJSONObject("rootParagraph").getString("title");
-            UseCase createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle, rootParagraphText);
+            String username = jsonObject.getString("username");
+            String password = jsonObject.getString("password");
+            UseCase signup = new SignUp(Server.Instance.getSafeModel(), username, password);
 
-            createStory.perform();
+            signup.perform();
 
             response.setStatus(HttpServletResponse.SC_OK);
-            //TODO: return story id to stream?
         }
         catch (Throwable wtf){
             wtf.printStackTrace();

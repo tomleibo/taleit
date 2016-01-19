@@ -85,4 +85,13 @@ public class Model {
     public Paragraph getParagraph(Story story, String paragraphId) {
         return story.getParagraphById(paragraphId);
     }
+
+    public Story getStory(String storyId) {
+        for (Story story : getStories()) {
+            if (story.getId().equals(storyId)) {
+                return story;
+            }
+        }
+        throw new RuntimeException("story (id = " + storyId + ") not found");
+    }
 }

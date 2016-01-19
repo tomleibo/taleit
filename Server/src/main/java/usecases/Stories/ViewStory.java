@@ -1,5 +1,6 @@
 package usecases.Stories;
 
+import lang.Function;
 import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
@@ -10,8 +11,8 @@ import usecases.ActionUseCase;
  * Created by Shai on 18/01/2016.
  */
 public class ViewStory extends ActionUseCase{
-    Story story;
-    String paragraphId;
+    final Story story;
+    final String paragraphId;
     Paragraph paragraph;
 
     public ViewStory(SafeObject<Model> context, Story story, String paragraphId) {
@@ -19,6 +20,17 @@ public class ViewStory extends ActionUseCase{
 
         this.story = story;
         this.paragraphId = paragraphId;
+    }
+
+    public ViewStory(SafeObject<Model> context, final String storyId, String paragraphId){
+        super(context);
+
+        this.paragraphId = paragraphId;
+        this.story = context.read(new Function<Model>() {
+            public Story perform(Model model) {
+                return model.getStory(storyId);
+            }
+        });
     }
 
     public void perform(Model model) {
