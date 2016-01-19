@@ -35,7 +35,7 @@ public class BridgeProxy implements BridgeAPI {
         return true;
     }
 
-    public int createParagraph(int storyId, String userName, String title, String text) {
+    public int createParagraph(int storyId, String title, String text) {
         return 1;
     }
 

@@ -28,7 +28,7 @@ public interface BridgeAPI {
     //////////////////////////////////// Paragraphs /////////////////////////
 
     //returns id=0 when fails
-    int createParagraph(int storyId, String userName, String title, String text);
+    int createParagraph(int storyId, String title, String text);
 
     boolean isParagraphExists(int storyId, int paragraphId);
 
