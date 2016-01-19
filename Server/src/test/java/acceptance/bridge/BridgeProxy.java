@@ -31,8 +31,8 @@ public class BridgeProxy implements BridgeAPI {
         return true;
     }
 
-    public boolean getStoryRoot(int storyId) {
-        return true;
+    public int getStoryRoot(int storyId) {
+        return 1;
     }
 
     public int createParagraph(int storyId, String title, String text) {
@@ -43,11 +43,11 @@ public class BridgeProxy implements BridgeAPI {
         return true;
     }
 
-    public boolean getNextParagrph(int storyId, int currentParagraphId) {
-        return true;
+    public int getNextParagrph(int storyId, int currentParagraphId) {
+        return 1;
     }
 
-    public boolean getpreviusParagrph(int storyId, int currentParagraphId) {
-        return true;
+    public int getpreviusParagrph(int storyId, int currentParagraphId) {
+        return 1;
     }
 }

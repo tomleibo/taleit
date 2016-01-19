@@ -23,7 +23,7 @@ public interface BridgeAPI {
 
     boolean isStoryExists(int storyId);
 
-    boolean getStoryRoot(int storyId);
+    int getStoryRoot(int storyId);
 
     //////////////////////////////////// Paragraphs /////////////////////////
 
@@ -32,9 +32,9 @@ public interface BridgeAPI {
 
     boolean isParagraphExists(int storyId, int paragraphId);
 
-    boolean getNextParagrph(int storyId, int currentParagraphId);
+    int getNextParagrph(int storyId, int currentParagraphId);
 
-    boolean getpreviusParagrph(int storyId, int currentParagraphId);
+    int getpreviusParagrph(int storyId, int currentParagraphId);
 }
 
 
