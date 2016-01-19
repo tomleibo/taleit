@@ -42,7 +42,7 @@ public class AcceptanceTestBase {
         return (randomGenerator.nextInt(10) + 2);
     }
 
-    public boolean isStoryExists(int story){
+    public boolean isStoryExists(String story){
         return bridge.browseStories().contains(story);
     }
 }

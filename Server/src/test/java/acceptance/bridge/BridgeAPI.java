@@ -21,6 +21,10 @@ public interface BridgeAPI {
 
     Collection<String> browseStories();
 
+    String createParagraph(String storyNumber, String paragraphTitle, String paragraphText);
+
+    boolean isParagraphExists(String storyNumber, String i);
+
     //////////////////////////////////// Paragraphs /////////////////////////
 }
 

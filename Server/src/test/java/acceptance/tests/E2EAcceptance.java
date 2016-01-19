@@ -14,8 +14,8 @@ import static junit.framework.Assert.assertTrue;
  */
 public class E2EAcceptance extends AcceptanceTestBase {
     private String[] users;
-    private int[] stories;
-    private int[][] paragraphs;
+    private String[] stories;
+    private String[][] paragraphs;
     private int randomNumber;
 
     protected String storyTitle = StoryDetailForTest.FIRST_TITLE.getValue();
@@ -29,8 +29,8 @@ public class E2EAcceptance extends AcceptanceTestBase {
         super.init();
         randomNumber = getRandomNumber();
         users = new String[randomNumber];
-        stories = new int[randomNumber];
-        paragraphs = new int[randomNumber][randomNumber];
+        stories = new String[randomNumber];
+        paragraphs = new String[randomNumber][randomNumber];
 
         String userName = "guri";
         String userPostfix = "@gmail.com";
@@ -52,9 +52,9 @@ public class E2EAcceptance extends AcceptanceTestBase {
             assertTrue("faild to perform Signup number " + i ,
                     bridge.login(users[i], password));
 
-            int storyNumber = bridge.createStory(storyTitle, storyText);
+            String storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
             stories[i] = storyNumber;
-            assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
+            assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
 
             assertTrue("failed to logout without login: " + userName, bridge.logout());
 
@@ -72,9 +72,9 @@ public class E2EAcceptance extends AcceptanceTestBase {
                     bridge.login(users[i], password));
 
             for (int j = 0; j<randomNumber; j++){
-                int paragraphNumber = bridge.createParagraph(stories[j], paragraphTitle, paragraphText);
+                String paragraphNumber = bridge.createParagraph(stories[j], paragraphTitle, paragraphText);
                 paragraphs[i][j] = paragraphNumber;
-                assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == 0);
+                assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == null);
             }
 
             assertTrue("failed to logout without login: " + userName, bridge.logout());

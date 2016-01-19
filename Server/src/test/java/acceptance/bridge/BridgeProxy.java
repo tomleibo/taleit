@@ -30,4 +30,12 @@ public class BridgeProxy implements BridgeAPI {
     public Collection<String> browseStories() {
         return null;
     }
+
+    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {
+        return null;
+    }
+
+    public boolean isParagraphExists(String storyNumber, String i) {
+        return false;
+    }
 }

@@ -135,4 +135,12 @@ public class BridgeReal implements BridgeAPI {
             return null;
         }
     }
+
+    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {
+        return null;
+    }
+
+    public boolean isParagraphExists(String storyNumber, String i) {
+        return false;
+    }
 }
