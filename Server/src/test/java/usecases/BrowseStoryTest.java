@@ -21,7 +21,7 @@ import static junit.framework.Assert.assertTrue;
 public class BrowseStoryTest extends TestBase {
 
     @Test
-    public void oneStory_valid_returnOneStoryWithSameId() {
+    public void oneStory_valid_returnOneStoryWithSameId_5_1() {
         // arrange
         int storyId = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
         BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
@@ -35,7 +35,7 @@ public class BrowseStoryTest extends TestBase {
     }
 
     @Test
-    public void threeStories_valid_returnThreeStories() {
+    public void threeStories_valid_returnThreeStories_5_2() {
         // arrange
         int firstStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
         int secondStory = getNewStoryId(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
@@ -55,7 +55,7 @@ public class BrowseStoryTest extends TestBase {
     }
 
     @Test(expected = BrowseStoryException.class)
-    public void noStory() {
+    public void noStory_5_3() {
         // arrange
         BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
 
