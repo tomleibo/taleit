@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class CreateStoryTest extends TestBase{
     @Test
-    public void create_Story_Simple() {
+    public void create_Story_Simple_4_1() {
         CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), "cookie-dough", StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
         usecase.perform();
         Story story = usecase.getStory();
