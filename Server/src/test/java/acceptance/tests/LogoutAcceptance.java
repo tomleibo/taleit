@@ -17,7 +17,7 @@ public class LogoutAcceptance extends SignedUpBaseAcceptance {
     }
 
     @Test
-    public void afterLogin() {
+        public void logoutAfterLogin_3_1() {
         assertTrue("failed to perform login with user: " + userName + " and password: " + password,
                 bridge.login(userName, password));
 
@@ -26,12 +26,12 @@ public class LogoutAcceptance extends SignedUpBaseAcceptance {
     }
 
     @Test
-    public void withoutLogin() {
+    public void logoutWithoutLogin_3_2() {
         assertFalse("succeed to perform logout without login: " + userName, bridge.logout());
     }
 
     @Test
-    public void loginAndTwoLogouts() {
+    public void loginAndTwoLogouts_3_3() {
         assertTrue("failed to perform login with user: " + userName + " and password: " + password,
                 bridge.login(userName, password));
 
@@ -41,7 +41,7 @@ public class LogoutAcceptance extends SignedUpBaseAcceptance {
     }
 
     @Test
-     public void randomNumbersOfLoginLogout() {
+     public void randomNumbersOfLoginLogout_3_4() {
         int randomNumber = getRandomNumber();
 
         System.out.println("will perform " + randomNumber + " of login and logout");

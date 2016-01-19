@@ -18,12 +18,12 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
     }
 
     @Test
-    public void noStories() {
+    public void noStories_5_1() {
         assertTrue("There are stories in browser without creating one" , bridge.browseStories().size()==0);
     }
 
     @Test
-    public void oneStory() {
+    public void oneStory_5_2() {
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create story ", storyNumber == 0);
 
@@ -32,7 +32,7 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
     }
 
     @Test
-     public void randomNumberOfStories() {
+     public void randomNumberOfStories_5_3() {
         int randomNumber = getRandomNumber();
         int[] storiesNumber = new int[randomNumber];
 

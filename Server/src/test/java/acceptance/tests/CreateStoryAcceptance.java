@@ -19,28 +19,28 @@ public class CreateStoryAcceptance extends LoggedInBaseAcceptance {
     }
 
     @Test
-    public void validStroy() {
+    public void validStroy_4_1() {
         storyNumber = bridge.createStory(storyTitle, storyText);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == 0);
         assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
     }
 
     @Test
-    public void noTitle() {
+    public void noTitle_4_2() {
         storyNumber = bridge.createStory("", storyText);
         assertTrue("succeeded to create a story with no title", storyNumber == 0);
         assertFalse("Story exists with no title", bridge.isStoryExists(storyNumber));
     }
 
     @Test
-    public void noText() {
+    public void noText_4_3() {
         storyNumber = bridge.createStory(storyTitle, "");
         assertTrue("succeeded to create a story with no text", storyNumber == 0);
         assertFalse("Story exists with no text", bridge.isStoryExists(storyNumber));
     }
 
     @Test
-     public void randomNumberOfStories() {
+     public void randomNumberOfStories_4_4() {
         int randomNumber = getRandomNumber();
         int[] storiesNumber = new int[randomNumber];
 

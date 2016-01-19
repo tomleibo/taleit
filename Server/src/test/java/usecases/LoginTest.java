@@ -23,7 +23,7 @@ public class LoginTest extends SignedUpTestBase {
     }
 
     @Test
-    public void userExists_validData_userLoggedIn() {
+    public void userExists_validData_userLoggedIn_2_1() {
         // arrange
         Login login = new Login(new SafeObject<Model>(model), userName, password);
 
@@ -36,7 +36,7 @@ public class LoginTest extends SignedUpTestBase {
     }
 
     @Test(expected = LoginException.class)
-    public void noUser_validData_userNotLoggedIn() {
+    public void noUser_validData_userNotLoggedIn_2_2() {
         // arrange
         String firstTimeUserName = UserDetailForTest.USERNAME_FIRST_TIME.getValue();
         Login login = new Login(new SafeObject<Model>(model), firstTimeUserName, password);
@@ -50,7 +50,7 @@ public class LoginTest extends SignedUpTestBase {
     }
 
     @Test(expected = UsecaseException.class)
-    public void userExists_badmail_userNotLoggedIn() {
+    public void userExists_badmail_userNotLoggedIn_2_3() {
         // arrange
         String invalidUserName = UserDetailForTest.USERNAME_INVALID.getValue();
         Login login = new Login(new SafeObject<Model>(model), invalidUserName, UserDetailForTest.PASSWORD_VALID.getValue());
@@ -64,7 +64,7 @@ public class LoginTest extends SignedUpTestBase {
     }
 
     @Test(expected = UsecaseException.class)
-    public void userExists_passwordIsNull_userNotLoggedIn() {
+    public void userExists_passwordIsNull_userNotLoggedIn_2_4() {
         // arrange
         Login login = new Login(new SafeObject<Model>(model), userName, null);
 
@@ -77,7 +77,7 @@ public class LoginTest extends SignedUpTestBase {
     }
 
     @Test(expected = LoginException.class)
-    public void userExists_passwordIncorrect_userNotLoggedIn() {
+    public void userExists_passwordIncorrect_userNotLoggedIn_2_5() {
         // arrange
         String incorrectPassword = UserDetailForTest.PASSWORD_INCORRECT.getValue();
         Login login = new Login(new SafeObject<Model>(model), userName, incorrectPassword);

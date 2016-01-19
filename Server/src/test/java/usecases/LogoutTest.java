@@ -22,7 +22,7 @@ public class LogoutTest extends SignedUpTestBase {
     }
 
     @Test
-    public void userLoggedIn_validData_userLoggedOut() {
+    public void userLoggedIn_validData_userLoggedOut_3_1() {
         // arrange
         login = new Login(new SafeObject<Model>(model), userName, password);
         login.perform();
