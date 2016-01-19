@@ -1,5 +1,6 @@
 package usecases.Stories;
 
+import lang.Function;
 import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
@@ -28,6 +29,22 @@ public class ContinueStory extends ActionUseCase {
         this.title = title;
 
         this.paragraph = null; // will be assigned after perform only TODO: change it!!!
+    }
+
+    public ContinueStory(SafeObject<Model> context, final String storyId, final String paragraphId, final String title, final String text, final String cookie) {
+        super(context);
+
+        context.read(new Function<Model>() {
+            public Void perform(Model model) {
+                ContinueStory.this.story = model.getStory(storyId);
+                ContinueStory.this.father = story.getParagraphById(paragraphId);
+                ContinueStory.this.user = model.getUserFromCookie(cookie);
+                ContinueStory.this.title = title;
+                ContinueStory.this. text = text;
+
+                return null; // returning null to satisfy method declaration
+            }
+        });
     }
 
     public void perform(Model model) {
