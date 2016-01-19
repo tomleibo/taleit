@@ -31,20 +31,20 @@ public class ContinueStoryTest extends TestBase{
     }
 
     @Test
-    public void add_paragraph(){
+    public void add_paragraph_6_1(){
         ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue(), root.getUser(), story);
         usecaseContinue.perform();
         assertEquals(1, root.getChildren().size());
     }
 
     @Test(expected = StoryException.class)
-    public void add_paragraph_father_null(){
+    public void add_paragraph_father_null_6_2(){
         ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), null, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue(), null ,story);
         usecaseContinue.perform();
     }
 
     @Test
-    public void add_2_paragraphs_in_a_line(){
+    public void add_2_paragraphs_in_a_line_6_3(){
         ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.TITLE.getValue() ,StoryDetailForTest.PARAGRAPH_TEXT.getValue(), root.getUser(), story);
         usecaseContinue.perform();
         Paragraph para2 = usecaseContinue.getParagraph();
@@ -61,7 +61,7 @@ public class ContinueStoryTest extends TestBase{
     }
 
     @Test
-    public void add_2_paragraphs_to_the_root(){
+    public void add_2_paragraphs_to_the_root_6_4(){
         ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue(), root.getUser(), story);
         usecaseContinue.perform();
         Paragraph para2 = usecaseContinue.getParagraph();

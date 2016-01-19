@@ -20,7 +20,6 @@ public class LoggedInBaseAcceptance extends SignedUpBaseAcceptance {
         assertTrue("failed to perform login with user: " + userName + " and password: " + password,
                 bridge.login(userName, password));
 
-
     }
 
 

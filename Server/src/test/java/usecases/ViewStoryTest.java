@@ -31,7 +31,7 @@ public class ViewStoryTest extends TestBase {
     }
 
     @Test
-    public void go_through_linear_Story_tree() {
+    public void go_through_linear_Story_tree_7_1() {
         ContinueStory usecaseContinue = new ContinueStory(new SafeObject<Model>(model), root, StoryDetailForTest.TITLE.getValue(),StoryDetailForTest.PARAGRAPH_TEXT.getValue(), root.getUser(), story);
         usecaseContinue.perform();
         Paragraph para2 = usecaseContinue.getParagraph();
@@ -60,7 +60,7 @@ public class ViewStoryTest extends TestBase {
     }
 
     @Test
-    public void get_root_with_null_param() {
+    public void get_root_with_null_param__7_2() {
         ViewStory useCaseView = new ViewStory(new SafeObject<Model>(model), story, null);
         useCaseView.perform();
         Paragraph paraAns1 = useCaseView.getParagraph();
