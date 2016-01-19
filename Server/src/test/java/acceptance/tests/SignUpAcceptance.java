@@ -73,7 +73,7 @@ public class SignUpAcceptance extends AcceptanceTestBase {
         for (int i=1; i<=randomNumber; i++){
             String actualUsername = userName+i+userPostfix;
             assertTrue("faild to perform Signup number " + i ,
-                    bridge.login(actualUsername, password));
+                    bridge.signUp(actualUsername, password));
         }
     }
 }
