@@ -19,35 +19,15 @@ public class BridgeProxy implements BridgeAPI {
         return true;
     }
 
+    public String createStory(String title, String rootTitle, String rootText) {
+        return "";
+    }
+
     public int createStory(String title, String text) {
         return 1;
     }
 
-    public Collection<Integer> browseStories() {
+    public Collection<String> browseStories() {
         return null;
-    }
-
-    public boolean isStoryExists(int storyId) {
-        return true;
-    }
-
-    public boolean getStoryRoot(int storyId) {
-        return true;
-    }
-
-    public int createParagraph(int storyId, String userName, String title, String text) {
-        return 1;
-    }
-
-    public boolean isParagraphExists(int storyId, int paragraphId) {
-        return true;
-    }
-
-    public boolean getNextParagrph(int storyId, int currentParagraphId) {
-        return true;
-    }
-
-    public boolean getpreviusParagrph(int storyId, int currentParagraphId) {
-        return true;
     }
 }

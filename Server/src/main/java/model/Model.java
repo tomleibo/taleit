@@ -42,10 +42,15 @@ public class Model {
     }
 
     public void logoutUser(String cookie) {
-        for (User user: users.values()){
+        User found = null;
+        for (User user: loggedUsers){
             if (user.cookie != null && user.cookie.equals(cookie)){
-                loggedUsers.remove(user);
+                found = user;
             }
+        }
+
+        if (found != null){
+            loggedUsers.remove(found);
         }
     }
 

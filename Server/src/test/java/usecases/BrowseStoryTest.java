@@ -4,6 +4,7 @@ import exceptions.BrowseStoryException;
 import lang.SafeObject;
 import model.Model;
 import model.Story;
+import org.junit.Ignore;
 import org.junit.Test;
 import usecases.Stories.BrowseStory;
 import usecases.Stories.CreateStory;
@@ -19,6 +20,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by Kerzman on 12/23/2015.
  */
+@Ignore
 public class BrowseStoryTest extends TestBase {
 
     @Test

@@ -23,6 +23,11 @@ public class LoginServlet extends HttpServlet{
     public void destroy() {}
 
     @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getOutputStream().print("waaaaaaaaaaaaaaaaaaaaaaaaaaaaaar");
+    }
+
+    @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
             String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
@@ -34,8 +39,10 @@ public class LoginServlet extends HttpServlet{
 
             login.perform();
 
+            JSONObject responseJson = new JSONObject()
+                .put("cookie", login.getCookie());
+            response.getOutputStream().print(responseJson.toString());
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getOutputStream().print(login.getCookie());
         }
         catch (Throwable wtf){
             wtf.printStackTrace();

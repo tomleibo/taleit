@@ -2,6 +2,7 @@ package acceptance.tests;
 
 import acceptance.core.LoggedInBaseAcceptance;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
@@ -10,8 +11,9 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
+//@Ignore
 public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
-    int storyNumber;
+    String storyNumber;
     @Before
     public void init(){
         super.init();
@@ -24,8 +26,8 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void oneStory_5_2() {
-        storyNumber = bridge.createStory(storyTitle, storyText);
-        assertFalse("Could not create story ", storyNumber == 0);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
+        assertFalse("Could not create story ", storyNumber == null);
 
         //assert for browse
         assertTrue("Could not find story in browser", bridge.browseStories().contains(storyNumber));
@@ -34,20 +36,19 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
     @Test
      public void randomNumberOfStories_5_3() {
         int randomNumber = getRandomNumber();
-        int[] storiesNumber = new int[randomNumber];
+        String[] storiesNumber = new String[randomNumber];
 
         System.out.println("will create " + randomNumber + " stories");
 
         // save story number
         for (int i=1; i<=randomNumber; i++){
-            storiesNumber[i-1] = bridge.createStory(storyTitle, storyText);
+            storiesNumber[i-1] = bridge.createStory(storyTitle, storyTitle, storyText);
         }
 
         // assertions
         for (int i=0; i<randomNumber; i++){
-            assertFalse("Could not create a story number: " + i+1 , storiesNumber[i]== 0);
+            assertFalse("Could not create a story number: " + i+1 , storiesNumber[i]== null);
             assertTrue("Could not find story number: " + i+1 + " in browser", bridge.browseStories().contains(storiesNumber[i]));
         }
     }
-
 }

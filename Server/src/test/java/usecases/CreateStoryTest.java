@@ -5,6 +5,7 @@ import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
 import model.Story;
+import org.junit.Ignore;
 import org.junit.Test;
 import usecases.Stories.CreateStory;
 import usecases.core.TestBase;
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Shai on 15/01/2016.
  */
+@Ignore
 public class CreateStoryTest extends TestBase{
     @Test
     public void create_Story_Simple_4_1() {

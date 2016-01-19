@@ -30,29 +30,29 @@ public class BrowseStoryServlet extends HttpServlet {
             BrowseStory usecase = new BrowseStory(Server.Instance.getSafeModel());
 
             usecase.perform();
-
-            response.setStatus(HttpServletResponse.SC_OK);
-
-            JSONObject responseJson = new JSONObject();
             JSONArray stories = new JSONArray();
-            responseJson.put("stories", stories);
             for (Story story: usecase.getStories()){
-                JSONObject jsonStory = new JSONObject();
-                jsonStory.put("id", story.getId());
-                jsonStory.put("title", story.getTitle());
-                jsonStory.put("author", story.getUser().getUsername());
                 JSONObject jsonRoot = new JSONObject();
-                jsonStory.put("root", jsonRoot);
                 jsonRoot.put("id", story.getRoot().getId());
                 jsonRoot.put("title", story.getRoot().getTitle());
                 jsonRoot.put("text", story.getRoot().getText());
-            }
+                jsonRoot.put("author", story.getUser().getUsername());
 
-            response.getOutputStream().print(responseJson.toString());
+                JSONObject jsonStory = new JSONObject();
+                jsonStory.put("id", story.getId());
+                jsonStory.put("title", story.getTitle());
+                jsonStory.put("root", jsonRoot);
+
+                stories.put(jsonStory);
+            }
+            JSONObject responseJson = new JSONObject();
+            responseJson.put("stories", stories);
+
+            response.getWriter().print(responseJson);
+            response.setStatus(HttpServletResponse.SC_OK);
         }
         catch (Throwable wtf){
-            wtf.printStackTrace();
-
+            response.getWriter().print(wtf);
             //TODO: add relevant error?
             //TODO: print relevant error to stream?
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

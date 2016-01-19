@@ -2,6 +2,7 @@ package acceptance.tests;
 
 import acceptance.core.SignedUpBaseAcceptance;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
@@ -10,6 +11,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
+@Ignore
 public class LogoutAcceptance extends SignedUpBaseAcceptance {
     @Before
     public void init(){

@@ -38,12 +38,12 @@ public class CreateStoryServlet extends HttpServlet{
             String title = jsonObject.getString("title");
             String rootParagraphText = jsonObject.getJSONObject("rootParagraph").getString("text");
             String rootParagraphTitle = jsonObject.getJSONObject("rootParagraph").getString("title");
-            UseCase createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle, rootParagraphText);
+            CreateStory createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle, rootParagraphText);
 
             createStory.perform();
 
             response.setStatus(HttpServletResponse.SC_OK);
-            //TODO: return story id to stream?
+            response.getWriter().print(new JSONObject().put("storyId", createStory.getStory().getId()));
         }
         catch (Throwable wtf){
             wtf.printStackTrace();
@@ -51,6 +51,7 @@ public class CreateStoryServlet extends HttpServlet{
             //TODO: add relevant error?
             //TODO: print relevant error to stream?
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().print(wtf.toString());
         }
     }
 }

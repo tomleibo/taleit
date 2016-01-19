@@ -31,7 +31,8 @@ public class AcceptanceTestBase {
 
     @Before
     public void init() {
-        setRealBridge("fake");
+//        setRealBridge("fake");
+        setRealBridge("real");
     }
 
     //from 2 to 12

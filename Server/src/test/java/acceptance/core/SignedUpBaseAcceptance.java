@@ -13,8 +13,7 @@ public class SignedUpBaseAcceptance extends AcceptanceTestBase {
     public void init(){
         super.init();
         // login user
-        assertTrue("failed to perform signup with user: " + userName + " and password: " + password, bridge.signUp
-                (userName, password));
+        assertTrue("failed to perform signup with user: " + userName + " and password: " + password, bridge.signUp(userName, password));
     }
 
 

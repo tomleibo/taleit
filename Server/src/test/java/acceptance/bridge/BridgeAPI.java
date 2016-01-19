@@ -17,24 +17,11 @@ public interface BridgeAPI {
     ///////////////////////////////////// STORIES //////////////////
 
     //returns id=0 when fails
-    int createStory(String title, String text);
+    String createStory(String title, String rootTitle, String rootText);
 
-    Collection<Integer> browseStories();
-
-    boolean isStoryExists(int storyId);
-
-    boolean getStoryRoot(int storyId);
+    Collection<String> browseStories();
 
     //////////////////////////////////// Paragraphs /////////////////////////
-
-    //returns id=0 when fails
-    int createParagraph(int storyId, String userName, String title, String text);
-
-    boolean isParagraphExists(int storyId, int paragraphId);
-
-    boolean getNextParagrph(int storyId, int currentParagraphId);
-
-    boolean getpreviusParagrph(int storyId, int currentParagraphId);
 }
 
 
