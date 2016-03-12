@@ -1,0 +1,17 @@
+h1, h3{
+    text-align: center;
+}
+
+table{
+    width:100%;
+    border: 1px solid black;
+}
+table, tr, td{
+    border: 1px solid black;
+}
+
+.fireballimg {
+    width:128px;
+    height: 128px;
+}
+
