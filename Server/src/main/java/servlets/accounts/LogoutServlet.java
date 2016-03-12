@@ -4,18 +4,18 @@ import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
 import org.json.JSONObject;
+import servlets.TaleitServlet;
 import usecases.users.Logout;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 @WebServlet( name = "LogoutServlet", description = "Logout servlet", urlPatterns = {"/rest/accounts/logout"} )
-public class LogoutServlet extends HttpServlet{
+public class LogoutServlet extends TaleitServlet{
     @Override
     public void init() throws ServletException {}
 
@@ -24,23 +24,19 @@ public class LogoutServlet extends HttpServlet{
 
     @Override
     public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
-            JSONObject jsonObject = new JSONObject(content);
+        doRequest(request, response);
+    }
 
-            String cookie = jsonObject.getString("cookie");
-            Logout logout = new Logout(Server.Instance.getSafeModel(), cookie);
+    @Override
+    protected JSONObject handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
+        JSONObject jsonObject = new JSONObject(content);
 
-            logout.perform();
+        String cookie = jsonObject.getString("cookie");
+        Logout logout = new Logout(Server.Instance.getSafeModel(), cookie);
 
-            response.setStatus(HttpServletResponse.SC_OK);
-        }
-        catch (Throwable wtf){
-            wtf.printStackTrace();
+        logout.perform();
 
-            //TODO: add relevant error?
-            //TODO: print relevant error to stream?
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
+        return null;
     }
 }

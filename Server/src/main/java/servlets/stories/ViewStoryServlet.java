@@ -7,6 +7,7 @@ import model.Paragraph;
 import model.Story;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import servlets.TaleitServlet;
 import usecases.Stories.BrowseStory;
 import usecases.Stories.CreateStory;
 import usecases.Stories.ViewStory;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 @WebServlet( name = "ViewStoryServlet", description = "View story servlet", urlPatterns = {"/rest/stories/view/*"} )
-public class ViewStoryServlet extends HttpServlet {
+public class ViewStoryServlet extends TaleitServlet {
     @Override
     public void init() throws ServletException {}
 
@@ -30,34 +31,29 @@ public class ViewStoryServlet extends HttpServlet {
 
     @Override
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
-            String storyId = request.getParameter("storyId");
-            String paragraphId = request.getParameter("paragraphId");
+        doRequest(request, response);
+    }
 
-            ViewStory usecase = new ViewStory(Server.Instance.getSafeModel(), storyId, paragraphId);
+    @Override
+    protected JSONObject handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String storyId = request.getParameter("storyId");
+        String paragraphId = request.getParameter("paragraphId");
 
-            usecase.perform();
+        ViewStory usecase = new ViewStory(Server.Instance.getSafeModel(), storyId, paragraphId);
 
-            JSONObject responseJson = new JSONObject();
-            JSONArray children = new JSONArray();
-            responseJson.put("paragraph", children);
-            for (Paragraph child: usecase.getParagraph().getChildren()){
-                JSONObject jsonChild = new JSONObject();
-                jsonChild.put("id", child.getId());
-                jsonChild.put("title", child.getTitle());
-                jsonChild.put("text", child.getText());
-                jsonChild.put("author", child.getUser().getUsername());
-            }
+        usecase.perform();
 
-            response.getOutputStream().print(responseJson.toString());
-            response.setStatus(HttpServletResponse.SC_OK);
+        JSONObject responseJson = new JSONObject();
+        JSONArray children = new JSONArray();
+        responseJson.put("paragraph", children);
+        for (Paragraph child: usecase.getParagraph().getChildren()){
+            JSONObject jsonChild = new JSONObject();
+            jsonChild.put("id", child.getId());
+            jsonChild.put("title", child.getTitle());
+            jsonChild.put("text", child.getText());
+            jsonChild.put("author", child.getUser().getUsername());
         }
-        catch (Throwable wtf){
-            wtf.printStackTrace();
 
-            //TODO: add relevant error?
-            //TODO: print relevant error to stream?
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
+        return responseJson;
     }
 }
