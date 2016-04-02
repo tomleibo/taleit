@@ -64,6 +64,24 @@ public class ManualTests {
         return object;
     }
 
+    public JSONObject create(String cookie, String title, String text, String rootTitle, String rootText) throws IOException, JSONException{
+        JSONObject content = new JSONObject();
+        content.put("cookie", cookie);
+        content.put("title", title);
+        content.put("text", text);
+        JSONObject root = new JSONObject();
+        content.put("rootParagraph", root);
+        root.put("text",rootText);
+        root.put("title",rootTitle);
+
+        String bla = makeRequest("/rest/stories/create", content.toString(), "POST");
+//        System.out.println(bla);
+
+        JSONObject object = new JSONObject(bla);
+        return object;
+    }
+
+
     public void update(String udid, String regkey, String address, String username) throws IOException, JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("data", new JSONObject());
