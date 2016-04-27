@@ -49,7 +49,10 @@ public class LocalhostClient {
     }
 
     private String createURI(String route){
-        String uri = PROTOCOL + "://" + HOST + ":" + PORT + "/" + APPLICATION + route;
+        //todo dropped APPLICATION becuase didn't know what it is for... it fixed the 404 problem.... Gur?
+//        String uri = PROTOCOL + "://" + HOST + ":" + PORT + "/" + APPLICATION + route;
+        String uri = PROTOCOL + "://" + HOST + ":" + PORT + "/" + route;
+
         return uri;
     }
 
