@@ -8,18 +8,18 @@ import java.util.Collection;
 public interface BridgeAPI {
 
     /////////// USERS//////////////////
-    boolean signUp(String userName, String password) throws Throwable;
+    boolean signUp(String userName, String password);
 
-    boolean login(String userName, String password) throws Throwable;
+    boolean login(String userName, String password);
 
-    boolean logout() throws Throwable;
+    boolean logout();
 
     ///////////////////////////////////// STORIES //////////////////
 
     //returns id=0 when fails
-    String createStory(String title, String rootTitle, String rootText) throws Throwable;
+    String createStory(String title, String rootTitle, String rootText);
 
-    Collection<String> browseStories() throws Throwable;
+    Collection<String> browseStories();
 
     String createParagraph(String storyNumber, String paragraphTitle, String paragraphText);
 
