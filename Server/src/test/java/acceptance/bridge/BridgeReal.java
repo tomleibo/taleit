@@ -1,9 +1,14 @@
 package acceptance.bridge;
 
+import exceptions.InvalidUseCaseParameterException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,26 +21,29 @@ public class BridgeReal implements BridgeAPI {
 
     String cookie = null;
 
-    public boolean signUp(String userName, String password) {
+    public boolean signUp(String userName, String password){
+        LocalhostClient client = new LocalhostClient();
+        JSONObject content = null;
         try {
-            LocalhostClient client = new LocalhostClient();
-            JSONObject content = new JSONObject()
+            content = new JSONObject()
                     .put("username", userName)
                     .put("password", password);
-            HttpResponse response = client.makeApiPostRequest("/rest/accounts/signup", content.toString());
-
-            return response.getStatusLine().getStatusCode() == HTTP_OK ? true : false;
-
+        } catch (JSONException e) {
+            throw new RuntimeException();
         }
-        catch (Throwable throwable){
-            throwable.printStackTrace();
-            return false;
+        HttpResponse response = null;
+        try {
+            response = client.makeApiPostRequest("/rest/accounts/signup", content.toString());
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
+
+        return response.getStatusLine().getStatusCode() == HTTP_OK ? true : false;
     }
 
-    public boolean login(String userName, String password) {
+    public boolean login(String userName, String password){
+        LocalhostClient client = new LocalhostClient();
         try {
-            LocalhostClient client = new LocalhostClient();
             JSONObject content = new JSONObject()
                     .put("username", userName)
                     .put("password", password);
@@ -46,41 +54,40 @@ public class BridgeReal implements BridgeAPI {
             }
 
             JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-            if (responseJson.has("cookie") && responseJson.getString("cookie").length() > 0){
+            if (responseJson.has("cookie") && responseJson.getString("cookie").length() > 0) {
                 cookie = responseJson.getString("cookie");
                 return true;
             }
-            return false;
+        }catch (Exception e){
+            throw new RuntimeException(e);
 
         }
-        catch (Throwable throwable){
-            return false;
-        }
+        return false;
     }
 
-    public boolean logout() {
-        try{
-            LocalhostClient client = new LocalhostClient();
+    public boolean logout(){
+        LocalhostClient client = new LocalhostClient();
 
-            JSONObject content = new JSONObject()
+        JSONObject content = null;
+        try {
+            content = new JSONObject()
                     .put("cookie", cookie);
             HttpResponse response = client.makeApiPostRequest("/rest/accounts/logout", content.toString());
 
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {
                 return false;
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            cookie = null;
-            return true;
-        }
-        catch (Throwable throwable){
-            return false;
-        }
+        cookie = null;
+        return true;
     }
 
-    public String createStory(String title, String rootTitle, String rootText) {
-         try{
-             LocalhostClient client = new LocalhostClient();
+    public String createStory(String title, String rootTitle, String rootText){
+         LocalhostClient client = new LocalhostClient();
+        try {
 
              JSONObject rootParagrapth = new JSONObject()
                      .put("title", rootTitle)
@@ -99,18 +106,17 @@ public class BridgeReal implements BridgeAPI {
              if (responseJson.has("id") && responseJson.getString("id").length() > 0){
                  return responseJson.getString("id");
              }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-              return null;
-        }
-        catch (Throwable throwable){
-            return null;
-        }
+
+    return null;
     }
 
-    public Collection<String> browseStories() {
+    public Collection<String> browseStories(){
+        LocalhostClient client = new LocalhostClient();
         try{
-            LocalhostClient client = new LocalhostClient();
-
             HttpResponse response = client.makeApiGetRequest("/rest/stories/browse");
 
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {
@@ -127,13 +133,11 @@ public class BridgeReal implements BridgeAPI {
                 String id = storyJson.getString("id");
                 result.add(id);
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-            return new ArrayList<String>();
-        }
-        catch (Throwable throwable){
-            throwable.printStackTrace();
-            return null;
-        }
+        return new ArrayList<String>();
     }
 
     public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {

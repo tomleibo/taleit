@@ -5,11 +5,14 @@ import lang.SafeObject;
 import model.Model;
 import model.Paragraph;
 import model.Story;
+import model.User;
 import org.junit.Ignore;
 import org.junit.Test;
 import usecases.Stories.CreateStory;
 import usecases.core.TestBase;
+import usecases.users.SignUp;
 import usecases.utils.StoryDetailForTest;
+import usecases.utils.UserDetailForTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -19,35 +22,43 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Shai on 15/01/2016.
  */
-@Ignore
 public class CreateStoryTest extends TestBase{
     @Test
     public void create_Story_Simple_4_1() {
-        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), "cookie-dough", StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
+        String userName = UserDetailForTest.USERNAME_VALID.getValue();
+        String pass = UserDetailForTest.PASSWORD_VALID.getValue();
+        model.addUser(new User(userName, pass));
+        String cookie = model.loginUser(userName,pass);
+
+        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
         usecase.perform();
         Story story = usecase.getStory();
 
         assertTrue(model.getStories().size() == 1);
-        assertEquals(story.getUser().getUsername(), StoryDetailForTest.AUTHOR.getValue());
+        assertEquals(story.getUser().getUsername(), userName);
 
         Paragraph root = story.getRoot();
 
         assertEquals(root.getText(),StoryDetailForTest.BODY.getValue());
         assertNull(root.getFather());
-//        assertEquals(root.getId(), 0);
         assertTrue(root.getChildren().isEmpty());
-        assertEquals(root.getUser(), StoryDetailForTest.AUTHOR.getValue());
+        assertEquals(root.getUser().getUsername(), userName);
     }
 
-//    @Test(expected = InvalidUseCaseParameterException.class)
-//    public void TitleToLong() {
-//        String longTitle = "";
-//        for (int i = 0; i < CreateStory.MAX_TITLE_LENGTH +10; i++){
-//            longTitle += "a";
-//        }
-//        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), longTitle, StoryDetailForTest.AUTHOR.getValue());
-//        usecase.perform();
-//    }
+    @Test(expected = InvalidUseCaseParameterException.class)
+    public void TitleToLong() {
+        String userName = UserDetailForTest.USERNAME_VALID.getValue();
+        String pass = UserDetailForTest.PASSWORD_VALID.getValue();
+        model.addUser(new User(userName, pass));
+        String cookie = model.loginUser(userName,pass);
+
+        String longTitle = "";
+        for (int i = 0; i < CreateStory.MAX_TITLE_LENGTH +10; i++){
+            longTitle += "a";
+        }
+        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), longTitle, cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue());
+        usecase.perform();
+    }
 
 
 
