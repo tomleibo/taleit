@@ -99,4 +99,10 @@ public class Model {
         }
         throw new RuntimeException("story (id = " + storyId + ") not found");
     }
+
+    public void init() {
+        this.users.clear();
+        this.loggedUsers.clear();
+        this.stories.clear();
+    }
 }
