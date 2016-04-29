@@ -1,6 +1,7 @@
 package acceptance.bridge;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -155,25 +156,28 @@ public class BridgeReal implements BridgeAPI {
                     .put("storyId", storyNumber);
 
             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
-            System.out.println(response);
 
-            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
-                return null;
-            }
-
-            JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-            System.out.println(responseJson);
-            JSONObject data = null;
-            if (responseJson.has("data")) {
-                data = responseJson.getJSONObject("data");
-                if (data.has("storyId") && data.getString("storyId").length() > 0) {
-                    return data.getString("storyId");
+            if (response.getStatusLine().getStatusCode() == HTTP_OK){
+                JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+                System.out.println(responseJson);
+                JSONObject data = null;
+                if (responseJson.has("data")) {
+                    data = responseJson.getJSONObject("data");
+                    if (data.has("storyId") && data.getString("storyId").length() > 0) {
+                        return data.getString("storyId");
+                    }
                 }
             }
+            else if (response.getStatusLine().getStatusCode() == 500){
+                String entity = EntityUtils.toString(response.getEntity());
+                System.out.println(entity);
+            }
+
+            return null;
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
 
     public boolean isParagraphExists(String storyNumber, String i) {
