@@ -24,6 +24,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
     @Test
     public void validParagraph_6_1() {
         storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
+
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 

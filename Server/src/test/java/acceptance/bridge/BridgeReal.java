@@ -54,9 +54,13 @@ public class BridgeReal implements BridgeAPI {
             }
 
             JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-            if (responseJson.has("cookie") && responseJson.getString("cookie").length() > 0) {
-                cookie = responseJson.getString("cookie");
-                return true;
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                if (data.has("cookie") && data.getString("cookie").length() > 0) {
+                    cookie = data.getString("cookie");
+                    return true;
+                }
             }
         }catch (Exception e){
             throw new RuntimeException(e);
@@ -88,29 +92,29 @@ public class BridgeReal implements BridgeAPI {
     public String createStory(String title, String rootTitle, String rootText){
          LocalhostClient client = new LocalhostClient();
         try {
+            JSONObject rootParagrapth = new JSONObject()
+                 .put("title", rootTitle)
+                 .put("text", rootText);
+            JSONObject content = new JSONObject()
+                 .put("cookie", cookie)
+                 .put("title", title)
+                 .put("rootParagraph", rootParagrapth);
+            HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
+             return null;
+            }
 
-             JSONObject rootParagrapth = new JSONObject()
-                     .put("title", rootTitle)
-                     .put("text", rootText);
-             JSONObject content = new JSONObject()
-                     .put("cookie", cookie)
-                     .put("title", title)
-                     .put("rootParagraph", rootParagrapth);
-             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
-
-             if (response.getStatusLine().getStatusCode() != HTTP_OK) {
-                 return null;
-             }
-
-             JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-             if (responseJson.has("id") && responseJson.getString("id").length() > 0){
-                 return responseJson.getString("id");
-             }
+            JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                if (data.has("storyId") && data.getString("storyId").length() > 0) {
+                    return data.getString("storyId");
+                }
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     return null;
     }
 
@@ -125,26 +129,70 @@ public class BridgeReal implements BridgeAPI {
             }
 
             JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-
-            Collection<String> result = new ArrayList<String>();
-
-            for (int i = 0; i < responseJson.getJSONArray("stories").length(); i++){
-                JSONObject storyJson = (JSONObject) responseJson.getJSONArray("stories").get(i);
-                String id = storyJson.getString("id");
-                result.add(id);
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                Collection<String> result = new ArrayList<String>();
+                for (int i = 0; i < data.getJSONArray("stories").length(); i++) {
+                    JSONObject storyJson = (JSONObject) data.getJSONArray("stories").get(i);
+                    String id = storyJson.getString("id");
+                    result.add(id);
+                }
+                return result;
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        return new ArrayList<String>();
+        return null;
     }
 
     public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {
+        LocalhostClient client = new LocalhostClient();
+        try {
+
+            JSONObject content = new JSONObject()
+                    .put("cookie", cookie)
+                    .put("title", paragraphTitle)
+                    .put("text", paragraphText)
+                    .put("storyId", storyNumber)
+                    .put("paragraphId", 1234);
+            HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
+                return null;
+            }
+
+            JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                if (data.has("storyId") && data.getString("storyId").length() > 0) {
+                    return data.getString("storyId");
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
     public boolean isParagraphExists(String storyNumber, String i) {
         return false;
+    }
+
+    public boolean initServer (){
+        LocalhostClient client = new LocalhostClient();
+        try{
+            HttpResponse response = client.makeApiGetRequest("/rest/admin/init");
+
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
+                System.out.println(response.getStatusLine());
+                return false;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
     }
 }

@@ -25,6 +25,8 @@ public interface BridgeAPI {
 
     boolean isParagraphExists(String storyNumber, String i);
 
+    boolean initServer();
+
     //////////////////////////////////// Paragraphs /////////////////////////
 }
 

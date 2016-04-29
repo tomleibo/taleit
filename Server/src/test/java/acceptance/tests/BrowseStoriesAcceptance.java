@@ -28,7 +28,6 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
     public void oneStory_5_2() {
         storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
         assertFalse("Could not create story ", storyNumber == null);
-
         //assert for browse
         assertTrue("Could not find story in browser", bridge.browseStories().contains(storyNumber));
     }

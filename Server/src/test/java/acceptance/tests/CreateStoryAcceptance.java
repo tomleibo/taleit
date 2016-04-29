@@ -12,7 +12,6 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sharonk on 1/18/2016
  */
-@Ignore
 public class CreateStoryAcceptance extends LoggedInBaseAcceptance {
     String storyNumber;
     @Before

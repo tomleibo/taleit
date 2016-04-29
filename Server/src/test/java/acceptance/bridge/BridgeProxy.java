@@ -38,4 +38,9 @@ public class BridgeProxy implements BridgeAPI {
     public boolean isParagraphExists(String storyNumber, String i) {
         return false;
     }
+
+    @Override
+    public boolean initServer() {
+        return false;
+    }
 }

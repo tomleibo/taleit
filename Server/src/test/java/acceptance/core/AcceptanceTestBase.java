@@ -34,6 +34,7 @@ public class AcceptanceTestBase {
     public void init() {
 //        setRealBridge("fake");
         setRealBridge("real");
+        bridge.initServer();
     }
 
     //from 2 to 12
