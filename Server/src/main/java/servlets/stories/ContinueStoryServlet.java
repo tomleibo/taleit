@@ -42,6 +42,6 @@ public class ContinueStoryServlet extends TaleitServlet {
 
         usecase.perform();
 
-        return null;
+        return new JSONObject().put("paragraphId", usecase.getParagraph().getId());
     }
 }

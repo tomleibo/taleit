@@ -31,7 +31,7 @@ public class BridgeProxy implements BridgeAPI {
         return null;
     }
 
-    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {
+    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText, String rootParagraphId) {
         return null;
     }
 
@@ -42,5 +42,10 @@ public class BridgeProxy implements BridgeAPI {
     @Override
     public boolean initServer() {
         return false;
+    }
+
+    @Override
+    public String getRootParagraph(String storyNumber) {
+        return null;
     }
 }

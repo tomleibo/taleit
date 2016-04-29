@@ -1,14 +1,10 @@
 package acceptance.bridge;
 
-import exceptions.InvalidUseCaseParameterException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.security.*;
-import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -147,7 +143,7 @@ public class BridgeReal implements BridgeAPI {
         return null;
     }
 
-    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText) {
+    public String createParagraph(String storyNumber, String paragraphTitle, String paragraphText, String rootParagraphId) {
         LocalhostClient client = new LocalhostClient();
         try {
 
@@ -155,14 +151,18 @@ public class BridgeReal implements BridgeAPI {
                     .put("cookie", cookie)
                     .put("title", paragraphTitle)
                     .put("text", paragraphText)
-                    .put("storyId", storyNumber)
-                    .put("paragraphId", 1234);
+                    .put("paragraphId", rootParagraphId)
+                    .put("storyId", storyNumber);
+
             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
+            System.out.println(response);
+
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {
                 return null;
             }
 
             JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+            System.out.println(responseJson);
             JSONObject data = null;
             if (responseJson.has("data")) {
                 data = responseJson.getJSONObject("data");
@@ -194,5 +194,36 @@ public class BridgeReal implements BridgeAPI {
         }
 
         return true;
+    }
+
+    @Override
+    public String getRootParagraph(String storyNumber) {
+        LocalhostClient client = new LocalhostClient();
+        try{
+            HttpResponse response = client.makeApiGetRequest("/rest/stories/browse");
+
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
+                System.out.println(response.getStatusLine());
+                return null;
+            }
+
+            JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                Collection<String> result = new ArrayList<String>();
+                for (int i = 0; i < data.getJSONArray("stories").length(); i++) {
+                    JSONObject storyJson = (JSONObject) data.getJSONArray("stories").get(i);
+                    String id = storyJson.getString("id");
+                    if (storyNumber.equals(id)){
+                        return storyJson.getJSONObject("root").getString("id");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
     }
 }

@@ -21,11 +21,13 @@ public interface BridgeAPI {
 
     Collection<String> browseStories();
 
-    String createParagraph(String storyNumber, String paragraphTitle, String paragraphText);
+    String createParagraph(String storyNumber, String paragraphTitle, String paragraphText, String rootParagraphId);
 
     boolean isParagraphExists(String storyNumber, String i);
 
     boolean initServer();
+
+    String getRootParagraph(String storyNumber);
 
     //////////////////////////////////// Paragraphs /////////////////////////
 }

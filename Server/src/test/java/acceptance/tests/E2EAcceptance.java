@@ -1,7 +1,6 @@
 package acceptance.tests;
 
 import acceptance.core.AcceptanceTestBase;
-import acceptance.core.LoggedInBaseAcceptance;
 import acceptance.utils.StoryDetailForTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,27 +63,27 @@ public class E2EAcceptance extends AcceptanceTestBase {
         }
     }
 
-    @Test
-    public void loginCreateStoryLogoutContinueEachStory_8_2(){
-        loginCreateStoryAndLogout_8_1();
-        for (int i = 0; i<randomNumber; i++){
-            assertTrue("faild to perform login number " + i ,
-                    bridge.login(users[i], password));
-
-            for (int j = 0; j<randomNumber; j++){
-                String paragraphNumber = bridge.createParagraph(stories[j], paragraphTitle, paragraphText);
-                paragraphs[i][j] = paragraphNumber;
-                assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == null);
-            }
-
-            assertTrue("failed to logout without login: " + userName, bridge.logout());
-
-        }
-        for (int i = 0; i<randomNumber; i++) {
-            for (int j = 0 ; j<randomNumber; j++){
-                assertTrue("paragraph not exists", bridge.isParagraphExists(stories[i], paragraphs[i][j]));
-            }
-        }
-    }
+//    @Test
+//    public void loginCreateStoryLogoutContinueEachStory_8_2(){
+//        loginCreateStoryAndLogout_8_1();
+//        for (int i = 0; i<randomNumber; i++){
+//            assertTrue("faild to perform login number " + i ,
+//                    bridge.login(users[i], password));
+//
+//            for (int j = 0; j<randomNumber; j++){
+//                String paragraphNumber = bridge.createParagraph(stories[j], paragraphTitle, paragraphText, rootParagraphNumber);
+//                paragraphs[i][j] = paragraphNumber;
+//                assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == null);
+//            }
+//
+//            assertTrue("failed to logout without login: " + userName, bridge.logout());
+//
+//        }
+//        for (int i = 0; i<randomNumber; i++) {
+//            for (int j = 0 ; j<randomNumber; j++){
+//                assertTrue("paragraph not exists", bridge.isParagraphExists(stories[i], paragraphs[i][j]));
+//            }
+//        }
+//    }
 
 }
