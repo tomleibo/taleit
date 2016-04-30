@@ -37,7 +37,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
     @Test
     public void noStory_6_2() {
         storyNumber = "100"; // random number
-        paragraphNumber = bridge.createParagraph(storyNumber, paragraphTitle, paragraphText, rootParagraphNumber);
+        paragraphNumber = bridge.createParagraph(storyNumber, paragraphTitle, paragraphText, "3864");
         assertFalse("Could not create paragraph with Title: " + paragraphTitle + " and body: " + paragraphText, paragraphNumber == null);
         assertTrue("paragraph not exists", bridge.isParagraphExists(storyNumber, paragraphNumber));
     }

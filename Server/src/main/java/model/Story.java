@@ -19,8 +19,9 @@ public class Story {
     public Story(String title, Paragraph root){
         this.title = title;
         this.id = UUID.randomUUID().toString();
-        this. root = root;
+        this.root = root;
         this.paragraphs = new HashMap<String, Paragraph>();
+        this.paragraphs.put(root.getId(), root);
     }
 
     public String getId() {
