@@ -48,6 +48,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
+        rootParagraphNumber = bridge.getRootParagraph(storyNumber);
         paragraphNumber = bridge.createParagraph(storyNumber, "", paragraphText, rootParagraphNumber);
         assertFalse("Could not create paragraph with no Title",
                 paragraphNumber == null);
@@ -60,6 +61,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
+        rootParagraphNumber = bridge.getRootParagraph(storyNumber);
         paragraphNumber = bridge.createParagraph(storyNumber, paragraphTitle, "", rootParagraphNumber);
         assertFalse("Succeed to create paragraph with no Text", paragraphNumber == null);
         assertTrue("paragraph not exists", bridge.isParagraphExists(storyNumber, paragraphNumber));
@@ -76,6 +78,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
+        rootParagraphNumber = bridge.getRootParagraph(storyNumber);
         // save paragraphs number
         for (int i=1; i<=randomNumber; i++){
             paragraphsNumber[i-1] = bridge.createParagraph(storyNumber, paragraphTitle, paragraphText, rootParagraphNumber);
