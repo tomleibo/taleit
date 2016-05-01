@@ -53,6 +53,15 @@ public class LoginAcceptance extends SignedUpBaseAcceptance {
                 bridge.login(userName, password));
 
         assertFalse("succeed to perform second login with same user name : " + userName,
+                bridge.login(userName, password));
+    }
+
+    @Test
+    public void LoginSignUpSameUser_NEW() {
+        assertTrue("failed to perform login with user: " + userName + " and password: " + password,
+                bridge.login(userName, password));
+
+        assertFalse("succeed to perform second login with same user name : " + userName,
                 bridge.signUp(userName, password));
     }
 
