@@ -2,21 +2,18 @@ package usecases;
 
 import exceptions.InvalidUseCaseParameterException;
 import lang.SafeObject;
+import model.Categories;
 import model.Model;
 import model.Paragraph;
 import model.Story;
 import model.User;
-import org.junit.Ignore;
 import org.junit.Test;
 import usecases.Stories.CreateStory;
 import usecases.core.TestBase;
-import usecases.users.SignUp;
 import usecases.utils.StoryDetailForTest;
 import usecases.utils.UserDetailForTest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 /**
@@ -30,7 +27,9 @@ public class CreateStoryTest extends TestBase{
         model.addUser(new User(userName, pass));
         String cookie = model.loginUser(userName,pass);
 
-        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
+        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(),
+                                              cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY
+                                                      .getValue(), Categories.ADULTS);
         usecase.perform();
         Story story = usecase.getStory();
 
@@ -56,7 +55,8 @@ public class CreateStoryTest extends TestBase{
         for (int i = 0; i < CreateStory.MAX_TITLE_LENGTH +10; i++){
             longTitle += "a";
         }
-        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), longTitle, cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue());
+        CreateStory usecase = new CreateStory(new SafeObject<Model>(model), longTitle, cookie, StoryDetailForTest
+                .TITLE.getValue(), StoryDetailForTest.PARAGRAPH_TEXT.getValue(), Categories.ADULTS);
         usecase.perform();
     }
 

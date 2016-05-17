@@ -3,6 +3,7 @@ package usecases.Stories;
 import exceptions.InvalidUseCaseParameterException;
 import lang.Function;
 import lang.SafeObject;
+import model.Categories;
 import model.Model;
 import model.Paragraph;
 import model.Story;
@@ -12,14 +13,17 @@ import usecases.ActionUseCase;
 public class CreateStory extends ActionUseCase {
     String title;
     Paragraph root;
+    Categories category;
     Story result;
 
     public static final int MAX_TITLE_LENGTH = 100;
 
-    public CreateStory(SafeObject<Model> context, String title, final String cookie, String rootTitle, String rootText) {
+    public CreateStory(SafeObject<Model> context, String title, final String cookie, String rootTitle, String
+            rootText, Categories category) {
         super(context);
 
         this.title = title;
+        this.category = category;
 
         User user = context.read(new Function<Model>() {
             public User perform(Model model) {
@@ -35,7 +39,7 @@ public class CreateStory extends ActionUseCase {
     }
 
     public void perform(Model model) {
-        result = new Story(title, root);
+        result = new Story(title, root, category);
         model.addStory(result);
     }
 

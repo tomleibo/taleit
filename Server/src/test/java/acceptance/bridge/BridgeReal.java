@@ -1,7 +1,7 @@
 package acceptance.bridge;
 
+import model.Categories;
 import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,6 +95,7 @@ public class BridgeReal implements BridgeAPI {
             JSONObject content = new JSONObject()
                  .put("cookie", cookie)
                  .put("title", title)
+                 .put("category", Categories.ADULTS)
                  .put("rootParagraph", rootParagrapth);
             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {

@@ -1,3 +1,4 @@
+import model.Categories;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
@@ -64,18 +65,20 @@ public class ManualTests {
         return object;
     }
 
-    public JSONObject create(String cookie, String title, String text, String rootTitle, String rootText) throws IOException, JSONException{
+    public JSONObject create(String cookie, String title, String text, String rootTitle, String rootText, Categories
+            category) throws
+            IOException, JSONException{
         JSONObject content = new JSONObject();
         content.put("cookie", cookie);
         content.put("title", title);
         content.put("text", text);
+        content.put("category", category.getValue());
         JSONObject root = new JSONObject();
         content.put("rootParagraph", root);
         root.put("text",rootText);
         root.put("title",rootTitle);
 
         String bla = makeRequest("/rest/stories/create", content.toString(), "POST");
-//        System.out.println(bla);
 
         JSONObject object = new JSONObject(bla);
         return object;
