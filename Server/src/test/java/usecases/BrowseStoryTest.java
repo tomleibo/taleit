@@ -1,6 +1,5 @@
 package usecases;
 
-import exceptions.BrowseStoryException;
 import lang.SafeObject;
 import model.Categories;
 import model.Model;
@@ -63,7 +62,7 @@ public class BrowseStoryTest extends TestBase {
         assertEquals("couldn't find the story", stories.size(), 3);
     }
 
-    @Test(expected = BrowseStoryException.class)
+    @Test
     public void noStory_5_3() {
         // arrange
         BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));

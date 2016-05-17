@@ -20,15 +20,16 @@ import java.util.Calendar;
  * Created by gur on 3/11/2016.
  */
 public class ManualTests {
-    final String devserver;
+    final String server;
     String cookie;
+    private String appname = "/server.core-1.0-SNAPSHOT";
 
     public ManualTests(){
-        this.devserver = "127.0.0.1";
+        this.server = "127.0.0.1";
     }
 
-    public ManualTests(String devserver){
-        this.devserver = devserver;
+    public ManualTests(String server){
+        this.server = server;
     }
 
     public JSONObject signup(String username, String password) throws IOException, JSONException {
@@ -124,7 +125,7 @@ public class ManualTests {
     }
 
     private String makeRequest(String route, String content, String method) throws IOException {
-        String uri = "http://" + devserver + ":8080" + route;
+        String uri = "http://" + server + ":8080" + appname + route;
         HttpRequest request = createHttpRequest(uri, method);
 
         if (content != null && request instanceof HttpEntityEnclosingRequestBase){
@@ -137,7 +138,7 @@ public class ManualTests {
         Calendar exp = Calendar.getInstance();
         exp.add(Calendar.MINUTE, 60);
 
-        cookie.setDomain(devserver);
+        cookie.setDomain(server);
         cookie.setPath("/");
 
         /////////////
@@ -148,7 +149,7 @@ public class ManualTests {
         client.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.RFC_2109);
 
 
-        HttpHost host = new HttpHost(devserver,8080);
+        HttpHost host = new HttpHost(server,8080);
         HttpResponse response = client.execute(host, request);
         System.out.println(response.getStatusLine().toString());
         String result = EntityUtils.toString(response.getEntity(), "UTF8");
