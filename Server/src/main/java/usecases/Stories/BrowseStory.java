@@ -24,9 +24,6 @@ public class BrowseStory extends ActionUseCase {
     }
 
     public Collection<Story> getStories() {
-        if (stories.isEmpty()) {
-            throw new BrowseStoryException("no available stories ");
-        }
         return stories;
     }
 
