@@ -54,7 +54,12 @@ public class ManualTestRunner {
         String username = "gurk" + new Random().nextInt() + "@post.bgu.ac.il";
         suite.signup(username, "123456");
         suite.login(username, "123456");
-        suite.create(suite.cookie, "this is the title", "this is the text", "now this is a story","all of belair, my " +
+        suite.create(suite.cookie, "this is the title", "this is the text", "now this is a story", "all of belair, my " +
                 "life got switched upside down", Categories.ADULTS);
+    }
+
+    @Test
+    public void getCategories() throws IOException, JSONException {
+        suite.getCategories();
     }
 }
