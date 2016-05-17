@@ -3,6 +3,7 @@ package servlets.stories;
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
 import ioc.Server;
+import model.Categories;
 import org.json.JSONObject;
 import servlets.TaleitServlet;
 import usecases.Stories.CreateStory;
@@ -37,9 +38,11 @@ public class CreateStoryServlet extends TaleitServlet{
 
         String cookie = jsonObject.getString("cookie"); //TODO: maybe get cookie from cookieStore/cookieJar ?
         String title = jsonObject.getString("title");
+        Categories category = Categories.getCategoryByString(jsonObject.getString("category"));
         String rootParagraphText = jsonObject.getJSONObject("rootParagraph").getString("text");
         String rootParagraphTitle = jsonObject.getJSONObject("rootParagraph").getString("title");
-        CreateStory createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle, rootParagraphText);
+        CreateStory createStory = new CreateStory(Server.Instance.getSafeModel(), title, cookie, rootParagraphTitle,
+                                                  rootParagraphText, category);
 
         createStory.perform();
         return new JSONObject().put("storyId", createStory.getStory().getId());

@@ -2,6 +2,7 @@ package usecases;
 
 import exceptions.StoryException;
 import lang.SafeObject;
+import model.Categories;
 import model.Model;
 import model.Paragraph;
 import model.Story;
@@ -24,7 +25,8 @@ public class ContinueStoryTest extends TestBase{
 
     @Before
     public void story(){
-        CreateStory usecaseCreate = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue(), "cookie dough",StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue());
+        CreateStory usecaseCreate = new CreateStory(new SafeObject<Model>(model), StoryDetailForTest.TITLE.getValue()
+                , "cookie dough",StoryDetailForTest.BODY.getValue(), StoryDetailForTest.AUTHOR.getValue(), Categories.ADULTS);
         usecaseCreate.perform();
         story = usecaseCreate.getStory();
         root = story.getRoot();

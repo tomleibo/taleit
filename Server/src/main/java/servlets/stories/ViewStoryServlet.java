@@ -42,16 +42,40 @@ public class ViewStoryServlet extends TaleitServlet {
         ViewStory usecase = new ViewStory(Server.Instance.getSafeModel(), storyId, paragraphId);
 
         usecase.perform();
+        Paragraph paragraph = usecase.getParagraph();
 
         JSONObject responseJson = new JSONObject();
-        JSONArray children = new JSONArray();
-        responseJson.put("paragraph", children);
-        for (Paragraph child: usecase.getParagraph().getChildren()){
-            JSONObject jsonChild = new JSONObject();
-            jsonChild.put("id", child.getId());
-            jsonChild.put("title", child.getTitle());
-            jsonChild.put("text", child.getText());
-            jsonChild.put("author", child.getUser().getUsername());
+
+        //children
+        if (!paragraph.getChildren().isEmpty()) {
+            for (Paragraph child : paragraph.getChildren()) {
+                JSONObject jsonChild = new JSONObject();
+                jsonChild.put("id", child.getId());
+                jsonChild.put("title", child.getTitle());
+                jsonChild.put("text", child.getText());
+                jsonChild.put("author", child.getUser().getUsername());
+            }
+            JSONArray children = new JSONArray();
+            responseJson.put("children", children);
+        }
+
+        //self
+        JSONObject paragraphDetails = new JSONObject();
+        paragraphDetails.put("Id", paragraph.getId());
+        paragraphDetails.put("title", paragraph.getText());
+        paragraphDetails.put("text", paragraph.getTitle());
+        paragraphDetails.put("author", paragraph.getUser().getUsername());
+        responseJson.put("paragraph", paragraphDetails);
+
+        //father
+        Paragraph father = paragraph.getFather();
+        if (father != null) {
+            JSONObject fatherDetails = new JSONObject();
+            fatherDetails.put("Id", father.getId());
+            fatherDetails.put("title", father.getText());
+            fatherDetails.put("text", father.getTitle());
+            fatherDetails.put("author", father.getUser().getUsername());
+            responseJson.put("father", fatherDetails);
         }
 
         return responseJson;

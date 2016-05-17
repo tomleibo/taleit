@@ -1,6 +1,7 @@
 package usecases;
 
 import lang.SafeObject;
+import model.Categories;
 import model.Model;
 import model.Story;
 import model.User;
@@ -75,7 +76,7 @@ public class BrowseStoryTest extends TestBase {
     }
 
     private Story getNewStory(String cookie, String title, String body) {
-        CreateStory story = new CreateStory(new SafeObject<Model>(model), title, cookie, title, body);
+        CreateStory story = new CreateStory(new SafeObject<Model>(model), title, cookie, title, body, Categories.ADULTS);
         story.perform();
         return story.getStory();
     }

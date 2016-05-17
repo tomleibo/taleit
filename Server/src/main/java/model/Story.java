@@ -1,11 +1,11 @@
 package model;
 
 
-import java.util.HashMap;
-import java.util.UUID;
-
 import exceptions.NoSuchParagraphIdException;
 import exceptions.StoryException;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Created by Shai on 23/12/2015.
@@ -15,12 +15,15 @@ public class Story {
     private String id;
     private String title;
     private Paragraph root;
+    private Categories category;
 
-    public Story(String title, Paragraph root){
+    public Story(String title, Paragraph root, Categories category){
         this.title = title;
         this.id = UUID.randomUUID().toString();
-        this. root = root;
+        this.root = root;
+        this.category = category;
         this.paragraphs = new HashMap<String, Paragraph>();
+        this.paragraphs.put(root.getId(), root);
     }
 
     public String getId() {
@@ -33,6 +36,10 @@ public class Story {
 
     public User getUser() {
         return root.getUser();
+    }
+
+    public Categories getCategory(){
+        return category;
     }
 
     public Paragraph addParagraph(Paragraph father, String title, String text, User user) {

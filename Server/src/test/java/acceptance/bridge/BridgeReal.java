@@ -1,7 +1,7 @@
 package acceptance.bridge;
 
+import model.Categories;
 import org.apache.http.HttpResponse;
-import org.apache.http.impl.client.SystemDefaultCredentialsProvider;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -95,6 +95,7 @@ public class BridgeReal implements BridgeAPI {
             JSONObject content = new JSONObject()
                  .put("cookie", cookie)
                  .put("title", title)
+                 .put("category", Categories.ADULTS)
                  .put("rootParagraph", rootParagrapth);
             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {
@@ -155,16 +156,15 @@ public class BridgeReal implements BridgeAPI {
                     .put("paragraphId", rootParagraphId)
                     .put("storyId", storyNumber);
 
-            HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
+            HttpResponse response = client.makeApiPostRequest("/rest/stories/continue", content.toString());
 
             if (response.getStatusLine().getStatusCode() == HTTP_OK){
                 JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
-                System.out.println(responseJson);
                 JSONObject data = null;
                 if (responseJson.has("data")) {
                     data = responseJson.getJSONObject("data");
-                    if (data.has("storyId") && data.getString("storyId").length() > 0) {
-                        return data.getString("storyId");
+                    if (data.has("paragraphId") && data.getString("paragraphId").length() > 0) {
+                        return data.getString("paragraphId");
                     }
                 }
             }
@@ -180,7 +180,27 @@ public class BridgeReal implements BridgeAPI {
         }
     }
 
-    public boolean isParagraphExists(String storyNumber, String i) {
+    public boolean isParagraphExists(String storyId, String paragraphId) {
+        LocalhostClient client = new LocalhostClient();
+        try{
+            String uriAndParams = "/rest/stories/view" + "?" + "storyId=" + storyId + "&paragraphId=" + paragraphId;
+            HttpResponse response = client.makeApiGetRequest(uriAndParams);
+
+            if (response.getStatusLine().getStatusCode() != HTTP_OK) {
+                System.out.println(response.getStatusLine());
+                throw new RuntimeException();
+            }
+
+            JSONObject responseJson = new JSONObject(EntityUtils.toString(response.getEntity()));
+            JSONObject data = null;
+            if (responseJson.has("data")) {
+                data = responseJson.getJSONObject("data");
+                return (data.getJSONObject("paragraph").getString("Id").equals(paragraphId));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return false;
     }
 

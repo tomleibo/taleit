@@ -6,12 +6,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by sharonk on 1/18/2016
  */
-//@Ignore
 public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
     String storyNumber;
     @Before
@@ -21,7 +21,7 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void noStories_5_1() {
-        assertTrue("There are stories in browser without creating one" , bridge.browseStories().size()==0);
+        assertNull("There are stories in browser without creating one" , bridge.browseStories());
     }
 
     @Test
