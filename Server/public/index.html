@@ -1,46 +1,31 @@
-<!doctype html>
-<html ng-app="Tale It">
-    <head>
-        <title> Tale It </title>
-        <script src="https://ajax.google.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-        <script type="text/javascript" src="app.js"></script>
+<!DOCTYPE html>
+<html ng-app="taleItApp">
+<head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="text-center">Tale it</h1>
+        <h2 class="text-center">It's all about creation</h2>
+    </header>
 
-    </head>
-
-    <body >
-    <div class="header">
-        <div class="container">
-            <h1>Book End</h1>
-        </div>
-    </div>
-
-    <div class="main" ng-controller="MainController">
-        <div class="container">
-
-            <h1>{{ title }}</h1>
-            <h2>{{ promo }}</h2>
-
-            <div ng-repeat="product in products" class="col-md-6">
-                <div class="thumbnail">
-                    <img ng-src="{{ product.cover }}">
-                    <p class="title">{{ product.name }}</p>
-                    <p class="price">{{ product.price | currency }}</p>
-                    <p class="date">{{ product.pubdate | date }}</p>
-                    <div class="rating">
-                        <p class="likes" ng-click="plusOne($index)">{{ product.likes }} </p>
-                        <p class="dislikes" ng-click="minusOne($index)">{{ product.dislikes }} </p>
-                    </div>
-                </div>
+    <div ng-controller="CategoriesController as categories">
+        <div ng-controller="CategoriesControllerOne as categoriesOne">
+            <div class="allCategories" ng-repeat="category in categoriesOne.categoryInstancesOne">
+                {{category.name}}
             </div>
 
+            <div ng-controller="CategoriesController as categories" class="allCategories" ng-repeat="category in categories.categoryInstances">
+                {{category.name}}
+            </div>
         </div>
     </div>
 
-    <!-- Modules -->
-    <script src="OLD/js/app.js"></script>
 
-    <!-- Controllers -->
-    <script src="OLD/js/controllers/MainController.js"></script>
-    </body>
 
+
+
+</body>
 </html>
