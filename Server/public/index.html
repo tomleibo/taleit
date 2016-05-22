@@ -3,7 +3,16 @@
 <head>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <!-- Modules -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/controllers/MainController.js"></script>
+
+    <!-- Services -->
+    <script src="js/services/categories.js"></script>
+
+    <!-- Directives -->
 </head>
 <body>
     <header>
@@ -11,16 +20,8 @@
         <h2 class="text-center">It's all about creation</h2>
     </header>
 
-    <div ng-controller="CategoriesController as categories">
-        <div ng-controller="CategoriesControllerOne as categoriesOne">
-            <div class="allCategories" ng-repeat="category in categoriesOne.categoryInstancesOne">
-                {{category.name}}
-            </div>
-
-            <div ng-controller="CategoriesController as categories" class="allCategories" ng-repeat="category in categories.categoryInstances">
-                {{category.name}}
-            </div>
-        </div>
+    <div class="main" ng-controller="MainController">
+        <p>  {{hello | json}}  </p>
     </div>
 
 
