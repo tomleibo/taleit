@@ -4,20 +4,24 @@ package model;
  * Created by Kerzman on 5/17/2015
  */
 public enum Categories {
-    COMEDY("Comedy"),
-    DRAMA("Drama"),
-    ADULTS("Adults"),
-    SCIFI("Sci-Fi"),
-    HORROR("Horror"),
-    ADVENTURE("Adventure"),
-    KIDS("Kids"),
-    ROMANCE("Romance"),
-    OTHERS("Others");
+    COMEDY("Comedy", "comedy"),
+    DRAMA("Drama", "drama"),
+    ADULTS("Adults", "adults"),
+    SCIFI("Sci-Fi", "scifi"),
+    HORROR("Horror", "horror"),
+    ADVENTURE("Adventure", "adventure"),
+    KIDS("Kids", "kids"),
+    ROMANCE("Romance", "romance"),
+    OTHERS("Others", "others");
 
     private final String value;
+    private final String image;
 
-    Categories(String value) {
+
+    Categories(String value, String image) {
+        final String base = "http://localhost:8080/resources/categories/";
         this.value = value;
+        this.image = base+image;
     }
 
     static public Categories getCategoryByString(String categoryStr) {
@@ -31,6 +35,14 @@ public enum Categories {
 
     public String getValue() {
         return this.value;
+    }
+
+    public String getImageUrl() {
+        return this.image+".png";
+    }
+
+    public String getImageHoverUrl() {
+        return this.image+"_hover.png";
     }
 
 }
