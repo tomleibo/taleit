@@ -3,7 +3,8 @@
         <td align="center" class="categoryDisplay">
             <section>
                 <p> {{category.name}} </p>
-                <img ng-src="{{category.image}}">
+                <img  ng-show="regular.isSet('1')" ng-src="{{category.image}}"
+                      ng-mouseover="regular.setTab('0')" ng-mouseleave="regular.setTab('1')">
             </section>
         </td>
     </tr>
