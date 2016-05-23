@@ -1,0 +1,11 @@
+<table style="width:100%">
+    <tr ng-repeat="category in categoriesSection.categoriesResult.data.categories">
+        <td align="center" class="categoryDisplay">
+            <section>
+                <p> {{category.name}} </p>
+                <img ng-src="{{category.image}}">
+            </section>
+        </td>
+    </tr>
+</table>
+
