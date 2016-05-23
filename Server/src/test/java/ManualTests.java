@@ -66,6 +66,12 @@ public class ManualTests {
         return object;
     }
 
+    public JSONObject getCategories() throws IOException, JSONException {
+        JSONObject content = new JSONObject();
+        JSONObject object = new JSONObject(makeRequest("/rest/stories/categories", content.toString(), "GET"));
+        return object;
+    }
+
     public JSONObject create(String cookie, String title, String text, String rootTitle, String rootText, Categories
             category) throws
             IOException, JSONException{

@@ -1,7 +1,7 @@
+import model.Categories;
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -10,7 +10,6 @@ import java.util.Random;
 /**
  * Created by gur on 3/11/2016.
  */
-@Ignore
 public class ManualTestRunner {
     ManualTests suite;
 
@@ -52,10 +51,15 @@ public class ManualTestRunner {
 
     @Test
     public void create() throws IOException, JSONException {
-        suite = new ManualTests("52.58.147.123");
-        String username = "yuvalla" + new Random().nextInt() + "@post.bgu.ac.il";
+        String username = "gurk" + new Random().nextInt() + "@post.bgu.ac.il";
         suite.signup(username, "123456");
         suite.login(username, "123456");
-        suite.create(suite.cookie, "סיפורו של דג", "עוד קצת תוכן", "תוכן תוכן","אהההההההההההה");
+        suite.create(suite.cookie, "this is the title", "this is the text", "now this is a story", "all of belair, my " +
+                "life got switched upside down", Categories.ADULTS);
+    }
+
+    @Test
+    public void getCategories() throws IOException, JSONException {
+        suite.getCategories();
     }
 }
