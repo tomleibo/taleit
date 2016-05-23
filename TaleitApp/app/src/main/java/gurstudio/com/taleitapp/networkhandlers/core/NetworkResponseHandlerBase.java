@@ -1,4 +1,4 @@
-package gurstudio.com.taleitapp.networkhandlers;
+package gurstudio.com.taleitapp.networkhandlers.core;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -13,16 +13,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseNetworkResponseHandler implements Response.Listener<JSONObject>, Response.ErrorListener {
-    protected final Context context;
+import gurstudio.com.taleitapp.application.core.ApplicationBase;
 
-    protected BaseNetworkResponseHandler(Context context){
-        this.context = context;
+public abstract class NetworkResponseHandlerBase<A extends ApplicationBase> implements Response.Listener<JSONObject>, Response.ErrorListener {
+    protected final A application;
+
+    protected NetworkResponseHandlerBase(A application){
+        this.application = application;
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG);
+        Toast.makeText(application, error.toString(), Toast.LENGTH_LONG);
     }
 
     protected List<JSONObject> toList(JSONArray array) throws JSONException {

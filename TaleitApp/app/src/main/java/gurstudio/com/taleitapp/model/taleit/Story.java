@@ -1,4 +1,7 @@
-package gurstudio.com.taleitapp.model;
+package gurstudio.com.taleitapp.model.taleit;
+
+import gurstudio.com.taleitapp.model.core.Observable;
+import gurstudio.com.taleitapp.model.core.ObservableText;
 
 public class Story extends TaleItCreationEntity{
     public ObservableText category = new ObservableText("");

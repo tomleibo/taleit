@@ -1,24 +1,22 @@
-package gurstudio.com.taleitapp.networkhandlers;
-
-import android.content.Context;
+package gurstudio.com.taleitapp.networkhandlers.taleit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
 
-import gurstudio.com.taleitapp.model.ApplicationModel;
-import gurstudio.com.taleitapp.model.Paragraph;
-import gurstudio.com.taleitapp.model.Story;
+import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
+import gurstudio.com.taleitapp.model.core.ApplicationModel;
+import gurstudio.com.taleitapp.model.taleit.Story;
 import lambdas.Selector;
 import queries.stracture.NestedQuery;
 
 /**
  * Created by gur on 5/18/2016.
  */
-public class GetStoriesResponseHandler extends BaseNetworkResponseHandler {
-    public GetStoriesResponseHandler(Context context) {
-        super(context);
+public class GetStoriesResponseHandler extends TaleItResponseHandlerBase {
+    public GetStoriesResponseHandler(TaleItApplication application) {
+        super(application);
     }
 
     @Override
@@ -57,7 +55,7 @@ public class GetStoriesResponseHandler extends BaseNetworkResponseHandler {
                 .select(new Selector<Story, Object>() {
                     @Override
                     public Object select(Story story) {
-                        ApplicationModel.Instance.getStories().add(story);
+                        application.getApplicationModel().getStories().add(story);
                         return null;
                     }
                 })
@@ -68,3 +66,4 @@ public class GetStoriesResponseHandler extends BaseNetworkResponseHandler {
         }
     }
 }
+

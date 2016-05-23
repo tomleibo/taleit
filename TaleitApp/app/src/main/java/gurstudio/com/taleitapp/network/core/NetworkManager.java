@@ -1,4 +1,4 @@
-package gurstudio.com.taleitapp.network;
+package gurstudio.com.taleitapp.network.core;
 
 import android.app.Application;
 

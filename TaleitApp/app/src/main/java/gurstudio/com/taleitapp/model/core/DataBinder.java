@@ -1,4 +1,4 @@
-package gurstudio.com.taleitapp.model;
+package gurstudio.com.taleitapp.model.core;
 
 import android.os.Handler;
 import android.os.Looper;
