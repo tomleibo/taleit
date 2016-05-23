@@ -1,10 +1,9 @@
 <table style="width:100%">
     <tr ng-repeat="category in categoriesSection.categoriesResult.data.categories">
-        <td align="center" class="categoryDisplay">
+        <td align="center" class="categoryDisplay" ng-init=" src = category.image">
             <section>
                 <p> {{category.name}} </p>
-                <img  ng-show="regular.isSet('1')" ng-src="{{category.image}}"
-                      ng-mouseover="regular.setTab('0')" ng-mouseleave="regular.setTab('1')">
+                <img  ng-src={{src}} ng-mouseover=" src = category.hover" ng-mouseleave=" src = category.image">
             </section>
         </td>
     </tr>
