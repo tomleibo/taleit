@@ -33,7 +33,7 @@ public class CreateStoryTest extends TestBase{
         usecase.perform();
         Story story = usecase.getStory();
 
-        assertTrue(model.getStories().size() == 1);
+        assertTrue(model.getStories(null).size() == 1);
         assertEquals(story.getUser().getUsername(), userName);
 
         Paragraph root = story.getRoot();

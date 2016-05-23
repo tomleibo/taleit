@@ -32,7 +32,7 @@ public class BrowseStoryTest extends TestBase {
 
 
         Story story = getNewStory(cookie, StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
-        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
+        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model), null);
 
         // act
         browseStory.perform();
@@ -49,7 +49,7 @@ public class BrowseStoryTest extends TestBase {
         Story secondStory = getNewStory(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
         Story thirdStory = getNewStory(StoryDetailForTest.AUTHOR.getValue(), StoryDetailForTest.TITLE.getValue(), StoryDetailForTest.BODY.getValue());
 
-        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
+        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model), null);
 
         // act
         browseStory.perform();
@@ -65,7 +65,7 @@ public class BrowseStoryTest extends TestBase {
     @Test
     public void noStory_5_3() {
         // arrange
-        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model));
+        BrowseStory browseStory = new BrowseStory(new SafeObject<Model>(model), null);
 
         // act
         browseStory.perform();
