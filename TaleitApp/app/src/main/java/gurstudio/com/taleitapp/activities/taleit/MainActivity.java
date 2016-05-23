@@ -7,26 +7,23 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import gurstudio.com.taleitapp.R;
-import gurstudio.com.taleitapp.model.core.ObservableCollection;
-import gurstudio.com.taleitapp.model.core.Observer;
-import gurstudio.com.taleitapp.model.taleit.Story;
+import gurstudio.com.taleitapp.adapters.taleit.CategoriesAdapter;
 
 public class MainActivity extends TaleItActivity implements NavigationView.OnNavigationItemSelectedListener {
-    TextView log;
-    private Button send;
+    private RecyclerView categoriesRecycler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,36 +44,23 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        findViews();
-
-        bindViews();
-
-        assignListeners();
     }
 
-    private void bindViews() {
-        getBaseApplication().getDataBinder().bind(getBaseApplication().getApplicationModel().getStories(), new Observer<ObservableCollection.ObservableItemAction<Story>>() {
-            @Override
-            public void onUpdate(ObservableCollection.ObservableItemAction<Story> value) {
-                String line = value.action.name() + " : " + value.item.title.get();
-                log.setText(log.getText() + "\n" + line);
-            }
-        });
+    @Override
+    protected void findViews() {
+        categoriesRecycler = (RecyclerView)findViewById(R.id.categories_recycler);
     }
 
-    private void assignListeners() {
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                log.setText("Waiting...");
-            }
-        });
+    @Override
+    protected void initViews() {
+        initRecyclerView();
     }
 
-    private void findViews() {
-        log = (TextView) findViewById(R.id.log);
-        send = (Button) findViewById(R.id.send);
+    private void initRecyclerView() {
+        // use a linear layout manager
+        categoriesRecycler.setLayoutManager(new LinearLayoutManager(this));
+        // specify an adapter (see also next example)
+        categoriesRecycler.setAdapter(new CategoriesAdapter(getBaseApplication().getApplicationModel().getCategories()));
     }
 
     @Override
@@ -134,5 +118,10 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public int getContentViewId() {
+        return R.layout.activity_main;
     }
 }
