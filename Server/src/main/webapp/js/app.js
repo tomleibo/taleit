@@ -33,6 +33,14 @@
             templateUrl: "/html/stories-section.html"
         };
     }]);
+
+    app.directive("titleSection", ['$http', function() {
+        return {
+            restrict: "E",
+            templateUrl: "/html/title-section.html"
+        };
+    }]);
+
 })();
 
 

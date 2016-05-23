@@ -1,4 +1,16 @@
-.categoryImg{
-	alignment: center;
-	width: 120px;
+.categoryImg {
+    width: 120px;
 }
+
+body {
+    background-color: #F6F7EB;
+    background-attachment: inherit;
+}
+
+.categoryClass {
+    float: left;
+    display: inline;
+    position: relative;
+
+}
+
