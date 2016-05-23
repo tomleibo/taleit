@@ -17,4 +17,20 @@
             templateUrl: "/html/categories-section.html"
         };
     });
+
+    app.controller('StoriesController', ['$http', function($http){
+        var storiesList = this;
+        storiesList.storiesResult = [];
+
+        $http.get('http://127.0.0.1:8080/rest/stories/browse').success(function(data){
+            storiesList.storiesResult = data;
+        });
+    }]);
+
+    app.directive("storiesSection", ['$http', function() {
+        return {
+            restrict: "E",
+            templateUrl: "/html/stories-section.html"
+        };
+    }]);
 })();
