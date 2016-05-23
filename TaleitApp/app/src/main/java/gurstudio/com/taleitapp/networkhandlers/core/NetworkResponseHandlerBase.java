@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.networkhandlers.core;
 
-import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.Response;

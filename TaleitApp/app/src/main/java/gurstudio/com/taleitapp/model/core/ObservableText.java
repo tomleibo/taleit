@@ -1,7 +1,7 @@
 package gurstudio.com.taleitapp.model.core;
 
-public class ObservableText extends Observable<CharSequence>{
-    public ObservableText(CharSequence value){
+public class ObservableText extends Observable<String>{
+    public ObservableText(String value){
         super(value);
     }
 
