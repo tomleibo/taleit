@@ -10,4 +10,11 @@
             catList.categoriesResult = data;
         });
     }]);
+
+    app.directive("categoriesSection", function() {
+        return {
+            restrict: "E",
+            templateUrl: "/html/categories-section.html"
+        };
+    });
 })();

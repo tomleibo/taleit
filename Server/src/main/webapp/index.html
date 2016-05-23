@@ -20,31 +20,10 @@
     <div class="main" ng-controller="CategoriesController as categoriesSection">
 
         <div id="categories">
-
-            <table style="width:100%">
-                <tr ng-repeat="category in categoriesSection.categoriesResult.data.categories">
-                    <td align="center" class="categoryDisplay">
-
-                        <div>
-                            <p> {{category.name}} </p>
-                            <img ng-src="{{category.image}}">
-                        </div>
-
-                    </td>
-                </tr>
-            </table>
-
-
+            <categories-section></categories-section>
         </div>
 
-
-
-
     </div>
-
-
-
-
 
 </body>
 </html>
