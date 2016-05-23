@@ -33,7 +33,12 @@ public class GetCategoriesServlet extends TaleitServlet {
         JSONArray categoriesJsn= new JSONArray();
 
         for (Categories category: Categories.values()){
-            categoriesJsn.put(category.getValue());
+            JSONObject jsonRoot = new JSONObject();
+            jsonRoot.put("name", category.getValue());
+            jsonRoot.put("image", category.getImageUrl());
+            jsonRoot.put("hover", category.getImageHoverUrl());
+
+            categoriesJsn.put(jsonRoot);
         }
         JSONObject responseJson = new JSONObject();
         responseJson.put("categories", categoriesJsn);
