@@ -1,4 +1,4 @@
-package gurstudio.com.taleitapp.model;
+package gurstudio.com.taleitapp.model.core;
 
 public class ObservableText extends Observable<CharSequence>{
     public ObservableText(CharSequence value){
