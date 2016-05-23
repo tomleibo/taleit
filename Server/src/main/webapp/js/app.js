@@ -14,7 +14,19 @@
     app.directive("categoriesSection", function() {
         return {
             restrict: "E",
-            templateUrl: "/html/categories-section.html"
+            templateUrl: "/html/categories-section.html",
+            controller: function($http) {
+                this.regular = '1';
+
+                this.isSet = function(checkRegular) {
+                    return this.regular === checkRegular;
+                };
+
+                this.setTab = function(activeRegular) {
+                    this.regular = activeRegular;
+                };
+            },
+            controllerAs: "regular"
         };
     });
 
@@ -34,3 +46,6 @@
         };
     }]);
 })();
+
+
+
