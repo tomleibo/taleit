@@ -31,7 +31,8 @@ public class BrowseStoryServlet extends TaleitServlet {
 
     @Override
     protected JSONObject handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        BrowseStory usecase = new BrowseStory(Server.Instance.getSafeModel());
+        String category = request.getParameter("category");
+        BrowseStory usecase = new BrowseStory(Server.Instance.getSafeModel(), category);
 
         usecase.perform();
         JSONArray stories = new JSONArray();

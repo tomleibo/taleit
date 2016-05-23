@@ -1,12 +1,5 @@
-<table style="width:100%">
-    <tr ng-repeat="category in categoriesSection.categoriesResult.data.categories">
-        <td align="center" class="categoryDisplay">
-            <section>
-                <p> {{category.name}} </p>
-                <img  ng-show="regular.isSet('1')" ng-src="{{category.image}}"
-                      ng-mouseover="regular.setTab('0')" ng-mouseleave="regular.setTab('1')">
-            </section>
-        </td>
-    </tr>
-</table>
-
+    <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories" ng-init=" src = category.image">
+                <p class = categoryName> {{category.name}} </p>
+                <img class = categoryImg ng-src={{src}} ng-mouseover=" src = category.hover"
+                      ng-mouseleave=" src = category.image">
+    </div>

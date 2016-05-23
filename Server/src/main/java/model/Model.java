@@ -75,8 +75,18 @@ public class Model {
          return getLoggedUsers().contains(users.get(userName));
     }
 
-    public Collection<Story> getStories() {
-        return stories;
+    public Collection<Story> getStories(String category) {
+        if (category == null){
+            return stories;
+        }
+        category = Categories.getCategoryByString(category).getValue();
+        Collection<Story> categoryStories = new HashSet<Story>();
+        for (Story story : stories) {
+            if (story.getCategory().getValue().equals(category)){
+                categoryStories.add(story);
+            }
+        }
+        return categoryStories;
     }
 
     public Paragraph concactinateParagraph(Story story, Paragraph father, String title, String text, User user) {
@@ -92,7 +102,7 @@ public class Model {
     }
 
     public Story getStory(String storyId) {
-        for (Story story : getStories()) {
+        for (Story story : getStories(null)) {
             if (story.getId().equals(storyId)) {
                 return story;
             }
