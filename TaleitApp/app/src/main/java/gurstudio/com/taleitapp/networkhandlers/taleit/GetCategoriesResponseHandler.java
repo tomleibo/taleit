@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 
+import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Category;
 import lambdas.Selector;
@@ -33,8 +34,8 @@ public class GetCategoriesResponseHandler extends TaleItResponseHandlerBase {
 
                             try {
                                 String name = jsonObject.getString("name");
-                                String image = jsonObject.getString("image");
-                                String hover = jsonObject.getString("hover");
+                                String image = jsonObject.getString("image").replace("localhost", BuildConfig.SERVER_ADDRESS);
+                                String hover = jsonObject.getString("hover").replace("localhost", BuildConfig.SERVER_ADDRESS);
 
                                 category.name.set(name);
                                 category.image.set(image);

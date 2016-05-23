@@ -1,18 +1,17 @@
 package gurstudio.com.taleitapp.adapters.core;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
-import gurstudio.com.taleitapp.views.core.ViewBase;
-
 /**
  * Created by gur on 5/23/2016.
  */
-public abstract class RecyclerViewAdapterBase<T extends ViewBase, S> extends RecyclerView.Adapter<RecyclerViewHolder<T>> {
+public abstract class RecyclerViewAdapterBase<T extends View, S> extends RecyclerView.Adapter<RecyclerViewHolder<T>> {
     private final List<S> items;
 
     public RecyclerViewAdapterBase(List<S> items) {
@@ -24,10 +23,16 @@ public abstract class RecyclerViewAdapterBase<T extends ViewBase, S> extends Rec
     // Create new views (invoked by the layout manager)
     @Override
     public RecyclerViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(getViewLayoutId(), parent, false);
-        // set the view's size, margins, paddings and layout parameters
-        return new RecyclerViewHolder<>((T) v);
+        try {
+            // create a new view
+            T view = (T) LayoutInflater.from(parent.getContext()).inflate(getViewLayoutId(), parent, false);
+            // set the view's size, margins, paddings and layout parameters
+            return new RecyclerViewHolder<>(view);
+        }
+        catch (Throwable wtf){
+            Log.e("WTF", wtf.toString());
+            throw wtf;
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -38,7 +43,7 @@ public abstract class RecyclerViewAdapterBase<T extends ViewBase, S> extends Rec
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder<T> holder, int position) {
-        onBindViewToItem((T) holder.itemView, items.get(position));
+        onBindViewToItem(holder.getItemView(), items.get(position));
     }
 
     protected abstract void onBindViewToItem(T view, S item);

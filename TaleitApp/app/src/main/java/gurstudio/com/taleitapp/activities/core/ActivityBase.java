@@ -10,8 +10,8 @@ import gurstudio.com.taleitapp.model.core.DataBinder;
  * Created by gur on 4/23/2016.
  */
 public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatActivity {
-    protected final DataBinder createBinder = new DataBinder();
-    protected final DataBinder resumeBinder = new DataBinder();
+    private final DataBinder createBinder = new DataBinder();
+    private final DataBinder resumeBinder = new DataBinder();
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -41,6 +41,9 @@ public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatA
 
         createBinder.clear();
     }
+
+    protected DataBinder getResumeBinder(){ return resumeBinder; }
+    protected DataBinder getCreateBinder(){ return createBinder; }
 
     protected T getBaseApplication() {
         return (T) getApplicationContext();

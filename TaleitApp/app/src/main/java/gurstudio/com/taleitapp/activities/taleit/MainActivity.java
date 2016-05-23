@@ -3,7 +3,6 @@ package gurstudio.com.taleitapp.activities.taleit;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,9 +15,13 @@ import android.view.View;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.CategoriesAdapter;
+import gurstudio.com.taleitapp.model.core.ObservableCollection;
+import gurstudio.com.taleitapp.model.core.Observer;
+import gurstudio.com.taleitapp.model.taleit.Category;
 
 public class MainActivity extends TaleItActivity implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView categoriesRecycler;
+    private FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,15 +29,6 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,20 +41,46 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
     }
 
     @Override
+    public void onPostCreate(Bundle savedInstanceState){
+        super.onPostCreate(savedInstanceState);
+
+        getResumeBinder().bind(getBaseApplication().getApplicationModel().getCategories(), new Observer<ObservableCollection.ObservableItemAction<Category>>() {
+            @Override
+            public void onUpdate(ObservableCollection.ObservableItemAction<Category> value) {
+                categoriesRecycler.getAdapter().notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
     protected void findViews() {
         categoriesRecycler = (RecyclerView)findViewById(R.id.categories_recycler);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     @Override
     protected void initViews() {
         initRecyclerView();
+        initFAB();
+    }
+
+    private void initFAB() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!categoriesRecycler.isComputingLayout()) {
+                    categoriesRecycler.getAdapter().notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     private void initRecyclerView() {
         // use a linear layout manager
         categoriesRecycler.setLayoutManager(new LinearLayoutManager(this));
         // specify an adapter (see also next example)
-        categoriesRecycler.setAdapter(new CategoriesAdapter(getBaseApplication().getApplicationModel().getCategories()));
+        CategoriesAdapter adapter = new CategoriesAdapter(getBaseApplication().getApplicationModel().getCategories());
+        categoriesRecycler.setAdapter(adapter);
     }
 
     @Override
