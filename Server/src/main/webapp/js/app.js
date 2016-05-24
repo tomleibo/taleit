@@ -1,6 +1,6 @@
 
 (function() {
-    var app = angular.module('taleItApp', []);
+    var app = angular.module('taleItApp', ['ui.bootstrap']);
 
     app.controller('CategoriesController', ['$http', function($http){
         var catList = this;
@@ -34,12 +34,12 @@
         };
     }]);
 
-    app.directive("titleSection", ['$http', function() {
+    app.directive("titleSection", function() {
         return {
             restrict: "E",
             templateUrl: "/html/title-section.html"
         };
-    }]);
+    });
 
 })();
 
