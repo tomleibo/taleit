@@ -14,15 +14,16 @@ body {
     margin-up: 5px;
 }
 
-.categoryClass a{
+.categoryClass a {
     text-decoration: none;
 }
 
 .categoryName {
+    color:#FFFFFF;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
 
     font-family: Georgia, serif;
     font-size: larger;
-    color: #f6f6f6;
     font-variant: small-caps;
     text-transform: none;
     font-weight: 100;
