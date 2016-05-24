@@ -6,8 +6,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,7 +62,7 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
 
     @Override
     protected void initViews() {
-        initRecyclerView();
+        initCategoriesRecyclerView();
         initFAB();
     }
 
@@ -75,9 +77,9 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
         });
     }
 
-    private void initRecyclerView() {
+    private void initCategoriesRecyclerView() {
         // use a linear layout manager
-        categoriesRecycler.setLayoutManager(new LinearLayoutManager(this));
+        categoriesRecycler.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         // specify an adapter (see also next example)
         CategoriesAdapter adapter = new CategoriesAdapter(getBaseApplication().getApplicationModel().getCategories());
         categoriesRecycler.setAdapter(adapter);
