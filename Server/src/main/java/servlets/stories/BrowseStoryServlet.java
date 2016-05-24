@@ -48,6 +48,9 @@ public class BrowseStoryServlet extends TaleitServlet {
             jsonStory.put("title", story.getTitle());
             jsonStory.put("category", story.getCategory().getValue());
             jsonStory.put("root", jsonRoot);
+            String imageName = story.getTitle().replace("'", "").replace(" ", "_").toLowerCase();
+            String imageURL = "http://localhost:8080/resources/stories/%s.png";
+            jsonStory.put("image", String.format(imageURL, imageName));
 
             stories.put(jsonStory);
         }
