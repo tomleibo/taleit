@@ -18,8 +18,10 @@ android {
         // build config variables
         buildConfigField "String", "SERVER_PROTOCOL", "\"http\""
         buildConfigField "int", "SERVER_PORT", "8080"
-        buildConfigField "String", "SERVER_ADDRESS", "\"52.29.147.50\""
-        buildConfigField "String", "SERVER_APP_ROUTE", "\"/server.core-1.0-SNAPSHOT\""
+        //buildConfigField "String", "SERVER_ADDRESS", "\"52.29.147.50\""
+        buildConfigField "String", "SERVER_ADDRESS", "\"192.168.2.111\""
+        //buildConfigField "String", "SERVER_APP_ROUTE", "\"/server.core-1.0-SNAPSHOT\""
+        buildConfigField "String", "SERVER_APP_ROUTE", "\"\""
     }
 
     buildTypes {
@@ -55,4 +57,5 @@ dependencies {
     compile 'com.github.gurkashi:fj:master'
     compile 'com.android.support:cardview-v7:23.0.+'
     compile 'com.android.support:recyclerview-v7:23.0.+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

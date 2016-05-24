@@ -17,22 +17,23 @@
     >
 
     <ImageView
+        android:id="@+id/category_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top|center_horizontal"
-        android:src="@drawable/logo"
         android:scaleType="centerCrop"
         >
 
     </ImageView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/categories_recycler"
+        android:id="@+id/stories_recycler"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom|center_horizontal"
+        android:layout_gravity="top|center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
+        android:layout_alignParentTop="true"
         />
 
 </RelativeLayout>

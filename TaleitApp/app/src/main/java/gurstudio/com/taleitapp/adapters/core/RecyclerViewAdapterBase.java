@@ -1,5 +1,7 @@
 package gurstudio.com.taleitapp.adapters.core;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,4 +49,8 @@ public abstract class RecyclerViewAdapterBase<T extends View, S> extends Recycle
     }
 
     protected abstract void onBindViewToItem(T view, S item);
+
+    public <A extends Activity> void startActivityForView(View view, Class<A> activityClass){
+        view.getContext().startActivity(new Intent(view.getContext(), activityClass));
+    }
 }

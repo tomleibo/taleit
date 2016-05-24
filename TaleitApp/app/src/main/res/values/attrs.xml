@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- custom attributes for category view -->
+    <declare-styleable name="CategoryView">
+        <attr name="show_category_label" format="boolean"/>
+    </declare-styleable>
+
+</resources>

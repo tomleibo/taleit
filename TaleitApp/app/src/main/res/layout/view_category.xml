@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<gurstudio.com.taleitapp.views.taleit.CategoryView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-     >
+    android:background="@android:color/transparent"
+    >
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+
+        android:background="@color/theme_black"
+        android:layout_gravity="bottom|center_horizontal"
+        />
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:background="@android:color/holo_green_light"
-        android:text="bla bla bla"
+        android:textColor="@color/theme_text_header"
+        android:background="@color/theme_text_background"
+        android:layout_gravity="center"
+        android:textSize="@dimen/category_view_label_text"
         />
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
     <!-- TODO: add images -->
-</android.support.v7.widget.CardView>
+
+</gurstudio.com.taleitapp.views.taleit.CategoryView>

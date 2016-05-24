@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.util.Collection;
 
+import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.core.ApplicationModel;
 import gurstudio.com.taleitapp.model.taleit.Story;
@@ -37,12 +38,11 @@ public class GetStoriesResponseHandler extends TaleItResponseHandlerBase {
 
                         try {
                             JSONObject root = jsonObject.getJSONObject("root");
-                            //story.category.set(jsonObject.getString("category"));
-                            story.category.set("TODO: GET THE CATEGORY FROM JSON");
+                            story.category.set(jsonObject.getString("category"));
                             story.id.set(jsonObject.getString("id"));
                             story.author.set(root.getString("author"));
                             story.title.set(jsonObject.getString("title"));
-
+                            story.image.set(jsonObject.getString("image").replace("localhost", BuildConfig.SERVER_ADDRESS));
                             story.root.get().id.set(root.getString("id"));
                             story.root.get().text.set(root.getString("text"));
                             story.root.get().title.set(root.getString("title"));
