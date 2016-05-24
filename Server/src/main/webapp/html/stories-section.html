@@ -1,9 +1,8 @@
-<table style="width:100%">
-    <tr ng-repeat="story in stories.storiesResult.data.stories">
-        <td align="center">
-            <section>
-                <p> {{story.title}} </p>
-            </section>
-        </td>
-    </tr>
-</table>
+<div class=categoryClass ng-repeat="story in stories.storiesResult.data.stories">
+    <a ng-href="/story-page.html?storyid={{story.id}}">
+        <h3 align="center" class=storyName> {{story.title}} </h3>
+        <p align="center" class=storyAuthor> By: {{story.root.author}} </p>
+        <img class=storyImg ng-src={{story.image}} >
+    </a>
+
+</div>

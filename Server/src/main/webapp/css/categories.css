@@ -1,7 +1,3 @@
-.categoryImg {
-    width: 120px;
-    height: 120px;
-}
 
 body {
     background-color: #F6F7EB;
@@ -16,8 +12,10 @@ body {
     margin-left: 5px;
     margin-right: 5px;
     margin-up: 5px;
+}
 
-
+.categoryClass a{
+    text-decoration: none;
 }
 
 .categoryName {
@@ -29,5 +27,21 @@ body {
     text-transform: none;
     font-weight: 100;
     margin-bottom: 0;
+}
+
+/*GROW*/
+.grow img {
+    width: 160px;
+    height: 160px;
+
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.grow img:hover {
+    width: 220px;
 }
 

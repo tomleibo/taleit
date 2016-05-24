@@ -2,7 +2,10 @@
      ng-init=" src = category.image">
     <a ng-href="/category-page.html?category={{category.name}}">
         <p align="center" class=categoryName> {{category.name}} </p>
-        <img class=categoryImg ng-src={{src}} >
+
+        <div class="grow pic">
+            <img class=categoryImg ng-src={{src}}>
+        </div>
     </a>
 
 </div>
