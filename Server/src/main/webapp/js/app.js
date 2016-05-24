@@ -20,11 +20,21 @@
 
     app.controller('StoriesController', ['$http', function($http){
         var storiesList = this;
-        storiesList.storiesResult = [];
 
-        $http.get('http://127.0.0.1:8080/rest/stories/browse').success(function(data){
+        var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
+        storiesList.storiesResult = [];
+        storiesList.storyByCategoryList = [];
+
+        $http.get(browseUrl).success(function(data){
             storiesList.storiesResult = data;
         });
+
+        this.getStoriesFromCategory = function (categoryStr){
+            var postFixUrl = '?category='+categoryStr;
+            $http.get(browseUrl+postFixUrl).success(function(data){
+                storiesList.storiesResult = data;
+            });
+        }
     }]);
 
     app.directive("storiesSection", ['$http', function() {
