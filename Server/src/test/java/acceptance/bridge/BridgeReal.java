@@ -86,7 +86,7 @@ public class BridgeReal implements BridgeAPI {
         return true;
     }
 
-    public String createStory(String title, String rootTitle, String rootText){
+    public String createStory(String title, String rootTitle, String rootText, String category){
          LocalhostClient client = new LocalhostClient();
         try {
             JSONObject rootParagrapth = new JSONObject()
@@ -95,7 +95,7 @@ public class BridgeReal implements BridgeAPI {
             JSONObject content = new JSONObject()
                  .put("cookie", cookie)
                  .put("title", title)
-                 .put("category", Categories.ADULTS)
+                 .put("category", category)
                  .put("rootParagraph", rootParagrapth);
             HttpResponse response = client.makeApiPostRequest("/rest/stories/create", content.toString());
             if (response.getStatusLine().getStatusCode() != HTTP_OK) {

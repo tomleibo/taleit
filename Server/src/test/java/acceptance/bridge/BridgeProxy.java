@@ -19,7 +19,7 @@ public class BridgeProxy implements BridgeAPI {
         return true;
     }
 
-    public String createStory(String title, String rootTitle, String rootText) {
+    public String createStory(String title, String rootTitle, String rootText, String category) {
         return "";
     }
 

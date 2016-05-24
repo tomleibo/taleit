@@ -17,7 +17,7 @@ public interface BridgeAPI {
     ///////////////////////////////////// STORIES //////////////////
 
     //returns id=0 when fails
-    String createStory(String title, String rootTitle, String rootText);
+    String createStory(String title, String rootTitle, String rootText, String category);
 
     Collection<String> browseStories();
 

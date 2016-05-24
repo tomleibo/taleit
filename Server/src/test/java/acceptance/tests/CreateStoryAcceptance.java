@@ -21,21 +21,21 @@ public class CreateStoryAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void validStroy_4_1() {
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         // assertTrue("Story is not exists", bridge.isStoryExists(storyNumber));
     }
 
     @Test
     public void noTitle_4_2() {
-        storyNumber = bridge.createStory("", "", storyText);
+        storyNumber = bridge.createStory("", "", storyText, null);
         assertTrue("succeeded to create a story with no title", storyNumber == null);
         //assertFalse("Story exists with no title", bridge.isStoryExists(storyNumber));
     }
 
     @Test
     public void noText_4_3() {
-        storyNumber = bridge.createStory(storyTitle, storyTitle, "");
+        storyNumber = bridge.createStory(storyTitle, storyTitle, "", null);
         assertTrue("succeeded to create a story with no text", storyNumber == null);
         //assertFalse("Story exists with no text", bridge.isStoryExists(storyNumber));
     }
@@ -49,7 +49,7 @@ public class CreateStoryAcceptance extends LoggedInBaseAcceptance {
 
         // save story number
         for (int i=1; i<=randomNumber; i++){
-            storiesNumber[i-1] = bridge.createStory(storyTitle, storyTitle, storyText);
+            storiesNumber[i-1] = bridge.createStory(storyTitle, storyTitle, storyText, null);
         }
 
         // assertions

@@ -51,7 +51,7 @@ public class E2EAcceptance extends AcceptanceTestBase {
             assertTrue("faild to perform Signup number " + i ,
                     bridge.login(users[i], password));
 
-            String storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
+            String storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
             stories[i] = storyNumber;
             assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
 

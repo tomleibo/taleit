@@ -4,6 +4,7 @@ import acceptance.core.LoggedInBaseAcceptance;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Categories;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
@@ -26,7 +27,7 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void oneStory_5_2() {
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
         assertFalse("Could not create story ", storyNumber == null);
         //assert for browse
         assertTrue("Could not find story in browser", bridge.browseStories().contains(storyNumber));
@@ -41,7 +42,7 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
 
         // save story number
         for (int i=1; i<=randomNumber; i++){
-            storiesNumber[i-1] = bridge.createStory(storyTitle, storyTitle, storyText);
+            storiesNumber[i-1] = bridge.createStory(storyTitle, storyTitle, storyText, null);
         }
 
         // assertions
