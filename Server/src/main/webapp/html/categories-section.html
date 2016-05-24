@@ -1,6 +1,6 @@
 <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories"
      ng-init=" src = category.image">
-    <a href="/category-page.html" ng-mouseover=" src = category.hover"
+    <a ng-href="/category-page.html?category={{category.name}}" ng-mouseover=" src = category.hover"
        ng-mouseleave=" src = category.image">
         <p align="center" class=categoryName> {{category.name}} </p>
         <img class=categoryImg ng-src={{src}} >
