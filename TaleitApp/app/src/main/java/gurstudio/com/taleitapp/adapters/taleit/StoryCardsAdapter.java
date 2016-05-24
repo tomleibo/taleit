@@ -9,31 +9,30 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import gurstudio.com.taleitapp.R;
-import gurstudio.com.taleitapp.activities.taleit.CategoryBrowserActivity;
-import gurstudio.com.taleitapp.activities.taleit.TaleItActivity;
+import gurstudio.com.taleitapp.activities.taleit.StoryViewerActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
-import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
-import gurstudio.com.taleitapp.views.taleit.CategoryView;
+import gurstudio.com.taleitapp.views.taleit.StoryCardView;
 
 /**
- * Created by gur on 5/23/2016.
+ * Created by gur on 5/24/2016.
  */
-public class CategoriesAdapter extends RecyclerViewAdapterBase<CategoryView, Category> {
+public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, Story> {
 
-    public CategoriesAdapter(List items) {
+    public StoryCardsAdapter(List<Story> items) {
         super(items);
     }
 
     @Override
     public int getViewLayoutId() {
-        return R.layout.view_category;
+        return R.layout.view_story_card;
     }
 
     @Override
-    protected void onBindViewToItem(final CategoryView view, final Category item) {
-        ((TextView)view.findViewById(R.id.name)).setText(item.name.get());
+    protected void onBindViewToItem(final StoryCardView view, final Story item) {
+        ((TextView)view.findViewById(R.id.title)).setText(item.title.get());
+        ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
 
         Picasso.with(view.getContext())
                 .load(item.image.get())
@@ -42,8 +41,8 @@ public class CategoriesAdapter extends RecyclerViewAdapterBase<CategoryView, Cat
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TaleItApplication.getTaleItModel().setCurrentViewedCategory(item);
-                startActivityForView(v, CategoryBrowserActivity.class);
+                TaleItApplication.getTaleItModel().setCurrentViewedStory(item);
+                startActivityForView(view, StoryViewerActivity.class);
             }
         });
     }
