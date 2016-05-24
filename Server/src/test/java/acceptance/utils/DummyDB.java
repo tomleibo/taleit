@@ -19,7 +19,7 @@ public class DummyDB extends LoggedInBaseAcceptance {
         super.init();
         bridge.signUp(userName, password);
         bridge.login(userName,password);
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, "");
 
 
 

@@ -44,7 +44,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void noTitle_6_3() {
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, "");
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
@@ -57,7 +57,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void noText_6_4() {
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, "");
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
@@ -74,7 +74,7 @@ public class ContinueStoryAcceptance extends LoggedInBaseAcceptance {
 
         System.out.println("will create " + randomNumber + " stories");
 
-        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, null);
+        storyNumber = bridge.createStory(storyTitle, storyTitle, storyText, "");
         assertFalse("Could not create a story with Title: " + storyTitle + " and body: " + storyText, storyNumber == null);
         assertTrue("Story is not exists", isStoryExists(storyNumber));
 
