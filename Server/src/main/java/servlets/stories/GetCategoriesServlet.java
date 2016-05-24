@@ -14,8 +14,7 @@ import java.io.IOException;
 /**
  * Created by gur on 1/16/2016.
  */
-@WebServlet( name = "GetCategoriesServlet", description = "Get Categories Servlet", urlPatterns =
-        {"/rest/stories/categories"} )
+@WebServlet( name = "GetCategoriesServlet", description = "Get Categories Servlet", urlPatterns = {"/rest/stories/categories"} )
 public class GetCategoriesServlet extends TaleitServlet {
     @Override
     public void init() throws ServletException {}

@@ -62,4 +62,16 @@ public class ManualTestRunner {
     public void getCategories() throws IOException, JSONException {
         suite.getCategories();
     }
+
+    @Test
+    public void nothing(){
+        String query = "http://localhost:8080/resources/images/me.jpg";
+        String path = query.substring(query.indexOf("resources"));
+        String fileType = path.substring(path.lastIndexOf(".") + 1);
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+
+        System.out.println(path);
+        System.out.println(fileName);
+        System.out.println(fileType);
+    }
 }

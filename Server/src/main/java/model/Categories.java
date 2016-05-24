@@ -10,13 +10,12 @@ public enum Categories {
     SCIFI("Sci-Fi", "scifi"),
     HORROR("Horror", "horror"),
     ADVENTURE("Adventure", "adventure"),
-    KIDS("Kids", "kids"),
+    COMICS("Comics", "comics"),
     ROMANCE("Romance", "romance"),
-    OTHERS("Others", "others");
+    OTHERS("Others", "other");
 
     private final String value;
     private final String image;
-
 
     Categories(String value, String image) {
         final String base = "http://localhost:8080/resources/categories/";
