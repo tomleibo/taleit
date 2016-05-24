@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "gurstudio.com.taleitapp"
-        minSdkVersion 16 // should be 17 but i have 16
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -21,6 +21,14 @@ android {
         buildConfigField "String", "SERVER_ADDRESS", "\"52.29.147.50\""
         buildConfigField "String", "SERVER_APP_ROUTE", "\"/server.core-1.0-SNAPSHOT\""
     }
+
+    buildTypes {
+        local {
+            buildConfigField "String", "SERVER_ADDRESS", "\"localhost\""
+            buildConfigField "String", "SERVER_APP_ROUTE", "\"\""
+        }
+    }
+
     signingConfigs {
         release {
             storeFile file("taleit.jks")

@@ -1,4 +1,32 @@
-.categoryImg{
-	alignment: center;
-	width: 120px;
+.categoryImg {
+    width: 120px;
 }
+
+body {
+    background-color: #F6F7EB;
+    background-attachment: inherit;
+}
+
+.categoryClass {
+    float: left;
+    display: inline;
+    position: relative;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-up: 5px;
+
+
+}
+
+.categoryName {
+
+    font-family: Georgia, serif;
+    font-size: larger;
+    color: #f6f6f6;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 100;
+    margin-bottom: 0;
+}
+
