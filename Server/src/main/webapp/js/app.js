@@ -25,13 +25,6 @@
         });
     }]);
 
-    app.directive("categoriesSection", function () {
-        return {
-            restrict: "E",
-            templateUrl: "/html/categories-section.html"
-        };
-    });
-
     app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
@@ -51,6 +44,12 @@
             });
         }
 
+        app.directive("categoriesSection", function () {
+            return {
+                restrict: "E",
+                templateUrl: "/html/categories-section.html"
+            };
+        });
 
     }]);
 
