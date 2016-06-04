@@ -13,7 +13,7 @@
             .when('/categories/:categoryValue', {
                 templateUrl : '/html/pages/category-page.html',
             })
-            .otherwise({templateUrl : '/html/pages/defualt.html'})
+            .otherwise({templateUrl : '/html/pages/default.html'})
     }]);
 
     app.controller('CategoriesController', ['$http', function ($http) {
