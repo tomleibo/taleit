@@ -6,14 +6,14 @@
 
             // route for the home page
             .when('/', {
-                templateUrl : 'main.html'
+                templateUrl : '/html/pages/main.html'
             })
 
             // route for the about page
             .when('/categories/:categoryValue', {
-                templateUrl : 'category-page.html',
+                templateUrl : '/html/pages/category-page.html',
             })
-            .otherwise({templateUrl : 'defualt.html'})
+            .otherwise({templateUrl : '/html/pages/defualt.html'})
     }]);
 
     app.controller('CategoriesController', ['$http', function ($http) {
@@ -44,14 +44,14 @@
             });
         }
 
-        app.directive("categoriesSection", function () {
-            return {
-                restrict: "E",
-                templateUrl: "/html/categories-section.html"
-            };
-        });
-
     }]);
+
+    app.directive("categoriesSection", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/categories-section.html"
+        };
+    });
 
     app.directive("storiesSection", ['$http', function () {
         return {
