@@ -1,6 +1,6 @@
 <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories"
      ng-init=" src = category.image">
-    <a ng-href="/category-page.html?category={{category.name}}">
+    <a ng-href="/#/categories/{{category.name}}">
         <p align="center" class=categoryName> {{category.name}} </p>
 
         <div class="grow pic">

@@ -1,5 +1,20 @@
 (function () {
-    var app = angular.module('taleItApp', ['ui.bootstrap']);
+    var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute']);
+
+    app.config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+
+            // route for the home page
+            .when('/', {
+                templateUrl : 'main.html'
+            })
+
+            // route for the about page
+            .when('/categories/:categoryValue', {
+                templateUrl : 'category-page.html',
+            })
+            .otherwise({templateUrl : 'defualt.html'})
+    }]);
 
     app.controller('CategoriesController', ['$http', function ($http) {
         var catList = this;
@@ -17,25 +32,13 @@
         };
     });
 
-    app.controller('StoriesController', ['$http', '$location', function ($http, $location) {
-        this.getURLParameter = function(sParam) {
-            var sPageURL = window.location.search.substring(1);
-            var sURLVariables = sPageURL.split('&');
-            for (var i = 0; i < sURLVariables.length; i++) {
-                var sParameterName = sURLVariables[i].split('=');
-                if (sParameterName[0] == sParam) {
-                    return sParameterName[1];
-                }
-            }
-            return null;
-        }
-
+    app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
 
         storiesList.storiesResult = [];
 
-        var searchResults = this.getURLParameter('category');
+        var searchResults = $routeParams.categoryValue;
 
         if (searchResults === null) {
             $http.get(browseUrl).success(function (data) {
@@ -43,8 +46,7 @@
             });
         }
         else {
-            var postFixUrl = '?category=' + searchResults;
-            $http.get(browseUrl + postFixUrl).success(function (data) {
+            $http.get(browseUrl + '?category=' + searchResults).success(function (data) {
                 storiesList.storiesResult = data;
             });
         }
