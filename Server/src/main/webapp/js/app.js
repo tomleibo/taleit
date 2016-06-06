@@ -1,19 +1,23 @@
 (function () {
     var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute']);
 
-    app.config(['$routeProvider', function($routeProvider) {
+    app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
 
             // route for the home page
             .when('/', {
-                templateUrl : '/html/pages/main.html'
+                templateUrl: '/html/pages/main.html'
             })
 
             // route for the about page
             .when('/categories/:categoryValue', {
-                templateUrl : '/html/pages/category-page.html',
+                templateUrl: '/html/pages/category-page.html',
             })
-            .otherwise({templateUrl : '/html/pages/default.html'})
+
+            .when('/stories/:storyId', {
+                templateUrl: '/html/pages/story-page.html',
+            })
+            .otherwise({templateUrl: '/html/pages/default.html'})
     }]);
 
     app.controller('CategoriesController', ['$http', function ($http) {
@@ -43,6 +47,21 @@
                 storiesList.storiesResult = data;
             });
         }
+
+    }]);
+
+    app.controller('StoryViewerCtrl', ['$http', '$routeParams', function ($http, $routeParams) {
+        var storyInfo = this;
+        var browseUrl = 'http://127.0.0.1:8080/rest/stories/view/';
+
+        storyInfo = [];
+
+        var searchResults = $routeParams.storyId;
+
+        $http.get(browseUrl + '?storyId=' + searchResults).success(function (data) {
+            storyInfo = data;
+        });
+
 
     }]);
 
