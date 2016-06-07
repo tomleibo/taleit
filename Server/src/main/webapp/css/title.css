@@ -142,7 +142,7 @@ body::after {
     48vw 28vh .1vmin rgba(200,255,230,.7);
 }
 
-h1 {
+#logo h1 {
     margin: 0;
     height: 12vmin;
     width: 120vmin;
@@ -151,7 +151,7 @@ h1 {
     position: relative;
 }
 
-h1::before {
+#logo h1::before {
     content: "";
     display: block;
     position: absolute;
@@ -165,7 +165,7 @@ h1::before {
     box-sizing: border-box;
 }
 
-em {
+#logo em {
     font-family: 'Josefin Sans', sans-serif;
     color: currentColor;
     font-size: 15vmin;
@@ -175,13 +175,13 @@ em {
     text-align: center;
 }
 
-em.planet {
+#logo em.planet {
     -webkit-animation: planet-rotate 4s linear infinite;
     animation: planet-rotate 4s linear infinite;
     position: relative;
 }
 
-em.planet::before {
+#logo em.planet::before {
     content: "";
     position: absolute;
     top: -.5vmin;
@@ -193,12 +193,12 @@ em.planet::before {
     background: black;
 }
 
-em.planet.left {
+#logo em.planet.left {
     -webkit-transform-origin: 40vmin 5vmin;
     transform-origin: 40vmin 5vmin;
 }
 
-em.planet.right {
+#logo em.planet.right {
     -webkit-transform-origin: -20vmin 5vmin;
     transform-origin: -20vmin 5vmin;
 }
