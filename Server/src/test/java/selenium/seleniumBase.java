@@ -18,9 +18,8 @@ public class SeleniumBase {
         System.setProperty("webdriver.chrome.driver", "utils\\chromedriver.exe");
         webDriver = new ChromeDriver();
         webDriver.get(URL_BASE);
-
+        webDriver.manage().window().maximize();
         facade = new ServicesSeleniumFacade(webDriver);
-
     }
 
     @After
