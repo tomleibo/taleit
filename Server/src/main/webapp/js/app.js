@@ -29,7 +29,7 @@
         });
     }]);
 
-    app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
+    app.controller('StoriesController', ['$http', '$routeParams', '$scope', function ($http, $routeParams, $scope) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
 
@@ -48,35 +48,22 @@
             });
         }
 
+        $scope.saveStoryTitle = function (title){
+        };
     }]);
 
-    app.controller('StoryViewerCtrl', ['$http', '$routeParams', function ($http, $routeParams) {
-        var storyInfo = this;
-        var browseUrl = 'http://127.0.0.1:8080/rest/stories/view/';
+    app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', function ($http, $routeParams, $scope) {
+        var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
 
-        storyInfo = [];
+        $scope.storyInfo = [];
 
         var searchResults = $routeParams.storyId;
 
         $http.get(browseUrl + '?storyId=' + searchResults).success(function (data) {
-            storyInfo = data;
+            $scope.storyInfo = data;
         });
 
 
-    }]);
-
-    app.directive("categoriesSection", function () {
-        return {
-            restrict: "E",
-            templateUrl: "/html/categories-section.html"
-        };
-    });
-
-    app.directive("storiesSection", ['$http', function () {
-        return {
-            restrict: "E",
-            templateUrl: "/html/stories-section.html"
-        };
     }]);
 
     app.directive("titleSection", function () {
