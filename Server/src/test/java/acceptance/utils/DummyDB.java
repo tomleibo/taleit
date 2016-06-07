@@ -8,6 +8,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -38,16 +39,16 @@ public class DummyDB extends LoggedInBaseAcceptance {
         super.init();
         bridge.signUp(userName, password);
         bridge.login(userName,password);
-        String storyNumber = null;
-        for (String[] story : simpleStories) {
-            if (storyNumber == null) {
-                storyNumber = bridge.createStory(story[0], story[1], story[2], story[3]);
-            }else{
-                bridge.createStory(story[0], story[1], story[2], story[3]);
-            }
-        }
-        String para = bridge.createParagraph(storyNumber, simpleStories[0][1], simpleStories[0][2], bridge.getRootParagraph(storyNumber));
-        InjectComplicatedStructureStories();
+//        String storyNumber = null;
+//        for (String[] story : simpleStories) {
+//            if (storyNumber == null) {
+//                storyNumber = bridge.createStory(story[0], story[1], story[2], story[3]);
+//            }else{
+//                bridge.createStory(story[0], story[1], story[2], story[3]);
+//            }
+//        }
+//        String para = bridge.createParagraph(storyNumber, simpleStories[0][1], simpleStories[0][2], bridge.getRootParagraph(storyNumber));
+        InjectRandomStructureStoryTree(5);
     }
 
     private void InjectComplicatedStructureStories(){
@@ -58,15 +59,16 @@ public class DummyDB extends LoggedInBaseAcceptance {
     }
 
     private void InjectRandomStructureStoryTree(int size){
-        String storyNumber = bridge.createStory("RandomStructureStoryTree", "1", "1", Categories.HORROR.getValue());
-        Set<String> nodes = new HashSet<String>();
-        nodes.toArray();
-//        for (int i = 1; i < size; i++){
-//            //choose a node father
-//            String paragraphNumber = bridge.createParagraph(storyNumber, father, father, bridge.getRootParagraph(storyNumber));
-//        }
-
-
+        String storyNumber = bridge.createStory("RandomStructureStoryTree", "0", "0", Categories.HORROR.getValue());
+        Set<String> nodes = new HashSet<>();
+        nodes.add(bridge.getRootParagraph(storyNumber));
+        System.out.println(nodes.size());
+        for (int i = 1; i < size; i++){
+            Object[] nodeArr = nodes.toArray();
+            String node = (String) nodeArr[ThreadLocalRandom.current().nextInt(0 , nodes.size())];
+            String paragraphNumber = bridge.createParagraph(storyNumber, "" + i, "" + i, node);
+            nodes.add(paragraphNumber);
+        }
+        System.out.println(nodes);
     }
-
 }
