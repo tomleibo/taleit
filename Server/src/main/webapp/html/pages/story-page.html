@@ -1,3 +1,13 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer">
-    <h4>{{storyInfo.data}}</h4>
+    <div>
+        <em>{{storyTitle}}</em>
+
+        <h3>{{storyInfo.data.paragraph.title}}</h3>
+
+
+        <h5>{{storyInfo.data.paragraph.text}}</h5>
+
+        <h6> By: {{storyInfo.data.paragraph.author}}</h6>
+
+    </div>
 </div>

@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute']);
+    var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute', 'ngCookies']);
 
     app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
@@ -29,7 +29,7 @@
         });
     }]);
 
-    app.controller('StoriesController', ['$http', '$routeParams', '$scope', function ($http, $routeParams, $scope) {
+    app.controller('StoriesController', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
 
@@ -49,12 +49,13 @@
         }
 
         $scope.saveStoryTitle = function (title){
+            $cookies.put("title", title);
         };
     }]);
 
-    app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', function ($http, $routeParams, $scope) {
+    app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
-
+        $scope.storyTitle = $cookies.get("title");
         $scope.storyInfo = [];
 
         var searchResults = $routeParams.storyId;
