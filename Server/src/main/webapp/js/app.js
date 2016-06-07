@@ -11,11 +11,11 @@
 
             // route for the about page
             .when('/categories/:categoryValue', {
-                templateUrl: '/html/pages/category-page.html',
+                templateUrl: '/html/pages/category-page.html'
             })
 
             .when('/stories/:storyId', {
-                templateUrl: '/html/pages/story-page.html',
+                templateUrl: '/html/pages/story-page.html'
             })
             .otherwise({templateUrl: '/html/pages/default.html'})
     }]);

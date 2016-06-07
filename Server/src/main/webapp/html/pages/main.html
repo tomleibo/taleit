@@ -1,7 +1,16 @@
 <div class="main" ng-controller="CategoriesController as categoriesSection">
 
     <div id="categories">
-        <categories-section></categories-section>
+        <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories">
+            <a ng-href="/#/categories/{{category.name}}">
+                <p align="center" class=categoryName> {{category.name}} </p>
+
+                <div class="grow pic">
+                    <img class=categoryImg ng-src={{category.image}}>
+                </div>
+            </a>
+
+        </div>
     </div>
 
 </div>
