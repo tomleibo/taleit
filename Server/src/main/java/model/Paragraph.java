@@ -8,7 +8,7 @@ import java.util.*;
 public class Paragraph {
     String id;
     Paragraph father;
-    Collection<Paragraph> Children;
+    Collection<Paragraph> children;
     User user;
     String text;
     String title;
@@ -19,7 +19,7 @@ public class Paragraph {
         this.user = user;
         this.text = text;
         this.title = title;
-        Children = new ArrayList<Paragraph>();
+        children = new ArrayList<Paragraph>();
     }
 
     public String getText() {
@@ -27,7 +27,7 @@ public class Paragraph {
     }
 
     public Collection<Paragraph> getChildren() {
-        return Children;
+        return children;
     }
 
     public Paragraph getFather() {
@@ -43,7 +43,7 @@ public class Paragraph {
     }
 
     public void addChild(Paragraph paragraph) {
-        Children.add(paragraph);
+        children.add(paragraph);
     }
 
     public String getTitle() {

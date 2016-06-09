@@ -1,25 +1,18 @@
 package servlets.stories;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import ioc.Server;
 import model.Paragraph;
-import model.Story;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import servlets.TaleitServlet;
-import usecases.Stories.BrowseStory;
-import usecases.Stories.CreateStory;
 import usecases.Stories.ViewStory;
-import usecases.UseCase;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 @WebServlet( name = "ViewStoryServlet", description = "View story servlet", urlPatterns = {"/rest/stories/view/*"} )
 public class ViewStoryServlet extends TaleitServlet {
@@ -46,20 +39,6 @@ public class ViewStoryServlet extends TaleitServlet {
 
         JSONObject responseJson = new JSONObject();
 
-        //children
-        if (!paragraph.getChildren().isEmpty()) {
-            JSONArray children = new JSONArray();
-            for (Paragraph child : paragraph.getChildren()) {
-                JSONObject jsonChild = new JSONObject();
-                jsonChild.put("id", child.getId());
-                jsonChild.put("title", child.getTitle());
-                jsonChild.put("text", child.getText());
-                jsonChild.put("author", child.getUser().getUsername());
-                children.put(jsonChild);
-            }
-            responseJson.put("children", children);
-        }
-
         //self
         JSONObject paragraphDetails = new JSONObject();
         paragraphDetails.put("Id", paragraph.getId());
@@ -79,6 +58,44 @@ public class ViewStoryServlet extends TaleitServlet {
             responseJson.put("father", fatherDetails);
         }
 
+
+
+            //children
+            if (!paragraph.getChildren().isEmpty()) {
+                JSONArray children;
+                if (paragraphId != null) {
+                    children = new JSONArray();
+                    for (Paragraph child : paragraph.getChildren()) {
+                        JSONObject jsonChild = parseJsonchild(child);
+                        children.put(jsonChild);
+                    }
+                } else {
+                    children = getChildrenTree(paragraph);
+                }
+                responseJson.put("children", children);
+            }
+
         return responseJson;
+    }
+
+    private JSONArray getChildrenTree(Paragraph root) throws Throwable{
+        JSONArray children = new JSONArray();
+        for (Paragraph child : root.getChildren()) {
+            JSONObject jsonChild = parseJsonchild(child);
+            if (!child.getChildren().isEmpty()) {
+                jsonChild.put("children", getChildrenTree(child));
+            }
+            children.put(jsonChild);
+        }
+        return children;
+    }
+
+    private JSONObject parseJsonchild(Paragraph child) throws JSONException {
+        JSONObject jsonChild = new JSONObject();
+        jsonChild.put("id", child.getId());
+        jsonChild.put("title", child.getTitle());
+        jsonChild.put("text", child.getText());
+        jsonChild.put("author", child.getUser().getUsername());
+        return jsonChild;
     }
 }
