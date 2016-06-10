@@ -43,14 +43,4 @@ public class MainPageE2E extends SeleniumBase {
 
 
     }
-
-    public void sleep(int seconds)
-    {
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-
-        }
-    }
-
 }

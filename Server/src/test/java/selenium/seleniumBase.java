@@ -1,5 +1,6 @@
 package selenium;
 
+import acceptance.utils.DummyDB;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,8 @@ public class SeleniumBase {
         webDriver.get(URL_BASE);
         webDriver.manage().window().maximize();
         facade = new ServicesSeleniumFacade(webDriver);
+        (new DummyDB()).eraseInjectDummyDB();
+
     }
 
     @After

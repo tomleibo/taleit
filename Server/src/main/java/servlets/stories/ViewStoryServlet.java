@@ -58,22 +58,20 @@ public class ViewStoryServlet extends TaleitServlet {
             responseJson.put("father", fatherDetails);
         }
 
-
-
-            //children
-            if (!paragraph.getChildren().isEmpty()) {
-                JSONArray children;
-                if (paragraphId != null) {
-                    children = new JSONArray();
-                    for (Paragraph child : paragraph.getChildren()) {
-                        JSONObject jsonChild = parseJsonchild(child);
-                        children.put(jsonChild);
-                    }
-                } else {
-                    children = getChildrenTree(paragraph);
+        //children
+        if (!paragraph.getChildren().isEmpty()) {
+            JSONArray children;
+            if (paragraphId != null) {
+                children = new JSONArray();
+                for (Paragraph child : paragraph.getChildren()) {
+                    JSONObject jsonChild = parseJsonchild(child);
+                    children.put(jsonChild);
                 }
-                responseJson.put("children", children);
+            } else {
+                children = getChildrenTree(paragraph);
             }
+            responseJson.put("children", children);
+        }
 
         return responseJson;
     }
