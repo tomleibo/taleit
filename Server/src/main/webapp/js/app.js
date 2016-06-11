@@ -74,6 +74,13 @@
         };
     });
 
+    app.directive("facebookButton", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/facebook-button.html"
+        };
+    });
+
 })();
 
 
