@@ -1,7 +1,7 @@
 package selenium;
 
 import org.openqa.selenium.WebDriver;
-import selenium.pageObjects.MainPageObject;
+import selenium.pageObjects.MainPageObjectTZIPI;
 
 /**
  * Created by Shai on 07/06/2016.
@@ -13,8 +13,8 @@ public class ServicesSeleniumFacade {
         this.webDriver = webDriver;
     }
 
-    public MainPageObject mainPageObject() {
-       return new MainPageObject(webDriver);
+    public MainPageObjectTZIPI mainPageObject() {
+       return new MainPageObjectTZIPI(webDriver);
     }
 
 

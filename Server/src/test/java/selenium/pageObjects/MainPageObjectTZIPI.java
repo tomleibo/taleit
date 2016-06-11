@@ -6,16 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Shai on 07/06/2016.
+ * Created by sharonk on 6/11/2016
  */
-public class MainPageObject {
+public class MainPageObjectTZIPI {
     WebDriver webDriver;
 
 
-    public MainPageObject(WebDriver webDriver) {
+    public MainPageObjectTZIPI(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
@@ -41,3 +40,4 @@ public class MainPageObject {
         }
     }
 }
+

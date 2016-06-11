@@ -1,31 +1,31 @@
 package selenium.seleniumtests;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import selenium.pageObjects.MainPageObject;
-import selenium.SeleniumBase;
+import selenium.SeleniumBaseTZIPI;
+import selenium.pageObjects.MainPageObjectTZIPI;
 
 import java.util.List;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by Shai on 07/06/2016.
  */
-public class MainPageE2E extends SeleniumBase {
+public class MainPageE2E extends SeleniumBaseTZIPI {
 
     @Test
     public void numberOfCategories(){
-        MainPageObject mainPageObject = facade.mainPageObject();
+        MainPageObjectTZIPI mainPageObject = facade.mainPageObject();
 
         assertEquals(mainPageObject.categories().size(), 9);
     }
 
     @Test
     public void imgChanges(){
-        MainPageObject mainPageObject = facade.mainPageObject();
+        MainPageObjectTZIPI mainPageObject = facade.mainPageObject();
 
         List<WebElement> elems = mainPageObject.categoryImages();
         String width = elems.get(0).getCssValue("width");

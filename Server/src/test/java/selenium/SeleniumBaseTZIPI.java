@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
- * Created by sharonk on 1/18/2016
+ * Created by sharonk on 6/11/2016
  */
-public class SeleniumBase {
+public class SeleniumBaseTZIPI {
     private WebDriver webDriver;
     static final String URL_BASE = "http://localhost:8080";
     protected ServicesSeleniumFacade facade;
