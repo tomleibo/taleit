@@ -47,7 +47,7 @@ public class DummyDB extends LoggedInBaseAcceptance {
                 bridge.createStory(story[0], story[1], story[2], story[3]);
             }
         }
-        String para = bridge.createParagraph(storyNumber, simpleStories[0][1], simpleStories[0][2], bridge.getRootParagraph(storyNumber));
+        String para = bridge.createParagraph(storyNumber, "the continue of the story title", "the continue of the story title", bridge.getRootParagraph(storyNumber));
         InjectRandomStructureStoryTree(5);
     }
 
