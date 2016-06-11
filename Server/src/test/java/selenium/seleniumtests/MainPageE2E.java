@@ -3,8 +3,8 @@ package selenium.seleniumtests;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import selenium.SeleniumBaseTZIPI;
-import selenium.pageObjects.MainPageObjectTZIPI;
+import selenium.SeleniumBase;
+import selenium.pageObjects.MainPageObject;
 
 import java.util.List;
 
@@ -14,18 +14,18 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by Shai on 07/06/2016.
  */
-public class MainPageE2E extends SeleniumBaseTZIPI {
+public class MainPageE2E extends SeleniumBase {
 
     @Test
     public void numberOfCategories(){
-        MainPageObjectTZIPI mainPageObject = facade.mainPageObject();
+        MainPageObject mainPageObject = facade.mainPageObject();
 
         assertEquals(mainPageObject.categories().size(), 9);
     }
 
     @Test
     public void imgChanges(){
-        MainPageObjectTZIPI mainPageObject = facade.mainPageObject();
+        MainPageObject mainPageObject = facade.mainPageObject();
 
         List<WebElement> elems = mainPageObject.categoryImages();
         String width = elems.get(0).getCssValue("width");

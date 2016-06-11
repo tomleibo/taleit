@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by sharonk on 6/11/2016
  */
-public class MainPageObjectTZIPI {
+public class MainPageObject {
     WebDriver webDriver;
 
 
-    public MainPageObjectTZIPI(WebDriver webDriver) {
+    public MainPageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
