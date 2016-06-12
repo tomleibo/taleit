@@ -37,58 +37,36 @@ public class ViewStoryServlet extends TaleitServlet {
         usecase.perform();
         Paragraph paragraph = usecase.getParagraph();
 
-        JSONObject responseJson = new JSONObject();
-
         //self
-        JSONObject paragraphDetails = new JSONObject();
-        paragraphDetails.put("Id", paragraph.getId());
-        paragraphDetails.put("title", paragraph.getText());
-        paragraphDetails.put("text", paragraph.getTitle());
-        paragraphDetails.put("author", paragraph.getUser().getUsername());
-        responseJson.put("paragraph", paragraphDetails);
+        JSONObject responseJson = parseParagraphToJson(paragraph);
 
         //father
         Paragraph father = paragraph.getFather();
         if (father != null) {
-            JSONObject fatherDetails = new JSONObject();
-            fatherDetails.put("Id", father.getId());
-            fatherDetails.put("title", father.getText());
-            fatherDetails.put("text", father.getTitle());
-            fatherDetails.put("author", father.getUser().getUsername());
-            responseJson.put("father", fatherDetails);
+            responseJson.put("father", parseParagraphToJson(father));
         }
 
         //children
-        if (!paragraph.getChildren().isEmpty()) {
-            JSONArray children;
-            if (paragraphId != null) {
-                children = new JSONArray();
-                for (Paragraph child : paragraph.getChildren()) {
-                    JSONObject jsonChild = parseJsonchild(child);
-                    children.put(jsonChild);
-                }
-            } else {
-                children = getChildrenTree(paragraph);
-            }
-            responseJson.put("children", children);
+        if (paragraph.hasChildren()) {
+            responseJson.put("children", getChildrenTree(paragraph, paragraphId == null));
         }
 
         return responseJson;
     }
 
-    private JSONArray getChildrenTree(Paragraph root) throws Throwable{
+    private JSONArray getChildrenTree(Paragraph root, boolean recursive) throws Throwable{
         JSONArray children = new JSONArray();
         for (Paragraph child : root.getChildren()) {
-            JSONObject jsonChild = parseJsonchild(child);
-            if (!child.getChildren().isEmpty()) {
-                jsonChild.put("children", getChildrenTree(child));
+            JSONObject jsonChild = parseParagraphToJson(child);
+            if (recursive && child.hasChildren()) {
+                jsonChild.put("children", getChildrenTree(child, true));
             }
             children.put(jsonChild);
         }
         return children;
     }
 
-    private JSONObject parseJsonchild(Paragraph child) throws JSONException {
+    private JSONObject parseParagraphToJson(Paragraph child) throws JSONException {
         JSONObject jsonChild = new JSONObject();
         jsonChild.put("id", child.getId());
         jsonChild.put("title", child.getTitle());

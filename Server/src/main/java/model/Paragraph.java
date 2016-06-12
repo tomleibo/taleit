@@ -49,4 +49,8 @@ public class Paragraph {
     public String getTitle() {
         return title;
     }
+
+    public boolean hasChildren(){
+        return !children.isEmpty();
+    }
 }
