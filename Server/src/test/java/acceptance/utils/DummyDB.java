@@ -4,8 +4,6 @@ import acceptance.core.LoggedInBaseAcceptance;
 import model.Categories;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -59,13 +57,19 @@ public class DummyDB extends LoggedInBaseAcceptance {
     }
 
     private void InjectRandomStructureStoryTree(int size){
-        String storyNumber = bridge.createStory("RandomStructureStoryTree", "0", "0", Categories.HORROR.getValue());
+        String storyNumber = bridge.createStory("RandomStructureStoryTree", "Hey I'm A Main Paragraph Title", "And " +
+                                                        "I'm The Maim paragraph sexy Body",
+                                                Categories
+                .HORROR
+                .getValue());
         Set<String> nodes = new HashSet<>();
         nodes.add(bridge.getRootParagraph(storyNumber));
         for (int i = 1; i < size; i++){
             Object[] nodeArr = nodes.toArray();
             String node = (String) nodeArr[ThreadLocalRandom.current().nextInt(0 , nodes.size())];
-            String paragraphNumber = bridge.createParagraph(storyNumber, "" + i, "" + i, node);
+            String paragraphNumber = bridge.createParagraph(storyNumber, "Title " + i, "Body " + i, node);
+            nodes.add(paragraphNumber);
+            paragraphNumber = bridge.createParagraph(storyNumber, "Second Title " + i, "Second Body " + i, node);
             nodes.add(paragraphNumber);
         }
     }

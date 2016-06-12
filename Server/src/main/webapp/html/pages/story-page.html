@@ -1,16 +1,40 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer">
     <div>
-        <em>{{storyTitle}}</em>
+        <div class="paragraphViewer">
+            <h1>{{storyTitle}}</h1>
 
-        <h1>{{storyInfo.data.paragraph.title}}</h1>
-
-
-        <h5>{{storyInfo.data.paragraph.text}}</h5>
-
-        <h6> By: {{storyInfo.data.paragraph.author}}</h6>
+            <h3>{{storyInfo.data.paragraph.title}}</h3>
 
 
-        <h1> {{storyInfo}}</h1>
+            <h5>{{storyInfo.data.paragraph.text}}</h5>
+
+            <h6> By: {{storyInfo.data.paragraph.author}}</h6>
+
+        </div>
+
+        <div ng-if="!storyInfo.data.children">
+            no comments
+        </div>
+
+
+        <div ng-if="storyInfo.data.children">
+            <div ng-repeat="paragraph in storyInfo.data.children" ng-if="$index <= amountOfParagraphsToShow">
+                <a class="paragraphSection"  ng-href="/#/">
+                    <div class="hovereffect pic">
+                        <img class=storyImg ng-src={{storyImage}}>
+
+
+                        <div class="overlay">
+                            <h2> {{paragraph.title}} <br> <h4> By: {{paragraph.author}} </h4> </h2>
+
+                            <p>
+                                Read It
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
     </div>
 </div>

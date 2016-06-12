@@ -1,5 +1,5 @@
 #view{
-    width: 50%;
+    width: 60%;
 }
 
 header {
@@ -10,7 +10,9 @@ header {
 .storyImg {
     width: 240px;
 }
-
+.paragraphSection{
+    padding-right: 30px;
+}
 
 .hovereffect {
     max-width: 240px;

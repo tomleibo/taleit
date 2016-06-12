@@ -48,15 +48,18 @@
             });
         }
 
-        $scope.saveStoryTitle = function (title){
-            $cookies.put("title", title);
+        $scope.saveStoryTitle = function (story){
+            $cookies.put("title", story.title);
+            $cookies.put("storyImage", story.image);
         };
     }]);
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
         $scope.storyTitle = $cookies.get("title");
+        $scope.storyImage = $cookies.get("storyImage");
         $scope.storyInfo = [];
+        $scope.amountOfParagraphsToShow = 4;
 
         var searchResults = $routeParams.storyId;
 

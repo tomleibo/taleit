@@ -2,7 +2,7 @@
 
     <div id="stories">
         <div class=categoryClass ng-repeat="story in storyCtrl.storiesResult.data.stories">
-            <a ng-href="/#/stories/{{story.id}}" ng-click="saveStoryTitle(story.title)">
+            <a ng-href="/#/stories/{{story.id}}" ng-click="saveStoryTitle(story)">
                 <div class="hovereffect pic">
                     <img class=storyImg ng-src={{story.image}}>
 
