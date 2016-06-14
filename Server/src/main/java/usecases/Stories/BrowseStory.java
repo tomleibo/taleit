@@ -27,6 +27,4 @@ public class BrowseStory extends ActionUseCase {
     public Collection<Story> getStories() {
         return stories;
     }
-
-
 }

@@ -221,7 +221,7 @@ public class BridgeReal implements BridgeAPI {
     }
 
     @Override
-    public String getRootParagraph(String storyNumber) {
+    public String getRootParagraph(String storyId) {
         LocalhostClient client = new LocalhostClient();
         try{
             HttpResponse response = client.makeApiGetRequest("/rest/stories/browse");
@@ -235,11 +235,11 @@ public class BridgeReal implements BridgeAPI {
             JSONObject data = null;
             if (responseJson.has("data")) {
                 data = responseJson.getJSONObject("data");
-                Collection<String> result = new ArrayList<String>();
+                Collection<String> result = new ArrayList<>();
                 for (int i = 0; i < data.getJSONArray("stories").length(); i++) {
                     JSONObject storyJson = (JSONObject) data.getJSONArray("stories").get(i);
                     String id = storyJson.getString("id");
-                    if (storyNumber.equals(id)){
+                    if (storyId.equals(id)){
                         return storyJson.getJSONObject("root").getString("id");
                     }
                 }

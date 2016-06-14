@@ -34,20 +34,24 @@ public class DummyDB extends LoggedInBaseAcceptance {
     };
 
     @Test
-    @Ignore
     public void eraseInjectDummyDB() {
-        super.init();
+        bridge.initServer();
         bridge.signUp(userName, password);
         bridge.login(userName,password);
-        String storyNumber = null;
+        String storyId = null;
         for (String[] story : simpleStories) {
-            if (storyNumber == null) {
-                storyNumber = bridge.createStory(story[0], story[1], story[2], story[3]);
+            if (storyId == null) {
+                storyId = bridge.createStory(story[0], story[1], story[2], story[3]);
             }else{
                 bridge.createStory(story[0], story[1], story[2], story[3]);
             }
         }
-        String para = bridge.createParagraph(storyNumber, "the continue of the story title", "the continue of the story title", bridge.getRootParagraph(storyNumber));
+        String rootParagraph = bridge.getRootParagraph(storyId);
+        String para = bridge.createParagraph(
+                storyId,
+                "the continue of the story title",
+                "the continue of the story title",
+                rootParagraph);
         InjectRandomStructureStoryTree(5);
     }
 
