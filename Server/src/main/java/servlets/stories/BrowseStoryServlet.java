@@ -42,6 +42,7 @@ public class BrowseStoryServlet extends TaleitServlet {
             jsonRoot.put("title", story.getRoot().getTitle());
             jsonRoot.put("text", story.getRoot().getText());
             jsonRoot.put("author", story.getUser().getUsername());
+            jsonRoot.put("userFacebookId", story.getUser().getFacebookId());
 
             JSONObject jsonStory = new JSONObject();
             jsonStory.put("id", story.getId());

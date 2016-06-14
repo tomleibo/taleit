@@ -72,6 +72,7 @@ public class ViewStoryServlet extends TaleitServlet {
         jsonChild.put("title", child.getTitle());
         jsonChild.put("text", child.getText());
         jsonChild.put("author", child.getUser().getUsername());
+        jsonChild.put("userFacebookId", child.getUser().getFacebookId());
         return jsonChild;
     }
 }
