@@ -15,6 +15,7 @@ public class User {
     String salt;
     public String cookie;
     private String facebookId;
+    private String facebookAccessToken;
 
     public User(String username, String password) {
         this.setUsername(username);
@@ -55,4 +56,13 @@ public class User {
     public String getFacebookId(){
         return this.facebookId;
     }
+
+    public void setFacebookAccessToken(String facebookAccessToken) {
+        this.facebookAccessToken = facebookAccessToken;
+    }
+
+    public String getFacebookAccessToken(){
+        return this.facebookAccessToken;
+    }
+
 }
