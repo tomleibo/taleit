@@ -9,8 +9,11 @@ import model.User;
  * Created by gur on 12/23/2015.
  */
 public class SignUp extends UserUseCase {
+    protected String facebookId;
+
     public SignUp(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
+        facebookId = null;
     }
 
     public void perform(Model model) {
@@ -18,6 +21,13 @@ public class SignUp extends UserUseCase {
             throw new SignUpException("User with this email already exists");
         }
 
-        model.addUser(new User(username, password));
+        User user = new User(username, password);
+        user.setFacebookId(facebookId);
+
+        model.addUser(user);
+    }
+
+    public void setFacebookId(String facebookId){
+        this.facebookId = facebookId;
     }
 }

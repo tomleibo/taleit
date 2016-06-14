@@ -14,11 +14,13 @@ public class User {
     String passwordHash;
     String salt;
     public String cookie;
+    private String facebookId;
 
     public User(String username, String password) {
         this.setUsername(username);
         this.salt = Integer.toString(RANDOM.nextInt());
         this.passwordHash = getPasswordHash(password);
+        this.facebookId = null;
     }
 
     public String getPasswordHash(String password) {
@@ -44,5 +46,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
+    public String getFacebookId(){
+        return this.facebookId;
     }
 }

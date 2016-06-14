@@ -35,7 +35,9 @@ public class SignUpServlet extends TaleitServlet {
 
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+        String facebookId = jsonObject.getString("facebookId");
         SignUp signup = new SignUp(Server.Instance.getSafeModel(), username, password);
+        signup.setFacebookId(facebookId);
 
         signup.perform();
 
