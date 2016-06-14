@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -45,7 +44,7 @@ public class CategoryBrowserActivity extends TaleItActivity {
             @Override
             public boolean predict(Story story) {
                 String storyCategory = story.category.get();
-                String viewedCategory = getBaseApplication().getApplicationModel().getCurrentViewedCategory().name.get();
+                String viewedCategory = getBaseApplication().getApplicationModel().getCurrentViewedCategory().get().name.get();
                 return storyCategory.equals(viewedCategory);
             }
         }).execute(getBaseApplication().getApplicationModel().getStories());

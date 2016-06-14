@@ -32,6 +32,11 @@
             android:name=".activities.taleit.StoryViewerActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity
+            android:name=".activities.taleit.ContinueStoryActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
