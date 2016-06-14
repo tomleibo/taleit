@@ -19,20 +19,11 @@
 
         <div ng-if="storyInfo.data.children">
             <div ng-repeat="paragraph in storyInfo.data.children" ng-if="$index <= amountOfParagraphsToShow">
-                <a class="paragraphSection"  ng-href="/#/">
-                    <div class="hovereffect pic">
-                        <img class=storyImg ng-src={{storyImage}}>
 
-
-                        <div class="overlay">
-                            <h2> {{paragraph.title}} <br> <h4> By: {{paragraph.author}} </h4> </h2>
-
-                            <p>
-                                Read It
-                            </p>
-                        </div>
-                    </div>
-                </a>
+                <display-element title="{{paragraph.title}}" link-to-url=""
+                                 change-text="By: {{paragraph.author}}"
+                                 img-src="/resources/coolBlackBG.jpg"
+                                 optional-title="{{paragraph.text | limitTo:20}}"></display-element>
             </div>
         </div>
 

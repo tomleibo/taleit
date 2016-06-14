@@ -91,7 +91,8 @@
                 title: '@',
                 linkToUrl: '@',
                 changeText: '@',
-                imgSrc: '@'
+                imgSrc: '@',
+                optionalTitle: '@'
             },
             templateUrl: "/html/display-element.html"
 
