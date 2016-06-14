@@ -29,7 +29,7 @@
         });
     }]);
 
-    app.controller('StoriesController', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
+    app.controller('StoriesController', ['$http', '$routeParams', '$scope', '$cookies', '$rootScope', function ($http, $routeParams, $scope, $cookies, $rootScope) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
 
@@ -48,7 +48,7 @@
             });
         }
 
-        $scope.saveStoryTitle = function (story){
+        $scope.saveStoryTitle = function (story) {
             $cookies.put("title", story.title);
             $cookies.put("storyImage", story.image);
         };
@@ -81,6 +81,20 @@
         return {
             restrict: "E",
             templateUrl: "/html/facebook-button.html"
+        };
+    });
+
+    app.directive("displayElement", function () {
+        return {
+            restrict: "E",
+            scope: {
+                title: '@',
+                linkToUrl: '@',
+                changeText: '@',
+                imgSrc: '@'
+            },
+            templateUrl: "/html/display-element.html"
+
         };
     });
 

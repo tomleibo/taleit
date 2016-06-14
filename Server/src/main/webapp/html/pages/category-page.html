@@ -1,20 +1,11 @@
 <div class="main" ng-controller="StoriesController as storyCtrl">
 
     <div id="stories">
-        <div class=categoryClass ng-repeat="story in storyCtrl.storiesResult.data.stories">
-            <a ng-href="/#/stories/{{story.id}}" ng-click="saveStoryTitle(story)">
-                <div class="hovereffect pic">
-                    <img class=storyImg ng-src={{story.image}}>
+        <div ng-repeat="story in storyCtrl.storiesResult.data.stories">
 
-                    <div class="overlay">
-                        <h2>{{story.title}}</h2>
-
-                        <p>
-                            By: {{story.root.author}}
-                        </p>
-                    </div>
-                </div>
-            </a>
+          <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
+                           change-text="By: {{story.root.author}}"
+                           img-src="{{story.image}}"></display-element>
 
         </div>
     </div>
