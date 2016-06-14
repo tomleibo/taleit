@@ -17,6 +17,10 @@
             .when('/stories/:storyId', {
                 templateUrl: '/html/pages/story-page.html'
             })
+
+            .when('/stories/:storyId/:paragraphId', {
+                templateUrl: '/html/pages/story-page.html'
+            })
             .otherwise({templateUrl: '/html/pages/default.html'})
     }]);
 
@@ -50,20 +54,32 @@
 
         $scope.saveInfo = function (story) {
             $cookies.put("title", story.title);
+            $cookies.put("id", story.id);
+
         };
     }]);
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
         $scope.storyTitle = $cookies.get("title");
+        $scope.storyId = $cookies.get("id");
         $scope.storyInfo = [];
         $scope.amountOfParagraphsToShow = 4;
 
-        var searchResults = $routeParams.storyId;
+        var storyIdResults = $routeParams.storyId;
+        var paragraphIdResults = $routeParams.paragraphId;
 
-        $http.get(browseUrl + '?storyId=' + searchResults).success(function (data) {
-            $scope.storyInfo = data;
-        });
+        if(paragraphIdResults){
+            $http.get(browseUrl + '?storyId=' + storyIdResults + '&paragraphId=' + paragraphIdResults).success(function (data) {
+                $scope.storyInfo = data;
+            });
+        }
+        else{
+            $http.get(browseUrl + '?storyId=' + storyIdResults).success(function (data) {
+                $scope.storyInfo = data;
+            });
+        }
+
 
 
     }]);

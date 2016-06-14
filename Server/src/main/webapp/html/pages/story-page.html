@@ -20,7 +20,7 @@
         <div ng-if="storyInfo.data.children">
             <div ng-repeat="paragraph in storyInfo.data.children" ng-if="$index <= amountOfParagraphsToShow">
 
-                <display-element title="{{paragraph.title}}" link-to-url=""
+                <display-element title="{{paragraph.title}}" link-to-url="/#/stories/{{storyId}}/{{paragraph.id}}"
                                  change-text="By: {{paragraph.author}}"
                                  img-src="/resources/coolBlackBG.jpg"
                                  optional-title="{{paragraph.text | limitTo:20}}"></display-element>
