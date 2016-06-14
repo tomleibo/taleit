@@ -30,12 +30,21 @@ public class LoginServlet extends TaleitServlet{
 
     @Override
     protected JSONObject handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        final String KEY_FACEBOOK_ACCESS_TOKEN = "facebookAccessToken";
+
+
         String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
         JSONObject jsonObject = new JSONObject(content);
 
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
+        String facebookAccessToken = null;
+        //optional json parameter facebook access token
+        if (jsonObject.has(KEY_FACEBOOK_ACCESS_TOKEN)) {
+            facebookAccessToken = jsonObject.getString(KEY_FACEBOOK_ACCESS_TOKEN);
+        }
         Login login = new Login(Server.Instance.getSafeModel(), username, password);
+        login.setFacebookAccessToken(facebookAccessToken);
 
         login.perform();
 
