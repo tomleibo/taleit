@@ -5,7 +5,7 @@
 
           <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
                            change-text="By: {{story.root.author}}"
-                           img-src="{{story.image}}"></display-element>
+                           img-src="{{story.image}}" ng-click='saveInfo(story)'></display-element>
 
         </div>
     </div>
