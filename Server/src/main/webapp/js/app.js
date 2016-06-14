@@ -113,6 +113,17 @@
         };
     });
 
+    app.directive("createButton", function () {
+        return {
+            restrict: "E",
+            scope: {
+                text: '@'
+            },
+            templateUrl: "/html/create-button.html"
+
+        };
+    });
+
 })();
 
 
