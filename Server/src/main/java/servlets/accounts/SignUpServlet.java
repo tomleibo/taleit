@@ -30,12 +30,17 @@ public class SignUpServlet extends TaleitServlet {
 
     @Override
     protected JSONObject handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        final String KEY_FACEBOOK_ID = "facebookId";
+
         String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
         JSONObject jsonObject = new JSONObject(content);
 
         String username = jsonObject.getString("username");
         String password = jsonObject.getString("password");
-        String facebookId = jsonObject.getString("facebookId");
+        String facebookId = null;
+        if (jsonObject.has(KEY_FACEBOOK_ID)) {
+            facebookId = jsonObject.getString(KEY_FACEBOOK_ID);
+        }
         SignUp signup = new SignUp(Server.Instance.getSafeModel(), username, password);
         signup.setFacebookId(facebookId);
 
