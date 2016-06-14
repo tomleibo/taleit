@@ -60,6 +60,13 @@ public class StoryViewerActivity extends TaleItActivity{
         refreshUI();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        refreshUI();
+    }
+
     private void initContinueStory() {
         continueStory.setOnClickListener(new View.OnClickListener() {
             @Override
