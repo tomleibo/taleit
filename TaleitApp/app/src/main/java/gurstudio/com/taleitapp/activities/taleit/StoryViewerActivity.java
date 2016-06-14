@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,15 +12,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.ParagraphViewAdapter;
 import gurstudio.com.taleitapp.model.taleit.Paragraph;
 import gurstudio.com.taleitapp.model.taleit.Story;
 
-public class StoryViewerActivity extends TaleItActivity{
+public class StoryViewerActivity extends TaleItActivity {
     List<Paragraph> currentChildren = new ArrayList<>();
-
     TextView storyTitle;
     TextView storyAuthor;
     ImageView image;
@@ -39,6 +38,18 @@ public class StoryViewerActivity extends TaleItActivity{
     @Override
     protected int getContentViewId() {
         return R.layout.activity_view_story;
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (getBaseApplication().getApplicationModel().getNavigationPath().isEmpty()) {
+            super.onBackPressed();
+        }
+        else {
+            Paragraph previousParagraph = getBaseApplication().getApplicationModel().getNavigationPath().pop();
+            getBaseApplication().getApplicationModel().setCurrentViewedParagraph(previousParagraph);
+            refreshUI();
+        }
     }
 
     @Override
@@ -105,11 +116,5 @@ public class StoryViewerActivity extends TaleItActivity{
         ParagraphViewAdapter adapter = new ParagraphViewAdapter(currentChildren);
 
         paragraphRecycler.setAdapter(adapter);
-    }
-
-    public void setNextParagraph(Paragraph item) {
-        Dialog d = new Dialog(this);
-        d.setTitle("WWWWWWWWWWWWWWWWWWWWAAAAAAAAA");
-        d.show();
     }
 }

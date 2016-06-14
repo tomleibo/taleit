@@ -37,18 +37,19 @@ public class ContinueStoryActivity extends TaleItActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            getBaseApplication().getNetworkManager().sendAsync(ContinueStoryRequest
+                final String userId = "sharon@gmail.com";
+                getBaseApplication().getNetworkManager().sendAsync(ContinueStoryRequest
                     .create(
                             getBaseApplication().getApplicationModel().getCurrentViewedStory().get().id.get(),
                             getBaseApplication().getApplicationModel().getCurrentViewedParagraph().get().id.get(),
                             title.getText().toString(),
                             content.getText().toString(),
-                            "sharon@gmail.com",
+                            userId,
                             new NetworkResponseHandlerBase(getBaseApplication()) {
                                 @Override
                                 public void onResponse(Object response) {
                                     Paragraph paragraph = new Paragraph();
-                                    paragraph.author.set("sharon@gmail.com");
+                                    paragraph.author.set(userId);
                                     paragraph.text.set(content.getText().toString());
                                     paragraph.title.set(title.getText().toString());
                                     try {
@@ -66,3 +67,4 @@ public class ContinueStoryActivity extends TaleItActivity {
         });
     }
 }
+

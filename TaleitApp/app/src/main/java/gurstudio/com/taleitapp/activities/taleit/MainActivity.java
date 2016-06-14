@@ -1,5 +1,6 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.CategoriesAdapter;
@@ -22,6 +24,7 @@ import gurstudio.com.taleitapp.model.taleit.Category;
 public class MainActivity extends TaleItActivity implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView categoriesRecycler;
     private FloatingActionButton fab;
+    private ImageView newStory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,23 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
     protected void findViews() {
         categoriesRecycler = (RecyclerView)findViewById(R.id.categories_recycler);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        newStory = (ImageView)findViewById(R.id.new_story);
     }
 
     @Override
     protected void initViews() {
         initCategoriesRecyclerView();
         initFAB();
+        initNewStory();
+    }
+
+    private void initNewStory() {
+        newStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), CreateStoryActivity.class));
+            }
+        });
     }
 
     private void initFAB() {

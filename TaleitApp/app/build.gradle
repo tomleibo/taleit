@@ -19,7 +19,7 @@ android {
         buildConfigField "String", "SERVER_PROTOCOL", "\"http\""
         buildConfigField "int", "SERVER_PORT", "8080"
         //buildConfigField "String", "SERVER_ADDRESS", "\"52.29.147.50\""
-        buildConfigField "String", "SERVER_ADDRESS", "\"192.168.2.110\""
+        buildConfigField "String", "SERVER_ADDRESS", "\"10.0.0.8\""
         //buildConfigField "String", "SERVER_APP_ROUTE", "\"/server.core-1.0-SNAPSHOT\""
         buildConfigField "String", "SERVER_APP_ROUTE", "\"\""
     }

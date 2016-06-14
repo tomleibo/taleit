@@ -43,6 +43,7 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
             public void onClick(View v) {
                 TaleItApplication.getTaleItModel().setCurrentViewedStory(item);
                 TaleItApplication.getTaleItModel().setCurrentViewedParagraph(item.root.get());
+                TaleItApplication.getTaleItModel().getNavigationPath().clear();
                 startActivityForView(view, StoryViewerActivity.class);
             }
         });

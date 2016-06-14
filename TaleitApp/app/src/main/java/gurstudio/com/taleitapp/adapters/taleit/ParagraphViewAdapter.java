@@ -7,6 +7,7 @@ import java.util.List;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.activities.taleit.StoryViewerActivity;
+import gurstudio.com.taleitapp.activities.taleit.TaleItActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Paragraph;
@@ -38,6 +39,9 @@ public class ParagraphViewAdapter extends RecyclerViewAdapterBase<ParagraphView,
             @Override
             public void onClick(View v) {
                 StoryViewerActivity activity = (StoryViewerActivity)view.getContext();
+
+                Paragraph currentViewedParagraph = TaleItApplication.getTaleItModel().getCurrentViewedParagraph().get();
+                TaleItApplication.getTaleItModel().getNavigationPath().push(currentViewedParagraph);
 
                 TaleItApplication.getTaleItModel().setCurrentViewedParagraph(item);
 
