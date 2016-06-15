@@ -95,6 +95,13 @@
         };
     });
 
+    app.directive("menuBar", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/menu-bar.html"
+        };
+    });
+
     app.directive("facebookButton", function () {
         return {
             restrict: "E",
