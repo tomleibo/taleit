@@ -1,5 +1,5 @@
 <div class="main" ng-controller="StoriesController as storyCtrl">
-    <create-button text="Create Your Own Story"></create-button>
+    <create-button text="Create Your Own Story" link-to-url="/#/create"></create-button>
 
     <div id="stories">
         <div ng-repeat="story in storyCtrl.storiesResult.data.stories">

@@ -21,6 +21,10 @@
             .when('/stories/:storyId/:paragraphId', {
                 templateUrl: '/html/pages/story-page.html'
             })
+
+            .when('/create', {
+                templateUrl: '/html/pages/create.html'
+            })
             .otherwise({templateUrl: '/html/pages/default.html'})
     }]);
 
@@ -117,7 +121,8 @@
         return {
             restrict: "E",
             scope: {
-                text: '@'
+                text: '@',
+                linkToUrl: '@'
             },
             templateUrl: "/html/create-button.html"
 
