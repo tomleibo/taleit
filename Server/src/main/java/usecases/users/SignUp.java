@@ -10,10 +10,12 @@ import model.User;
  */
 public class SignUp extends UserUseCase {
     protected String facebookId;
+    protected String name;
 
     public SignUp(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
         facebookId = null;
+        name = null;
     }
 
     public void perform(Model model) {
@@ -23,11 +25,16 @@ public class SignUp extends UserUseCase {
 
         User user = new User(username, password);
         user.setFacebookId(facebookId);
+        user.setName(name);
 
         model.addUser(user);
     }
 
     public void setFacebookId(String facebookId){
         this.facebookId = facebookId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
