@@ -44,4 +44,8 @@ public class ViewStory extends ActionUseCase{
     public Paragraph getParagraph() {
         return paragraph;
     }
+
+    public Story getStory(){
+        return this.story;
+    }
 }
