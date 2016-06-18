@@ -35,4 +35,6 @@ public abstract class NetworkResponseHandlerBase<A extends ApplicationBase> impl
 
         return list;
     }
+
+    protected A getApplication(){ return application; }
 }

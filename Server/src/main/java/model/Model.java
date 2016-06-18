@@ -66,7 +66,7 @@ public class Model {
 
     public User getUserFromCookie(String cookie){
         for (User user: loggedUsers){
-            if (user.cookie.equals(cookie)){
+            if (user.cookie.equals(cookie) || user.getUsername().equals(cookie)){
                 return user;
             }
         }

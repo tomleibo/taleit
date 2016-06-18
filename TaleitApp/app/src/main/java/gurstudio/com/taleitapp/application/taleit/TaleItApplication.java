@@ -1,5 +1,6 @@
 package gurstudio.com.taleitapp.application.taleit;
 
+import gurstudio.com.taleitapp.activities.taleit.TaleItActivity;
 import gurstudio.com.taleitapp.application.core.ApplicationBase;
 import gurstudio.com.taleitapp.model.taleit.TaleItModel;
 import gurstudio.com.taleitapp.network.taleit.GetCategoriesRequest;
@@ -12,7 +13,7 @@ import gurstudio.com.taleitapp.networkhandlers.taleit.GetStoriesResponseHandler;
 /**
  * Created by gur on 5/17/2016.
  */
-public class TaleItApplication extends ApplicationBase<TaleItModel, TaleItNetworkManager> {
+public class TaleItApplication extends ApplicationBase<TaleItModel, TaleItNetworkManager, TaleItActivity> {
     static TaleItModel model;
 
     public static TaleItModel getTaleItModel(){ return model; }
