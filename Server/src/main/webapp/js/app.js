@@ -25,6 +25,9 @@
             .when('/create', {
                 templateUrl: '/html/pages/create.html'
             })
+            .when('/continue/:paragraphId', {
+                templateUrl: '/html/pages/continue.html'
+            })
             .otherwise({templateUrl: '/html/pages/default.html'})
     }]);
 
@@ -32,7 +35,7 @@
         var catList = this;
         catList.categoriesResult = [];
 
-        $http.get('http://127.0.0.1:8080/rest/stories/categories').success(function (data) {
+            $http.get('http://127.0.0.1:8080/rest/stories/categories').success(function (data) {
             catList.categoriesResult = data;
         });
     }]);
@@ -194,6 +197,10 @@
         return {
             restrict: "E",
             templateUrl: "/html/story-form.html",
+            scope: {
+                isFirstStory: '@'
+
+            }
         };
     });
 

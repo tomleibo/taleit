@@ -4,12 +4,12 @@
 
         <input class="titleInput" ng-model="formData.formStoryTitle" type="text"
                placeholder="Your Story Title Goes Here.."
-               required>
+               ng-required="{{isFirstStory}}">
 
 
         <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
             <h4> Choose category </h4>
-            <select ng-model="formData.formCategory" >
+            <select ng-disabled="{{!isFirstStory}}" ng-model="formData.formCategory">
                 <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}</option>
             </select>
         </div>
