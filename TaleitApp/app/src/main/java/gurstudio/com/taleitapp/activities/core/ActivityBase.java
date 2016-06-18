@@ -1,5 +1,7 @@
 package gurstudio.com.taleitapp.activities.core;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -17,7 +19,9 @@ public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatA
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        setContentView(getContentViewId());
+        initBeforeLayoutInflation();
+
+        setContentView(getContentViewLayoutResourceId());
     }
 
     @Override
@@ -33,6 +37,15 @@ public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatA
         super.onPause();
 
         resumeBinder.clear();
+
+        getBaseApplication().setCurrentActivity(null);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        getBaseApplication().setCurrentActivity(this);
     }
 
     @Override
@@ -42,6 +55,10 @@ public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatA
         createBinder.clear();
     }
 
+    public <T extends Activity> void  startActivity(Class<T> activity){
+        startActivity(new Intent(this, activity));
+    }
+
     protected DataBinder getResumeBinder(){ return resumeBinder; }
     protected DataBinder getCreateBinder(){ return createBinder; }
 
@@ -49,8 +66,10 @@ public abstract class ActivityBase<T extends ApplicationBase> extends AppCompatA
         return (T) getApplicationContext();
     }
 
-    protected abstract int getContentViewId();
+    protected abstract int getContentViewLayoutResourceId();
 
     protected abstract void findViews();
     protected abstract void initViews();
+
+    protected void initBeforeLayoutInflation() {}
 }

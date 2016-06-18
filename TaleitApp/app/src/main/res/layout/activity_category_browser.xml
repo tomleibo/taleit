@@ -26,8 +26,7 @@
 
     </ImageView>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/stories_recycler"
+    <android.support.v7.widget.RecyclerView android:id="@+id/stories_recycler"
         android:layout_alignParentBottom="true"
         android:layout_gravity="top|center_horizontal"
         android:layout_width="match_parent"

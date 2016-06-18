@@ -1,5 +1,6 @@
 package gurstudio.com.taleitapp.networkhandlers.taleit;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,7 +8,7 @@ import java.util.Collection;
 
 import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
-import gurstudio.com.taleitapp.model.core.ApplicationModel;
+import gurstudio.com.taleitapp.model.taleit.Paragraph;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import lambdas.Selector;
 import queries.stracture.NestedQuery;
@@ -43,10 +44,9 @@ public class GetStoriesResponseHandler extends TaleItResponseHandlerBase {
                             story.author.set(root.getString("author"));
                             story.title.set(jsonObject.getString("title"));
                             story.image.set(jsonObject.getString("image").replace("localhost", BuildConfig.SERVER_ADDRESS));
-                            story.root.get().id.set(root.getString("id"));
-                            story.root.get().text.set(root.getString("text"));
-                            story.root.get().title.set(root.getString("title"));
-                            story.root.get().author.set(root.getString("author"));
+
+                            buildParagraphTree(root, story.root.get());
+
                         } catch (JSONException ex) {
                         }
                         return story;
@@ -65,5 +65,18 @@ public class GetStoriesResponseHandler extends TaleItResponseHandlerBase {
             ex.printStackTrace();
         }
     }
-}
 
+    private void buildParagraphTree(JSONObject jsonTree, Paragraph node) throws JSONException {
+        node.id.set(jsonTree.getString("id"));
+        node.text.set(jsonTree.getString("text"));
+        node.title.set(jsonTree.getString("title"));
+        node.author.set(jsonTree.getString("author"));
+
+        JSONArray children = jsonTree.getJSONArray("children");
+        for (int i = 0; i < children.length(); i++){
+            Paragraph paragraph = new Paragraph();
+            node.children.add(paragraph);
+            buildParagraphTree(children.getJSONObject(i), paragraph);
+        }
+    }
+}

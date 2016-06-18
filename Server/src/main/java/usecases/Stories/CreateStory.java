@@ -31,10 +31,6 @@ public class CreateStory extends ActionUseCase {
             }
         });
 
-        if (user == null){
-            throw new InvalidUseCaseParameterException("cookie", "No user with this cookie" + cookie);
-        }
-
         this.root = new Paragraph(null, rootText, rootTitle, user);
     }
 

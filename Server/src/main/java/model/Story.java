@@ -5,6 +5,8 @@ import exceptions.NoSuchParagraphIdException;
 import exceptions.StoryException;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -16,6 +18,7 @@ public class Story {
     private String title;
     private Paragraph root;
     private Categories category;
+    private Set<User> likes;
 
     public Story(String title, Paragraph root, Categories category){
         this.title = title;
@@ -24,6 +27,7 @@ public class Story {
         this.category = category;
         this.paragraphs = new HashMap<String, Paragraph>();
         this.paragraphs.put(root.getId(), root);
+        this.likes = new HashSet<>();
     }
 
     public String getId() {
@@ -77,5 +81,13 @@ public class Story {
     @Override
     public int hashCode(){
         return getId().hashCode();
+    }
+
+    public void addLike(User user) {
+        this.likes.add(user);
+    }
+
+    public int getLikes(){
+        return this.likes.size();
     }
 }

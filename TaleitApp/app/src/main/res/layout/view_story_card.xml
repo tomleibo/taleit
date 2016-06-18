@@ -38,7 +38,7 @@
             android:background="@android:color/transparent">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/story_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/theme_text_header"

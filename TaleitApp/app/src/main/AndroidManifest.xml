@@ -12,6 +12,8 @@
         android:name=".application.taleit.TaleItApplication"
         >
 
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
         <activity
             android:name=".activities.taleit.MainActivity"
             android:label="@string/app_name"
@@ -32,6 +34,20 @@
             android:name=".activities.taleit.StoryViewerActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <activity
+            android:name=".activities.taleit.ContinueStoryActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name=".activities.taleit.CreateStoryActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activities.taleit.FacebookLoginActivity"/>
+
+        <activity android:name="com.facebook.FacebookActivity"/>
     </application>
 
 </manifest>

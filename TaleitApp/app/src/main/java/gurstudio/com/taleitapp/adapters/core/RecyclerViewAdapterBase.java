@@ -32,7 +32,7 @@ public abstract class RecyclerViewAdapterBase<T extends View, S> extends Recycle
             return new RecyclerViewHolder<>(view);
         }
         catch (Throwable wtf){
-            Log.e("WTF", wtf.toString());
+            Log.e(getClass().getSimpleName(), wtf.toString());
             throw wtf;
         }
     }

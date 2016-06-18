@@ -41,6 +41,7 @@ public class BrowseStoryServlet extends TaleitServlet {
         for (Story story: usecase.getStories()){
 
             JSONObject jsonStory = new JSONObject();
+            jsonStory.put("likes", story.getLikes());
             jsonStory.put("id", story.getId());
             jsonStory.put("title", story.getTitle());
             jsonStory.put("category", story.getCategory().getValue());

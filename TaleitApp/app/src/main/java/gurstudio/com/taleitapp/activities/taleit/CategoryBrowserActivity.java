@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -20,7 +19,7 @@ public class CategoryBrowserActivity extends TaleItActivity {
     private RecyclerView storiesRecycler;
 
     @Override
-    protected int getContentViewId() {
+    protected int getContentViewLayoutResourceId() {
         return R.layout.activity_category_browser;
     }
 
@@ -32,10 +31,6 @@ public class CategoryBrowserActivity extends TaleItActivity {
     @Override
     protected void initViews() {
         initCategoriesRecyclerView();
-
-        Object model = getBaseApplication().getApplicationModel();
-
-        return;
     }
 
     private void initCategoriesRecyclerView() {
@@ -45,7 +40,7 @@ public class CategoryBrowserActivity extends TaleItActivity {
             @Override
             public boolean predict(Story story) {
                 String storyCategory = story.category.get();
-                String viewedCategory = getBaseApplication().getApplicationModel().getCurrentViewedCategory().name.get();
+                String viewedCategory = getBaseApplication().getApplicationModel().getCurrentViewedCategory().get().name.get();
                 return storyCategory.equals(viewedCategory);
             }
         }).execute(getBaseApplication().getApplicationModel().getStories());
