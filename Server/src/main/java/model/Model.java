@@ -41,6 +41,16 @@ public class Model {
         }
     }
 
+    public String loginUser(String username) {
+        User user = users.get(username);
+        if (!loggedUsers.contains(user)){
+            user.cookie = UUID.randomUUID().toString();
+            loggedUsers.add(user);
+        }
+        return user.cookie;
+    }
+
+
     public void logoutUser(String cookie) {
         User found = null;
         for (User user: loggedUsers){

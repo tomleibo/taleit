@@ -16,12 +16,14 @@ public class User {
     public String cookie;
     private String facebookId;
     private String facebookAccessToken;
+    private String name;
 
     public User(String username, String password) {
         this.setUsername(username);
         this.salt = Integer.toString(RANDOM.nextInt());
         this.passwordHash = getPasswordHash(password);
         this.facebookId = null;
+        this.name = null;
     }
 
     public String getPasswordHash(String password) {
@@ -65,4 +67,11 @@ public class User {
         return this.facebookAccessToken;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
+    }
 }

@@ -66,6 +66,10 @@ public class BrowseStoryServlet extends TaleitServlet {
         tree.put("title", node.getTitle());
         tree.put("text", node.getText());
         tree.put("author", node.getUser().getUsername());
+        String name  = node.getUser().getName();
+        if (name != null){
+            tree.put("name", name);
+        }
         tree.put("userFacebookId", node.getUser().getFacebookId());
 
         JSONArray children = new JSONArray();

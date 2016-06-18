@@ -9,9 +9,15 @@ import model.User;
 public class Login extends UserUseCase {
     String cookie = null;
     protected String facebookAccessToken;
+    private boolean FacebookAuthorized = false;
 
     public Login(SafeObject<Model> context, String username, String password) {
         super(context, username, password);
+        facebookAccessToken = null;
+    }
+
+    public Login(SafeObject<Model> context, String username) {
+        super(context, username, "blabla");
         facebookAccessToken = null;
     }
 
@@ -20,8 +26,12 @@ public class Login extends UserUseCase {
             throw new LoginException("User does not exists");
         }
 
-        cookie = model.loginUser(username, password);
-        User user= model.getUserFromCookie(cookie);
+        if (this.FacebookAuthorized){
+            cookie = model.loginUser(username);
+        }else {
+            cookie = model.loginUser(username, password);
+        }
+        User user = model.getUserFromCookie(cookie);
         user.setFacebookAccessToken(facebookAccessToken);
 
     }
@@ -34,5 +44,8 @@ public class Login extends UserUseCase {
         this.facebookAccessToken = facebookAccessToken;
     }
 
+    public void setFacebookAuthorized() {
+        this.FacebookAuthorized = true;
+    }
 }
 
