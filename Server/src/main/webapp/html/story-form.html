@@ -2,23 +2,24 @@
 
     <form id="storyForm" ng-submit="sendPost()">
 
-        <input class="titleInput" ng-modal="formStoryTitle" type="text" placeholder="Your Story Title Goes Here.."
+        <input class="titleInput" ng-model="formData.formStoryTitle" type="text"
+               placeholder="Your Story Title Goes Here.."
                required>
 
 
         <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
             <h4> Choose category </h4>
-            <select>
-                <option ng-modal="formCategory"
+            <select ng-model="formData.formCategory">
+                <option
                         ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}
                 </option>
             </select>
         </div>
 
-        <input class="titleInput" ng-modal="formTitle" type="text"
+        <input class="titleInput" ng-model="formData.formTitle" type="text"
                placeholder="Your Chapter Title Goes Here.. (optional)">
 
-        <textarea form="storyForm" ng-modal="formText" required placeholder="Write Your Story.."></textarea>
+        <textarea form="storyForm" ng-model="formData.formText" required placeholder="Write Your Story.."></textarea>
 
         <input class="submitBtn" type="submit" value="Set it free">
 

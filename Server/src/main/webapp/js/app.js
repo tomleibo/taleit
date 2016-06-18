@@ -87,19 +87,28 @@
     }]);
 
     app.controller('storyFormCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
 
+
         $scope.sendPost = function () {
+            console.log("Cookie is: "+ window.userCookie);
+            console.log("title is: "+ $scope.formData.formStoryTitle);
+            console.log("category is: "+  $scope.formData.formCategory);
+            console.log("paragraph title is: "+ $scope.formData.formTitle);
+            console.log("text is: "+  $scope.formData.formText);
+
             $http({
                 url: 'http://127.0.0.1:8080/rest/stories/create',
                 method: "POST",
                 data: {
-                    'title': $scope.formStoryTitle,
-                    'category': $scope.formCategory,
+                    'cookie': window.userCookie,
+                    'title': $scope.formData.formStoryTitle,
+                    'category': $scope.formData.formCategory,
                     'rootParagraph': {
-                        'title': $scope.formTitle,
-                        'text': $scope.formText
+                        'title': $scope.formData.formTitle,
+                        'text': $scope.formData.formText
                     }
                 }
             }).then(function (response) {
