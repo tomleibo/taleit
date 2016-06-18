@@ -73,20 +73,65 @@
         var storyIdResults = $routeParams.storyId;
         var paragraphIdResults = $routeParams.paragraphId;
 
-        if(paragraphIdResults){
+        if (paragraphIdResults) {
             $http.get(browseUrl + '?storyId=' + storyIdResults + '&paragraphId=' + paragraphIdResults).success(function (data) {
                 $scope.storyInfo = data;
             });
         }
-        else{
+        else {
             $http.get(browseUrl + '?storyId=' + storyIdResults).success(function (data) {
                 $scope.storyInfo = data;
             });
         }
 
-
-
     }]);
+
+    app.controller('storyFormCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
+
+        $scope.sendPost = function () {
+            $http({
+                url: 'http://127.0.0.1:8080/rest/stories/create',
+                method: "POST",
+                data: {
+                    'title': $scope.formStoryTitle,
+                    'category': $scope.formCategory,
+                    'rootParagraph': {
+                        'title': $scope.formTitle,
+                        'text': $scope.formText
+                    }
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                $scope.message = response.data;
+            }, function (response) {
+                //fail case
+                console.log(response);
+                $scope.message = response;
+            });
+
+        };
+    }]);
+
+    app.controller('fbCtrl', ['$http', '$scope', function ($http, $scope) {
+
+        $scope.callFBServlet = function () {
+            $scope.res = userResponse;
+            console.log("kakak  " + $scope.res);
+            var data = $.param({
+                json: JSON.stringify({
+                    'facebookAccessToken': res.userResponse.authResponse.accessToken,
+                    'facebookId': window.res.authResponse.userID
+
+                })
+            });
+            $http.post("http://127.0.0.1:8080/rest/accounts/fblogin", data).success(function (data, status) {
+                $scope.servletResponse = data;
+            })
+        }
+    }
+    ]);
 
     app.directive("titleSection", function () {
         return {
@@ -139,7 +184,7 @@
     app.directive("storyForm", function () {
         return {
             restrict: "E",
-            templateUrl: "/html/story-form.html"
+            templateUrl: "/html/story-form.html",
         };
     });
 
