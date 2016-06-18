@@ -1,16 +1,29 @@
-<form id="storyForm">
-    <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
-        <h4> Choose category </h4>
-        <select>
-            <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}
-            </option>
-        </select>
-    </div>
+<div ng-controller="storyFormCtrl">
 
-    <input class="titleInput" type="text" placeholder="Story Title goes here..." required>
+    <form id="storyForm" ng-submit="sendPost()">
 
-    <textarea form="storyForm" required placeholder="Write Your Story.."></textarea>
+        <input class="titleInput" ng-modal="formStoryTitle" type="text" placeholder="Your Story Title Goes Here.."
+               required>
 
-    <input class="submitBtn" type="submit" value="Set it free">
 
-</form>
+        <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
+            <h4> Choose category </h4>
+            <select>
+                <option ng-modal="formCategory"
+                        ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}
+                </option>
+            </select>
+        </div>
+
+        <input class="titleInput" ng-modal="formTitle" type="text"
+               placeholder="Your Chapter Title Goes Here.. (optional)">
+
+        <textarea form="storyForm" ng-modal="formText" required placeholder="Write Your Story.."></textarea>
+
+        <input class="submitBtn" type="submit" value="Set it free">
+
+    </form>
+
+    <p>Message from servlet: {{message}} </p>
+
+</div>
