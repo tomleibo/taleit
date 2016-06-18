@@ -117,8 +117,28 @@
         };
     }]);
 
-    app.controller('fbCtrl', ['$http', '$scope', function ($http, $scope) {
+    app.controller('displayElementCtrl', ['$scope', function ($scope) {
+        var imageExists = function (image_url){
 
+            var http = new XMLHttpRequest();
+
+            http.open('HEAD', image_url, false);
+            http.send();
+
+            return http.status != 404;
+
+        };
+
+        $scope.getImgSrc = function(imgSrc) {
+            console.log("image src is " + imgSrc);
+            if(imageExists(imgSrc)){
+                return imgSrc
+            }
+            else{
+                return "/resources/coolBlackBG.jpg"
+            }
+
+        };
     }
     ]);
 
