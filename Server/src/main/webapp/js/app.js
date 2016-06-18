@@ -116,20 +116,6 @@
 
     app.controller('fbCtrl', ['$http', '$scope', function ($http, $scope) {
 
-        $scope.callFBServlet = function () {
-            $scope.res = userResponse;
-            console.log("kakak  " + $scope.res);
-            var data = $.param({
-                json: JSON.stringify({
-                    'facebookAccessToken': res.userResponse.authResponse.accessToken,
-                    'facebookId': window.res.authResponse.userID
-
-                })
-            });
-            $http.post("http://127.0.0.1:8080/rest/accounts/fblogin", data).success(function (data, status) {
-                $scope.servletResponse = data;
-            })
-        }
     }
     ]);
 
