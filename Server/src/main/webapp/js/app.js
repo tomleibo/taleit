@@ -136,6 +136,13 @@
         };
     });
 
+    app.directive("storyForm", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/story-form.html"
+        };
+    });
+
 })();
 
 

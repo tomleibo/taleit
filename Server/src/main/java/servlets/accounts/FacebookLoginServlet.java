@@ -6,7 +6,6 @@ import exceptions.SignUpException;
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.RawAPIResponse;
-import facebook4j.conf.Configuration;
 import facebook4j.conf.ConfigurationBuilder;
 import ioc.Server;
 import org.json.JSONObject;

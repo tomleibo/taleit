@@ -1,0 +1,16 @@
+<form id="storyForm">
+    <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
+        <h4> Choose category </h4>
+        <select>
+            <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}
+            </option>
+        </select>
+    </div>
+
+    <input class="titleInput" type="text" placeholder="Story Title goes here..." required>
+
+    <textarea form="storyForm" required placeholder="Write Your Story.."></textarea>
+
+    <input class="submitBtn" type="submit" value="Set it free">
+
+</form>
