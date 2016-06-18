@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * Created by gur on 1/16/2016.
  */
-@WebServlet( name = "BrowseStoryServlet", description = "Browse story servlet", urlPatterns = {"/rest/stories/browse"} )
+    @WebServlet( name = "BrowseStoryServlet", description = "Browse story servlet", urlPatterns = {"/rest/stories/browse"} )
 public class BrowseStoryServlet extends TaleitServlet {
     @Override
     public void init() throws ServletException {}

@@ -93,12 +93,6 @@
 
 
         $scope.sendPost = function () {
-            console.log("Cookie is: "+ window.userCookie);
-            console.log("title is: "+ $scope.formData.formStoryTitle);
-            console.log("category is: "+  $scope.formData.formCategory);
-            console.log("paragraph title is: "+ $scope.formData.formTitle);
-            console.log("text is: "+  $scope.formData.formText);
-
             $http({
                 url: 'http://127.0.0.1:8080/rest/stories/create',
                 method: "POST",
