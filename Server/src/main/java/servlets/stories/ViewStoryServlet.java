@@ -44,6 +44,7 @@ public class ViewStoryServlet extends TaleitServlet {
         //containing story
         Story story = usecase.getStory();
         JSONObject jsonStory = new JSONObject();
+        jsonStory.put("likes", story.getLikes());
         jsonStory.put("id", story.getId());
         jsonStory.put("title", story.getTitle());
         jsonStory.put("category", story.getCategory().getValue());
@@ -51,6 +52,7 @@ public class ViewStoryServlet extends TaleitServlet {
         String imageURL = "http://localhost:8080/resources/stories/%s.png";
         jsonStory.put("image", String.format(imageURL, imageName));
         responseJson.put("story", jsonStory);
+
 
         //father
         Paragraph father = paragraph.getFather();
