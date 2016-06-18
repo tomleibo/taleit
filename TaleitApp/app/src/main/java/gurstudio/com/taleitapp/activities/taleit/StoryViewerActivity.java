@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.ParagraphViewAdapter;
@@ -36,7 +34,7 @@ public class StoryViewerActivity extends TaleItActivity {
     }
 
     @Override
-    protected int getContentViewId() {
+    protected int getContentViewLayoutResourceId() {
         return R.layout.activity_view_story;
     }
 
@@ -72,20 +70,13 @@ public class StoryViewerActivity extends TaleItActivity {
     }
 
     @Override
-    protected void onResume(){
+    public void onResume(){
         super.onResume();
 
         refreshUI();
     }
 
-    private void initContinueStory() {
-        continueStory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ContinueStoryActivity.class));
-            }
-        });
-    }
+    private void initContinueStory() { continueStory.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) {startActivity(ContinueStoryActivity.class);}});}
 
     public void refreshUI() {
         Story currentStory = getBaseApplication().getApplicationModel().getCurrentViewedStory().get();

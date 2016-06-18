@@ -30,3 +30,4 @@ public class ContinueStoryRequest extends TaleItNetworkRequestBase {
         return new ContinueStoryRequest(jsonObject, handler, handler);
     }
 }
+

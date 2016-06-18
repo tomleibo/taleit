@@ -21,14 +21,14 @@ public class ContinueStoryActivity extends TaleItActivity {
     private ImageView apply;
 
     @Override
-    protected int getContentViewId() {
+    protected int getContentViewLayoutResourceId() {
         return R.layout.activity_continue_story;
     }
 
     @Override
     protected void findViews() {
-        title = (EditText)findViewById(R.id.title);
-        content = (EditText)findViewById(R.id.content);
+        title = (EditText)findViewById(R.id.story_name);
+        content = (EditText)findViewById(R.id.story_description);
         apply = (ImageView)findViewById(R.id.apply);
     }
 

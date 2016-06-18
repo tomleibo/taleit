@@ -19,7 +19,7 @@ public class CategoryBrowserActivity extends TaleItActivity {
     private RecyclerView storiesRecycler;
 
     @Override
-    protected int getContentViewId() {
+    protected int getContentViewLayoutResourceId() {
         return R.layout.activity_category_browser;
     }
 
@@ -31,10 +31,6 @@ public class CategoryBrowserActivity extends TaleItActivity {
     @Override
     protected void initViews() {
         initCategoriesRecyclerView();
-
-        Object model = getBaseApplication().getApplicationModel();
-
-        return;
     }
 
     private void initCategoriesRecyclerView() {

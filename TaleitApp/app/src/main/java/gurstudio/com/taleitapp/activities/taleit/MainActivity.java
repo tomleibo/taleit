@@ -1,6 +1,5 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -69,14 +68,7 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
         initNewStory();
     }
 
-    private void initNewStory() {
-        newStory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), CreateStoryActivity.class));
-            }
-        });
-    }
+    private void initNewStory() { newStory.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View v) { startActivity(CreateStoryActivity.class); }}); }
 
     private void initFAB() {
         fab.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +147,7 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
     }
 
     @Override
-    public int getContentViewId() {
+    public int getContentViewLayoutResourceId() {
         return R.layout.activity_main;
     }
 }

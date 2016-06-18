@@ -1,5 +1,7 @@
 package gurstudio.com.taleitapp.model.taleit;
 
+import com.facebook.AccessToken;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -14,6 +16,7 @@ public class TaleItModel extends ApplicationModel {
     ObservableCollection<Story> stories = new ObservableCollection<>(ArrayList.class);
     ObservableCollection<Category> categories = new ObservableCollection<>(ArrayList.class);
     Stack<Paragraph> navigationPath = new Stack<>();
+    private Observable<AccessToken> user = new Observable<>(null);
 
     public ObservableCollection<Story> getStories(){ return stories; }
     public ObservableCollection<Category> getCategories(){ return categories; }
@@ -27,5 +30,6 @@ public class TaleItModel extends ApplicationModel {
     public void setCurrentViewedStory(Story currentViewedStory) { this.currentViewedStory.set(currentViewedStory); }
     public void setCurrentViewedParagraph(Paragraph currentViewedParagraph) { this.currentViewedParagraph.set(currentViewedParagraph); }
 
-
+    public void setLoggedInUser(AccessToken token) { user.set(token); }
+    public AccessToken getUser() { return user.get(); }
 }

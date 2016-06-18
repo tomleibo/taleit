@@ -1,7 +1,5 @@
 package gurstudio.com.taleitapp.networkhandlers.taleit;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +8,6 @@ import java.util.Collection;
 
 import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
-import gurstudio.com.taleitapp.model.core.ApplicationModel;
 import gurstudio.com.taleitapp.model.taleit.Paragraph;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import lambdas.Selector;

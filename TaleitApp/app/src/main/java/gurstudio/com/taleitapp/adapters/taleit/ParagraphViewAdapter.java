@@ -7,7 +7,6 @@ import java.util.List;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.activities.taleit.StoryViewerActivity;
-import gurstudio.com.taleitapp.activities.taleit.TaleItActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Paragraph;
@@ -29,7 +28,7 @@ public class ParagraphViewAdapter extends RecyclerViewAdapterBase<ParagraphView,
 
     @Override
     protected void onBindViewToItem(final ParagraphView view, final Paragraph item) {
-        ((TextView)view.findViewById(R.id.title)).setText(item.title.get());
+        ((TextView)view.findViewById(R.id.story_name)).setText(item.title.get());
         ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
 
         view.setParagraph(item);

@@ -31,12 +31,19 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
 
     @Override
     protected void onBindViewToItem(final StoryCardView view, final Story item) {
-        ((TextView)view.findViewById(R.id.title)).setText(item.title.get());
+        ((TextView)view.findViewById(R.id.story_name)).setText(item.title.get());
         ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
 
-        Picasso.with(view.getContext())
-                .load(item.image.get())
-                .into(((ImageView) view.findViewById(R.id.image)));
+        try {
+            Picasso.with(view.getContext())
+                    .load(item.image.get())
+                    .into(((ImageView) view.findViewById(R.id.image)));
+        }
+        catch (Exception ex){
+            Picasso.with(view.getContext())
+                    .load(R.drawable.logo)
+                    .into(((ImageView) view.findViewById(R.id.image)));
+        }
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
