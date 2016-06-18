@@ -1,5 +1,7 @@
 <div class="main" ng-controller="CategoriesController as categoriesSection">
 
+    <create-button text="Create Your Own Story" link-to-url="/#/create"></create-button>
+
     <div id="categories">
         <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories">
             <a ng-href="/#/categories/{{category.name}}">
