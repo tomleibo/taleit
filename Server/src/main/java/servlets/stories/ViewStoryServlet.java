@@ -2,6 +2,7 @@ package servlets.stories;
 
 import ioc.Server;
 import model.Paragraph;
+import model.Story;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,17 @@ public class ViewStoryServlet extends TaleitServlet {
 
         //self
         JSONObject responseJson = parseParagraphToJson(paragraph);
+
+        //containing story
+        Story story = usecase.getStory();
+        JSONObject jsonStory = new JSONObject();
+        jsonStory.put("id", story.getId());
+        jsonStory.put("title", story.getTitle());
+        jsonStory.put("category", story.getCategory().getValue());
+        String imageName = story.getTitle().replace("'", "").replace(" ", "_").toLowerCase();
+        String imageURL = "http://localhost:8080/resources/stories/%s.png";
+        jsonStory.put("image", String.format(imageURL, imageName));
+        responseJson.put("story", jsonStory);
 
         //father
         Paragraph father = paragraph.getFather();
