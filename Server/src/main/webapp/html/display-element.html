@@ -1,7 +1,7 @@
 <div class=displayElement>
 <a ng-href="{{linkToUrl}}">
-    <div class="hovereffect pic">
-        <img class=displayElementImg ng-src={{imgSrc}}>
+    <div class="hovereffect pic" ng-controller="displayElementCtrl">
+        <img class=displayElementImg ng-src="{{getImgSrc(imgSrc)}}">
 
         <div class="overlay">
             <h2>{{title}}</h2>

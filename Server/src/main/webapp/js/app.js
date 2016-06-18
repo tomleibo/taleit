@@ -93,12 +93,6 @@
 
 
         $scope.sendPost = function () {
-            console.log("Cookie is: "+ window.userCookie);
-            console.log("title is: "+ $scope.formData.formStoryTitle);
-            console.log("category is: "+  $scope.formData.formCategory);
-            console.log("paragraph title is: "+ $scope.formData.formTitle);
-            console.log("text is: "+  $scope.formData.formText);
-
             $http({
                 url: 'http://127.0.0.1:8080/rest/stories/create',
                 method: "POST",
@@ -123,8 +117,28 @@
         };
     }]);
 
-    app.controller('fbCtrl', ['$http', '$scope', function ($http, $scope) {
+    app.controller('displayElementCtrl', ['$scope', function ($scope) {
+        var imageExists = function (image_url){
 
+            var http = new XMLHttpRequest();
+
+            http.open('HEAD', image_url, false);
+            http.send();
+
+            return http.status != 404;
+
+        };
+
+        $scope.getImgSrc = function(imgSrc) {
+            console.log("image src is " + imgSrc);
+            if(imageExists(imgSrc)){
+                return imgSrc
+            }
+            else{
+                return "/resources/coolBlackBG.jpg"
+            }
+
+        };
     }
     ]);
 
