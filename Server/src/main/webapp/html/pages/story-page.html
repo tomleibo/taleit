@@ -1,7 +1,7 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer" ng-init="showLogo=false">
     <div>
         <div class="paragraphViewer">
-            <h1>{{storyTitle}}</h1>
+            <h1>{{storyInfo.data.story.title}}</h1>
 
             <h3>{{storyInfo.data.title}}</h3>
 
@@ -20,7 +20,8 @@
         <div ng-if="storyInfo.data.children">
             <div ng-repeat="paragraph in storyInfo.data.children" ng-if="$index <= amountOfParagraphsToShow">
 
-                <display-element title="{{paragraph.title}}" link-to-url="/#/stories/{{storyId}}/{{paragraph.id}}"
+                <display-element title="{{paragraph.title}}"
+                                 link-to-url="/#/stories/{{storyInfo.data.story.id}}/{{paragraph.id}}"
                                  change-text="By: {{paragraph.author}}"
                                  img-src="/resources/coolBlackBG.jpg"
                                  optional-title="{{paragraph.text | limitTo:20}}"></display-element>

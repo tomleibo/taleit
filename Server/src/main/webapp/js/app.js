@@ -40,7 +40,7 @@
         });
     }]);
 
-    app.controller('StoriesController', ['$http', '$routeParams', '$scope', '$cookies', '$rootScope', function ($http, $routeParams, $scope, $cookies, $rootScope) {
+    app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
         var storiesList = this;
         var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
 
@@ -58,12 +58,6 @@
                 storiesList.storiesResult = data;
             });
         }
-
-        $scope.saveInfo = function (story) {
-            $cookies.put("title", story.title);
-            $cookies.put("id", story.id);
-
-        };
     }]);
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
