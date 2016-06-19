@@ -1,12 +1,17 @@
-
+#categories{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    float: right;
+}
 .categoryClass {
-    float: left;
+    float: right;
+
     display: inline;
     position: relative;
     margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    margin-up: 5px;
 }
 
 .categoryClass a {
