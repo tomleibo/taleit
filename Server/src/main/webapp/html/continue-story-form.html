@@ -1,0 +1,18 @@
+<div ng-controller="continueStoryFormCtrl">
+
+    <form id="storyForm" ng-submit="sendPost()">
+
+       <h2> Continue </h2>
+
+        <input class="titleInput" ng-model="formData.formTitle" type="text"
+               placeholder="Your Chapter Title Goes Here.. (optional)" required>
+
+        <textarea form="storyForm" ng-model="formData.formText" required placeholder="Write Your Story.."></textarea>
+
+        <input class="submitBtn" type="submit" value="Set it free">
+
+    </form>
+
+    <p>Message from servlet: {{message}} </p>
+
+</div>

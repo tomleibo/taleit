@@ -25,7 +25,7 @@
             .when('/create', {
                 templateUrl: '/html/pages/create.html'
             })
-            .when('/continue/:paragraphId', {
+            .when('/continue/:storyId/:paragraphId', {
                 templateUrl: '/html/pages/continue.html'
             })
             .otherwise({templateUrl: '/html/pages/default.html'})
@@ -83,7 +83,7 @@
 
     }]);
 
-    app.controller('storyFormCtrl', ['$scope', '$http', function ($scope, $http) {
+    app.controller('createStoryFormCtrl', ['$scope', '$http', function ($scope, $http) {
         $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
@@ -114,6 +114,44 @@
         };
     }]);
 
+    app.controller('continueStoryFormCtrl', ['$scope', '$http','$routeParams' , function ($scope, $http, $routeParams) {
+        $scope.formData = {};
+
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
+
+        var storyIdResults = $routeParams.storyId;
+        var paragraphIdResults = $routeParams.paragraphId;
+
+        console.log("cookie = " + window.userCookie);
+        console.log("title = " + $scope.formData.formTitle);
+        console.log("text = " + $scope.formData.formText);
+        console.log("paragraphId = " + paragraphIdResults);
+        console.log("storyId = " + storyIdResults);
+
+
+        $scope.sendPost = function () {
+            $http({
+                url: 'http://127.0.0.1:8080/rest/stories/continue',
+                method: "POST",
+                data: {
+                    'cookie': window.userCookie,
+                    'title': $scope.formData.formTitle,
+                    'text': $scope.formData.formText,
+                    'paragraphId': paragraphIdResults,
+                    'storyId': storyIdResults
+                }
+            }).then(function (response) {
+                console.log(response.data);
+                $scope.message = response.data;
+            }, function (response) {
+                //fail case
+                console.log(response);
+                $scope.message = response;
+            });
+
+        };
+    }]);
+
     app.controller('displayElementCtrl', ['$scope', function ($scope) {
         var imageExists = function (image_url){
 
@@ -127,7 +165,6 @@
         };
 
         $scope.getImgSrc = function(imgSrc) {
-            console.log("image src is " + imgSrc);
             if(imageExists(imgSrc)){
                 return imgSrc
             }
@@ -183,14 +220,30 @@
         };
     });
 
+    app.directive("continueButton", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/continue-button.html",
+            scope: {
+                buttonTitle: '@',
+                paragraphId: '@',
+                storyId: '@'
+
+            }
+        };
+    });
+
     app.directive("createStoryForm", function () {
         return {
             restrict: "E",
-            templateUrl: "/html/create-story-form.html",
-            scope: {
-                isFirstStory: '@'
+            templateUrl: "/html/create-story-form.html"
+        };
+    });
 
-            }
+    app.directive("continueStoryForm", function () {
+        return {
+            restrict: "E",
+            templateUrl: "/html/continue-story-form.html"
         };
     });
 
