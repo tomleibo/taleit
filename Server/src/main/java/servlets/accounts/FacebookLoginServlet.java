@@ -41,7 +41,6 @@ public class FacebookLoginServlet extends TaleitServlet{
         final String APP_ID = "136173363469093";
         final String APP_SECRET = "e125df335c1aafb0e35facb8f4cf27d8";
 
-
         String content = CharStreams.toString(new InputStreamReader(request.getInputStream(), Charsets.UTF_8));
         JSONObject jsonObject = new JSONObject(content);
 

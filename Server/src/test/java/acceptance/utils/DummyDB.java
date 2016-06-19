@@ -34,6 +34,7 @@ public class DummyDB extends LoggedInBaseAcceptance {
     };
 
     @Test
+    @Ignore
     public void eraseInjectDummyDB() {
         bridge.initServer();
         bridge.signUp(userName, password);
