@@ -144,8 +144,7 @@ body::after {
 
 #logo{
     position: fixed;
-    left:0;
-    width: 50%;
+    left: 0;
 }
 
 #logo h1 {

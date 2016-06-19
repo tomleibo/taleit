@@ -1,5 +1,7 @@
 <div class="main" ng-controller="StoriesController as storyCtrl">
+   <div id="create">
     <create-button></create-button>
+   </div>
 
     <div id="stories">
         <div ng-repeat="story in storyCtrl.storiesResult.data.stories">

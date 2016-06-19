@@ -1,7 +1,17 @@
+#create{
+    z-index: 9;
+    bottom: -20px;
+    left: 40%;
+    position: absolute;
+    float: right;
+
+
+}
+
 #categories{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 40px;
+    right: 30px;
     float: right;
 }
 .categoryClass {
