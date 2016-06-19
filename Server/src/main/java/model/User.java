@@ -11,7 +11,7 @@ public class User {
     private static SecureRandom RANDOM = new SecureRandom();
 
     private String username;
-    String passwordHash;
+    public String passwordHash;
     String salt;
     public String cookie;
     private String facebookId;
@@ -23,6 +23,7 @@ public class User {
         this.salt = Integer.toString(RANDOM.nextInt());
         this.passwordHash = getPasswordHash(password);
         this.facebookId = null;
+        this.facebookAccessToken = null;
         this.name = null;
     }
 
@@ -73,5 +74,9 @@ public class User {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getSalt() {
+        return this.salt;
     }
 }

@@ -8,14 +8,14 @@ import java.sql.*;
 import java.util.Map;
 
 public class DbHandler {
-    private static final String DB_URL = "";
-    private static final String USER = "";
-    private static final String PASS = "";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+    private static final String USER = "root";
+    private static final String PASS = "root";
 
     //queryUser
     private static final int USER_ID = 1;
     private static final int USER_NAME = 2;
-    private static final int USER_PASS= 3;
+    private static final int USER_PASS = 3;
     private static final int USER_SALT = 4;
 
 
@@ -50,10 +50,10 @@ public class DbHandler {
             int columnIndex=1;
             for (Pair<Boolean,Object> entry : values.values()) {
                 if (entry.getKey()) {
-                    stmt.setInt(columnIndex++,(Integer)(entry.getValue()));
+                    stmt.setInt(++columnIndex,(Integer)(entry.getValue()));
                 }
                 else {
-                    stmt.setString(columnIndex++,(String)(entry.getValue()));
+                    stmt.setString(++columnIndex,(String)(entry.getValue()));
                 }
             }
             rs = stmt.executeQuery();
@@ -81,9 +81,47 @@ public class DbHandler {
 
     }
 
-    /**
-     * creates a connection
-     */
+    public void InsertUser(User user) {
+        PreparedStatement stmt = null;
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO `taleitdb`.`author`(`USERNAME`,`PASSWORDHASH`,`SALT`,`COOKIE`,`FACEBOOK_ID`,`FACEBOOK_ACCESS_TOKEN`,`NAME`)");
+        query.append("VALUES(?,?,?,?,?,?,?)");
+
+        try {
+            int columnIndex = 1;
+
+            stmt = conn.prepareStatement(query.toString());
+
+            stmt.setString(++columnIndex, user.getUsername());
+            stmt.setString(++columnIndex, user.passwordHash);
+            stmt.setString(++columnIndex, user.getSalt());
+            stmt.setString(++columnIndex, null);
+            stmt.setString(++columnIndex, user.getFacebookId());
+            stmt.setString(++columnIndex, user.getFacebookAccessToken());
+            stmt.setString(++columnIndex, user.getName());
+
+            stmt.executeQuery();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+        /**
+         * creates a connection
+         */
     public void connect(){
         conn = null;
         try{

@@ -1,5 +1,6 @@
 package model;
 
+import db.DbHandler;
 import exceptions.LoginException;
 
 import java.util.*;
@@ -11,14 +12,18 @@ public class Model {
     final private Map<String, User> users;
     final private Set<User> loggedUsers;
     final private Collection<Story> stories;
+    private final DbHandler db;
 
     public Model(){
         this.users = new HashMap<String, User>();
         this.loggedUsers = new HashSet<User>();
         this.stories = new HashSet<Story>();
+        this.db = new DbHandler();
+        db.connect();
     }
 
     public void addUser(User user){
+        db.InsertUser(user);
         users.put(user.getUsername(), user);
     }
 
