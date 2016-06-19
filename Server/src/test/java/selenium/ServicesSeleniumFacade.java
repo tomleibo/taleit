@@ -1,6 +1,7 @@
 package selenium;
 
 import org.openqa.selenium.WebDriver;
+import selenium.pageObjects.CreatePageObject;
 import selenium.pageObjects.MainPageObject;
 
 /**
@@ -15,6 +16,10 @@ public class ServicesSeleniumFacade {
 
     public MainPageObject mainPageObject() {
        return new MainPageObject(webDriver);
+    }
+
+    public CreatePageObject createPageObject() {
+        return new CreatePageObject(webDriver);
     }
 
 

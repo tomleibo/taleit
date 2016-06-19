@@ -2,7 +2,7 @@
 
     <form id="storyForm" ng-submit="sendPost()">
 
-        <input class="titleInput" ng-model="formData.formStoryTitle" type="text"
+        <input id="sInput" class="titleInput" ng-model="formData.formStoryTitle" type="text"
                placeholder="Your Story Title Goes Here.."
                required>
 
@@ -14,7 +14,7 @@
             </select>
         </div>
 
-        <input requried class="titleInput" ng-model="formData.formTitle" type="text"
+        <input requried id="pInput" class="titleInput" ng-model="formData.formTitle" type="text"
                placeholder="Your Chapter Title Goes Here..">
 
         <textarea form="storyForm" ng-model="formData.formText" required placeholder="Write Your Story.."></textarea>
