@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import gurstudio.com.taleitapp.R;
+import gurstudio.com.taleitapp.network.taleit.FacebookLoginRequest;
+import gurstudio.com.taleitapp.networkhandlers.core.NetworkResponseHandlerBase;
 
 /**
  * Created by gur on 6/18/2016.
@@ -40,14 +47,38 @@ public class FacebookLoginActivity extends TaleItActivity implements FacebookCal
 
     @Override
     protected void initBeforeLayoutInflation() {
-        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
     }
 
     @Override
     public void onSuccess(LoginResult loginResult) {
-        getBaseApplication().getApplicationModel().setLoggedInUser(loginResult.getAccessToken());
-        finish();
+        final AccessToken token = loginResult.getAccessToken();
+        getBaseApplication().getApplicationModel().setAccessToken(token);
+
+        //////////////
+        ProfileTracker profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                this.stopTracking();
+                Profile.setCurrentProfile(currentProfile);
+                getBaseApplication().getApplicationModel().setFacebookProfile(currentProfile);
+
+                getBaseApplication().getNetworkManager().sendAsync(FacebookLoginRequest.create(token, new NetworkResponseHandlerBase(getBaseApplication()) {
+                    @Override
+                    public void onResponse(Object response) {
+                        try {
+                            JSONObject jsonResponse = (JSONObject) response;
+                            String cookie = jsonResponse.getJSONObject("data").getString("cookie");
+                            getBaseApplication().getApplicationModel().setUserCookie(cookie);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }));
+            }
+        };
+        profileTracker.startTracking();
     }
 
     @Override

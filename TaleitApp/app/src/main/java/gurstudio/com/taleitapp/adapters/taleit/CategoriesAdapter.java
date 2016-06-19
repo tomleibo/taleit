@@ -10,11 +10,9 @@ import java.util.List;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.activities.taleit.CategoryBrowserActivity;
-import gurstudio.com.taleitapp.activities.taleit.TaleItActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Category;
-import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.views.taleit.CategoryView;
 
 /**
@@ -42,7 +40,7 @@ public class CategoriesAdapter extends RecyclerViewAdapterBase<CategoryView, Cat
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TaleItApplication.getTaleItModel().setCurrentViewedCategory(item);
+                ((TaleItApplication)(view.getContext().getApplicationContext())).getApplicationModel().setCurrentViewedCategory(item);
                 startActivityForView(v, CategoryBrowserActivity.class);
             }
         });

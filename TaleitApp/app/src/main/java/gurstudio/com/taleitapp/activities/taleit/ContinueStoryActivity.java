@@ -37,29 +37,32 @@ public class ContinueStoryActivity extends TaleItActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String userId = "sharon@gmail.com";
+                if (getBaseApplication().getApplicationModel().getUserCookie().get() == null){
+                    startActivity(FacebookLoginActivity.class);
+                }
+
                 getBaseApplication().getNetworkManager().sendAsync(ContinueStoryRequest
                     .create(
                             getBaseApplication().getApplicationModel().getCurrentViewedStory().get().id.get(),
                             getBaseApplication().getApplicationModel().getCurrentViewedParagraph().get().id.get(),
                             title.getText().toString(),
                             content.getText().toString(),
-                            userId,
+                            getBaseApplication().getApplicationModel().getUserCookie().get(),
                             new NetworkResponseHandlerBase(getBaseApplication()) {
                                 @Override
                                 public void onResponse(Object response) {
-                                    Paragraph paragraph = new Paragraph();
-                                    paragraph.author.set(userId);
-                                    paragraph.text.set(content.getText().toString());
-                                    paragraph.title.set(title.getText().toString());
                                     try {
+                                        Paragraph paragraph = new Paragraph();
+                                        paragraph.author.set(getBaseApplication().getApplicationModel().getFacebookProfile().get().getName());
+                                        paragraph.text.set(content.getText().toString());
+                                        paragraph.title.set(title.getText().toString());
                                         paragraph.id.set(((JSONObject) response).getJSONObject("data").getString("paragraphId"));
                                         getBaseApplication().getApplicationModel().getCurrentViewedParagraph().get().children.add(paragraph);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
 
-                                    ContinueStoryActivity.this.finish();
+                                    finish();
                                 }
                             }
                     ));
@@ -67,4 +70,3 @@ public class ContinueStoryActivity extends TaleItActivity {
         });
     }
 }
-

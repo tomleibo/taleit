@@ -8,12 +8,15 @@ import gurstudio.com.taleitapp.activities.core.ActivityBase;
 import gurstudio.com.taleitapp.model.core.ApplicationModel;
 import gurstudio.com.taleitapp.model.core.DataBinder;
 import gurstudio.com.taleitapp.network.core.NetworkManager;
+import gurstudio.com.taleitapp.model.core.SharedPreferencesManager;
 
 /**
  * Created by gur on 5/17/2016.
  */
 public abstract class ApplicationBase<M extends ApplicationModel, N extends NetworkManager, A extends ActivityBase> extends Application{
+    static final String GLOBAL_PREFERENCES = "global_preferences";
     private DataBinder binder;
+    private SharedPreferencesManager sharedPreferencesManager;
     private M applicationModel;
     private N networkManager;
     private A currentActivity;
@@ -23,6 +26,7 @@ public abstract class ApplicationBase<M extends ApplicationModel, N extends Netw
         super.onCreate();
 
         binder = new DataBinder();
+        sharedPreferencesManager = new SharedPreferencesManager(GLOBAL_PREFERENCES, this);
         applicationModel = createApplicationModel();
         networkManager = createNetworkManager();
     }
@@ -47,4 +51,6 @@ public abstract class ApplicationBase<M extends ApplicationModel, N extends Netw
     public A getCurrentActivity(){
         return currentActivity;
     }
+
+    public SharedPreferencesManager getSharedPreferencesManager() { return sharedPreferencesManager; }
 }
