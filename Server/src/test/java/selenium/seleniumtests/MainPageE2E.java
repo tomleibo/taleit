@@ -41,6 +41,5 @@ public class MainPageE2E extends SeleniumBase {
         width = elems.get(0).getCssValue("width");
         assertTrue(width.contains("220"));
 
-
     }
 }

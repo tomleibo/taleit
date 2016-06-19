@@ -26,6 +26,10 @@ public class MainPageObject {
         return webDriver.findElements(By.className("categoryImg"));
     }
 
+    public WebElement createButton(){
+        return webDriver.findElement(By.className("createButton"));
+    }
+
     public Actions getAction(){
         Actions action = new Actions(webDriver);
         return action;
