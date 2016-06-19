@@ -178,19 +178,15 @@
     app.directive("createButton", function () {
         return {
             restrict: "E",
-            scope: {
-                text: '@',
-                linkToUrl: '@'
-            },
             templateUrl: "/html/create-button.html"
 
         };
     });
 
-    app.directive("storyForm", function () {
+    app.directive("createStoryForm", function () {
         return {
             restrict: "E",
-            templateUrl: "/html/story-form.html",
+            templateUrl: "/html/create-story-form.html",
             scope: {
                 isFirstStory: '@'
 
