@@ -72,6 +72,7 @@ public class FacebookLoginServlet extends TaleitServlet{
         String username = fbresjson.getString("email");
 
         SignUp signup = new SignUp(Server.Instance.getSafeModel(), username, Integer.toString((new SecureRandom()).nextInt()));
+        signup.setFacebookId(facebookId);
         signup.setName(name);
         try {
             signup.perform();

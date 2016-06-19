@@ -27,7 +27,12 @@ public class User {
         this.name = null;
     }
 
-    public String getPasswordHash(String password) {
+    public User() {
+
+    }
+
+
+        public String getPasswordHash(String password) {
         return DigestUtils.sha1Hex(password + salt);
     }
 
@@ -48,29 +53,34 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
-    public void setFacebookId(String facebookId) {
+    public User setFacebookId(String facebookId) {
         this.facebookId = facebookId;
+        return this;
     }
 
     public String getFacebookId(){
         return this.facebookId;
     }
 
-    public void setFacebookAccessToken(String facebookAccessToken) {
+    public User setFacebookAccessToken(String facebookAccessToken) {
         this.facebookAccessToken = facebookAccessToken;
+        return this;
     }
 
     public String getFacebookAccessToken(){
         return this.facebookAccessToken;
     }
 
-    public void setName(String name) {
+    public User setName(String name) {
         this.name = name;
+        return this;
     }
+
 
     public String getName() {
         return this.name;
@@ -78,5 +88,24 @@ public class User {
 
     public String getSalt() {
         return this.salt;
+    }
+
+    public User setSalt(String salt){
+        this.salt = salt;
+        return this;
+    }
+
+    public User setPasswordHash(String passHash){
+        this.passwordHash = passHash;
+        return this;
+    }
+
+    public User setCookie(String cookie){
+        this.cookie = cookie;
+        return this;
+    }
+
+    public String getCookie() {
+        return cookie;
     }
 }

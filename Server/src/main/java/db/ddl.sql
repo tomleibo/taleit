@@ -38,7 +38,7 @@ create table AUTHOR (
 	SALT varchar(256) not null,
 	COOKIE varchar(100),
 	FACEBOOK_ID varchar(100),
-	FACEBOOK_ACCESS_TOKEN varchar(100),
+	FACEBOOK_ACCESS_TOKEN varchar(256),
 	NAME varchar(100)
 );
 

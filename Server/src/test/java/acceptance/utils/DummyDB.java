@@ -1,6 +1,7 @@
 package acceptance.utils;
 
 import acceptance.core.LoggedInBaseAcceptance;
+import db.DbHandler;
 import model.Categories;
 import org.junit.Ignore;
 import org.junit.Test;
