@@ -17,3 +17,4 @@ public class GetCategoriesRequest extends TaleItNetworkRequestBase {
         return new GetCategoriesRequest(handler, handler);
     }
 }
+

@@ -6,7 +6,7 @@
 
     <color name="theme_background">@color/theme_black</color>
     <color name="theme_text_header">@color/theme_white</color>
-    <color name="theme_text_content">@color/theme_grey</color>
+    <color name="theme_text_content">@color/theme_light_grey</color>
     <color name="theme_text_background">#5A000000</color>
     <color name="theme_primary">@color/theme_purple</color>
     <color name="theme_primary_accent">@color/theme_blue</color>
@@ -16,6 +16,7 @@
     <color name="theme_black">#2D2D2D</color>
     <color name="theme_white">#EAE4E4</color>
     <color name="theme_grey">#505050</color>
+    <color name="theme_light_grey">#C0C0C0</color>
     <color name="theme_yellow">#BD9F00</color>
     <color name="theme_blue">#303D74</color>
     <color name="theme_purple">#452F74</color>
@@ -23,4 +24,5 @@
     <color name="theme_red">#AA4639</color>
     <color name="theme_orange">#D87721</color>
     <color name="theme_pink">#CE6DAC</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

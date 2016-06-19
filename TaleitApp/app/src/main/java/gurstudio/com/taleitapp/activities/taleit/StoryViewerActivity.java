@@ -83,10 +83,19 @@ public class StoryViewerActivity extends TaleItActivity {
 
         storyTitle.setText(currentStory.title.get());
         storyAuthor.setText(currentStory.author.get());
-        Picasso.with(this)
-                .load(currentStory.image.get())
-                .fit()
-                .into(image);
+
+        try {
+            Picasso.with(this)
+                    .load(currentStory.image.get())
+                    .fit()
+                    .into(image);
+        }
+        catch (Exception ex){
+            Picasso.with(this)
+                    .load(R.drawable.logo)
+                    .fit()
+                    .into(image);
+        }
 
         Paragraph currentParagraph = getBaseApplication().getApplicationModel().getCurrentViewedParagraph().get();
         paragraphText.setText(currentParagraph.text.get());

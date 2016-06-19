@@ -13,6 +13,7 @@ import gurstudio.com.taleitapp.activities.taleit.StoryViewerActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Story;
+import gurstudio.com.taleitapp.model.taleit.TaleItModel;
 import gurstudio.com.taleitapp.views.taleit.StoryCardView;
 
 /**
@@ -32,6 +33,7 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
     @Override
     protected void onBindViewToItem(final StoryCardView view, final Story item) {
         ((TextView)view.findViewById(R.id.story_name)).setText(item.title.get());
+        ((TextView)view.findViewById(R.id.story_content)).setText(item.root.get().text.get());
         ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
 
         try {
@@ -48,9 +50,11 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TaleItApplication.getTaleItModel().setCurrentViewedStory(item);
-                TaleItApplication.getTaleItModel().setCurrentViewedParagraph(item.root.get());
-                TaleItApplication.getTaleItModel().getNavigationPath().clear();
+                TaleItModel model = ((TaleItApplication)(view.getContext().getApplicationContext())).getApplicationModel();
+
+                model.setCurrentViewedStory(item);
+                model.setCurrentViewedParagraph(item.root.get());
+                model.getNavigationPath().clear();
                 startActivityForView(view, StoryViewerActivity.class);
             }
         });

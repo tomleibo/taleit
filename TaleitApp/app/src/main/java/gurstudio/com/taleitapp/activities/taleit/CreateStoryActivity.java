@@ -8,11 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
+import com.facebook.Profile;
 
 import java.util.List;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.CategoryNamesAdapter;
+import gurstudio.com.taleitapp.model.core.Observer;
 import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.network.taleit.CreateStoryRequest;
@@ -20,14 +22,13 @@ import gurstudio.com.taleitapp.networkhandlers.taleit.CreateStoryResponseHandler
 
 public class CreateStoryActivity extends TaleItActivity {
     private EditText storyName;
+    private TextView author;
     private Category selectedCategory;
-    private EditText content;
     private EditText rootTitle;
     private EditText rootContent;
     private TextView categoriesLabel;
     private RecyclerView categoriesRecycler;
     private ImageView apply;
-
 
     @Override
     protected int getContentViewLayoutResourceId() {
@@ -37,7 +38,8 @@ public class CreateStoryActivity extends TaleItActivity {
     @Override
     protected void findViews() {
         storyName = (EditText)findViewById(R.id.story_name);
-        content = (EditText)findViewById(R.id.story_description);
+        author = (TextView) findViewById(R.id.story_author);
+
         categoriesLabel = (TextView)findViewById(R.id.categories_label);
         categoriesRecycler = (RecyclerView)findViewById(R.id.categories_recycler);
 
@@ -48,12 +50,42 @@ public class CreateStoryActivity extends TaleItActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    @Override
     protected void initViews() {
         initApply();
 
         initCategories();
 
         initCategoryLabel();
+
+        initAuthor();
+    }
+
+    private void initAuthor() {
+        Profile profile = getBaseApplication().getApplicationModel().getFacebookProfile().get();
+        if (profile != null) {
+            author.setText(profile.getName());
+        }
+
+        author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(FacebookLoginActivity.class);
+            }
+        });
+
+        getCreateBinder().bind(getBaseApplication().getApplicationModel().getFacebookProfile(), new Observer<Profile>() {
+            @Override
+            public void onUpdate(Profile value) {
+                if (value != null) {
+                    author.setText(value.getName());
+                }
+            }
+        });
     }
 
     private void initCategoryLabel() {
@@ -90,7 +122,7 @@ public class CreateStoryActivity extends TaleItActivity {
             @Override
             public void onClick(View v) {
                 String userId;
-                AccessToken userToken = getBaseApplication().getApplicationModel().getUser();
+                AccessToken userToken = getBaseApplication().getApplicationModel().getAccessToken();
                 if (userToken != null){
                     userId = userToken.getUserId();
                 }
@@ -101,7 +133,7 @@ public class CreateStoryActivity extends TaleItActivity {
 
                 final Story newStory = new Story();
                 newStory.title.set(storyName.getText().toString());
-                newStory.author.set(userId);
+                newStory.author.set(getBaseApplication().getApplicationModel().getFacebookProfile().get().getName());
                 newStory.category.set(selectedCategory.name.get());
                 newStory.root.get().title.set(rootTitle.getText().toString());
                 newStory.root.get().text.set(rootContent.getText().toString());
@@ -112,7 +144,7 @@ public class CreateStoryActivity extends TaleItActivity {
                                 selectedCategory.name.get(),
                                 rootTitle.getText().toString(),
                                 rootContent.getText().toString(),
-                                userId,
+                                getBaseApplication().getApplicationModel().getUserCookie().get(),
                                 new CreateStoryResponseHandler(getBaseApplication(), newStory)
                         ));
             }
