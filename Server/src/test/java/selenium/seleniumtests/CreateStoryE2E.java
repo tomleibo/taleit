@@ -18,11 +18,13 @@ public class CreateStoryE2E extends SeleniumBase {
     public void buildup() {
         super.buildup();
         mainPageObject = facade.mainPageObject();
+        mainPageObject.wait2secs();
     }
 
     @Test
     public void createStoryAndVerifyOnStoryPage() {
         mainPageObject.createButton().click();
+        mainPageObject.wait2secs();
         CreatePageObject createPageObject = facade.createPageObject();
         createPageObject.storyTitle().sendKeys("The True King Of The North");
         createPageObject.paragraphTitle().sendKeys("Dark Beginning");
@@ -31,6 +33,7 @@ public class CreateStoryE2E extends SeleniumBase {
         createPageObject.chooseCategotyByIndex(3);
 
         createPageObject.setItFree().click();
+        webDriver.switchTo().alert().accept();
 
         webDriver.navigate().to(URL_BASE);
 
