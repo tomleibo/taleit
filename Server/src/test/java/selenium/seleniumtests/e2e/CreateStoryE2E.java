@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import selenium.pageObjects.CreatePageObject;
 import selenium.pageObjects.MainPageObject;
+import selenium.pageObjects.ViewStoryObject;
 import selenium.seleniumtests.E2EBase;
 
 /**
@@ -63,6 +64,19 @@ public class CreateStoryE2E extends E2EBase {
         log("Click on 'Set It Free' button");
         createPageObject.setItFree().click();
         waitFor(TIME_TO_WAIT);
+
+        log("Verify Story Title text");
+        ViewStoryObject viewStoryObject = facade.viewStoryObject();
+        Assert.assertEquals("Title is not as expected ", viewStoryObject.storyTitle().getText(), STORY_TITLE);
+
+        log("Verify Paragraph Title text");
+        Assert.assertEquals("Paragraph Title is not as expected ", viewStoryObject.paragraphTitle().getText(),
+                            PARAGRAPH_TITLE);
+
+        log("Verify Body text");
+        Assert.assertTrue("Body is not as expected ", BODY_TEXT.contains(viewStoryObject.body().getText().substring
+                (0,60)));
+
 
     }
 

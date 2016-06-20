@@ -1,14 +1,14 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer" ng-init="showLogo=false">
     <div>
         <div class="paragraphViewer">
-            <h1>{{storyInfo.data.story.title}}</h1>
+            <h1 id="storyTitle">{{storyInfo.data.story.title}}</h1>
 
-            <h3>{{storyInfo.data.title}}</h3>
+            <h3 id="paragraphTitle">{{storyInfo.data.title}}</h3>
 
 
-            <h5>{{storyInfo.data.text}}</h5>
+            <h5 id="bodyText">{{storyInfo.data.text}}</h5>
 
-            <h6> By: {{storyInfo.data.author}}</h6>
+            <h6 id="Author"> By: {{storyInfo.data.author}}</h6>
 
         </div>
 

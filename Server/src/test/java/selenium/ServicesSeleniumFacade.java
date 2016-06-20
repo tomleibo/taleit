@@ -2,8 +2,9 @@ package selenium;
 
 import org.openqa.selenium.WebDriver;
 import selenium.pageObjects.CreatePageObject;
-import selenium.pageObjects.FaceboogPage;
+import selenium.pageObjects.FacebookPage;
 import selenium.pageObjects.MainPageObject;
+import selenium.pageObjects.ViewStoryObject;
 
 /**
  * Created by Shai on 07/06/2016.
@@ -23,8 +24,12 @@ public class ServicesSeleniumFacade {
         return new CreatePageObject(webDriver);
     }
 
-    public FaceboogPage faceboogPage() {
-        return new FaceboogPage(webDriver);
+    public FacebookPage facebookPage() {
+        return new FacebookPage(webDriver);
+    }
+
+    public ViewStoryObject viewStoryObject() {
+        return new ViewStoryObject(webDriver);
     }
 
 

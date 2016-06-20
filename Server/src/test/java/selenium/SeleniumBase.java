@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import selenium.pageObjects.FaceboogPage;
+import selenium.pageObjects.FacebookPage;
 import selenium.pageObjects.MainPageObject;
 
 /**
@@ -12,7 +12,7 @@ import selenium.pageObjects.MainPageObject;
  */
 public class SeleniumBase {
 
-    protected static final int TIME_TO_WAIT = 2000;
+    protected static final int TIME_TO_WAIT = 500;
     protected static final String URL_BASE = "http://localhost:8080";
     protected static final String STORY_TITLE = "Lorem ipsum dolor sit amet, conse";
     protected static final String PARAGRAPH_TITLE = "Dicimus aliquem hilare vivere";
@@ -73,19 +73,19 @@ public class SeleniumBase {
             webDriver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
         }
         waitFor(TIME_TO_WAIT);
-        FaceboogPage faceboogPage = facade.faceboogPage();
+        FacebookPage facebookPage = facade.facebookPage();
 
         log("Insert Email");
-        faceboogPage.email().sendKeys("taleit42@gmail.com");
+        facebookPage.email().sendKeys("taleit42@gmail.com");
         waitFor(TIME_TO_WAIT);
 
         log("Insert Password");
-        faceboogPage.password().sendKeys("BritneySpears42");
+        facebookPage.password().sendKeys("BritneySpears42");
         waitFor(TIME_TO_WAIT);
 
         log("Click login");
-        faceboogPage.login().click();
+        facebookPage.login().click();
         webDriver.switchTo().window(parentHandle);
-        waitFor(TIME_TO_WAIT);
+        waitFor(3000);
     }
 }

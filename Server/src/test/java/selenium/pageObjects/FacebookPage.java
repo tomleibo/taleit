@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 /**
  * Created by sharonk on 6/20/2016
  */
-public class FaceboogPage {
+public class FacebookPage {
 
     WebDriver webDriver;
 
-    public FaceboogPage(WebDriver webDriver) {
+    public FacebookPage(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
