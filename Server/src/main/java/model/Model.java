@@ -1,6 +1,8 @@
 package model;
 
+import db.DbHandler;
 import exceptions.LoginException;
+import javafx.util.Pair;
 
 import java.util.*;
 
@@ -8,26 +10,28 @@ import java.util.*;
  * Created by gur on 11/6/2015.
  */
 public class Model {
-    final private Map<String, User> users;
     final private Set<User> loggedUsers;
     final private Collection<Story> stories;
+    private final DbHandler db;
 
     public Model(){
-        this.users = new HashMap<String, User>();
         this.loggedUsers = new HashSet<User>();
         this.stories = new HashSet<Story>();
+        this.db = new DbHandler();
+        db.connect();
     }
 
     public void addUser(User user){
-        users.put(user.getUsername(), user);
+        db.InsertUser(user);
     }
 
     public boolean userExists(String username) {
-        return users.containsKey(username);
+        User user = db.queryUser("USERNAME", username);
+        return (user != null);
     }
 
     public String loginUser(String username, String password) {
-        User user = users.get(username);
+        User user = db.queryUser("USERNAME", username);
 
         if (user.getPasswordHash(password).equals(user.passwordHash)){
             if (!loggedUsers.contains(user)){
@@ -41,8 +45,13 @@ public class Model {
         }
     }
 
+    /**
+     * facebook login uses this
+     * @param username
+     * @return
+     */
     public String loginUser(String username) {
-        User user = users.get(username);
+        User user = db.queryUser("USERNAME", username);
         if (!loggedUsers.contains(user)){
             user.cookie = UUID.randomUUID().toString();
             loggedUsers.add(user);
@@ -82,7 +91,7 @@ public class Model {
     }
 
     public boolean isUserLoggedIn(String userName){
-         return getLoggedUsers().contains(users.get(userName));
+        return getLoggedUsers().contains( db.queryUser("USERNAME", userName));
     }
 
     public Collection<Story> getStories(String category) {
@@ -121,8 +130,12 @@ public class Model {
     }
 
     public void init() {
-        this.users.clear();
         this.loggedUsers.clear();
         this.stories.clear();
+        this.db.truncateTables();
+    }
+
+    public void UserUpdate(User user) {
+        this.db.updateUser(user);
     }
 }

@@ -1,18 +1,52 @@
 <div class="main" ng-controller="CategoriesController as categoriesSection">
-
-    <create-button></create-button>
-
-    <div id="categories">
-        <div class=categoryClass ng-repeat="category in categoriesSection.categoriesResult.data.categories">
-            <a ng-href="/#/categories/{{category.name}}">
-                <p align="center" class=categoryName> {{category.name}} </p>
-
-                <div class="grow pic">
-                    <img class=categoryImg ng-src={{category.image}}>
-                </div>
-            </a>
-
-        </div>
+    <div id="create">
+        <create-button></create-button>
     </div>
+
+
+    <table id="categories">
+        <tr>
+            <td class=categoryClass
+                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3">
+
+                <a ng-href="/#/categories/{{category.name}}">
+                    <p align="center" class=categoryName> {{category.name}} </p>
+
+                    <div class="grow pic">
+                        <img class=categoryImg ng-src={{category.image}}>
+                    </div>
+                </a>
+            </td>
+
+        </tr>
+        <tr>
+            <td class=categoryClass
+                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3 : 3  ">
+
+                <a ng-href="/#/categories/{{category.name}}">
+                    <p align="center" class=categoryName> {{category.name}} </p>
+
+                    <div class="grow pic">
+                        <img class=categoryImg ng-src={{category.image}}>
+                    </div>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class=categoryClass
+                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: -3">
+
+                <a ng-href="/#/categories/{{category.name}}">
+                    <p align="center" class=categoryName> {{category.name}} </p>
+
+                    <div class="grow pic">
+                        <img class=categoryImg ng-src={{category.image}}>
+                    </div>
+                </a>
+            </td>
+
+        </tr>
+    </table>
+
 
 </div>

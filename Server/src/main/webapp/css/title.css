@@ -142,6 +142,11 @@ body::after {
     48vw 28vh .1vmin rgba(200,255,230,.7);
 }
 
+#logo{
+    position: fixed;
+    left: 0;
+}
+
 #logo h1 {
     margin: 0;
     height: 12vmin;
