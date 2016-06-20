@@ -18,6 +18,7 @@ import gurstudio.com.taleitapp.views.taleit.ParagraphView;
  */
 public class ParagraphViewAdapter extends RecyclerViewAdapterBase<ParagraphView, Paragraph> {
 
+
     public ParagraphViewAdapter(List<Paragraph> items) {
         super(items);
     }
@@ -33,7 +34,6 @@ public class ParagraphViewAdapter extends RecyclerViewAdapterBase<ParagraphView,
         ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
 
         view.setParagraph(item);
-        view.setBackgroundResource(R.color.theme_green);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
