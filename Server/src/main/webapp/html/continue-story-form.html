@@ -2,12 +2,13 @@
 
     <form id="storyForm" ng-submit="sendPost()">
 
-       <h2> Continue </h2>
+       <h2 id="paragraphInputf"> Continue </h2>
 
-        <input required class="titleInput" ng-model="formData.formTitle" type="text"
+        <input id="paragraphInput" required class="titleInput" ng-model="formData.formTitle" type="text"
                placeholder="Your Chapter Title Goes Here" >
 
-        <textarea form="storyForm" ng-model="formData.formText" required placeholder="Write Your Story.."></textarea>
+        <textarea id="bodyForm" form="storyForm" ng-model="formData.formText" required
+                  placeholder="Write Your Story.."></textarea>
 
         <input class="submitBtn" type="submit" value="Set it free">
 

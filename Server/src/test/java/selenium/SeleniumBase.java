@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import selenium.pageObjects.CreatePageObject;
 import selenium.pageObjects.FacebookPage;
 import selenium.pageObjects.MainPageObject;
 
@@ -28,6 +29,9 @@ public class SeleniumBase {
             "vitam sapientia. At hoc in eo M. An eiusdem modi? Sed tu istuc dixti bene Latine, parum plane. Occultum " +
             "facinus esse potuerit, gaudebit; Nosti, credo, illud: Nemo pius est, qui pietatem-; Quamquam te quidem video " +
             "minime esse deterritum. Quare attende, quaeso.";
+
+    protected static final String CONTINUE_PARAGRAPH_TITLE = "WOW This Is Great Paragraph Title";
+
 
     protected WebDriver webDriver;
     protected ServicesSeleniumFacade facade;
@@ -87,5 +91,33 @@ public class SeleniumBase {
         facebookPage.login().click();
         webDriver.switchTo().window(parentHandle);
         waitFor(3000);
+    }
+
+    protected void createNewStory(){
+        log("Click on 'Create' button");
+        MainPageObject mainPageObject = facade.mainPageObject();
+        mainPageObject.createButton().click();
+        waitFor(TIME_TO_WAIT);
+
+        log("Fill Story Title");
+        CreatePageObject createPageObject = facade.createPageObject();
+        createPageObject.storyTitle().sendKeys(STORY_TITLE);
+        waitFor(TIME_TO_WAIT);
+
+        log("Fill Paragraph Title");
+        createPageObject.paragraphTitle().sendKeys(PARAGRAPH_TITLE);
+        waitFor(TIME_TO_WAIT);
+
+        log("Fill Body text");
+        createPageObject.body().sendKeys(BODY_TEXT);
+        waitFor(TIME_TO_WAIT);
+
+        log("Choose Category");
+        createPageObject.chooseCategotyByIndex(3);
+        waitFor(TIME_TO_WAIT);
+
+        log("Click on 'Set It Free' button");
+        createPageObject.setItFree().click();
+        waitFor(TIME_TO_WAIT);
     }
 }
