@@ -13,7 +13,7 @@ import selenium.pageObjects.MainPageObject;
  */
 public class SeleniumBase {
 
-    protected static final int TIME_TO_WAIT = 500;
+    protected static final int TIME_TO_WAIT = 1500;
     protected static final String URL_BASE = "http://localhost:8080";
     protected static final String STORY_TITLE = "Lorem ipsum dolor sit amet, conse";
     protected static final String PARAGRAPH_TITLE = "Dicimus aliquem hilare vivere";
