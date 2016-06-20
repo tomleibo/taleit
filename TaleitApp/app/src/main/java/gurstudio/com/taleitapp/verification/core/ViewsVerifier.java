@@ -3,14 +3,14 @@ package gurstudio.com.taleitapp.verification.core;
 import android.app.Activity;
 import android.view.View;
 
+import com.gurkashi.fj.lambdas.Predicate;
+import com.gurkashi.fj.lambdas.Selector;
+import com.gurkashi.fj.queries.stracture.Queriable;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-
-import lambdas.Predicate;
-import lambdas.Selector;
-import queries.stracture.NestedQuery;
 
 /**
  * Created by gur on 6/20/2016.
@@ -24,7 +24,7 @@ public class ViewsVerifier {
             fieldCollection.add(field);
         }
 
-        Collection<VerificationException> errors = NestedQuery.create(Field.class)
+        Collection<VerificationException> errors = Queriable.create(Field.class)
                 .where(new Predicate<Field>() {
                     @Override
                     public boolean predict(Field field) {

@@ -1,5 +1,8 @@
 package gurstudio.com.taleitapp.networkhandlers.taleit;
 
+import com.gurkashi.fj.lambdas.Selector;
+import com.gurkashi.fj.queries.stracture.Queriable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,8 +11,6 @@ import java.util.Collection;
 import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Category;
-import lambdas.Selector;
-import queries.stracture.NestedQuery;
 
 public class GetCategoriesResponseHandler extends TaleItResponseHandlerBase {
     public GetCategoriesResponseHandler(TaleItApplication application) {
@@ -26,7 +27,7 @@ public class GetCategoriesResponseHandler extends TaleItResponseHandlerBase {
         }
 
         try {
-            NestedQuery.create(JSONObject.class)
+            Queriable.create(JSONObject.class)
                     .select(new Selector<JSONObject, Category>() {
                         @Override
                         public Category select(JSONObject jsonObject) {
