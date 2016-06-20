@@ -9,4 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Matching {
     String[] regex() default { ".*" };
+    String message() default "Text is not matching pattern";
 }

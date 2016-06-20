@@ -10,5 +10,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface NotEmpty {}
+public @interface NotEmpty {
+    String message() default "Text is not empty";
+}
 

@@ -13,7 +13,7 @@ public class NotEmptyVerificationAnnotationStrategy extends VerificationAnnotati
     @Override
     protected void verifyFieldValue(Object value) throws VerificationException {
         if (((TextView)value).getText().toString().isEmpty()){
-            fail();
+            fail(getAnnotation().message());
         }
     }
 

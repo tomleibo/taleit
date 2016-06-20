@@ -21,20 +21,21 @@ import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.network.taleit.CreateStoryRequest;
 import gurstudio.com.taleitapp.networkhandlers.taleit.CreateStoryResponseHandler;
+import gurstudio.com.taleitapp.verification.core.Matching;
 import gurstudio.com.taleitapp.verification.core.NotEmpty;
 import gurstudio.com.taleitapp.verification.core.VerificationException;
 import gurstudio.com.taleitapp.verification.core.ViewsVerifier;
 
 public class CreateStoryActivity extends TaleItActivity {
-    @NotEmpty
+    @NotEmpty(message = "Must provide story name")
     private EditText storyName;
-    @NotEmpty
+    @NotEmpty(message = "Must login in order to post")
     private TextView author;
-    @NotEmpty
+    @NotEmpty(message = "Must select a title for your first paragraph")
     private EditText rootTitle;
-    @NotEmpty
+    @NotEmpty(message = "Must create a story")
     private EditText rootContent;
-    @NotEmpty
+    @Matching(regex = "/^\\s*\\S.*$/", message = "Must select a category from the list")
     private TextView categoriesLabel;
 
     private Category selectedCategory;

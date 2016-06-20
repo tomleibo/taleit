@@ -20,7 +20,7 @@ public class MatchingVerificationAnnotationStrategy extends VerificationAnnotati
             }
         }
 
-        fail(text + " is not permitted");
+        fail(getAnnotation().message());
     }
 
     @Override
