@@ -1,16 +1,16 @@
-package selenium.seleniumtests;
+package selenium.seleniumtests.e2e;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import selenium.SeleniumBase;
 import selenium.pageObjects.CreatePageObject;
-import selenium.pageObjects.FaceboogPage;
 import selenium.pageObjects.MainPageObject;
+import selenium.seleniumtests.E2EBase;
 
 /**
  * Created by sharonk on 6/19/2016
  */
-public class CreateStoryE2E extends SeleniumBase {
+public class CreateStoryE2E extends E2EBase {
 
     private MainPageObject mainPageObject;
 
@@ -31,16 +31,15 @@ public class CreateStoryE2E extends SeleniumBase {
 
         log("Fill Story Title");
         CreatePageObject createPageObject = facade.createPageObject();
-        createPageObject.storyTitle().sendKeys("The True King Of The North");
+        createPageObject.storyTitle().sendKeys(STORY_TITLE);
         waitFor(TIME_TO_WAIT);
 
         log("Fill Paragraph Title");
-        createPageObject.paragraphTitle().sendKeys("Dark Beginning");
+        createPageObject.paragraphTitle().sendKeys(PARAGRAPH_TITLE);
         waitFor(TIME_TO_WAIT);
 
         log("Fill Body text");
-        createPageObject.body().sendKeys("Eddard Stark was just a fool, \n " +
-                                                 "but...");
+        createPageObject.body().sendKeys(BODY_TEXT);
         waitFor(TIME_TO_WAIT);
 
         log("Choose Category");
@@ -51,32 +50,15 @@ public class CreateStoryE2E extends SeleniumBase {
         createPageObject.setItFree().click();
         waitFor(TIME_TO_WAIT);
 
+        log("Verify Alert text");
+        Assert.assertTrue("Alert Text Message is incorrect", webDriver.switchTo().alert().getText().contains
+                ("Facebook"));
+
         log("Accept Alert");
         webDriver.switchTo().alert().accept();
 
         log("Perform Facebook login");
-
-        String parentHandle = webDriver.getWindowHandle();
-        log("Click on 'Facebook Login' button");
-        mainPageObject.facebookButton().click();
-        for (String winHandle : webDriver.getWindowHandles()) {
-            webDriver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-        }
-        waitFor(TIME_TO_WAIT);
-        FaceboogPage faceboogPage = facade.faceboogPage();
-
-        log("Insert Email");
-        faceboogPage.email().sendKeys("taleit42@gmail.com");
-        waitFor(TIME_TO_WAIT);
-
-        log("Insert Password");
-        faceboogPage.password().sendKeys("BritneySpears42");
-        waitFor(TIME_TO_WAIT);
-
-        log("Click login");
-        faceboogPage.login().click();
-        webDriver.switchTo().window(parentHandle);
-        waitFor(TIME_TO_WAIT);
+        performFacebookLogin();
 
         log("Click on 'Set It Free' button");
         createPageObject.setItFree().click();

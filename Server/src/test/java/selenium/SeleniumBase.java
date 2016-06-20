@@ -4,18 +4,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import selenium.pageObjects.FaceboogPage;
+import selenium.pageObjects.MainPageObject;
 
 /**
  * Created by sharonk on 6/11/2016
  */
 public class SeleniumBase {
+
     protected static final int TIME_TO_WAIT = 2000;
-    protected WebDriver webDriver;
     protected static final String URL_BASE = "http://localhost:8080";
+    protected static final String STORY_TITLE = "Lorem ipsum dolor sit amet, conse";
+    protected static final String PARAGRAPH_TITLE = "Dicimus aliquem hilare vivere";
+    protected static final String BODY_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sic enim maiores" +
+            " nostri labores non fugiendos tristissimo tamen verbo aerumnas etiam in deo nominaverunt. Ut non sine causa " +
+            "ex iis memoriae ducta sit disciplina. Sed ut iis bonis erigimur, quae expectamus, sic laetamur iis, quae " +
+            "recordamur. Ita relinquet duas, de quibus etiam atque etiam consideret. Istam voluptatem, inquit, Epicurus " +
+            "ignorat? Sed ne, dum huic obsequor, vobis molestus sim. Suo genere perveniant ad extremum; Quid turpius quam " +
+            "sapientis vitam ex insipientium sermone pendere? Duo Reges: constructio interrete.\n" +
+            "\n" +
+            "Quo modo autem philosophus loquitur? Sed " +
+            "tamen est aliquid, quod nobis non liceat, liceat illis. Quod si ita se habeat, non possit beatam praestare " +
+            "vitam sapientia. At hoc in eo M. An eiusdem modi? Sed tu istuc dixti bene Latine, parum plane. Occultum " +
+            "facinus esse potuerit, gaudebit; Nosti, credo, illud: Nemo pius est, qui pietatem-; Quamquam te quidem video " +
+            "minime esse deterritum. Quare attende, quaeso.";
+
+    protected WebDriver webDriver;
     protected ServicesSeleniumFacade facade;
 
     @Before
-    public void buildup(){
+    public void buildup() {
         System.setProperty("webdriver.chrome.driver", "utils\\chromedriver.exe");
         log("Open new Chrome Driver");
         webDriver = new ChromeDriver();
@@ -24,12 +42,12 @@ public class SeleniumBase {
         log("Navigating to Tale it");
         webDriver.get(URL_BASE);
         facade = new ServicesSeleniumFacade(webDriver);
-       // (new DummyDB()).eraseInjectDummyDB();
+        // (new DummyDB()).eraseInjectDummyDB();
 
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         webDriver.close();
     }
 
@@ -41,7 +59,33 @@ public class SeleniumBase {
         }
     }
 
-    protected void log(String str){
-       System.out.print(str);
+    protected void log(String str) {
+        System.out.println(str);
+    }
+
+    protected void performFacebookLogin() {
+        String parentHandle = webDriver.getWindowHandle();
+
+        log("Click on 'Facebook Login' button");
+        MainPageObject mainPageObject = facade.mainPageObject();
+        mainPageObject.facebookButton().click();
+        for (String winHandle : webDriver.getWindowHandles()) {
+            webDriver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+        }
+        waitFor(TIME_TO_WAIT);
+        FaceboogPage faceboogPage = facade.faceboogPage();
+
+        log("Insert Email");
+        faceboogPage.email().sendKeys("taleit42@gmail.com");
+        waitFor(TIME_TO_WAIT);
+
+        log("Insert Password");
+        faceboogPage.password().sendKeys("BritneySpears42");
+        waitFor(TIME_TO_WAIT);
+
+        log("Click login");
+        faceboogPage.login().click();
+        webDriver.switchTo().window(parentHandle);
+        waitFor(TIME_TO_WAIT);
     }
 }
