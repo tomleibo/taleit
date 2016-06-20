@@ -3,6 +3,7 @@ package selenium.seleniumtests.e2e;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import selenium.pageObjects.ContinuePageObject;
 import selenium.pageObjects.CreatePageObject;
 import selenium.pageObjects.MainPageObject;
 import selenium.pageObjects.ViewStoryObject;
@@ -75,8 +76,35 @@ public class CreateStoryE2E extends E2EBase {
 
         log("Verify Body text");
         Assert.assertTrue("Body is not as expected ", BODY_TEXT.contains(viewStoryObject.body().getText().substring
-                (0,60)));
+                (0, 60)));
 
+        log("Click on Continue story");
+        viewStoryObject.createButton().click();
+        waitFor(TIME_TO_WAIT);
+        ContinuePageObject continuePageObject = facade.continuePageObject();
+
+        log("Fill Paragraph Title");
+        continuePageObject.paragraphTitle().sendKeys(CONTINUE_PARAGRAPH_TITLE);
+        waitFor(TIME_TO_WAIT);
+
+        log("Fill Body text");
+        continuePageObject.body().sendKeys(BODY_TEXT);
+        waitFor(TIME_TO_WAIT);
+
+        log("Click on 'Set It Free'");
+        continuePageObject.setItFree().click();
+
+        log("Verify Story Title text");
+        viewStoryObject = facade.viewStoryObject();
+        Assert.assertEquals("Title is not as expected ", viewStoryObject.storyTitle().getText(), STORY_TITLE);
+
+        log("Verify Paragraph Title text");
+        Assert.assertEquals("Paragraph Title is not as expected ", viewStoryObject.paragraphTitle().getText(),
+                            CONTINUE_PARAGRAPH_TITLE);
+
+        log("Verify Body text");
+        Assert.assertTrue("Body is not as expected ", BODY_TEXT.contains(viewStoryObject.body().getText().substring
+                (0, 60)));
 
     }
 
