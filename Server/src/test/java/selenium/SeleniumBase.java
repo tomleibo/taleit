@@ -17,8 +17,11 @@ public class SeleniumBase {
     @Before
     public void buildup(){
         System.setProperty("webdriver.chrome.driver", "utils\\chromedriver.exe");
+        log("Open new Chrome Driver");
         webDriver = new ChromeDriver();
+        log("Maximize window");
         webDriver.manage().window().maximize();
+        log("Navigating to Tale it");
         webDriver.get(URL_BASE);
         facade = new ServicesSeleniumFacade(webDriver);
        // (new DummyDB()).eraseInjectDummyDB();
@@ -36,5 +39,9 @@ public class SeleniumBase {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void log(String str){
+       System.out.print(str);
     }
 }
