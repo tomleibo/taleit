@@ -2,6 +2,7 @@ package selenium;
 
 import org.openqa.selenium.WebDriver;
 import selenium.pageObjects.CreatePageObject;
+import selenium.pageObjects.FaceboogPage;
 import selenium.pageObjects.MainPageObject;
 
 /**
@@ -21,6 +22,11 @@ public class ServicesSeleniumFacade {
     public CreatePageObject createPageObject() {
         return new CreatePageObject(webDriver);
     }
+
+    public FaceboogPage faceboogPage() {
+        return new FaceboogPage(webDriver);
+    }
+
 
 
 }

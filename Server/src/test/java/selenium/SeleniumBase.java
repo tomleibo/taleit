@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * Created by sharonk on 6/11/2016
  */
 public class SeleniumBase {
+    protected static final int TIME_TO_WAIT = 2000;
     protected WebDriver webDriver;
     protected static final String URL_BASE = "http://localhost:8080";
     protected ServicesSeleniumFacade facade;
@@ -27,5 +28,13 @@ public class SeleniumBase {
     @After
     public void tearDown(){
         webDriver.close();
+    }
+
+    protected void waitFor(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

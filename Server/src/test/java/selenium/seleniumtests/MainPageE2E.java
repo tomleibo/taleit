@@ -34,8 +34,8 @@ public class MainPageE2E extends SeleniumBase {
         Actions action = mainPageObject.getAction();
         action.moveToElement(elems.get(0));
         action.perform();
-        
-        mainPageObject.wait2secs();
+
+        waitFor(TIME_TO_WAIT);
 
         elems = mainPageObject.categoryImages();
         width = elems.get(0).getCssValue("width");
