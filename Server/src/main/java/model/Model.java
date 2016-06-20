@@ -17,7 +17,7 @@ public class Model {
     public Model(){
         this.loggedUsers = new HashSet<User>();
         this.stories = new HashSet<Story>();
-        this.db = new DbHandler();
+        this.db = DbHandler.getInstance();
         db.connect();
     }
 

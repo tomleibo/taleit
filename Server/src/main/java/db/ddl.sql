@@ -5,7 +5,7 @@ drop table IF EXISTS PARAGRAPH;
 create table PARAGRAPH (
 	ID varchar(100) primary key not null,
 	FATHER varchar(100),
-	AUTHOR_ID varchar(100) not null,
+	AUTHOR_ID varchar(100),
 	TEXT text,
 	TITLE varchar(100) not null
 );

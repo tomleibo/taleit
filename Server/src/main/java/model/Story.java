@@ -1,6 +1,7 @@
 package model;
 
 
+import db.DbHandler;
 import exceptions.NoSuchParagraphIdException;
 import exceptions.StoryException;
 
@@ -16,14 +17,14 @@ public class Story {
     private final HashMap<String, Paragraph> paragraphs;
     private String id;
     private String title;
-    private Paragraph root;
+    private String root;
     private Categories category;
     private Set<User> likes;
 
     public Story(String title, Paragraph root, Categories category){
         this.title = title;
         this.id = UUID.randomUUID().toString();
-        this.root = root;
+        this.root = root.getId();
         this.category = category;
         this.paragraphs = new HashMap<String, Paragraph>();
         this.paragraphs.put(root.getId(), root);
@@ -35,11 +36,11 @@ public class Story {
     }
 
     public Paragraph getRoot() {
-        return root;
+        return (DbHandler.getInstance().queryParagraph("ID", root)).iterator().next();
     }
 
     public User getUser() {
-        return root.getUser();
+        return getRoot().getUser();
     }
 
     public Categories getCategory(){
@@ -52,12 +53,13 @@ public class Story {
         }
 
         Paragraph paragraph = new Paragraph(father, text, title, user);
+        DbHandler.getInstance().InsertParagraph(paragraph);
         paragraphs.put(paragraph.getId(), paragraph); // TODO: make paragraphs a collection of paragraph only. implement equals & hashcode by id only
-        father.addChild(paragraph);
         return paragraph;
     }
 
     public Paragraph getParagraphById(String paragraphId) {
+        DbHandler.getInstance().queryParagraph("ID", root);
         if (paragraphs.containsKey(paragraphId)) {
             return paragraphs.get(paragraphId);
         }
