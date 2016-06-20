@@ -1,5 +1,6 @@
 package gurstudio.com.taleitapp.activities.taleit;
 
+import android.app.Dialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 
+import java.util.Collection;
 import java.util.List;
 
 import gurstudio.com.taleitapp.R;
@@ -19,14 +21,23 @@ import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.network.taleit.CreateStoryRequest;
 import gurstudio.com.taleitapp.networkhandlers.taleit.CreateStoryResponseHandler;
+import gurstudio.com.taleitapp.verification.core.NotEmpty;
+import gurstudio.com.taleitapp.verification.core.VerificationException;
+import gurstudio.com.taleitapp.verification.core.ViewsVerifier;
 
 public class CreateStoryActivity extends TaleItActivity {
+    @NotEmpty
     private EditText storyName;
+    @NotEmpty
     private TextView author;
-    private Category selectedCategory;
+    @NotEmpty
     private EditText rootTitle;
+    @NotEmpty
     private EditText rootContent;
+    @NotEmpty
     private TextView categoriesLabel;
+
+    private Category selectedCategory;
     private RecyclerView categoriesRecycler;
     private ImageView apply;
 
@@ -94,8 +105,7 @@ public class CreateStoryActivity extends TaleItActivity {
             public void onClick(View v) {
                 if (categoriesRecycler.getVisibility() == View.VISIBLE) {
                     categoriesRecycler.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     categoriesRecycler.setVisibility(View.VISIBLE);
                 }
             }
@@ -121,13 +131,18 @@ public class CreateStoryActivity extends TaleItActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userId;
                 AccessToken userToken = getBaseApplication().getApplicationModel().getAccessToken();
-                if (userToken != null){
-                    userId = userToken.getUserId();
-                }
-                else {
+                if (userToken == null) {
                     startActivity(FacebookLoginActivity.class);
+                    return;
+                }
+
+                Collection<VerificationException> errors = ViewsVerifier.verifyActivityViews(CreateStoryActivity.this);
+
+                if (!errors.isEmpty()){
+                    Dialog dialog = new Dialog(CreateStoryActivity.this);
+                    dialog.setTitle(errors.iterator().next().getMessage());
+                    dialog.show();
                     return;
                 }
 

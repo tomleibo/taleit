@@ -39,6 +39,7 @@ public class ContinueStoryActivity extends TaleItActivity {
             public void onClick(View v) {
                 if (getBaseApplication().getApplicationModel().getUserCookie().get() == null){
                     startActivity(FacebookLoginActivity.class);
+                    return;
                 }
 
                 getBaseApplication().getNetworkManager().sendAsync(ContinueStoryRequest
