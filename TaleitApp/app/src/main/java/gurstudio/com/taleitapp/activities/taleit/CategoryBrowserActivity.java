@@ -3,13 +3,14 @@ package gurstudio.com.taleitapp.activities.taleit;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.gurkashi.fj.lambdas.Predicate;
+import com.gurkashi.fj.queries.stracture.Queriable;
+
 import java.util.List;
 
 import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.adapters.taleit.StoryCardsAdapter;
 import gurstudio.com.taleitapp.model.taleit.Story;
-import lambdas.Predicate;
-import queries.stracture.NestedQuery;
 
 /**
  * Created by gur on 5/24/2016.
@@ -36,7 +37,7 @@ public class CategoryBrowserActivity extends TaleItActivity {
     private void initCategoriesRecyclerView() {
         storiesRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        List<Story> relevantStories = (List<Story>) NestedQuery.create(Story.class).where(new Predicate<Story>() {
+        List<Story> relevantStories = (List<Story>) Queriable.create(Story.class).where(new Predicate<Story>() {
             @Override
             public boolean predict(Story story) {
                 String storyCategory = story.category.get();
