@@ -2,7 +2,6 @@ package model;
 
 import db.DbHandler;
 import exceptions.LoginException;
-import javafx.util.Pair;
 
 import java.util.*;
 
