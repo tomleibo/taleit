@@ -1,15 +1,16 @@
 html {
     margin: 0;
-    height: 100%;
+}
+
+html, body{
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    line-height: 1.5;
 }
 
 body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: black;
     color: #ccc;
 }
@@ -145,6 +146,10 @@ body::after {
 #logo{
     position: fixed;
     left: 0;
+    justify-content: center;
+
+
+
 }
 
 #logo h1 {

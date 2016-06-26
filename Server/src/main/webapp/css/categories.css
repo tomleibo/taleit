@@ -1,9 +1,4 @@
-#create{
-    z-index: 9;
-    left: 20%;
-    position: absolute;
-
-
+.main{
 }
 
 #categories{
@@ -11,6 +6,8 @@
     top: 40px;
     right: 30px;
     float: right;
+    margin-top: 5%;
+
 }
 .categoryClass {
     float: right;
