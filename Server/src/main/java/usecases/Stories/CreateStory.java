@@ -1,5 +1,6 @@
 package usecases.Stories;
 
+import db.DbHandler;
 import exceptions.InvalidUseCaseParameterException;
 import lang.Function;
 import lang.SafeObject;
@@ -32,6 +33,7 @@ public class CreateStory extends ActionUseCase {
         });
 
         this.root = new Paragraph(null, rootText, rootTitle, user);
+        DbHandler.getInstance().InsertParagraph(this.root);
     }
 
     protected void pre(){

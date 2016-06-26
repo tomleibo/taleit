@@ -2,7 +2,6 @@ package model;
 
 import db.DbHandler;
 import exceptions.LoginException;
-import javafx.util.Pair;
 
 import java.util.*;
 
@@ -11,13 +10,11 @@ import java.util.*;
  */
 public class Model {
     final private Set<User> loggedUsers;
-    final private Collection<Story> stories;
     private final DbHandler db;
 
     public Model(){
         this.loggedUsers = new HashSet<User>();
-        this.stories = new HashSet<Story>();
-        this.db = new DbHandler();
+        this.db = DbHandler.getInstance();
         db.connect();
     }
 
@@ -83,7 +80,7 @@ public class Model {
     }
 
     public void addStory(Story story) {
-        stories.add(story);
+        db.InsertStory(story);
     }
 
     public Set<User> getLoggedUsers(){
@@ -96,16 +93,12 @@ public class Model {
 
     public Collection<Story> getStories(String category) {
         if (category == null){
-            return stories;
+            return db.queryStory("1", "1");
         }
-        category = Categories.getCategoryByString(category).getValue();
-        Collection<Story> categoryStories = new HashSet<Story>();
-        for (Story story : stories) {
-            if (story.getCategory().getValue().equals(category)){
-                categoryStories.add(story);
-            }
-        }
-        return categoryStories;
+
+       category = Categories.getCategoryByString(category).getValue();
+
+       return db.queryStory("CATEGORY", category);
     }
 
     public Paragraph concactinateParagraph(Story story, Paragraph father, String title, String text, User user) {
@@ -121,17 +114,17 @@ public class Model {
     }
 
     public Story getStory(String storyId) {
-        for (Story story : getStories(null)) {
-            if (story.getId().equals(storyId)) {
-                return story;
-            }
+        Set<Story> stories = db.queryStory("ID", storyId);
+
+        if (stories.size() > 0){
+            return stories.iterator().next();
         }
-        throw new RuntimeException("story (id = " + storyId + ") not found");
+
+       throw new RuntimeException("story (id = " + storyId + ") not found");
     }
 
     public void init() {
         this.loggedUsers.clear();
-        this.stories.clear();
         this.db.truncateTables();
     }
 
