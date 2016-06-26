@@ -35,7 +35,7 @@
         var catList = this;
         catList.categoriesResult = [];
 
-        $http.get('http://127.0.0.1:8080/rest/stories/categories').success(function (data) {
+        $http.get('/rest/stories/categories').success(function (data) {
             catList.categoriesResult = data;
         });
     }]);

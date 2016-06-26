@@ -18,7 +18,7 @@ public enum Categories {
     private final String image;
 
     Categories(String value, String image) {
-        final String base = "http://localhost:8080/resources/categories/";
+        final String base = "/resources/categories/";
         this.value = value;
         this.image = base+image;
     }
