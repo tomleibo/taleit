@@ -18,11 +18,6 @@ public class UserDbHandler {
 
     private Connection conn;
 
-    public UserDbHandler(){
-        this.conn = conn;
-    }
-
-
     /**
      *
      * @return list of users

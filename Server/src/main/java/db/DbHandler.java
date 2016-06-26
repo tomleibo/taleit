@@ -2,6 +2,7 @@ package db;
 
 
 import model.Paragraph;
+import model.Story;
 import model.User;
 
 import java.sql.*;
@@ -10,9 +11,11 @@ import java.util.Set;
 
 public final class DbHandler {
     private static DbHandler instance = null;
+
     private DbHandler() {
         userDbHandler = new UserDbHandler();
         paragraphDbHandler = new ParagraphDbHandler();
+        storyDbHandler = new StoryDbHandler();
     }
 
     public static synchronized DbHandler getInstance() {
@@ -21,12 +24,11 @@ public final class DbHandler {
             instance.connect();
             instance.userDbHandler.setConn(instance.conn);
             instance.paragraphDbHandler.setConn(instance.conn);
+            instance.storyDbHandler.setConn(instance.conn);
         }
 
         return instance;
     }
-
-
 
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
@@ -36,6 +38,8 @@ public final class DbHandler {
     private Connection conn;
     private UserDbHandler userDbHandler;
     private ParagraphDbHandler paragraphDbHandler;
+    private StoryDbHandler storyDbHandler;
+
 
 
     /**
@@ -62,7 +66,21 @@ public final class DbHandler {
         return paragraphDbHandler.InsertParagraph(paragraph);
     }
 
-        /**
+    public boolean updateParagraph(Paragraph paragraph) {
+        return paragraphDbHandler.updateParagraph(paragraph);
+    }
+
+
+    public Set<Story> queryStory(String key, String value) {
+        return storyDbHandler.queryStory(key, value);
+    }
+
+    public boolean InsertStory(Story story) {
+        return storyDbHandler.InsertStory(story);
+    }
+
+
+    /**
          *
          * @return if the query changed anything
          */
@@ -73,6 +91,9 @@ public final class DbHandler {
             stmt.executeUpdate();
             stmt = conn.prepareStatement("TRUNCATE `taleitdb`.`paragraph`;");
             stmt.executeUpdate();
+            stmt = conn.prepareStatement("TRUNCATE `taleitdb`.`story`;");
+            stmt.executeUpdate();
+
 
             return stmt.executeUpdate() > 0;
 

@@ -7,28 +7,29 @@ create table PARAGRAPH (
 	FATHER varchar(100),
 	AUTHOR_ID varchar(100),
 	TEXT text,
-	TITLE varchar(100) not null
+	TITLE varchar(100) not null,
+	STORY varchar(100)
 );
 
 ALTER TABLE PARAGRAPH ADD INDEX `ID` (`ID`);
 ALTER TABLE PARAGRAPH ADD INDEX `FATHER` (`FATHER`);
 ALTER TABLE PARAGRAPH ADD INDEX `AUTHOR_ID` (`AUTHOR_ID`);
 ALTER TABLE PARAGRAPH ADD INDEX `TITLE` (`TITLE`);
+ALTER TABLE PARAGRAPH ADD INDEX `STORY` (`STORY`);
 
 drop table IF EXISTS STORY;
 
 create table STORY (
-	ID integer primary key not null,
+	ID varchar(100) primary key not null,
 	TITLE varchar(100) not null,
 	ROOT_ID varchar(100) not null,
-	CATEGORY varchar(100) not null,
-	PARAGRAPH_TITLE varchar(100) not null
+	CATEGORY varchar(100) not null
 );
 
 ALTER TABLE STORY ADD INDEX `ID` (`ID`);
 ALTER TABLE STORY ADD INDEX `TITLE` (`TITLE`);
+ALTER TABLE STORY ADD INDEX `ROOT_ID` (`ROOT_ID`);
 ALTER TABLE STORY ADD INDEX `CATEGORY` (`CATEGORY`);
-ALTER TABLE STORY ADD INDEX `PARAGRAPH_TITLE` (`PARAGRAPH_TITLE`);
 
 drop table IF EXISTS AUTHOR;
 

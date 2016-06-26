@@ -5,30 +5,28 @@ import db.DbHandler;
 import exceptions.NoSuchParagraphIdException;
 import exceptions.StoryException;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by Shai on 23/12/2015.
  */
 public class Story {
-    private final HashMap<String, Paragraph> paragraphs;
     private String id;
     private String title;
     private String root;
     private Categories category;
-    private Set<User> likes;
 
     public Story(String title, Paragraph root, Categories category){
         this.title = title;
         this.id = UUID.randomUUID().toString();
         this.root = root.getId();
         this.category = category;
-        this.paragraphs = new HashMap<String, Paragraph>();
-        this.paragraphs.put(root.getId(), root);
-        this.likes = new HashSet<>();
+        root.setStory(this.getId());
+        DbHandler.getInstance().updateParagraph(root);
+    }
+
+    public Story(){
+
     }
 
     public String getId() {
@@ -53,17 +51,18 @@ public class Story {
         }
 
         Paragraph paragraph = new Paragraph(father, text, title, user);
+        paragraph.setStory(this.getId());
         DbHandler.getInstance().InsertParagraph(paragraph);
-        paragraphs.put(paragraph.getId(), paragraph); // TODO: make paragraphs a collection of paragraph only. implement equals & hashcode by id only
         return paragraph;
     }
 
     public Paragraph getParagraphById(String paragraphId) {
-        DbHandler.getInstance().queryParagraph("ID", root);
-        if (paragraphs.containsKey(paragraphId)) {
-            return paragraphs.get(paragraphId);
+        Set<Paragraph> paragraphs = DbHandler.getInstance().queryParagraph("STORY", this.getId());
+        for(Paragraph para: paragraphs){
+            if (Objects.equals(para.getId(), paragraphId)){
+                return para;
+            }
         }
-
         throw new NoSuchParagraphIdException(paragraphId);
     }
 
@@ -85,11 +84,23 @@ public class Story {
         return getId().hashCode();
     }
 
-    public void addLike(User user) {
-        this.likes.add(user);
+    public Story setId(String id) {
+        this.id = id;
+        return this;
     }
 
-    public int getLikes(){
-        return this.likes.size();
+    public Story setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public Story setRoot(String root) {
+        this.root = root;
+        return this;
+    }
+
+    public Story setCategory(Categories category) {
+        this.category = category;
+        return this;
     }
 }

@@ -13,6 +13,7 @@ public class Paragraph {
     String user;
     String text;
     String title;
+    String story;
 
     public Paragraph(Paragraph father, String text, String title, User user) {
         this.id = UUID.randomUUID().toString();
@@ -28,6 +29,16 @@ public class Paragraph {
         }
         this.text = text;
         this.title = title;
+        this.story = null;
+    }
+
+    public Paragraph setStory(String story) {
+        this.story = story;
+        return this;
+    }
+
+    public String getStory() {
+        return story;
     }
 
     public Paragraph(){
