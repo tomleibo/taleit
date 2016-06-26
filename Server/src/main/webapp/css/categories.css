@@ -11,6 +11,8 @@
     top: 40px;
     right: 30px;
     float: right;
+    border: 5px solid red;
+
 }
 .categoryClass {
     float: right;

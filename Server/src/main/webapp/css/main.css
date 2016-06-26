@@ -4,7 +4,45 @@
     top: 40px;
     right: 30px;
     float: right;
+
 }
+
+nav a {
+    height: 60px;
+    line-height: 60px;
+    color: #204156;
+    text-decoration: none;
+}
+
+#navBar{
+    border: 5px ;
+    border: 5px solid red;
+
+}
+
+nav li {
+    display: inline;
+    margin: 0;
+    padding: 0 10px;
+}
+.contact-btn a {
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px;
+    padding: 8px 18px;
+    border: 1px solid #204156;
+
+}
+
+.contact-btn a:active {
+    top: 2px;
+
+}
+
+nav ul {
+    display: inline;
+}
+
 
 header {
     text-align: center;
