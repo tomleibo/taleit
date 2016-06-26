@@ -1,12 +1,4 @@
-#create{
-    z-index: 9;
-    border: 5px solid white;
-
-
-}
-
 .main{
-    border: 5px solid red;
 }
 
 #categories{
@@ -14,6 +6,7 @@
     top: 40px;
     right: 30px;
     float: right;
+    margin-top: 5%;
 
 }
 .categoryClass {
