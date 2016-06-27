@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute', 'ngCookies']);
 
-    app.config(['$routeProvider', function ($routeProvider) {
+    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
 
             // route for the home page
@@ -35,14 +35,14 @@
         var catList = this;
         catList.categoriesResult = [];
 
-        $http.get('/rest/stories/categories').success(function (data) {
+        $http.get(window.urlApiCategories).success(function (data) {
             catList.categoriesResult = data;
         });
     }]);
 
     app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
         var storiesList = this;
-        var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
+        var browseUrl = window.urlApiBrowse;
 
         storiesList.storiesResult = [];
 
@@ -61,7 +61,7 @@
     }]);
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
-        var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
+        var browseUrl =  window.urlApiView;
         $scope.storyTitle = $cookies.get("title");
         $scope.storyId = $cookies.get("id");
         $scope.storyInfo = [];
@@ -95,7 +95,7 @@
             }
             else {
                 $http({
-                    url: 'http://127.0.0.1:8080/rest/stories/create',
+                    url:  window.urlApiCreate,
                     method: "POST",
                     data: {
                         'cookie': window.userCookie,
@@ -142,7 +142,7 @@
             }
             else {
                 $http({
-                    url: 'http://127.0.0.1:8080/rest/stories/continue',
+                    url: window.urlApiContinue,
                     method: "POST",
                     data: {
                         'cookie': window.userCookie,

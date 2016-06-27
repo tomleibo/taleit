@@ -16,6 +16,29 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
+    <script>
+        window.userCookie = "";
+        var restStr = "/rest";
+        var storiesStr = "/stories";
+
+        var categoriesStr = "/categories";
+        var browseStr = "/browse";
+        var viewStr = "/view";
+        var createStr = "/create";
+        var continueStr = "/continue";
+
+
+
+        var storyPath = restStr + storiesStr;
+
+        window.urlApiCategories = storyPath + categoriesStr;
+        window.urlApiBrowse = storyPath + browseStr;
+        window.urlApiView = storyPath + viewStr;
+        window.urlApiCreate = storyPath + createStr;
+        window.urlApiContinue = storyPath + continueStr;
+
+
+    </script>
 
     <link rel="stylesheet" type="text/css" href="/css/categories.css">
 

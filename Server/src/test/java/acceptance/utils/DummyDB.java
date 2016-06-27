@@ -1,9 +1,7 @@
 package acceptance.utils;
 
 import acceptance.core.LoggedInBaseAcceptance;
-import db.DbHandler;
 import model.Categories;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -35,7 +33,7 @@ public class DummyDB extends LoggedInBaseAcceptance {
     };
 
     @Test
-    @Ignore
+  //  @Ignore
     public void eraseInjectDummyDB() {
         bridge.initServer();
         bridge.signUp(userName, password);

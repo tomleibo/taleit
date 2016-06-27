@@ -57,15 +57,15 @@ header {
 }
 
 .displayElementImg {
-    width: 240px;
+    width: 120px;
 }
 .paragraphSection{
     padding-right: 30px;
 }
 
 .hovereffect {
-    max-width: 240px;
-    max-height: 240px;
+    max-width: 120px;
+    max-height: 120px;
     float: left;
     overflow: hidden;
     position: relative;
