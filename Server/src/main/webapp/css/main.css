@@ -12,16 +12,23 @@
     text-align: center;
 
 }
+
+
+.showContent{
+    display: inline-block;
+    float: right;
+}
+
 .displayElementImg {
-    width: 120px;
+    width: 185px;
 }
 .paragraphSection{
     padding-right: 30px;
 }
 
 .hovereffect {
-    max-width: 120px;
-    max-height: 120px;
+    max-width: 185px;
+    max-height: 185px;
     float: left;
     overflow: hidden;
     position: relative;
