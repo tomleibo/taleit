@@ -1,22 +1,71 @@
-#view{
+.view{
     width: 60%;
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    float: right;
+
 }
 
-header {
+#fbContainer{
+    justify-content: center;
     text-align: center;
 
 }
 
+nav a {
+    height: 60px;
+    line-height: 60px;
+    color: #204156;
+    text-decoration: none;
+}
+
+#navBar{
+
+}
+
+.container{
+    margin-top: 15%;
+}
+
+nav li {
+    display: inline;
+    margin: 0;
+    padding: 0 10px;
+}
+.contact-btn a {
+    position: relative;
+    cursor: pointer;
+    margin-right: 30px;
+    padding: 8px 18px;
+    border: 1px solid #204156;
+
+}
+
+.contact-btn a:active {
+    top: 2px;
+
+}
+
+nav ul {
+    display: inline;
+}
+
+
+header {
+
+}
+
 .displayElementImg {
-    width: 240px;
+    width: 120px;
 }
 .paragraphSection{
     padding-right: 30px;
 }
 
 .hovereffect {
-    max-width: 240px;
-    max-height: 240px;
+    max-width: 120px;
+    max-height: 120px;
     float: left;
     overflow: hidden;
     position: relative;

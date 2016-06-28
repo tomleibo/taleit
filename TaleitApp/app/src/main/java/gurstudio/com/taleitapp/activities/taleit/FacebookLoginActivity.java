@@ -55,7 +55,6 @@ public class FacebookLoginActivity extends TaleItActivity implements FacebookCal
         final AccessToken token = loginResult.getAccessToken();
         getBaseApplication().getApplicationModel().setAccessToken(token);
 
-        //////////////
         ProfileTracker profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {

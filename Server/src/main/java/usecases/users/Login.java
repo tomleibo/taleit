@@ -33,6 +33,7 @@ public class Login extends UserUseCase {
         }
         User user = model.getUserFromCookie(cookie);
         user.setFacebookAccessToken(facebookAccessToken);
+        model.UserUpdate(user);
 
     }
 

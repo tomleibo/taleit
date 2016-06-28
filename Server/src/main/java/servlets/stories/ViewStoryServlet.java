@@ -44,7 +44,6 @@ public class ViewStoryServlet extends TaleitServlet {
         //containing story
         Story story = usecase.getStory();
         JSONObject jsonStory = new JSONObject();
-        jsonStory.put("likes", story.getLikes());
         jsonStory.put("id", story.getId());
         jsonStory.put("title", story.getTitle());
         jsonStory.put("category", story.getCategory().getValue());

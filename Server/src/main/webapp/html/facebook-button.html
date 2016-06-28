@@ -15,18 +15,21 @@
 
                 xhttp.open("POST", "http://127.0.0.1:8080/rest/accounts/fblogin", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send(JSON.stringify({facebookAccessToken:response.authResponse.accessToken, facebookId:response.authResponse.userID}));
+                xhttp.send(JSON.stringify({
+                    facebookAccessToken: response.authResponse.accessToken,
+                    facebookId: response.authResponse.userID
+                }));
 
 
-                xhttp.onreadystatechange = function() {//Call a function when the state changes.
-                    if(xhttp.readyState == 4 && xhttp.status == 200) {
+                xhttp.onreadystatechange = function () {//Call a function when the state changes.
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
                         window.userCookie = JSON.parse(xhttp.responseText).data.cookie;
                     }
                 };
 
                 testAPI();
                 FB.api(
-                        "/" + response.authResponse.userID +"/picture",
+                        "/" + response.authResponse.userID + "/picture",
                         function (response) {
                             if (response && !response.error) {
                                 document.getElementById('facebookpicture').src = response.data.url;
@@ -109,14 +112,14 @@
       the JavaScript SDK to present a graphical Login button that triggers
       the FB.login() function when clicked.
     -->
+    <div id="fbontainer">
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
 
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-    </fb:login-button>
+        <div id="status">
+        </div>
 
-    <div id="status">
+        <img id="facebookpicture" src="">
+
     </div>
-
-    <img id="facebookpicture" src="">
-
-
 </div>

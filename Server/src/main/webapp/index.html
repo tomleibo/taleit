@@ -16,13 +16,35 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 
+    <script>
+        window.userCookie = "";
+        var restStr = "/rest";
+        var storiesStr = "/stories";
+
+        var categoriesStr = "/categories";
+        var browseStr = "/browse";
+        var viewStr = "/view";
+        var createStr = "/create";
+        var continueStr = "/continue";
+
+
+
+        var storyPath = restStr + storiesStr;
+
+        window.urlApiCategories = storyPath + categoriesStr;
+        window.urlApiBrowse = storyPath + browseStr;
+        window.urlApiView = storyPath + viewStr;
+        window.urlApiCreate = storyPath + createStr;
+        window.urlApiContinue = storyPath + continueStr;
+
+
+    </script>
 
     <link rel="stylesheet" type="text/css" href="/css/categories.css">
 
     <link rel="stylesheet" type="text/css" href="/css/title.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/create.css">
-    <link rel="stylesheet" type="text/css" href="/css/menu-bar.css">
     <link rel="stylesheet" type="text/css" href="/css/storyForm.css">
 
 
@@ -33,7 +55,6 @@
     <script type="text/javascript"
             src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
     <!-- Modules -->
-    <script src="js/menu-bar.js"></script>
     <script src="js/app.js"></script>
 
 
@@ -46,19 +67,28 @@
 <body>
 
 <header>
+    <nav id="navBar">
+        <ul>
+            <li><a href="#"><b>Arctic</b></a></li>
+            <li><a href="#">Alpine</a></li>
+            <li><a href="#">Antarctic</a></li>
+        </ul>
+        <div class="contact-btn"><a>Contact</a>
+        </div>
+    </nav>
+
+</header>
+<div class="container">
     <div id="logo">
-        <menu-bar></menu-bar>
         <title-section></title-section>
         <h2 class="text-center">It's all about creation</h2>
         <facebook-button></facebook-button>
 
     </div>
 
-</header>
-
-<div id="view">
-    <div ng-view></div>
+    <div class="view">
+        <div ng-view></div>
+    </div>
 </div>
-
 </body>
 </html>

@@ -1,7 +1,7 @@
 (function () {
     var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute', 'ngCookies']);
 
-    app.config(['$routeProvider', function ($routeProvider) {
+    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider
 
             // route for the home page
@@ -35,14 +35,14 @@
         var catList = this;
         catList.categoriesResult = [];
 
-            $http.get('http://127.0.0.1:8080/rest/stories/categories').success(function (data) {
+        $http.get(window.urlApiCategories).success(function (data) {
             catList.categoriesResult = data;
         });
     }]);
 
     app.controller('StoriesController', ['$http', '$routeParams', function ($http, $routeParams) {
         var storiesList = this;
-        var browseUrl = 'http://127.0.0.1:8080/rest/stories/browse';
+        var browseUrl = window.urlApiBrowse;
 
         storiesList.storiesResult = [];
 
@@ -61,7 +61,7 @@
     }]);
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
-        var browseUrl = 'http://127.0.0.1:8080/rest/stories/view';
+        var browseUrl =  window.urlApiView;
         $scope.storyTitle = $cookies.get("title");
         $scope.storyId = $cookies.get("id");
         $scope.storyInfo = [];
@@ -83,38 +83,45 @@
 
     }]);
 
-    app.controller('createStoryFormCtrl', ['$scope', '$http', function ($scope, $http) {
+    app.controller('createStoryFormCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
         $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
 
 
         $scope.sendPost = function () {
-            $http({
-                url: 'http://127.0.0.1:8080/rest/stories/create',
-                method: "POST",
-                data: {
-                    'cookie': window.userCookie,
-                    'title': $scope.formData.formStoryTitle,
-                    'category': $scope.formData.formCategory,
-                    'rootParagraph': {
-                        'title': $scope.formData.formTitle,
-                        'text': $scope.formData.formText
+            if (window.userCookie == "") {
+                alert("Only logged in members can create new stories, please log in via Facebook")
+            }
+            else {
+                $http({
+                    url:  window.urlApiCreate,
+                    method: "POST",
+                    data: {
+                        'cookie': window.userCookie,
+                        'title': $scope.formData.formStoryTitle,
+                        'category': $scope.formData.formCategory,
+                        'rootParagraph': {
+                            'title': $scope.formData.formTitle,
+                            'text': $scope.formData.formText
+                        }
                     }
-                }
-            }).then(function (response) {
-                console.log(response.data);
-                $scope.message = response.data;
-            }, function (response) {
-                //fail case
-                console.log(response);
-                $scope.message = response;
-            });
+                }).then(function (response) {
+                    console.log(response.data);
+                    $scope.message = response.data;
+
+                    $window.location.href="/#/stories/" + response.data.data.storyId;
+                }, function (response) {
+                    //fail case
+                    console.log(response);
+                    $scope.message = response;
+                });
+            }
 
         };
     }]);
 
-    app.controller('continueStoryFormCtrl', ['$scope', '$http','$routeParams' , function ($scope, $http, $routeParams) {
+    app.controller('continueStoryFormCtrl', ['$scope', '$http', '$routeParams', '$window', function ($scope, $http, $routeParams, $window) {
         $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
@@ -130,30 +137,33 @@
 
 
         $scope.sendPost = function () {
-            $http({
-                url: 'http://127.0.0.1:8080/rest/stories/continue',
-                method: "POST",
-                data: {
-                    'cookie': window.userCookie,
-                    'title': $scope.formData.formTitle,
-                    'text': $scope.formData.formText,
-                    'paragraphId': paragraphIdResults,
-                    'storyId': storyIdResults
-                }
-            }).then(function (response) {
-                console.log(response.data);
-                $scope.message = response.data;
-            }, function (response) {
-                //fail case
-                console.log(response);
-                $scope.message = response;
-            });
+            if (window.userCookie == "") {
+                alert("Only logged in members can create new stories, please log in via Facebook")
+            }
+            else {
+                $http({
+                    url: window.urlApiContinue,
+                    method: "POST",
+                    data: {
+                        'cookie': window.userCookie,
+                        'title': $scope.formData.formTitle,
+                        'text': $scope.formData.formText,
+                        'paragraphId': paragraphIdResults,
+                        'storyId': storyIdResults
+                    }
+                }).then(function (response) {
+                    $window.location.href = '/#/stories/'+storyIdResults+'/'+response.data.data.paragraphId;
+                }, function (response) {
+                    //fail case
+                });
 
+
+            }
         };
     }]);
 
     app.controller('displayElementCtrl', ['$scope', function ($scope) {
-        var imageExists = function (image_url){
+        var imageExists = function (image_url) {
 
             var http = new XMLHttpRequest();
 
@@ -164,11 +174,11 @@
 
         };
 
-        $scope.getImgSrc = function(imgSrc) {
-            if(imageExists(imgSrc)){
+        $scope.getImgSrc = function (imgSrc) {
+            if (imageExists(imgSrc)) {
                 return imgSrc
             }
-            else{
+            else {
                 return "/resources/coolBlackBG.jpg"
             }
 

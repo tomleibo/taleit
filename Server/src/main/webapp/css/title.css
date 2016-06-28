@@ -1,15 +1,16 @@
 html {
     margin: 0;
-    height: 100%;
+}
+
+html, body{
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    line-height: 1.5;
 }
 
 body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: black;
     color: #ccc;
 }
@@ -140,6 +141,15 @@ body::after {
     9vw 46vh .1vmin rgba(200,255,230,.7),
     63vw 59vh .1vmin rgba(200,255,230,.7),
     48vw 28vh .1vmin rgba(200,255,230,.7);
+}
+
+#logo{
+    position: fixed;
+    left: 0;
+    justify-content: center;
+
+
+
 }
 
 #logo h1 {

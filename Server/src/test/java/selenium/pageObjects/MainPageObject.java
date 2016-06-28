@@ -30,18 +30,13 @@ public class MainPageObject {
         return webDriver.findElement(By.className("createButton"));
     }
 
+    public WebElement facebookButton(){
+        return webDriver.findElement(By.tagName("fb:login-button"));
+    }
+
     public Actions getAction(){
         Actions action = new Actions(webDriver);
         return action;
-    }
-
-
-    public void wait2secs() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
 

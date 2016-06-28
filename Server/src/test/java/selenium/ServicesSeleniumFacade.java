@@ -1,8 +1,11 @@
 package selenium;
 
 import org.openqa.selenium.WebDriver;
+import selenium.pageObjects.ContinuePageObject;
 import selenium.pageObjects.CreatePageObject;
+import selenium.pageObjects.FacebookPage;
 import selenium.pageObjects.MainPageObject;
+import selenium.pageObjects.ViewStoryObject;
 
 /**
  * Created by Shai on 07/06/2016.
@@ -21,6 +24,19 @@ public class ServicesSeleniumFacade {
     public CreatePageObject createPageObject() {
         return new CreatePageObject(webDriver);
     }
+
+    public FacebookPage facebookPage() {
+        return new FacebookPage(webDriver);
+    }
+
+    public ViewStoryObject viewStoryObject() {
+        return new ViewStoryObject(webDriver);
+    }
+
+    public ContinuePageObject continuePageObject() {
+        return new ContinuePageObject(webDriver);
+    }
+
 
 
 }

@@ -1,5 +1,8 @@
 package gurstudio.com.taleitapp.networkhandlers.taleit;
 
+import com.gurkashi.fj.lambdas.Selector;
+import com.gurkashi.fj.queries.stracture.Queriable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,8 +13,6 @@ import gurstudio.com.taleitapp.BuildConfig;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
 import gurstudio.com.taleitapp.model.taleit.Paragraph;
 import gurstudio.com.taleitapp.model.taleit.Story;
-import lambdas.Selector;
-import queries.stracture.NestedQuery;
 
 /**
  * Created by gur on 5/18/2016.
@@ -31,7 +32,7 @@ public class GetStoriesResponseHandler extends TaleItResponseHandlerBase {
         }
 
         try {
-            NestedQuery.create(JSONObject.class)
+            Queriable.create(JSONObject.class)
                 .select(new Selector<JSONObject, Story>() {
                     @Override
                     public Story select(JSONObject jsonObject) {

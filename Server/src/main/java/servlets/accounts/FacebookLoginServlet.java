@@ -6,6 +6,7 @@ import exceptions.SignUpException;
 import facebook4j.Facebook;
 import facebook4j.FacebookFactory;
 import facebook4j.RawAPIResponse;
+import facebook4j.auth.AccessToken;
 import facebook4j.conf.ConfigurationBuilder;
 import ioc.Server;
 import org.json.JSONObject;
@@ -51,12 +52,11 @@ public class FacebookLoginServlet extends TaleitServlet{
         cb.setDebugEnabled(true)
                 .setOAuthAppId(APP_ID)
                 .setOAuthAppSecret(APP_SECRET)
-                .setOAuthAccessToken(facebookAccessToken)
+                .setOAuthAccessToken(APP_ID + "|" + APP_SECRET)
                 .setOAuthPermissions("email");
         FacebookFactory ff = new FacebookFactory(cb.build());
         Facebook facebook = ff.getInstance();
-
-        RawAPIResponse res = facebook.callGetAPI("/debug_token?input_token=" + facebookAccessToken);
+        RawAPIResponse res = facebook.callGetAPI("/debug_token?input_token=" + facebookAccessToken + "&access_token=" + APP_ID + "|" + APP_SECRET);
         facebook4j.internal.org.json.JSONObject fbresjson = res.asJSONObject();
         facebook4j.internal.org.json.JSONObject data = fbresjson.getJSONObject("data");
         System.out.println(fbresjson);
@@ -65,12 +65,14 @@ public class FacebookLoginServlet extends TaleitServlet{
             return responseJson;
         }
 
+        facebook.setOAuthAccessToken(new AccessToken(facebookAccessToken));
         res = facebook.callGetAPI("/me?fields=email,name&" + facebookAccessToken);
         fbresjson = res.asJSONObject();
         String name = fbresjson.getString("name");
         String username = fbresjson.getString("email");
 
         SignUp signup = new SignUp(Server.Instance.getSafeModel(), username, Integer.toString((new SecureRandom()).nextInt()));
+        signup.setFacebookId(facebookId);
         signup.setName(name);
         try {
             signup.perform();

@@ -1,95 +1,129 @@
 package db;
 
 
-import javafx.util.Pair;
+import model.Paragraph;
+import model.Story;
 import model.User;
 
 import java.sql.*;
-import java.util.Map;
+import java.util.Set;
 
-public class DbHandler {
-    private static final String DB_URL = "";
-    private static final String USER = "";
-    private static final String PASS = "";
 
-    //queryUser
-    private static final int USER_ID = 1;
-    private static final int USER_NAME = 2;
-    private static final int USER_PASS= 3;
-    private static final int USER_SALT = 4;
+public final class DbHandler {
+    private static DbHandler instance = null;
 
+    private DbHandler() {
+        userDbHandler = new UserDbHandler();
+        paragraphDbHandler = new ParagraphDbHandler();
+        storyDbHandler = new StoryDbHandler();
+    }
+
+    public static synchronized DbHandler getInstance() {
+        if (instance == null) {
+            instance = new DbHandler();
+            instance.connect();
+            instance.userDbHandler.setConn(instance.conn);
+            instance.paragraphDbHandler.setConn(instance.conn);
+            instance.storyDbHandler.setConn(instance.conn);
+        }
+
+        return instance;
+    }
+
+
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
+    private static final String USER = "root";
+    private static final String PASS = "root";
 
     private Connection conn;
+    private UserDbHandler userDbHandler;
+    private ParagraphDbHandler paragraphDbHandler;
+    private StoryDbHandler storyDbHandler;
+
+
 
     /**
      *
-     * @param values map from column name to pair<boolean,object>
-     * true means object is numeric, false means string
      * @return list of users
      */
-    public User queryUser(Map<String,Pair<Boolean,Object>> values) {
-        boolean firstValue = true;
-        PreparedStatement stmt=null;
-        StringBuilder query = new StringBuilder();
-        query.append("select * from AUTHOR ");
-        for (Map.Entry<String,Pair<Boolean,Object>> entry : values.entrySet()) {
-            if (firstValue) {
-                query.append("where ");
-                firstValue=false;
-            }
-            else {
-                query.append("and ");
-            }
-            query.append(entry.getKey()+" = ? ");
-        }
+    public User queryUser(String key, String value) {
+        return userDbHandler.queryUser(key, value);
+    }
 
-        ResultSet rs=null;
+    public boolean InsertUser(User user) {
+        return userDbHandler.InsertUser(user);
+    }
 
+    public boolean updateUser(User user) {
+        return userDbHandler.updateUser(user);
+    }
+
+    public Set<Paragraph> queryParagraph(String key, String value) {
+        return paragraphDbHandler.queryParagraph(key, value);
+    }
+
+    public boolean InsertParagraph(Paragraph paragraph) {
+        return paragraphDbHandler.InsertParagraph(paragraph);
+    }
+
+    public boolean updateParagraph(Paragraph paragraph) {
+        return paragraphDbHandler.updateParagraph(paragraph);
+    }
+
+
+    public Set<Story> queryStory(String key, String value) {
+        return storyDbHandler.queryStory(key, value);
+    }
+
+    public boolean InsertStory(Story story) {
+        return storyDbHandler.InsertStory(story);
+    }
+
+
+    /**
+         *
+         * @return if the query changed anything
+         */
+    public boolean truncateTables() {
+        PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement(query.toString());
-            int columnIndex=1;
-            for (Pair<Boolean,Object> entry : values.values()) {
-                if (entry.getKey()) {
-                    stmt.setInt(columnIndex++,(Integer)(entry.getValue()));
-                }
-                else {
-                    stmt.setString(columnIndex++,(String)(entry.getValue()));
-                }
-            }
-            rs = stmt.executeQuery();
-            while(rs.next()){
-                int id  = rs.getInt(USER_ID);
-                String name = rs.getString(USER_NAME);
-                String pass = rs.getString(USER_PASS);
-                String salt = rs.getString(USER_SALT);
-                return new User(name,pass);
-            }
-            return null;
+            stmt = conn.prepareStatement("TRUNCATE `taleitdb`.`author`;");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("TRUNCATE `taleitdb`.`paragraph`;");
+            stmt.executeUpdate();
+            stmt = conn.prepareStatement("TRUNCATE `taleitdb`.`story`;");
+            stmt.executeUpdate();
+
+
+            return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
         finally {
             try {
-                rs.close();
-                stmt.close();
+                if (stmt != null) {
+                    stmt.close();
+                }
             }
             catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
+        return false;
     }
 
+
     /**
-     * creates a connection
-     */
+         * creates a connection
+         */
     public void connect(){
         conn = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
         }
         catch(SQLException se){
             se.printStackTrace();
@@ -98,6 +132,4 @@ public class DbHandler {
             e.printStackTrace();
         }
     }
-
-
 }
