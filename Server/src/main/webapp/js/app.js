@@ -95,6 +95,7 @@
                 alert("Only logged in members can create new stories, please log in via Facebook")
             }
             else {
+
                 $http({
                     url:  window.urlApiCreate,
                     method: "POST",
