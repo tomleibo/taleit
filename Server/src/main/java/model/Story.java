@@ -20,14 +20,12 @@ public class Story {
     private Categories category;
     private Set<User> likes;
 
-    public Story(String title, Paragraph root, Categories category){
-        this.title = title;
-        this.id = UUID.randomUUID().toString();
-        this.root = root;
-        this.category = category;
-        this.paragraphs = new HashMap<String, Paragraph>();
-        this.paragraphs.put(root.getId(), root);
-        this.likes = new HashSet<>();
+    public void addLike(User user) {
+        this.likes.add(user);
+    }
+
+    public int getLikes(){
+        return this.likes.size();
     }
 
     public String getId() {
@@ -83,11 +81,13 @@ public class Story {
         return getId().hashCode();
     }
 
-    public void addLike(User user) {
-        this.likes.add(user);
-    }
-
-    public int getLikes(){
-        return this.likes.size();
+    public Story(String title, Paragraph root, Categories category){
+        this.title = title;
+        this.id = UUID.randomUUID().toString();
+        this.root = root;
+        this.category = category;
+        this.paragraphs = new HashMap<String, Paragraph>();
+        this.paragraphs.put(root.getId(), root);
+        this.likes = new HashSet<>();
     }
 }
