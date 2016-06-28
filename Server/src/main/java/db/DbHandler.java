@@ -35,9 +35,11 @@ public final class DbHandler {
     }
 
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
-    private static final String USER = "root";
-    private static final String PASS = "root";
+    //private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
+//    private static final String USER = "root";
+//    private static final String PASS = "root";
+    public static final String CONNECTION_STRING = "jdbc:mysql://localhost/taleitdb?" + "user=root&password=root";
+
 
     private Connection conn;
     private UserDbHandler userDbHandler;
@@ -122,18 +124,18 @@ public final class DbHandler {
          * creates a connection
          */
     public void connect(){
-        conn = null;
-        try{
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-        }
-        catch(SQLException se){
-            se.printStackTrace();
-        }
-        catch(Exception e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        System.out.println("Connecting to database...");
+
+        //conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try {
+            conn = DriverManager.getConnection(CONNECTION_STRING);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }
