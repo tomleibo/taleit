@@ -45,7 +45,7 @@ public class BrowseStoryServlet extends TaleitServlet {
             jsonStory.put("title", story.getTitle());
             jsonStory.put("category", story.getCategory().getValue());
             String imageName = story.getTitle().replace("'", "").replace(" ", "_").toLowerCase();
-            String imageURL = "http://localhost:8080/resources/stories/%s.png";
+            String imageURL = "/resources/stories/%s.png";
             jsonStory.put("image", String.format(imageURL, imageName));
 
             JSONObject paragraphTree = new JSONObject();

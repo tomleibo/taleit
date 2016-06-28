@@ -1,7 +1,8 @@
 (function () {
     var app = angular.module('taleItApp', ['ui.bootstrap', 'ngRoute', 'ngCookies']);
 
-    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    app.config(['$routeProvider', function ($routeProvider) {
+
         $routeProvider
 
             // route for the home page
@@ -29,7 +30,6 @@
                 templateUrl: '/html/pages/continue.html'
             })
             .otherwise({templateUrl: '/html/pages/default.html'});
-        $locationProvider.html5Mode(true);
     }]);
 
     app.controller('CategoriesController', ['$http', function ($http) {
@@ -111,7 +111,7 @@
                     console.log(response.data);
                     $scope.message = response.data;
 
-                    $window.location.href="/stories/" + response.data.data.storyId;
+                    $window.location.href="/#/stories/" + response.data.data.storyId;
                 }, function (response) {
                     //fail case
                     console.log(response);
@@ -153,7 +153,7 @@
                         'storyId': storyIdResults
                     }
                 }).then(function (response) {
-                    $window.location.href = '/stories/'+storyIdResults+'/'+response.data.data.paragraphId;
+                    $window.location.href = '/#/stories/'+storyIdResults+'/'+response.data.data.paragraphId;
                 }, function (response) {
                     //fail case
                 });

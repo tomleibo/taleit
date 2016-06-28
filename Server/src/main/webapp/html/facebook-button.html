@@ -13,7 +13,7 @@
 
                 var xhttp = new XMLHttpRequest();
 
-                xhttp.open("POST", "http://127.0.0.1:8080/rest/accounts/fblogin", true);
+                xhttp.open("POST", "/rest/accounts/fblogin", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send(JSON.stringify({
                     facebookAccessToken: response.authResponse.accessToken,
