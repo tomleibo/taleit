@@ -19,12 +19,16 @@ public final class DbHandler {
     }
 
     public static synchronized DbHandler getInstance() {
-        if (instance == null) {
-            instance = new DbHandler();
-            instance.connect();
-            instance.userDbHandler.setConn(instance.conn);
-            instance.paragraphDbHandler.setConn(instance.conn);
-            instance.storyDbHandler.setConn(instance.conn);
+        try {
+            if (instance == null || instance.conn == null || instance.conn.isClosed()) {
+                instance = new DbHandler();
+                instance.connect();
+                instance.userDbHandler.setConn(instance.conn);
+                instance.paragraphDbHandler.setConn(instance.conn);
+                instance.storyDbHandler.setConn(instance.conn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return instance;
