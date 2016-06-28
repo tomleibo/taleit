@@ -12,6 +12,7 @@
     <color name="theme_primary_accent">@color/theme_blue</color>
     <color name="theme_secondary">@color/theme_orange</color>
     <color name="theme_secondary_accent">@color/theme_red</color>
+    <color name="theme_light_blue">#D4DDF0</color>
 
     <color name="theme_black">#2D2D2D</color>
     <color name="theme_white">#EAE4E4</color>

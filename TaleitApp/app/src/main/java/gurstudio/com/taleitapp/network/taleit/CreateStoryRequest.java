@@ -32,3 +32,4 @@ public class CreateStoryRequest extends TaleItNetworkRequestBase {
         return new CreateStoryRequest(jsonObject, handler, handler);
     }
 }
+

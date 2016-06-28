@@ -26,7 +26,7 @@ public class StoryViewerActivity extends TaleItActivity {
     TextView paragraphTitle;
     TextView paragraphAuthor;
     RecyclerView paragraphRecycler;
-    ImageView continueStory;
+    View continueStory;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -59,7 +59,7 @@ public class StoryViewerActivity extends TaleItActivity {
         paragraphAuthor = (TextView)findViewById(R.id.paragraph_author);
         paragraphTitle = (TextView)findViewById(R.id.paragraph_title);
         paragraphRecycler = (RecyclerView) findViewById(R.id.paragraph_recycler);
-        continueStory = (ImageView)findViewById(R.id.continue_story);
+        continueStory = findViewById(R.id.continue_story);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class StoryViewerActivity extends TaleItActivity {
     }
 
     public void initParagraphRecyclerView() {
-        paragraphRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        paragraphRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         ParagraphViewAdapter adapter = new ParagraphViewAdapter(currentChildren);
 
