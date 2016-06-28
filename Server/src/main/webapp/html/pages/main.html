@@ -10,7 +10,7 @@
             <td class=categoryClass
                 ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3">
 
-                <a ng-href="/#/categories/{{category.name}}">
+                <a ng-href="/categories/{{category.name}}">
                     <p align="center" class=categoryName> {{category.name}} </p>
 
                     <div class="grow pic">
@@ -24,7 +24,7 @@
             <td class=categoryClass
                 ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3 : 3  ">
 
-                <a ng-href="/#/categories/{{category.name}}">
+                <a ng-href="/categories/{{category.name}}">
                     <p align="center" class=categoryName> {{category.name}} </p>
 
                     <div class="grow pic">
@@ -37,7 +37,7 @@
             <td class=categoryClass
                 ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: -3">
 
-                <a ng-href="/#/categories/{{category.name}}">
+                <a ng-href="/categories/{{category.name}}">
                     <p align="center" class=categoryName> {{category.name}} </p>
 
                     <div class="grow pic">
