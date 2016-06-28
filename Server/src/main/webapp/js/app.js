@@ -223,14 +223,6 @@
         };
     });
 
-    app.directive("createButton", function () {
-        return {
-            restrict: "E",
-            templateUrl: "/html/create-button.html"
-
-        };
-    });
-
     app.directive("continueButton", function () {
         return {
             restrict: "E",
