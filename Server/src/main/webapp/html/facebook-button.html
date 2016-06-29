@@ -32,7 +32,7 @@
                             "/" + response.authResponse.userID + "/picture",
                             function (response) {
                                 if (response && !response.error) {
-                                    document.getElementById('facebookpicture').style.display = 'block';
+                                    document.getElementById('facebookpicture').style.display = 'inline-block';
                                     document.getElementById('facebookpicture').src = response.data.url;
                                 }
                             }

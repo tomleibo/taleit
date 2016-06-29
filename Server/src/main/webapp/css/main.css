@@ -23,6 +23,10 @@
     text-align: center;
 }
 
+#facebookpicture{
+   align-content: center;
+}
+
 .showContent {
     float: right;
     margin-top: 80px;
