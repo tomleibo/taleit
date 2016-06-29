@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 @WebServlet( name = "ViewStoryServlet", description = "View story servlet", urlPatterns = {"/rest/stories/view/*"} )
@@ -48,10 +49,10 @@ public class ViewStoryServlet extends TaleitServlet {
         jsonStory.put("title", story.getTitle());
         jsonStory.put("category", story.getCategory().getValue());
         String imageName = story.getTitle().replace("'", "").replace(" ", "_").toLowerCase();
+
         String imageURL = "/resources/stories/%s.png";
         jsonStory.put("image", String.format(imageURL, imageName));
         responseJson.put("story", jsonStory);
-
 
         //father
         Paragraph father = paragraph.getFather();
