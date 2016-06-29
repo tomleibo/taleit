@@ -27,7 +27,7 @@ public class MainPageObject {
     }
 
     public WebElement createButton(){
-        return webDriver.findElement(By.className("createButton"));
+            return webDriver.findElement(By.id("create"));
     }
 
     public WebElement facebookButton(){

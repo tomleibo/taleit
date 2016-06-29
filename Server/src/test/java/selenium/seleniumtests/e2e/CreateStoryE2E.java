@@ -45,7 +45,7 @@ public class CreateStoryE2E extends E2EBase {
         waitFor(TIME_TO_WAIT);
 
         log("Choose Category");
-        createPageObject.chooseCategotyByIndex(3);
+        createPageObject.chooseCategotyByIndex(2);
         waitFor(TIME_TO_WAIT);
 
         log("Click on 'Set It Free' button");

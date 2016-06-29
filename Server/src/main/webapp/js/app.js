@@ -77,6 +77,7 @@
         }
         else {
             $http.get(browseUrl + '?storyId=' + storyIdResults).success(function (data) {
+                console.log(browseUrl + '?storyId=' + storyIdResults)
                 $scope.storyInfo = data;
                 $scope.authorId = $scope.storyInfo.data.userFacebookId;
             });
