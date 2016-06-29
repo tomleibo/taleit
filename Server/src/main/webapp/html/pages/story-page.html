@@ -18,15 +18,22 @@
 
             <h5 id="bodyText" style="margin-top: 50px">{{storyInfo.data.text}}</h5>
 
+            <br>
 
-        </div>
+            <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
+                <div>
+                    <continue-button button-title="No Continues,  BE THE FIRST ONE"
+                                     paragraph-id="{{storyInfo.data.id}}"
+                                     story-id="{{storyInfo.data.story.id}}"></continue-button>
+                </div>
+            </div>
 
-        <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
-            <div>
-                <continue-button button-title="No Continues,  BE THE FIRST ONE"
+            <div class="createInCategory"  ng-if="storyInfo.data.children">
+                <continue-button button-title="Continue this story in your own WAY"
                                  paragraph-id="{{storyInfo.data.id}}"
                                  story-id="{{storyInfo.data.story.id}}"></continue-button>
             </div>
+
         </div>
 
 
@@ -36,16 +43,11 @@
 
                 <display-element title="{{paragraph.title}}"
                                  link-to-url="/#/stories/{{storyInfo.data.story.id}}/{{paragraph.id}}"
-                                 change-text="By: {{paragraph.author}}"
+                                 change-text="By: {{paragraph.name}}"
                                  img-src="/resources/coolBlackBG.jpg"
-                                 optional-title="{{paragraph.text | limitTo:20}}"></display-element>
+                                 optional-title="{{paragraph.text | limitTo:10}}"></display-element>
             </div>
 
-            <div class="createInCategory">
-                <continue-button button-title="Continue this story in your own WAY"
-                                 paragraph-id="{{storyInfo.data.id}}"
-                                 story-id="{{storyInfo.data.story.id}}"></continue-button>
-            </div>
         </div>
 
     </div>
