@@ -1,5 +1,10 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer" ng-init="showLogo=false">
     <div>
+        <div class="goHome">
+            <a class="submitBtn" ng-href="/#/"> Home </a>
+        </div>
+        <br>
+
         <div class="paragraphViewer">
 
             <h1 id="storyTitle"> {{storyInfo.data.story.title | capitalize}}</h1>
