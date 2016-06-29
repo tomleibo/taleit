@@ -6,7 +6,13 @@
     float: right;
 
 }
+option{
+    color: black;
+}
 
+select{
+    color: darkblue;
+}
 .main{
     width: 100%;
     height: 100%;
