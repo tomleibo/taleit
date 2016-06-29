@@ -9,7 +9,8 @@
 
         <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
             <h4> Choose category </h4>
-            <select ng-model="formData.formCategory">
+            <select ng-model="formData.formCategory" required="required"
+                    ng-init="formData.formCategory = categoriesSection.categoriesResult.data.categories[1].name">
                 <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}</option>
             </select>
         </div>

@@ -19,21 +19,27 @@ public final class DbHandler {
     }
 
     public static synchronized DbHandler getInstance() {
-        if (instance == null) {
-            instance = new DbHandler();
-            instance.connect();
-            instance.userDbHandler.setConn(instance.conn);
-            instance.paragraphDbHandler.setConn(instance.conn);
-            instance.storyDbHandler.setConn(instance.conn);
+        try {
+            if (instance == null || instance.conn == null || instance.conn.isClosed()) {
+                instance = new DbHandler();
+                instance.connect();
+                instance.userDbHandler.setConn(instance.conn);
+                instance.paragraphDbHandler.setConn(instance.conn);
+                instance.storyDbHandler.setConn(instance.conn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return instance;
     }
 
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
-    private static final String USER = "root";
-    private static final String PASS = "root";
+    //private static final String DB_URL = "jdbc:mysql://localhost:3306/taleitdb";
+//    private static final String USER = "root";
+//    private static final String PASS = "root";
+    public static final String CONNECTION_STRING = "jdbc:mysql://localhost/taleitdb?" + "user=root&password=root";
+
 
     private Connection conn;
     private UserDbHandler userDbHandler;
@@ -118,18 +124,18 @@ public final class DbHandler {
          * creates a connection
          */
     public void connect(){
-        conn = null;
-        try{
+        try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-        }
-        catch(SQLException se){
-            se.printStackTrace();
-        }
-        catch(Exception e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        }
+        System.out.println("Connecting to database...");
+
+        //conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        try {
+            conn = DriverManager.getConnection(CONNECTION_STRING);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

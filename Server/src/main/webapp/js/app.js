@@ -95,6 +95,7 @@
                 alert("Only logged in members can create new stories, please log in via Facebook")
             }
             else {
+
                 $http({
                     url:  window.urlApiCreate,
                     method: "POST",
@@ -218,14 +219,6 @@
                 optionalTitle: '@'
             },
             templateUrl: "/html/display-element.html"
-
-        };
-    });
-
-    app.directive("createButton", function () {
-        return {
-            restrict: "E",
-            templateUrl: "/html/create-button.html"
 
         };
     });
