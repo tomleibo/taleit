@@ -6,11 +6,11 @@
 
 }
 .createInCategory{
+
     margin-top: 100px;
 }
 
 .createInCategory a{
-    display: flex;
     align-items: center;
     justify-content: center;
 }

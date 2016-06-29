@@ -21,6 +21,7 @@ textarea {
 }
 
 .submitBtn {
+    white-space: nowrap;
     margin-top: 20px;
     border: 1px solid #0a3c59;
     background: #3e779d;
