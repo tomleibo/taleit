@@ -6,9 +6,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Categories;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
+
 
 /**
  * Created by sharonk on 1/18/2016
@@ -22,7 +21,7 @@ public class BrowseStoriesAcceptance extends LoggedInBaseAcceptance {
 
     @Test
     public void noStories_5_1() {
-        assertNull("There are stories in browser without creating one" , bridge.browseStories());
+        assertEquals("There are stories in browser without creating one" , bridge.browseStories().size(), 0);
     }
 
     @Test

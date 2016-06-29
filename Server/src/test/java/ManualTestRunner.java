@@ -2,6 +2,7 @@ import model.Categories;
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.Random;
 /**
  * Created by gur on 3/11/2016.
  */
-public class ManualTestRunner {
+@Ignore public class ManualTestRunner {
     ManualTests suite;
 
     @Before

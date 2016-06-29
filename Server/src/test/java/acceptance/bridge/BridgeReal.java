@@ -39,6 +39,9 @@ public class BridgeReal implements BridgeAPI {
     }
 
     public boolean login(String userName, String password){
+        if (cookie != null){
+            return false;
+        }
         LocalhostClient client = new LocalhostClient();
         try {
             JSONObject content = new JSONObject()
@@ -195,7 +198,7 @@ public class BridgeReal implements BridgeAPI {
             JSONObject data = null;
             if (responseJson.has("data")) {
                 data = responseJson.getJSONObject("data");
-                return (data.getJSONObject("paragraph").getString("Id").equals(paragraphId));
+                return (data.getString("id").equals(paragraphId));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

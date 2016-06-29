@@ -73,7 +73,7 @@ public class LoginAcceptance extends SignedUpBaseAcceptance {
         assertTrue("failed to perform login with user: " + userName + " and password: " + password,
                 bridge.login(userName, password));
 
-        assertFalse("succeed to perform login with different will logged in",
+        assertFalse("succeed to perform login with different user logged in",
                 bridge.login(secondUserName, secondPassword));
     }
 }
