@@ -18,6 +18,13 @@
     float: right;
 }
 
+.goHome{
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
 .displayElementImg {
     width: 185px;
 }
