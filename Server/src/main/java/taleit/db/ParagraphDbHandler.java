@@ -77,7 +77,7 @@ public class ParagraphDbHandler {
     public boolean InsertParagraph(Paragraph paragraph) {
         PreparedStatement stmt = null;
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO `taleitdb`.`paragraph`(`ID`,`FATHER`,`AUTHOR_ID`,`TEXT`,`TITLE`,`STORY`)");
+        query.append("INSERT INTO `taleitdb`.`PARAGRAPH`(`ID`,`FATHER`,`AUTHOR_ID`,`TEXT`,`TITLE`,`STORY`)");
         query.append("VALUES(?,?,?,?,?,?)");
 
         try {
@@ -125,7 +125,7 @@ public class ParagraphDbHandler {
     public boolean updateParagraph(Paragraph paragraph) {
         PreparedStatement stmt = null;
         StringBuilder query = new StringBuilder();
-        query.append("UPDATE `taleitdb`.`paragraph` SET `ID` = ?,`FATHER` = ?,`AUTHOR_ID` = ?,`TEXT` = ?,`TITLE` = ?,`STORY` = ?");
+        query.append("UPDATE `taleitdb`.`PARAGRAPH` SET `ID` = ?,`FATHER` = ?,`AUTHOR_ID` = ?,`TEXT` = ?,`TITLE` = ?,`STORY` = ?");
         query.append(" WHERE `ID` = ?");
 
         try {
