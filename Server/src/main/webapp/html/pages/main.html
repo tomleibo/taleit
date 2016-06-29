@@ -1,46 +1,59 @@
 <section class="main" ng-controller="CategoriesController as categoriesSection">
-    <table id="categories">
-        <tr>
-            <td class=categoryClass
-                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3">
 
-                <a ng-href="/#/categories/{{category.name}}">
-                    <p align="center" class=categoryName> {{category.name}} </p>
+    <div id="logo">
+        <title-section></title-section>
+        <h2 class="text-center">It's all about creation</h2>
+        <facebook-button></facebook-button>
+        <div id="create">
+            <a class="submitBtn" ng-href="/#/create"> Create Your
+                Own Story </a>
 
-                    <div class="grow pic">
-                        <img class=categoryImg ng-src={{category.image}}>
-                    </div>
-                </a>
-            </td>
+        </div>
 
-        </tr>
-        <tr>
-            <td class=categoryClass
-                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3 : 3  ">
+    </div>
+    <div class="mainMain">
+        <table id="categories">
+            <tr>
+                <td class=categoryClass
+                    ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3">
 
-                <a ng-href="/#/categories/{{category.name}}">
-                    <p align="center" class=categoryName> {{category.name}} </p>
+                    <a ng-href="/#/categories/{{category.name}}">
+                        <p align="center" class=categoryName> {{category.name}} </p>
 
-                    <div class="grow pic">
-                        <img class=categoryImg ng-src={{category.image}}>
-                    </div>
-                </a>
-            </td>
-        </tr>
-        <tr>
-            <td class=categoryClass
-                ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: -3">
+                        <div class="grow pic">
+                            <img class=categoryImg ng-src={{category.image}}>
+                        </div>
+                    </a>
+                </td>
 
-                <a ng-href="/#/categories/{{category.name}}">
-                    <p align="center" class=categoryName> {{category.name}} </p>
+            </tr>
+            <tr>
+                <td class=categoryClass
+                    ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: 3 : 3  ">
 
-                    <div class="grow pic">
-                        <img class=categoryImg ng-src={{category.image}}>
-                    </div>
-                </a>
-            </td>
+                    <a ng-href="/#/categories/{{category.name}}">
+                        <p align="center" class=categoryName> {{category.name}} </p>
 
-        </tr>
-    </table>
+                        <div class="grow pic">
+                            <img class=categoryImg ng-src={{category.image}}>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class=categoryClass
+                    ng-repeat="category in categoriesSection.categoriesResult.data.categories | limitTo: -3">
 
+                    <a ng-href="/#/categories/{{category.name}}">
+                        <p align="center" class=categoryName> {{category.name}} </p>
+
+                        <div class="grow pic">
+                            <img class=categoryImg ng-src={{category.image}}>
+                        </div>
+                    </a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
 </section>
