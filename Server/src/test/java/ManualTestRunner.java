@@ -57,7 +57,7 @@ import java.util.Random;
         suite.signup(username, "123456");
         suite.login(username, "123456");
         suite.create(suite.cookie, "this is the title", "this is the text", "now this is a story", "all of belair, my " +
-                "life got switched upside down", Categories.ADULTS);
+                "life got switched upside down", Categories.COMEDY);
     }
 
     @Test

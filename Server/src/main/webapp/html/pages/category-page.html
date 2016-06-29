@@ -6,17 +6,19 @@
         </div>
         <br>
 
+
         <div class="showContent">
             <div ng-repeat="story in storyCtrl.storiesResult.data.stories">
 
                 <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
-                                 change-text="By: {{story.root.author}}"
+                                 change-text="By: {{story.root.name}}"
                                  img-src="{{story.image}}"></display-element>
 
             </div>
         </div>
+        <br>
 
-        <div id="createInCategory">
+        <div class="createInCategory">
             <a class="submitBtn" ng-href="/#/create"> Create Your
                 Own Story </a>
         </div>
