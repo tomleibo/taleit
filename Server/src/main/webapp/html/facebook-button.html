@@ -28,14 +28,7 @@
                 };
 
                 testAPI();
-                FB.api(
-                        "/" + response.authResponse.userID + "/picture",
-                        function (response) {
-                            if (response && !response.error) {
-                                document.getElementById('facebookpicture').src = response.data.url;
-                            }
-                        }
-                );
+
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
                 document.getElementById('status').innerHTML = 'Please log ' +
@@ -45,6 +38,16 @@
                 // they are logged into this app or not.
                 document.getElementById('status').innerHTML = 'Please log ' +
                         'into Facebook.';
+
+                var logoutHttp = new XMLHttpRequest();
+
+                logoutHttp.open("POST", "/rest/accounts/logout", true);
+                logoutHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                logoutHttp.send(JSON.stringify({
+                    cookie: window.userCookie
+                }));
+
+                window.userCookie = "";
             }
         }
 
@@ -113,13 +116,14 @@
       the FB.login() function when clicked.
     -->
     <div id="fbontainer">
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        <!--<div class="fb-login-button" data-max-rows="1" ></div>-->
+        <fb:login-button data-size="large" data-show-faces="true" data-auto-logout-link="true"
+                         scope="public_profile,email"
+                         onlogin="checkLoginState();"  data-max-rows="5">
         </fb:login-button>
 
         <div id="status">
         </div>
-
-        <img id="facebookpicture" src="">
 
     </div>
 </div>
