@@ -87,11 +87,14 @@
 
     }]);
 
-    app.controller('createStoryFormCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
+    app.controller('createStoryFormCtrl', ['$scope', '$http', '$window', '$location', function ($scope, $http, $window, $location) {
         $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
 
+        $scope.go = function () {
+            window.history.back();
+        };
 
         $scope.sendPost = function () {
             if (window.userCookie == "") {
@@ -126,10 +129,15 @@
         };
     }]);
 
-    app.controller('continueStoryFormCtrl', ['$scope', '$http', '$routeParams', '$window', function ($scope, $http, $routeParams, $window) {
+    app.controller('continueStoryFormCtrl', ['$scope', '$http', '$routeParams', '$window', '$location', function ($scope, $http, $routeParams, $window, $location) {
         $scope.formData = {};
 
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
+
+
+        $scope.go = function () {
+            window.history.back();
+        };
 
         var storyIdResults = $routeParams.storyId;
         var paragraphIdResults = $routeParams.paragraphId;

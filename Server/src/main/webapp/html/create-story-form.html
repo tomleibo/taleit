@@ -23,9 +23,12 @@
 
             <textarea form="storyForm" ng-model="formData.formText" required
                       placeholder="Write Your Story.."></textarea>
-            <br>
             <input class="submitBtn" type="submit" value="Set it free">
 
+            <button class="submitBtn" ng-click="go()" style="background: red; color: black"> Cancel
+            </button>
+
+            <br>
         </form>
 
         <p>Message from servlet: {{message}} </p>
