@@ -1,14 +1,20 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer" ng-init="showLogo=false">
     <div>
         <div class="paragraphViewer">
-            <h1 id="storyTitle">Story: {{storyInfo.data.story.title}}</h1>
 
-            <h3 id="paragraphTitle">Chapter: {{storyInfo.data.title}}</h3>
+            <h1 id="storyTitle"> {{storyInfo.data.story.title}}</h1>
+
+            <h3 id="paragraphTitle"> {{storyInfo.data.title}}</h3>
+
+            {{storyInfo.data}}
+
+
+            <h6 id="Author"> By: {{storyInfo.data.author}}</h6>
+            <img ng-src="http://graph.facebook.com/{{authorId}}/picture">
 
 
             <h5 id="bodyText">{{storyInfo.data.text}}</h5>
 
-            <h6 id="Author"> By: {{storyInfo.data.author}}</h6>
 
         </div>
 

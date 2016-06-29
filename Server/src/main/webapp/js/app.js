@@ -63,8 +63,6 @@
 
     app.controller('StoryViewerCtrl', ['$http', '$routeParams', '$scope', '$cookies', function ($http, $routeParams, $scope, $cookies) {
         var browseUrl =  window.urlApiView;
-        $scope.storyTitle = $cookies.get("title");
-        $scope.storyId = $cookies.get("id");
         $scope.storyInfo = [];
         $scope.amountOfParagraphsToShow = 4;
 
@@ -74,13 +72,18 @@
         if (paragraphIdResults) {
             $http.get(browseUrl + '?storyId=' + storyIdResults + '&paragraphId=' + paragraphIdResults).success(function (data) {
                 $scope.storyInfo = data;
+                $scope.authorId = $scope.storyInfo.data.userFacebookId;
             });
         }
         else {
             $http.get(browseUrl + '?storyId=' + storyIdResults).success(function (data) {
                 $scope.storyInfo = data;
+                $scope.authorId = $scope.storyInfo.data.userFacebookId;
             });
         }
+
+
+
 
     }]);
 
