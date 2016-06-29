@@ -12,6 +12,7 @@ import model.User;
 import usecases.ActionUseCase;
 
 public class CreateStory extends ActionUseCase {
+    String text;
     String title;
     Paragraph root;
     Categories category;
@@ -25,6 +26,7 @@ public class CreateStory extends ActionUseCase {
 
         this.title = title;
         this.category = category;
+        this.text = rootText;
 
         User user = context.read(new Function<Model>() {
             public User perform(Model model) {
@@ -38,6 +40,7 @@ public class CreateStory extends ActionUseCase {
 
     protected void pre(){
         validateTitle(title);
+        validateText(text);
     }
 
     public void perform(Model model) {
@@ -53,6 +56,13 @@ public class CreateStory extends ActionUseCase {
             throw new InvalidUseCaseParameterException("Title", "is too long, must be less than" + MAX_TITLE_LENGTH);
         }
     }
+
+    private void validateText(String text) {
+        if(text == null || text.length() == 0){
+            throw new InvalidUseCaseParameterException("Text", "can't be null or zero length");
+        }
+    }
+
 
     public Story getStory() {
         return result;
