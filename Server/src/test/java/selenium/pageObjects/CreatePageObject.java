@@ -35,7 +35,11 @@ public class CreatePageObject {
     }
 
     public WebElement setItFree(){
-        return webDriver.findElement(By.className("submitBtn"));
+        return webDriver.findElement(By.id("createBtn"));
+    }
+
+    public WebElement cancel() {
+        return webDriver.findElement(By.id("cancelBtn"));
     }
 
     public void chooseCategotyByIndex(int index){

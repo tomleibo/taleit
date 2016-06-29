@@ -26,6 +26,7 @@ public class ContinueStoryIT extends ITBase {
         mainPageObject = facade.mainPageObject();
         waitFor(TIME_TO_WAIT);
         createNewStory();
+        waitFor(TIME_TO_WAIT);
         viewStoryObject = facade.viewStoryObject();
 
         log("Click On Create Story");
