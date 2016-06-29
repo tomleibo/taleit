@@ -38,7 +38,13 @@ public class CreateStoryServlet extends TaleitServlet{
 
         String cookie = jsonObject.getString("cookie"); //TODO: maybe get cookie from cookieStore/cookieJar ?
         String title = jsonObject.getString("title");
-        Categories category = Categories.getCategoryByString(jsonObject.getString("category"));
+        Categories category;
+        try {
+            category = Categories.getCategoryByString(jsonObject.getString("category"));
+        }catch (Exception any){
+            category = Categories.OTHERS;
+        }
+
         String rootParagraphText = jsonObject.getJSONObject("rootParagraph").getString("text");
         String rootParagraphTitle = jsonObject.getJSONObject("rootParagraph").getString("title");
         CreateStory createStory = new CreateStory(TaleItServer.Instance.getSafeModel(), title, cookie, rootParagraphTitle,
