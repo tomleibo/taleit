@@ -1,10 +1,6 @@
 <div class="main" ng-controller="StoriesController as storyCtrl">
-   <div id="create">
-    <create-button></create-button>
-   </div>
-
     <div id="stories">
-        <div ng-repeat="story in storyCtrl.storiesResult.data.stories">
+        <div class="showContent" ng-repeat="story in storyCtrl.storiesResult.data.stories">
 
           <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
                            change-text="By: {{story.root.author}}"
