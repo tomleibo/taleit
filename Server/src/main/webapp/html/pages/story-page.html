@@ -20,7 +20,7 @@
 
 
         </div>
-        <h6> result is: {{storyInfo}} </h6>
+
         <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
             <div>
                 <continue-button button-title="No Continues,  BE THE FIRST ONE"
@@ -32,13 +32,7 @@
 
         <div style="margin-top: 50px" ng-if="storyInfo.data.children">
 
-            <div>
-                <continue-button button-title="Continue this story in your own WAY"
-                                 paragraph-id="{{storyInfo.data.id}}"
-                                 story-id="{{storyInfo.data.story.id}}"></continue-button>
-            </div>
-
-            <div ng-repeat="paragraph in storyInfo.data.children" ng-if="$index <= amountOfParagraphsToShow">
+            <div ng-repeat="paragraph in storyInfo.data.children">
 
                 <display-element title="{{paragraph.title}}"
                                  link-to-url="/#/stories/{{storyInfo.data.story.id}}/{{paragraph.id}}"
@@ -46,7 +40,12 @@
                                  img-src="/resources/coolBlackBG.jpg"
                                  optional-title="{{paragraph.text | limitTo:20}}"></display-element>
             </div>
-
+             <br>
+            <div class="createInCategory">
+                <continue-button button-title="Continue this story in your own WAY"
+                                 paragraph-id="{{storyInfo.data.id}}"
+                                 story-id="{{storyInfo.data.story.id}}"></continue-button>
+            </div>
         </div>
 
     </div>

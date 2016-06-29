@@ -5,12 +5,13 @@
     z-index: 9;
 
 }
-#createInCategory{
+.createInCategory{
     margin-top: 100px;
 }
 
-#createInCategory a{
+.createInCategory a{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
