@@ -1,4 +1,4 @@
-.view{
+.view {
     width: 60%;
     margin-top: 3%;
     position: absolute;
@@ -7,28 +7,36 @@
 
 }
 
-#fbContainer{
+#stories {
+    display: inline-block;
+}
+
+#fbContainer {
     justify-content: center;
     text-align: center;
-
 }
 
-.showContent{
-    display: inline-block;
+.showContent {
     float: right;
+    margin-top: 80px;
+        margin-left: 30px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.goHome{
-    display: inline-block;
-    float: right;
-    margin-right: 20px;
-    margin-top: 20px;
+.goHome {
+    top: 10px;
+    right: 10px;
+    position: absolute;
 }
 
 .displayElementImg {
     width: 185px;
 }
-.paragraphSection{
+
+.paragraphSection {
     padding-right: 30px;
 }
 
@@ -48,11 +56,12 @@
     height: 100%;
     position: absolute;
     overflow: hidden;
-    top:  0;
+    top: 0;
     left: 0;
     padding: 20px 20px;
 }
-.hovereffect .overlay h2, .hovereffect .overlay h4, .hovereffect .overlay p{
+
+.hovereffect .overlay h2, .hovereffect .overlay h4, .hovereffect .overlay p {
     background-color: rgba(24, 20, 23, 0.5);
 
 }
@@ -64,8 +73,8 @@
     width: calc(100% + 20px);
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
     transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: translate3d(-10px,0,0);
-    transform: translate3d(-10px,0,0);
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
@@ -73,8 +82,8 @@
 .hovereffect:hover img {
     opacity: 0.4;
     filter: alpha(opacity=40);
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 .hovereffect h2 {
@@ -106,13 +115,13 @@
     content: '';
     -webkit-transition: -webkit-transform 0.35s;
     transition: transform 0.35s;
-    -webkit-transform: translate3d(-100%,0,0);
-    transform: translate3d(-100%,0,0);
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
 }
 
 .hovereffect:hover h2:after {
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
 }
 
 .hovereffect p {
@@ -121,13 +130,17 @@
     filter: alpha(opacity=0);
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
     transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: translate3d(100%,0,0);
-    transform: translate3d(100%,0,0);
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
 }
 
 .hovereffect:hover p {
     opacity: 1;
     filter: alpha(opacity=100);
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.paragraphViewer {
+
 }

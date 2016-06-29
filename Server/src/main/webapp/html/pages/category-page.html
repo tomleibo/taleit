@@ -1,17 +1,19 @@
 <div class="main" ng-controller="StoriesController as storyCtrl">
     <div id="stories">
-        <div class="showContent" ng-repeat="story in storyCtrl.storiesResult.data.stories">
 
-          <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
-                           change-text="By: {{story.root.author}}"
-                           img-src="{{story.image}}"></display-element>
-
-        </div>
         <div class="goHome">
-            <br>
-
             <a class="submitBtn" ng-href="/#/"> Home </a>
+        </div>
+        <br>
 
+        <div class="showContent">
+            <div ng-repeat="story in storyCtrl.storiesResult.data.stories">
+
+                <display-element title="{{story.title}}" link-to-url="/#/stories/{{story.id}}"
+                                 change-text="By: {{story.root.author}}"
+                                 img-src="{{story.image}}"></display-element>
+
+            </div>
         </div>
 
     </div>
