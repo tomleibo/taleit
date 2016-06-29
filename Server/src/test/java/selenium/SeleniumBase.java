@@ -32,7 +32,6 @@ public class SeleniumBase {
 
     protected static final String CONTINUE_PARAGRAPH_TITLE = "WOW This Is Great Paragraph Title";
 
-
     protected WebDriver webDriver;
     protected ServicesSeleniumFacade facade;
 
@@ -72,6 +71,7 @@ public class SeleniumBase {
 
         log("Click on 'Facebook Login' button");
         MainPageObject mainPageObject = facade.mainPageObject();
+
         mainPageObject.facebookButton().click();
         for (String winHandle : webDriver.getWindowHandles()) {
             webDriver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
@@ -93,7 +93,7 @@ public class SeleniumBase {
         waitFor(3000);
     }
 
-    protected void createNewStory(){
+    protected void createNewStory() {
         log("Click on 'Create' button");
         MainPageObject mainPageObject = facade.mainPageObject();
         mainPageObject.createButton().click();

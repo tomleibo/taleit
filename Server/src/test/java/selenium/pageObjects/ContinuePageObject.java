@@ -8,24 +8,27 @@ import org.openqa.selenium.WebElement;
  * Created by sharonk on 6/11/2016
  */
 public class ContinuePageObject {
-    WebDriver webDriver;
 
+    WebDriver webDriver;
 
     public ContinuePageObject(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 
-    public WebElement paragraphTitle(){
+    public WebElement paragraphTitle() {
         return webDriver.findElement(By.className("titleInput"));
     }
 
-    public WebElement body(){
+    public WebElement body() {
         return webDriver.findElement(By.tagName("textarea"));
     }
 
-    public WebElement setItFree(){
-        return webDriver.findElement(By.className("submitBtn"));
+    public WebElement setItFree() {
+        return webDriver.findElement(By.id("createBtn"));
     }
 
+    public WebElement cancel() {
+        return webDriver.findElement(By.id("cancelBtn"));
+    }
 }
 

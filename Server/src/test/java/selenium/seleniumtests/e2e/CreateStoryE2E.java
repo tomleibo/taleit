@@ -23,13 +23,17 @@ public class CreateStoryE2E extends E2EBase {
         super.buildup();
         mainPageObject = facade.mainPageObject();
         waitFor(TIME_TO_WAIT);
+
+        log("Click on 'Create' button");
+        mainPageObject.createButton().click();
+        waitFor(TIME_TO_WAIT);
+
+        webDriver.navigate().refresh();
+        waitFor(TIME_TO_WAIT);
     }
 
     @Test
     public void createStoryAndVerifyOnStoryPage() {
-        log("Click on 'Create' button");
-        mainPageObject.createButton().click();
-        waitFor(TIME_TO_WAIT);
 
         log("Fill Story Title");
         CreatePageObject createPageObject = facade.createPageObject();
@@ -83,10 +87,6 @@ public class CreateStoryE2E extends E2EBase {
 
     @Test
     public void continueStoryAndVerifyOnStoryPage() {
-        log("Click on 'Create' button");
-        mainPageObject.createButton().click();
-        waitFor(TIME_TO_WAIT);
-
         log("Fill Story Title");
         CreatePageObject createPageObject = facade.createPageObject();
         createPageObject.storyTitle().sendKeys(STORY_TITLE);
@@ -149,6 +149,7 @@ public class CreateStoryE2E extends E2EBase {
 
         log("Click on 'Set It Free'");
         continuePageObject.setItFree().click();
+        waitFor(TIME_TO_WAIT);
 
         log("Verify Story Title text");
         viewStoryObject = facade.viewStoryObject();

@@ -34,7 +34,7 @@ public class ViewStoryObject {
     }
 
     public WebElement createButton(){
-        return webDriver.findElement(By.className("submitBtn"));
+        return webDriver.findElement(By.id("createBtn"));
     }
 
 

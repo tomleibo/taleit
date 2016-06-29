@@ -1,7 +1,7 @@
 <div class="main" ng-controller="StoryViewerCtrl as storyViewer" ng-init="showLogo=false">
     <div>
         <div class="goHome">
-            <a class="submitBtn" ng-href="/#/"> Home </a>
+            <a class="submitBtn" id="goHome" ng-href="/#/"> Home </a>
         </div>
         <br>
 
@@ -18,34 +18,36 @@
 
             <h5 id="bodyText" style="margin-top: 50px">{{storyInfo.data.text}}</h5>
 
+            <br>
 
-        </div>
-
-        <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
-            <div>
-                <continue-button button-title="No Continues,  BE THE FIRST ONE"
-                                 paragraph-id="{{storyInfo.data.id}}"
-                                 story-id="{{storyInfo.data.story.id}}"></continue-button>
-            </div>
-        </div>
-
-
-        <div style="margin-top: 50px" ng-if="storyInfo.data.children">
-
-            <div ng-repeat="paragraph in storyInfo.data.children">
-
-                <display-element title="{{paragraph.title}}"
-                                 link-to-url="/#/stories/{{storyInfo.data.story.id}}/{{paragraph.id}}"
-                                 change-text="By: {{paragraph.author}}"
-                                 img-src="/resources/coolBlackBG.jpg"
-                                 optional-title="{{paragraph.text | limitTo:20}}"></display-element>
+            <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
+                <div>
+                    <continue-button button-title="No Continues,  BE THE FIRST ONE"
+                                     paragraph-id="{{storyInfo.data.id}}"
+                                     story-id="{{storyInfo.data.story.id}}"></continue-button>
+                </div>
             </div>
 
-            <div class="createInCategory">
+            <div class="createInCategory"  ng-if="storyInfo.data.children">
                 <continue-button button-title="Continue this story in your own WAY"
                                  paragraph-id="{{storyInfo.data.id}}"
                                  story-id="{{storyInfo.data.story.id}}"></continue-button>
             </div>
+
+        </div>
+
+
+        <div style="margin-top: 50px" ng-if="storyInfo.data.children">
+            <h4> What's Next? </h4>
+            <div ng-repeat="paragraph in storyInfo.data.children">
+
+                <display-element title="{{paragraph.title}}"
+                                 link-to-url="/#/stories/{{storyInfo.data.story.id}}/{{paragraph.id}}"
+                                 change-text="By: {{paragraph.name}}"
+                                 img-src="/resources/coolBlackBG.jpg"
+                                 optional-title="{{paragraph.text | limitTo:10}}"></display-element>
+            </div>
+
         </div>
 
     </div>
