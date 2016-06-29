@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Matching {
+public @interface NotMatching {
     String[] regex() default { ".*" };
     String message() default "Text is not matching pattern";
 }
-

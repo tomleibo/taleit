@@ -21,8 +21,8 @@ import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.network.taleit.CreateStoryRequest;
 import gurstudio.com.taleitapp.networkhandlers.taleit.CreateStoryResponseHandler;
-import gurstudio.com.taleitapp.verification.core.Matching;
 import gurstudio.com.taleitapp.verification.core.NotEmpty;
+import gurstudio.com.taleitapp.verification.core.NotMatching;
 import gurstudio.com.taleitapp.verification.core.VerificationException;
 import gurstudio.com.taleitapp.verification.core.ViewsVerifier;
 
@@ -35,7 +35,7 @@ public class CreateStoryActivity extends TaleItActivity {
     private EditText rootTitle;
     @NotEmpty(message = "Must create a story")
     private EditText rootContent;
-    @Matching(regex = "/^\\s*\\S.*$/", message = "Must select a category from the list")
+    @NotMatching(regex = {"", "Show categories"} ,message = "Must select category")
     private TextView categoriesLabel;
 
     private Category selectedCategory;
@@ -150,6 +150,7 @@ public class CreateStoryActivity extends TaleItActivity {
                 final Story newStory = new Story();
                 newStory.title.set(storyName.getText().toString());
                 newStory.author.set(getBaseApplication().getApplicationModel().getFacebookProfile().get().getName());
+                newStory.name.set(getBaseApplication().getApplicationModel().getFacebookProfile().get().getName());
                 newStory.category.set(selectedCategory.name.get());
                 newStory.root.get().title.set(rootTitle.getText().toString());
                 newStory.root.get().text.set(rootContent.getText().toString());

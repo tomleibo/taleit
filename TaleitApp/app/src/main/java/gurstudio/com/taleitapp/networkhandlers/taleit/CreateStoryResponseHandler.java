@@ -19,6 +19,13 @@ public class CreateStoryResponseHandler extends TaleItResponseHandlerBase{
 
     @Override
     public void onResponse(JSONObject response) {
+        try {
+            JSONObject data = response.getJSONObject("data");
+            storyToAdd.id.set(data.getString("storyId"));
+            storyToAdd.root.get().id.set(data.getString("rootId"));
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
         getApplication().getApplicationModel().getStories().add(storyToAdd);
 
         getApplication().getCurrentActivity().finish();

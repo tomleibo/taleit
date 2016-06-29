@@ -8,6 +8,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
@@ -50,10 +52,32 @@ public class FacebookLoginActivity extends TaleItActivity implements FacebookCal
         callbackManager = CallbackManager.Factory.create();
     }
 
+    private void fetchProfile() {
+        GraphRequest request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        // this is where you should have the profile
+
+                        updateApplicationUser(AccessToken.getCurrentAccessToken());
+                        getBaseApplication().getApplicationModel().setFacebookProfile(Profile.getCurrentProfile());
+                        Log.v("fetched info", object.toString());
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link"); //write the fields you need
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
     @Override
     public void onSuccess(LoginResult loginResult) {
         final AccessToken token = loginResult.getAccessToken();
         getBaseApplication().getApplicationModel().setAccessToken(token);
+
+        fetchProfile();
+
 
         ProfileTracker profileTracker = new ProfileTracker() {
             @Override
@@ -61,23 +85,26 @@ public class FacebookLoginActivity extends TaleItActivity implements FacebookCal
                 this.stopTracking();
                 Profile.setCurrentProfile(currentProfile);
                 getBaseApplication().getApplicationModel().setFacebookProfile(currentProfile);
-
-                getBaseApplication().getNetworkManager().sendAsync(FacebookLoginRequest.create(token, new NetworkResponseHandlerBase(getBaseApplication()) {
-                    @Override
-                    public void onResponse(Object response) {
-                        try {
-                            JSONObject jsonResponse = (JSONObject) response;
-                            String cookie = jsonResponse.getJSONObject("data").getString("cookie");
-                            getBaseApplication().getApplicationModel().setUserCookie(cookie);
-                            finish();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }));
+                updateApplicationUser(token);
             }
         };
         profileTracker.startTracking();
+    }
+
+    private void updateApplicationUser(AccessToken token) {
+        getBaseApplication().getNetworkManager().sendAsync(FacebookLoginRequest.create(token, new NetworkResponseHandlerBase(getBaseApplication()) {
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    JSONObject jsonResponse = (JSONObject) response;
+                    String cookie = jsonResponse.getJSONObject("data").getString("cookie");
+                    getBaseApplication().getApplicationModel().setUserCookie(cookie);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }));
     }
 
     @Override

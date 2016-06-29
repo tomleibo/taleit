@@ -39,7 +39,8 @@ public class TaleItModel extends ApplicationModel {
     public void setCurrentViewedStory(Story currentViewedStory) { this.currentViewedStory.set(currentViewedStory); }
     public void setCurrentViewedParagraph(Paragraph currentViewedParagraph) { this.currentViewedParagraph.set(currentViewedParagraph); }
 
-    public void setFacebookProfile(Profile facebookProfile) { this.facebookProfile.set(facebookProfile); }
+    public void setFacebookProfile(Profile facebookProfile) {
+        this.facebookProfile.set(facebookProfile); }
     public Observable<Profile> getFacebookProfile() { return facebookProfile; }
 
     public AccessToken getAccessToken() {

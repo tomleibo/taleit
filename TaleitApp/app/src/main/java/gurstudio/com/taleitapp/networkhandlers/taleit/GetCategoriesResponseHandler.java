@@ -27,6 +27,7 @@ public class GetCategoriesResponseHandler extends TaleItResponseHandlerBase {
         }
 
         try {
+            application.getApplicationModel().getCategories().clear();
             Queriable.create(JSONObject.class)
                     .select(new Selector<JSONObject, Category>() {
                         @Override
@@ -35,8 +36,8 @@ public class GetCategoriesResponseHandler extends TaleItResponseHandlerBase {
 
                             try {
                                 String name = jsonObject.getString("name");
-                                String image = jsonObject.getString("image").replace("localhost", BuildConfig.SERVER_ADDRESS);
-                                String hover = jsonObject.getString("hover").replace("localhost", BuildConfig.SERVER_ADDRESS);
+                                String image = "http://" + BuildConfig.SERVER_ADDRESS + ":8080" + jsonObject.getString("image").replace("localhost", BuildConfig.SERVER_ADDRESS);
+                                String hover = "http://" + BuildConfig.SERVER_ADDRESS + ":8080" + jsonObject.getString("hover").replace("localhost", BuildConfig.SERVER_ADDRESS);
 
                                 category.name.set(name);
                                 category.image.set(image);

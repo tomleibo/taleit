@@ -31,6 +31,7 @@ public class CategoryNamesAdapter extends RecyclerViewAdapterBase<CustomTextView
             @Override
             public void onClick(View v) {
                 ((CreateStoryActivity) view.getContext()).setSelectedCategory(item);
+                ((CreateStoryActivity) view.getContext()).findViewById(R.id.categories_recycler).setVisibility(View.GONE);
             }
         });
     }

@@ -4,6 +4,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gurkashi.fj.lambdas.Predicate;
+import com.gurkashi.fj.lambdas.Selector;
+import com.gurkashi.fj.queries.stracture.Queriable;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import gurstudio.com.taleitapp.R;
 import gurstudio.com.taleitapp.activities.taleit.StoryViewerActivity;
 import gurstudio.com.taleitapp.adapters.core.RecyclerViewAdapterBase;
 import gurstudio.com.taleitapp.application.taleit.TaleItApplication;
+import gurstudio.com.taleitapp.model.taleit.Category;
 import gurstudio.com.taleitapp.model.taleit.Story;
 import gurstudio.com.taleitapp.model.taleit.TaleItModel;
 import gurstudio.com.taleitapp.views.taleit.StoryCardView;
@@ -34,7 +38,7 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
     protected void onBindViewToItem(final StoryCardView view, final Story item) {
         ((TextView)view.findViewById(R.id.story_name)).setText(item.title.get());
         ((TextView)view.findViewById(R.id.story_content)).setText(item.root.get().text.get());
-        ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
+        ((TextView)view.findViewById(R.id.author)).setText(item.name.get());
 
         try {
             Picasso.with(view.getContext())
@@ -42,8 +46,24 @@ public class StoryCardsAdapter extends RecyclerViewAdapterBase<StoryCardView, St
                     .into(((ImageView) view.findViewById(R.id.image)));
         }
         catch (Exception ex){
+            String image = Queriable.create(Category.class)
+                    .where(new Predicate<Category>() {
+                        @Override
+                        public boolean predict(Category category) {
+                            return category.name.get().equals(item.category.get());
+                        }
+                    })
+                    .select(new Selector<Category, String>() {
+                        @Override
+                        public String select(Category category) {
+                            return category.image.get();
+                        }
+                    })
+                    .first()
+                    .execute(((TaleItApplication) view.getContext().getApplicationContext()).getApplicationModel().getCategories());
+
             Picasso.with(view.getContext())
-                    .load(R.drawable.logo)
+                    .load(image)
                     .into(((ImageView) view.findViewById(R.id.image)));
         }
 

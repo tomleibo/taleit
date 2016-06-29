@@ -31,7 +31,7 @@ public class ParagraphViewAdapter extends RecyclerViewAdapterBase<ParagraphView,
     @Override
     protected void onBindViewToItem(final ParagraphView view, final Paragraph item) {
         ((TextView)view.findViewById(R.id.story_name)).setText(item.title.get());
-        ((TextView)view.findViewById(R.id.author)).setText(item.author.get());
+        ((TextView)view.findViewById(R.id.author)).setText(item.name.get());
 
         view.setParagraph(item);
 

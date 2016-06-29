@@ -29,6 +29,8 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getBaseApplication().buildApplicationModel();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,6 +42,13 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getCreateBinder().bind(getBaseApplication().getApplicationModel().getCategories(), new Observer<ObservableCollection.ObservableItemAction<Category>>() {
+            @Override
+            public void onUpdate(ObservableCollection.ObservableItemAction<Category> value) {
+                categoriesRecycler.getAdapter().notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -127,18 +136,9 @@ public class MainActivity extends TaleItActivity implements NavigationView.OnNav
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_login) {
+            startActivity(FacebookLoginActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

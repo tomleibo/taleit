@@ -20,16 +20,9 @@ android {
         buildConfigField "String", "SERVER_PROTOCOL", "\"http\""
         buildConfigField "int", "SERVER_PORT", "8080"
         //buildConfigField "String", "SERVER_ADDRESS", "\"52.29.147.50\""
-        buildConfigField "String", "SERVER_ADDRESS", "\"192.168.2.110\""
-        //buildConfigField "String", "SERVER_APP_ROUTE", "\"/server.core-1.0-SNAPSHOT\""
+        buildConfigField "String", "SERVER_ADDRESS", "\"192.168.2.105\""
+        //buildConfigField "String", "SERVER_ADDRESS", "\"192.168.2.104\"" // kerzman
         buildConfigField "String", "SERVER_APP_ROUTE", "\"\""
-    }
-
-    buildTypes {
-        local {
-            buildConfigField "String", "SERVER_ADDRESS", "\"localhost\""
-            buildConfigField "String", "SERVER_APP_ROUTE", "\"\""
-        }
     }
 
     signingConfigs {
@@ -45,6 +38,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+        }
+
+        local {
+            debuggable true
+        }
+
+        remote {
+
         }
     }
 }

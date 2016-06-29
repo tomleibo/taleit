@@ -76,6 +76,9 @@ public class ViewsVerifier {
         if (Matching.class.isAssignableFrom(annotation.getClass())){
             return new MatchingVerificationAnnotationStrategy(field, (Matching)annotation, activity);
         }
+        if (NotMatching.class.isAssignableFrom(annotation.getClass())){
+            return new NotMatchingVerificationAnnotationStrategy(field, (NotMatching)annotation, activity);
+        }
 
         return null;
     }

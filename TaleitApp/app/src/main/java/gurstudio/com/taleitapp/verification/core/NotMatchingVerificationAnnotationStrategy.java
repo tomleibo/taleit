@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
-public class MatchingVerificationAnnotationStrategy extends VerificationAnnotationStrategy<Matching>{
-    public MatchingVerificationAnnotationStrategy(Field field, Matching annotation, Activity activity){
+public class NotMatchingVerificationAnnotationStrategy extends VerificationAnnotationStrategy<NotMatching>{
+    public NotMatchingVerificationAnnotationStrategy(Field field, NotMatching annotation, Activity activity){
         super(field, annotation, activity);
     }
 
@@ -16,11 +16,9 @@ public class MatchingVerificationAnnotationStrategy extends VerificationAnnotati
 
         for (String regex: getAnnotation().regex()){
             if (text.matches(regex)) {
-                return;
+                fail(getAnnotation().message());
             }
         }
-
-        fail(getAnnotation().message());
     }
 
     @Override
@@ -28,4 +26,3 @@ public class MatchingVerificationAnnotationStrategy extends VerificationAnnotati
         return TextView.class;
     }
 }
-
