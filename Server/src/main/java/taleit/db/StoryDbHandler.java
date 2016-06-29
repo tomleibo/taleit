@@ -76,7 +76,7 @@ public class StoryDbHandler {
     public boolean InsertStory(Story story) {
         PreparedStatement stmt = null;
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO `taleitdb`.`story`(`ID`,`TITLE`,`ROOT_ID`,`CATEGORY`)");
+        query.append("INSERT INTO `taleitdb`.`STORY`(`ID`,`TITLE`,`ROOT_ID`,`CATEGORY`)");
         query.append("VALUES(?,?,?,?)");
 
         try {

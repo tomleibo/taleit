@@ -77,7 +77,7 @@ public class UserDbHandler {
     public boolean InsertUser(User user) {
         PreparedStatement stmt = null;
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO `taleitdb`.`author`(`USERNAME`,`PASSWORDHASH`,`SALT`,`COOKIE`,`FACEBOOK_ID`,`FACEBOOK_ACCESS_TOKEN`,`NAME`)");
+        query.append("INSERT INTO `taleitdb`.`AUTHOR`(`USERNAME`,`PASSWORDHASH`,`SALT`,`COOKIE`,`FACEBOOK_ID`,`FACEBOOK_ACCESS_TOKEN`,`NAME`)");
         query.append("VALUES(?,?,?,?,?,?,?)");
 
         try {
@@ -99,6 +99,7 @@ public class UserDbHandler {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
         finally {
             try {
@@ -110,13 +111,12 @@ public class UserDbHandler {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
     public boolean updateUser(User user) {
         PreparedStatement stmt = null;
         StringBuilder query = new StringBuilder();
-        query.append("UPDATE `taleitdb`.`author` SET `USERNAME` = ?,`PASSWORDHASH` = ?,`SALT` = ?,`COOKIE` = ?,`FACEBOOK_ID` = ?,`FACEBOOK_ACCESS_TOKEN` = ?,`NAME` = ?");
+        query.append("UPDATE `taleitdb`.`AUTHOR` SET `USERNAME` = ?,`PASSWORDHASH` = ?,`SALT` = ?,`COOKIE` = ?,`FACEBOOK_ID` = ?,`FACEBOOK_ACCESS_TOKEN` = ?,`NAME` = ?");
         query.append(" WHERE `USERNAME` = ?");
 
         try {

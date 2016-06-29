@@ -128,6 +128,8 @@ public final class DbHandler {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+
         }
         System.out.println("Connecting to database...");
 
@@ -136,6 +138,7 @@ public final class DbHandler {
             conn = DriverManager.getConnection(CONNECTION_STRING);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
     }
 }
