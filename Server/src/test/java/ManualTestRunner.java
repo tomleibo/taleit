@@ -1,9 +1,10 @@
-import model.Categories;
+
 import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import taleit.model.Categories;
 
 import java.io.IOException;
 import java.util.Random;

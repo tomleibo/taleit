@@ -1,6 +1,5 @@
 package acceptance.bridge;
 
-import model.Categories;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;

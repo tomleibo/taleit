@@ -45,6 +45,10 @@ public class CreateStoryServlet extends TaleitServlet{
                                                   rootParagraphText, category);
 
         createStory.perform();
-        return new JSONObject().put("storyId", createStory.getStory().getId());
+
+        JSONObject result = new JSONObject();
+        result.put("storyId", createStory.getStory().getId());
+        result.put("rootId", createStory.getStory().getRoot().getId());
+        return result;
     }
 }
