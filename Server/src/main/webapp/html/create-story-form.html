@@ -1,29 +1,33 @@
 <div ng-controller="createStoryFormCtrl">
+    <div class="main">
+        <form id="storyForm" ng-submit="sendPost()">
+            <h5> Title: </h5>
+            <input id="sInput" class="titleInput" ng-model="formData.formStoryTitle" type="text"
+                   placeholder="Your Story Title Goes Here.."
+                   required>
 
-    <form id="storyForm" ng-submit="sendPost()">
 
-        <input id="sInput" class="titleInput" ng-model="formData.formStoryTitle" type="text"
-               placeholder="Your Story Title Goes Here.."
-               required>
+            <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
+                <h5> Choose category: </h5>
+                <select ng-model="formData.formCategory" required="required"
+                        ng-init="formData.formCategory = categoriesSection.categoriesResult.data.categories[1].name">
+                    <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">
+                        {{category.name}}
+                    </option>
+                </select>
+            </div>
 
+            <h5> Chapter Title: </h5>
+            <input required id="pInput" class="titleInput" ng-model="formData.formTitle" type="text"
+                   placeholder="Your Chapter Title Goes Here..">
 
-        <div class="categoryDropDown" ng-controller="CategoriesController as categoriesSection">
-            <h4> Choose category </h4>
-            <select ng-model="formData.formCategory" required="required"
-                    ng-init="formData.formCategory = categoriesSection.categoriesResult.data.categories[1].name">
-                <option ng-repeat="category in categoriesSection.categoriesResult.data.categories">{{category.name}}</option>
-            </select>
-        </div>
+            <textarea form="storyForm" ng-model="formData.formText" required
+                      placeholder="Write Your Story.."></textarea>
+            <br>
+            <input class="submitBtn" type="submit" value="Set it free">
 
-        <input required id="pInput" class="titleInput" ng-model="formData.formTitle" type="text"
-               placeholder="Your Chapter Title Goes Here..">
+        </form>
 
-        <textarea form="storyForm" ng-model="formData.formText" required placeholder="Write Your Story.."></textarea>
-        <br>
-        <input class="submitBtn" type="submit" value="Set it free">
-
-    </form>
-
-    <p>Message from servlet: {{message}} </p>
-
+        <p>Message from servlet: {{message}} </p>
+    </div>
 </div>
