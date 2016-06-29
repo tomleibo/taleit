@@ -125,7 +125,7 @@ public class ManualTests {
     }
 
     private String makeRequest(String route, String content, String method) throws IOException {
-        String uri = "http://" + server + ":8080" + route;
+        String uri = "http://" + server + ":8080" + appname + route;
         HttpRequest request = createHttpRequest(uri, method);
 
         if (content != null && request instanceof HttpEntityEnclosingRequestBase){
