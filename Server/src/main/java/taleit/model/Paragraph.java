@@ -77,7 +77,7 @@ public class Paragraph {
     }
 
     public boolean hasChildren(){
-        return getChildren().isEmpty();
+        return !getChildren().isEmpty();
     }
 
     public Paragraph setId(String id) {
