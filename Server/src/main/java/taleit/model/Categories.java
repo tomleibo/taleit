@@ -24,11 +24,13 @@ public enum Categories {
     }
 
     static public Categories getCategoryByString(String categoryStr) {
-        for (Categories category : Categories.values()) {
-            if (category.getValue().toLowerCase().equals(categoryStr.toLowerCase())) {
-                return category;
+        try {
+            for (Categories category : Categories.values()) {
+                if (category.getValue().toLowerCase().equals(categoryStr.toLowerCase())) {
+                    return category;
+                }
             }
-        }
+        }catch (Exception ex) {}
         return Categories.OTHERS;
     }
 
