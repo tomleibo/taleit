@@ -2,23 +2,21 @@
     <div>
         <div class="paragraphViewer">
 
-            <h1 id="storyTitle"> {{storyInfo.data.story.title}}</h1>
+            <h1 id="storyTitle"> {{storyInfo.data.story.title | capitalize}}</h1>
 
             <h3 id="paragraphTitle"> {{storyInfo.data.title}}</h3>
+            <div>
+                <img ng-src="http://graph.facebook.com/{{authorId}}/picture">
+                <h6 id="Author" style="display: inline; margin-left: 20px;"> By: {{storyInfo.data.author}} </h6>
 
-            {{storyInfo.data}}
+            </div>
 
-
-            <h6 id="Author"> By: {{storyInfo.data.author}}</h6>
-            <img ng-src="http://graph.facebook.com/{{authorId}}/picture">
-
-
-            <h5 id="bodyText">{{storyInfo.data.text}}</h5>
+            <h5 id="bodyText" style="margin-top: 50px">{{storyInfo.data.text}}</h5>
 
 
         </div>
 
-        <div ng-if="!storyInfo.data.children">
+        <div style="margin-top: 50px" ng-if="!storyInfo.data.children">
             <div>
                 <continue-button button-title="No Continues,  BE THE FIRST ONE"
                                  paragraph-id="{{storyInfo.data.id}}"
@@ -27,7 +25,7 @@
         </div>
 
 
-        <div ng-if="storyInfo.data.children">
+        <div style="margin-top: 50px" ng-if="storyInfo.data.children">
 
             <div>
                 <continue-button button-title="Continue this story in your own WAY"
